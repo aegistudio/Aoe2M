@@ -1,6 +1,6 @@
-.classpath
-.wtpmodules
+/bin/
+/target/
 .project
 .settings
-bin
-target
+.classpath
+.wtpmodules
