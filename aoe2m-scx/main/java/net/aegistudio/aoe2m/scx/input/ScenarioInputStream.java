@@ -28,9 +28,10 @@ public class ScenarioInputStream extends InputStream {
 		
 		Inflater inflater = new Inflater(true);
 		InflaterInputStream inflateInput = new InflaterInputStream(fieldInputStream, inflater);
-		fieldInputStream = new FieldInputStream(inflateInput, charset);
 		
-		FieldInputTranslator translator = new FieldInputTranslator(fieldInputStream);
+		FieldInputTranslator translator = new FieldInputTranslator(inflateInput, charset);
+		//FieldInputTranslator translator = new StackDebugTranslator(
+		//		new DebugInputStream(inflateInput, System.out), charset);
 		new ScenarioDirector().build(scenario, translator);
 		return scenario;
 	}	

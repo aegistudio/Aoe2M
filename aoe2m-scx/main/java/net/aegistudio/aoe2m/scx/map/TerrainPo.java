@@ -2,9 +2,9 @@ package net.aegistudio.aoe2m.scx.map;
 
 import net.aegistudio.aoe2m.scx.Wrapper;
 
-public class TerrianPo extends Wrapper<Byte> {
+public class TerrainPo extends Wrapper<Byte> {
 	public byte[][] terrianValue;
-	public TerrianPo(int width, int height) {
+	public TerrainPo(int width, int height) {
 		super((byte) 0);
 		this.terrianValue = new byte[width][height];
 	}

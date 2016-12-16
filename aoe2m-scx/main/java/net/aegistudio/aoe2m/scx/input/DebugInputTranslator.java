@@ -1,120 +1,126 @@
 package net.aegistudio.aoe2m.scx.input;
 
-import java.io.EOFException;
 import java.io.IOException;
-import java.io.InputStream;
 
 import net.aegistudio.aoe2m.scx.CorruptionException;
 import net.aegistudio.aoe2m.scx.EnumWrapper;
-import net.aegistudio.aoe2m.scx.FieldTranslator;
 import net.aegistudio.aoe2m.scx.String16;
 import net.aegistudio.aoe2m.scx.String32;
 import net.aegistudio.aoe2m.scx.Wrapper;
 
-public class FieldInputTranslator implements FieldTranslator {
-	private final FieldInputStream fieldInputStream;
-	public FieldInputTranslator(InputStream fieldInputStream, String charset) {
-		this.fieldInputStream = new FieldInputStream(fieldInputStream, charset);
+public class DebugInputTranslator extends FieldInputTranslator {
+	private DebugInputStream debug;
+	
+	public DebugInputTranslator(DebugInputStream debug, String charset) {
+		super(debug, charset);
+		this.debug = debug;
+	}
+
+	protected interface IOECallable { public void call() throws IOException;}
+	protected void debug(String type, IOECallable next) throws IOException {
+		debug.start(type);
+		next.call();
+		debug.end();
+	}
+	protected interface IOECCallable { public void call() throws IOException, CorruptionException; }
+	protected void constDebug(String type, IOECCallable next) throws IOException, CorruptionException {
+		debug.start(type);
+		next.call();
+		debug.end();
 	}
 	
 	@Override
 	public void unsigned32(Wrapper<Long> field) throws IOException {
-		field.setValue(fieldInputStream.readUnsigned32());
+		debug("u32", () -> super.unsigned32(field));
 	}
 
 	@Override
 	public void signed32(Wrapper<Integer> field) throws IOException {
-		field.setValue(fieldInputStream.readSigned32());
+		debug("s32", () -> super.signed32(field));
 	}
 
 	@Override
 	public void string32(Wrapper<String32> field) throws IOException {
-		field.setValue(fieldInputStream.readString32());
+		debug("str32", () -> super.string32(field));
 	}
 
 	@Override
 	public void string16(Wrapper<String16> field) throws IOException {
-		field.setValue(fieldInputStream.readString16());
+		debug("str16", () -> super.string16(field));
 	}
 
 	@Override
 	public void division() throws CorruptionException, IOException {
-		CorruptionException.assertDivision(fieldInputStream.readUnsigned32());
+		constDebug("division", () -> super.division());
 	}
 
 	@Override
 	public void unused() throws CorruptionException, IOException {
-		CorruptionException.assertUnused(fieldInputStream.readUnsigned32());
+		constDebug("unused", () -> super.unused());
 	}
 
 	@Override
 	public void constUnsigned32(long field) throws CorruptionException, IOException {
-		CorruptionException.assertLong(field, fieldInputStream.readUnsigned32());
+		constDebug("cu32", () -> super.constUnsigned32(field));
 	}
 
 	@Override
 	public void constByte(int field) throws CorruptionException, IOException {
-		CorruptionException.assertInt(field, fieldInputStream.read());
+		constDebug("cu8", () -> super.constByte(field));
 	}
 
 	@Override
 	public void skip(long length) throws IOException {
-		fieldInputStream.skip(length);
+		debug("skip" + length, () -> super.skip(length));
 	}
-	
+
 	@Override
 	public void constString(int length, Wrapper<String> string) throws IOException {
-		string.setValue(fieldInputStream.readConstLengthString(length));
+		debug("cstr" + length, () -> super.constString(length, string));
 	}
 
 	@Override
 	public void bool32(Wrapper<Boolean> field) throws IOException {
-		field.setValue(fieldInputStream.readUnsigned32() != 0);
+		debug("bool32", () -> super.bool32(field));
 	}
 
 	@Override
 	public <T extends Enum<T>> void enum32(EnumWrapper<T> field) throws IOException {
-		field.setOrdinal((int) fieldInputStream.readUnsigned32());
+		debug("enum32", () -> super.enum32(field));
 	}
 	
 	@Override
 	public <T extends Enum<T>> void enum8(EnumWrapper<T> field) throws IOException {
-		field.setOrdinal((int) fieldInputStream.read());
+		debug("enum8", () -> super.enum8(field));
 	}
 
 	@Override
 	public void signed16(Wrapper<Short> field) throws IOException {
-		field.setValue(fieldInputStream.readSigned16());
+		debug("s16", () -> super.signed16(field));
 	}
 
 	@Override
 	public void float32(Wrapper<Float> field) throws IOException {
-		field.setValue(fieldInputStream.readFloat32());
+		debug("f32", () -> super.float32(field));
 	}
 	
 	@Override
 	public void constFloat(float expected) throws IOException, CorruptionException {
-		CorruptionException.assertFloat(expected, fieldInputStream.readFloat32());
+		constDebug("cf32", () -> super.constFloat(expected));
 	}
 
 	@Override
 	public void signed8(Wrapper<Byte> field) throws IOException {
-		field.setValue((byte) fieldInputStream.read());
+		debug("s8", () -> super.signed8(field));
 	}
 
 	@Override
 	public void constUnsigned16(int field) throws CorruptionException, IOException {
-		CorruptionException.assertInt(field, fieldInputStream.readUnsigned16());
+		constDebug("cu16", () -> super.constUnsigned16(field));
 	}
 
 	@Override
 	public void end() throws CorruptionException, IOException {
-		try {
-			fieldInputStream.read();
-			throw new CorruptionException("StreamOpening", "EndOfStream");
-		}
-		catch(EOFException e) {
-			
-		}
+		super.end();
 	}
 }

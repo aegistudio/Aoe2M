@@ -1,6 +1,6 @@
 package net.aegistudio.aoe2m.scx.map;
 
-public enum EnumTerrian {
+public enum EnumTerrain {
 	GRASS(0, 2, 0x000, 0x0ff, 0x00),
 	WATER_SHALLOW(1, 1, 0x077, 0x077, 0x0ff),
 	BEACH(2, 1, 0x0ee, 0x0ee, 0x000),
@@ -22,23 +22,23 @@ public enum EnumTerrian {
 	SNOWY_ROAD(38, 1, 0xff, 0xff, 0xee),
 	MUSHROOM_ROAD(39, 1, 0x55, 0xff, 0x55);
 	
-	public final int terrianId;
+	public final int terrainId;
 	public final int defaultElevation;
 	public final int r, g, b;
 	
-	private EnumTerrian(int terrianId, int defaultElevation, int r, int g, int b) {
-		this.terrianId = terrianId;
+	private EnumTerrain(int terrianId, int defaultElevation, int r, int g, int b) {
+		this.terrainId = terrianId;
 		this.defaultElevation = defaultElevation;
 		this.r = r; this.g = g; this.b = b;
 	}
 	
-	public static final EnumTerrian[] terrianLookup = new EnumTerrian[256];
+	public static final EnumTerrain[] terrianLookup = new EnumTerrain[256];
 	static {
-		for(EnumTerrian terrian : values())
-			terrianLookup[terrian.terrianId] = terrian;
+		for(EnumTerrain terrain : values())
+			terrianLookup[terrain.terrainId] = terrain;
 	}
 	
-	public static EnumTerrian getTerrian(byte id) {
+	public static EnumTerrain getTerrian(byte id) {
 		if(id < 0) return terrianLookup[256 + ((int)id)];
 		else return terrianLookup[id];
 	}

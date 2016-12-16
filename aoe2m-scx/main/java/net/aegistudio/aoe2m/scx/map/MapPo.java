@@ -10,8 +10,8 @@ public class MapPo {
 	public Wrapper<Long> mapWidth = new Wrapper<Long>(0l);
 	public Wrapper<Long> mapHeight = new Wrapper<Long>(0l);
 	
-	public TerrianPo terrianId = new TerrianPo(256, 256);
-	public TerrianPo elevation = new TerrianPo(256, 256);
+	public TerrainPo terrianId = new TerrainPo(256, 256);
+	public TerrainPo elevation = new TerrainPo(256, 256);
 	
 	public Wrapper<Long> playerCount = new Wrapper<Long>(9l);
 	
