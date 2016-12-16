@@ -3,6 +3,8 @@ package net.aegistudio.aoe2m.scx.input;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
+import java.util.function.Supplier;
 
 import net.aegistudio.aoe2m.scx.CorruptionException;
 import net.aegistudio.aoe2m.scx.EnumWrapper;
@@ -107,6 +109,17 @@ public class FieldInputTranslator implements FieldTranslator {
 		CorruptionException.assertInt(field, fieldInputStream.readUnsigned16());
 	}
 
+	@Override
+	public <T> void array(int length, List<T> list, Supplier<T> factory, ArrayTranslation<T> translation)
+			throws IOException, CorruptionException {
+		if(list != null) list.clear();
+		for(int i = 0; i < length; i ++) {
+			T value = factory.get();
+			translation.translate(value);
+			list.add(value);
+		}
+	}
+	
 	@Override
 	public void end() throws CorruptionException, IOException {
 		try {

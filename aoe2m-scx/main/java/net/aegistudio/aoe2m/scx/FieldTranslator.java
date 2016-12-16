@@ -1,6 +1,8 @@
 package net.aegistudio.aoe2m.scx;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * As we know, the order we read fields from the file is the same as we write them to file.
@@ -45,6 +47,10 @@ public interface FieldTranslator {
 	public void skip(long length) throws IOException;
 
 	public void constFloat(float expected) throws IOException, CorruptionException;
+	
+	public interface ArrayTranslation<T> { 	public void translate(T value) throws IOException, CorruptionException; }
+	public <T> void array(int length, List<T> list, Supplier<T> factory, ArrayTranslation<T> translation) 
+			throws IOException, CorruptionException;
 	
 	public void end() throws IOException, CorruptionException;
 }

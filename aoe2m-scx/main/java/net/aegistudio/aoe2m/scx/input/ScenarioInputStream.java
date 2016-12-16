@@ -35,5 +35,5 @@ public class ScenarioInputStream extends InputStream {
 		new ScenarioDirector().build(scenario, translator);
 		
 		return scenario;
-	}	
+	}
 }

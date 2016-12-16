@@ -12,8 +12,9 @@ import net.aegistudio.aoe2m.scx.msg.Message;
 import net.aegistudio.aoe2m.scx.msg.MessageBuilder;
 import net.aegistudio.aoe2m.scx.player.PlayerData;
 import net.aegistudio.aoe2m.scx.player.PlayerTableBuilder;
+import net.aegistudio.aoe2m.scx.trigger.OrderedList;
 import net.aegistudio.aoe2m.scx.trigger.TriggerBuilder;
-import net.aegistudio.aoe2m.scx.trigger.TriggerListPo;
+import net.aegistudio.aoe2m.scx.trigger.TriggerPo;
 
 public class Scenario implements ScenarioDirector.Directable {
 	@Override
@@ -69,8 +70,8 @@ public class Scenario implements ScenarioDirector.Directable {
 		return trigger;
 	}
 	
-	public TriggerListPo getTriggerList() {
-		return trigger.getTriggerList();
+	public OrderedList<TriggerPo> getTriggerList() {
+		return trigger.triggerList;
 	}
 	
 	public String toString() {
