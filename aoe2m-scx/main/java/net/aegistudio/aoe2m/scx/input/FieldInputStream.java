@@ -26,7 +26,7 @@ public class FieldInputStream extends InputStream {
 	
 	public String readConstLengthString(int length) throws IOException {
 		byte[] string = new byte[length];
-		this.inputStream.read(string);
+		this.read(string);
 		return new String(string, charset);
 	}
 	
@@ -63,7 +63,7 @@ public class FieldInputStream extends InputStream {
 	}
 	
 	public long readBytes(int length, boolean sext) throws IOException {
-		inputStream.read(bytes, 0, length);
+		read(bytes, 0, length);
 		long value = 0;
 		for(int i = 0; i < length; i ++)
 			value += sext? makeFieldSext(i) : makeField(i);

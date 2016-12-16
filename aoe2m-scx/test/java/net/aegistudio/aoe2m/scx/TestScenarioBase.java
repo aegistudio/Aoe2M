@@ -15,7 +15,7 @@ public abstract class TestScenarioBase {
 		this.encoding = encoding;
 	}
 	
-	public final @Test void read() {
+	public final @Test void test() {
 		try (	InputStream fileInputStream = getClass().getResourceAsStream(scenarioName);
 				ScenarioInputStream scenarioInputStream = new ScenarioInputStream(fileInputStream, encoding);) {
 			

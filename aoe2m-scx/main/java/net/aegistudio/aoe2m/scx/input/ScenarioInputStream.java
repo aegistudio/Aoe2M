@@ -33,6 +33,7 @@ public class ScenarioInputStream extends InputStream {
 		//FieldInputTranslator translator = new StackDebugTranslator(
 		//		new DebugInputStream(inflateInput, System.out), charset);
 		new ScenarioDirector().build(scenario, translator);
+		
 		return scenario;
 	}	
 }

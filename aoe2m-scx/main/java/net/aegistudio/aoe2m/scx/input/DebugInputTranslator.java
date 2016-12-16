@@ -119,8 +119,4 @@ public class DebugInputTranslator extends FieldInputTranslator {
 		constDebug("cu16", () -> super.constUnsigned16(field));
 	}
 
-	@Override
-	public void end() throws CorruptionException, IOException {
-		super.end();
-	}
 }
