@@ -9,7 +9,7 @@ public class PlayerTableBuilder {
 	private PlayerData playerData[] = new PlayerData[16]; { 
 		for(int i = 0; i < 16; i ++) {
 			playerData[i] = new PlayerData(); 
-			playerData[i].constPlayerName.setValue(new String16("Player " + i));
+			playerData[i].constPlayerName.setValue(new String16("Player " + (i + 1)));
 			playerData[i].diplomacy[i].setValue(EnumDiplomacy.ALLIED);
 		}
 	}

@@ -1,5 +1,7 @@
 package net.aegistudio.aoe2m.scx;
 
+import java.util.Arrays;
+
 import net.aegistudio.aoe2m.scx.map.MapBuilder;
 import net.aegistudio.aoe2m.scx.map.MapPo;
 import net.aegistudio.aoe2m.scx.meta.GlobalVictoryPo;
@@ -48,8 +50,8 @@ public class Scenario implements ScenarioDirector.Directable {
 		return this.message.getMessage();
 	}
 	
-	public Cinematic cinematicPo() {
-		return new Cinematic();
+	public Cinematic getCinematic() {
+		return this.message.getCinematic();
 	}
 	
 	MapBuilder map = new MapBuilder();
@@ -69,5 +71,30 @@ public class Scenario implements ScenarioDirector.Directable {
 	
 	public TriggerListPo getTriggerList() {
 		return trigger.getTriggerList();
+	}
+	
+	public String toString() {
+		StringFormater toString = new StringFormater(this);
+		toString.add("Metadata", getMetadata());
+		toString.line();
+		
+		toString.add("GlobalVictory", getGlobalVictory());
+		toString.line();
+		
+		toString.add("Message", getMessage());
+		toString.line();
+		
+		toString.add("Cinematic", getCinematic());
+		toString.line();
+		
+		toString.add("Map", getMap());
+		toString.line();
+		
+		toString.add("Player", Arrays.asList(getPlayerTable()).subList(0, 
+				this.getMetadata().playerCount));
+		
+		toString.add("AllTechs", getPlayerTableBuilder().allTechs.getValue());
+		
+		return toString.toString();
 	}
 }
