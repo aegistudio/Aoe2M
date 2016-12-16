@@ -30,6 +30,17 @@
     </plugins>
   </build>
   
+	<distributionManagement>
+		<repository>
+			<id>nexus.aegistudio.net</id>
+			<url>http://nexus.aegistudio.net/repository/release/</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus.aegistudio.net</id>
+			<url>http://nexus.aegistudio.net/repository/snapshot/</url>
+		</snapshotRepository>
+	</distributionManagement>
+  
   <dependencies>
   	<dependency>
   		<groupId>junit</groupId>
