@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
+import net.aegistudio.aoe2m.scx.FieldTranslator;
 import net.aegistudio.aoe2m.scx.Scenario;
 import net.aegistudio.aoe2m.scx.ScenarioDirector;
 import net.aegistudio.aoe2m.scx.meta.MetadataBuilder;
@@ -22,6 +23,8 @@ public class ScenarioInputStream extends InputStream {
 		return this.inputStream.read();
 	}
 	
+	private static final boolean debugging = false;
+	
 	public void readScenario(Scenario scenario) throws Exception {
 		FieldInputStream fieldInputStream = new FieldInputStream(inputStream, charset);
 		new MetadataBuilder(scenario.metadata, scenario.globalVictory)
@@ -30,9 +33,14 @@ public class ScenarioInputStream extends InputStream {
 		Inflater inflater = new Inflater(true);
 		InflaterInputStream inflateInput = new InflaterInputStream(fieldInputStream, inflater);
 		
-		FieldInputTranslator translator = new FieldInputTranslator(inflateInput, charset);
-		//FieldInputTranslator translator = new StackDebugTranslator(
-		//		new DebugInputStream(inflateInput, System.out), charset);
+		FieldTranslator translator;
+		if(debugging) {
+			DebugInputStream input = new DebugInputStream(inflateInput, System.out);
+			translator = new FieldInputTranslator(input, charset);
+			translator = new StackDebugTranslator(input, translator);
+		}
+		else translator = new FieldInputTranslator(inflateInput, charset);
+		
 		new ScenarioDirector().build(scenario, translator);
 	}
 	

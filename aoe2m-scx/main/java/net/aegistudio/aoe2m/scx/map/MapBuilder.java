@@ -25,8 +25,8 @@ public class MapBuilder {
 		
 		for(int i = 0; i < map.mapWidth.getValue(); i ++)
 			for(int j = 0; j < map.mapHeight.getValue(); j ++) {
-				map.terrianId.setCursor(i, j);
-				translator.signed8(map.terrianId);
+				map.terrainId.setCursor(i, j);
+				translator.signed8(map.terrainId);
 				map.elevation.setCursor(i, j);
 				translator.signed8(map.elevation);
 				translator.constByte(0);

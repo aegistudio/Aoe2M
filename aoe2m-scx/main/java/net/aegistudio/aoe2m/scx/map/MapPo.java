@@ -11,8 +11,16 @@ public class MapPo {
 	public Wrapper<Long> mapWidth = new Wrapper<Long>(0l);
 	public Wrapper<Long> mapHeight = new Wrapper<Long>(0l);
 	
-	public TerrainPo terrianId = new TerrainPo(256, 256);
-	public TerrainPo elevation = new TerrainPo(256, 256);
+	public TerrainPo terrainId = new TerrainPo(256, 256);
+	public TerrainPo elevation = new TerrainPo(256, 256); {
+		for(int i = 0; i < 256; i ++)
+			for(int j = 0; j < 256; j ++) {
+				terrainId.setCursor(i, j);
+				elevation.setCursor(i, j);
+				terrainId.setValue((byte) EnumTerrain.GRASS.terrainId);
+				elevation.setValue((byte) EnumTerrain.GRASS.defaultElevation);
+			}
+	}
 	
 	public Wrapper<Long> playerCount = new Wrapper<Long>(9l);
 	

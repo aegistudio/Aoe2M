@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 
-public class DebugInputStream extends InputStream {
+public class DebugInputStream extends InputStream implements Debuggable {
 	private final InputStream input;
 	private final PrintStream output;
 	public DebugInputStream(InputStream input, PrintStream output) {

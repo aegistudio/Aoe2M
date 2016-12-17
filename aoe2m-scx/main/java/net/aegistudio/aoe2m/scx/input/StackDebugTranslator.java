@@ -3,11 +3,12 @@ package net.aegistudio.aoe2m.scx.input;
 import java.io.IOException;
 
 import net.aegistudio.aoe2m.scx.CorruptionException;
+import net.aegistudio.aoe2m.scx.FieldTranslator;
 
-public class StackDebugTranslator extends DebugInputTranslator {
+public class StackDebugTranslator extends DebugTranslator {
 
-	public StackDebugTranslator(DebugInputStream debug, String charset) {
-		super(debug, charset);
+	public StackDebugTranslator(Debuggable debug, FieldTranslator translator) {
+		super(debug, translator);
 	}
 	
 	private String getCaller() {
