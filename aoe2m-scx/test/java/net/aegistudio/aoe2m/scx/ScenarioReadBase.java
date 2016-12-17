@@ -7,10 +7,10 @@ import static org.junit.Assert.*;
 
 import net.aegistudio.aoe2m.scx.input.ScenarioInputStream;
 
-public abstract class TestScenarioBase {
+public abstract class ScenarioReadBase {
 	protected final String scenarioName;
 	protected final String encoding;
-	public TestScenarioBase(String scenarioName, String encoding) {
+	public ScenarioReadBase(String scenarioName, String encoding) {
 		this.scenarioName = scenarioName;
 		this.encoding = encoding;
 	}

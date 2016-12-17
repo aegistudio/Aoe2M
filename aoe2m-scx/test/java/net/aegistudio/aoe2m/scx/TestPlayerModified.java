@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import net.aegistudio.aoe2m.scx.player.EnumCivilization;
 
-public class TestPlayerModified extends TestScenarioBase {
+public class TestPlayerModified extends ScenarioReadBase {
 	public TestPlayerModified() {super("/playerModified.scx", "gbk"); }
 	
 	public void todo(Scenario scenario) {

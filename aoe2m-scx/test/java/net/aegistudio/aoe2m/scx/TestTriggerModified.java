@@ -8,7 +8,7 @@ import net.aegistudio.aoe2m.scx.trigger.OrderedList;
 import net.aegistudio.aoe2m.scx.trigger.TriggerPo;
 import static org.junit.Assert.*;
 
-public class TestTriggerModified extends TestScenarioBase {
+public class TestTriggerModified extends ScenarioReadBase {
 	public TestTriggerModified() {super("/triggerModified.scx", "gbk"); }
 	
 	public void todo(Scenario scenario) {

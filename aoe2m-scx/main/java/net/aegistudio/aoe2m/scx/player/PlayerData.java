@@ -67,7 +67,7 @@ public class PlayerData {
 	public Wrapper<Short> unknownedX = new Wrapper<Short>((short) 72);
 	public Wrapper<Short> unknownedY = new Wrapper<Short>((short) 72);
 	
-	public Wrapper<Float> unknownedArrayIncluded = new Wrapper<Float>(1.0f);	// Included when 2.0f
+	public Wrapper<Float> unknownedArrayIncluded = new Wrapper<Float>(2.0f);	// Included when 2.0f
 	
 	public EnumWrapper<EnumPlayerColor> playerColor = new EnumWrapper<EnumPlayerColor>(EnumPlayerColor.RED);
 	

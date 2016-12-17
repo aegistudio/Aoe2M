@@ -39,7 +39,7 @@ public class FieldOutputStream extends OutputStream {
 	}
 	
 	public void writeFloat32(float value) throws IOException {
-		write32(Integer.reverseBytes(Float.floatToRawIntBits(value)));
+		write32(Float.floatToRawIntBits(value));
 	}
 	
 	public void write64(long value) throws IOException {

@@ -1,5 +1,6 @@
 package net.aegistudio.aoe2m.scx.meta;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import net.aegistudio.aoe2m.scx.CorruptionException;
@@ -10,7 +11,6 @@ import net.aegistudio.aoe2m.scx.input.FieldOutputStream;
 public class MetadataBuilder {
 	private MetadataPo metadata;
 	private GlobalVictoryPo victory;
-	private long headerLength;
 	
 	public MetadataBuilder(MetadataPo metadata, GlobalVictoryPo victory) {
 		this.metadata = metadata;
@@ -21,29 +21,43 @@ public class MetadataBuilder {
 		String versionCode = fin.readConstLengthString(4);
 		metadata.version = EnumVersion.getVersion(versionCode);
 		
-		this.headerLength = fin.readUnsigned32();
+		long headerLength = fin.readUnsigned32();
 		
 		CorruptionException.assertInt(2, fin.readSigned32());
-		this.headerLength -= 4;
-		
+		headerLength -= 4;
+	
 		metadata.lastSavedTimestamp = fin.readUnsigned32();
-		this.headerLength -= 4;
+		headerLength -= 4;
 		
 		metadata.scenarioInstruction = fin.readString32();
-		this.headerLength -= (metadata.scenarioInstruction.length + 4);
+		headerLength -= (metadata.scenarioInstruction.length + 4);
 		
 		CorruptionException.assertLong(0, fin.readUnsigned32());
-		this.headerLength -= 4;
+		headerLength -= 4;
 		
 		metadata.playerCount = (int) fin.readUnsigned32();
-		this.headerLength -= 4;
+		headerLength -= 4;
 		
-		if(this.headerLength != 0) 
-			throw new CorruptionException(this.headerLength, 0);
+		if(headerLength != 0) 
+			throw new CorruptionException(headerLength, 0);
 	}
 	
 	public void writeUncompressedHeader(FieldOutputStream fout) throws IOException, CorruptionException {
+		fout.writeConstString(4, metadata.version.getVersionString());
 		
+		ByteArrayOutputStream outputTemp = new ByteArrayOutputStream();
+		FieldOutputStream fieldTemp = new FieldOutputStream(outputTemp);
+		
+		fieldTemp.write32(2);
+		fieldTemp.write32((int) metadata.lastSavedTimestamp);
+		fieldTemp.writeString32(metadata.scenarioInstruction);
+		fieldTemp.write32(0);
+		fieldTemp.write32(metadata.playerCount);
+		
+		fout.write32(outputTemp.toByteArray().length);
+		outputTemp.writeTo(fout);
+		
+		fieldTemp.close();
 	}
 	
 	public void buildCompressedHeaderPre(FieldTranslator translator) throws IOException, CorruptionException {

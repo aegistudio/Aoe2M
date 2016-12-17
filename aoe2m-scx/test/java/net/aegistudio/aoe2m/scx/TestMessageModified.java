@@ -2,7 +2,7 @@ package net.aegistudio.aoe2m.scx;
 
 import static org.junit.Assert.*;
 
-public class TestMessageModified extends TestScenarioBase {
+public class TestMessageModified extends ScenarioReadBase {
 	public TestMessageModified() {super("/messageModified.scx", "gbk"); }
 	
 	public void todo(Scenario scenario) {

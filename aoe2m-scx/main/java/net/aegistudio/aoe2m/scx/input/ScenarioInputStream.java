@@ -27,7 +27,7 @@ public class ScenarioInputStream extends InputStream {
 	private static final boolean debugging = false;
 	
 	public void readScenario(Scenario scenario) throws IOException, CorruptionException {
-		FieldInputStream fieldInputStream = new FieldInputStream(inputStream, charset);
+		FieldInputStream fieldInputStream = new FieldInputStream(this, charset);
 		new MetadataBuilder(scenario.metadata, scenario.globalVictory)
 			.readUncompressedHeader(fieldInputStream);
 		

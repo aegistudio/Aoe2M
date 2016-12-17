@@ -2,7 +2,7 @@ package net.aegistudio.aoe2m.scx;
 
 import static org.junit.Assert.assertEquals;
 
-public class TestAiModified extends TestScenarioBase {
+public class TestAiModified extends ScenarioReadBase {
 	public TestAiModified() {	super("/aiModified.scx", "gbk");	}
 
 	@Override
