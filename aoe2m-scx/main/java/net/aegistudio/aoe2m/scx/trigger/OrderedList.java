@@ -8,38 +8,19 @@ import java.util.function.Supplier;
 import net.aegistudio.aoe2m.scx.Wrapper;
 import net.aegistudio.aoe2m.scx.CorruptionException;
 import net.aegistudio.aoe2m.scx.FieldTranslator;
+import net.aegistudio.aoe2m.scx.VariantList;
 
-public class OrderedList<T> {
-	public final List<T> element = new ArrayList<>();
+public class OrderedList<T> extends VariantList<T> {
 	public final List<Wrapper<Integer>> order = new ArrayList<>();
 	
-	public final Supplier<T> factory; 
-	public final OrderedListTranslation<T> translation;
-	
-	public static interface OrderedListTranslation<T> {
-		public void translate(T t, FieldTranslator translator) 
-				throws IOException, CorruptionException;
-	}
-	public OrderedList(Supplier<T> factory, OrderedListTranslation<T> translation) {
-		this.factory = factory;
-		this.translation = translation;
+	public OrderedList(Supplier<T> factory, ListTranslation<T> translation) {
+		super(factory, translation);
 	}
 	
 	public void build(FieldTranslator translator) throws IOException, CorruptionException {
-		Wrapper<Integer> conditionCount = new Wrapper<Integer>(element.size());
-		translator.signed32(conditionCount);
-		translator.array(conditionCount.getValue(), element, factory, 
-				element -> translation.translate(element, translator));
-		translator.array(conditionCount.getValue(), order, 
+		super.build(translator);
+		translator.array(element.size(), order, 
 				() -> new Wrapper<Integer>(0), 
 				order -> translator.signed32(order));
-	}
-	
-	public int size() {
-		return element.size();
-	}
-	
-	public T get(int index) {
-		return element.get(index);
 	}
 }

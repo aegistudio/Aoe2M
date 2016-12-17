@@ -22,8 +22,7 @@ public class ScenarioInputStream extends InputStream {
 		return this.inputStream.read();
 	}
 	
-	public Scenario readScenario() throws Exception {
-		Scenario scenario = new Scenario();
+	public void readScenario(Scenario scenario) throws Exception {
 		FieldInputStream fieldInputStream = new FieldInputStream(inputStream, charset);
 		new MetadataBuilder(scenario.metadata, scenario.globalVictory)
 			.readUncompressedHeader(fieldInputStream);
@@ -35,7 +34,11 @@ public class ScenarioInputStream extends InputStream {
 		//FieldInputTranslator translator = new StackDebugTranslator(
 		//		new DebugInputStream(inflateInput, System.out), charset);
 		new ScenarioDirector().build(scenario, translator);
-		
+	}
+	
+	public Scenario readScenario() throws Exception {
+		Scenario scenario = new Scenario();
+		readScenario(scenario);
 		return scenario;
 	}
 }

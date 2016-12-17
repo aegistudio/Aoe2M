@@ -37,13 +37,10 @@ public class MapBuilder {
 	
 	public void buildUnits(MetadataPo metadata, FieldTranslator translator) 
 			throws Exception {
-		translator.unsigned32(map.gaia);
-		map.gaia.buildUnitList(metadata, translator);
+		map.gaia.build(translator);
 		
-		for(int i = 0; i < map.playerCount.getValue() - 1; i ++) {
-			translator.unsigned32(map.units[i]);
-			map.units[i].buildUnitList(metadata, translator);
-		}
+		for(int i = 0; i < map.playerCount.getValue() - 1; i ++) 
+			map.units[i].build(translator);
 	}
 	
 	public MapPo getMap() {

@@ -1,5 +1,6 @@
 package net.aegistudio.aoe2m.scx.map;
 
+import net.aegistudio.aoe2m.scx.VariantList;
 import net.aegistudio.aoe2m.scx.Wrapper;
 
 public class MapPo {
@@ -15,7 +16,9 @@ public class MapPo {
 	
 	public Wrapper<Long> playerCount = new Wrapper<Long>(9l);
 	
-	public UnitList gaia = new UnitList(0l);
-	public UnitList[] units = new UnitList[8];
-	{ for(int i = 0; i < 8; i ++) units[i] = new UnitList(0l); }
+	public VariantList<UnitPo> gaia = new VariantList<>(UnitPo::new, UnitPo::build);
+	
+	@SuppressWarnings("unchecked")
+	public VariantList<UnitPo>[] units = new VariantList[8];
+	{ for(int i = 0; i < 8; i ++) units[i] = new VariantList<>(UnitPo::new, UnitPo::build); }
 }
