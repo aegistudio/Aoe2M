@@ -28,9 +28,9 @@ public interface FieldTranslator {
 	
 	public void signed8(Wrapper<Byte> field) throws IOException;
 	
-	public void string32(Wrapper<String32> field) throws IOException;
+	public void string32(Wrapper<Text> field) throws IOException;
 	
-	public void string16(Wrapper<String16> field) throws IOException;
+	public void string16(Wrapper<Text> field) throws IOException;
 	
 	public void bool32(Wrapper<Boolean> field) throws IOException;
 	

@@ -4,8 +4,7 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import net.aegistudio.aoe2m.scx.String16;
-import net.aegistudio.aoe2m.scx.String32;
+import net.aegistudio.aoe2m.scx.Text;
 
 public class FieldInputStream extends InputStream {
 	private final InputStream inputStream;
@@ -30,16 +29,16 @@ public class FieldInputStream extends InputStream {
 		return new String(string, charset);
 	}
 	
-	public String16 readString16() throws IOException {
+	public Text readString16() throws IOException {
 		int length = this.readUnsigned16();
 		String string = this.readConstLengthString(length);
-		return new String16(length, string);
+		return new Text(length, string);
 	}
 	
-	public String32 readString32() throws IOException {
+	public Text readString32() throws IOException {
 		long length = this.readUnsigned32();
 		String string = this.readConstLengthString((int) length);
-		return new String32(length, string);
+		return new Text(length, string);
 	}
 	
 	public int readUnsigned16() throws IOException {

@@ -4,8 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.aegistudio.aoe2m.scx.EnumWrapper;
-import net.aegistudio.aoe2m.scx.String16;
-import net.aegistudio.aoe2m.scx.String32;
+import net.aegistudio.aoe2m.scx.Text;
 import net.aegistudio.aoe2m.scx.Wrapper;
 
 public class PlayerData {
@@ -25,14 +24,13 @@ public class PlayerData {
 	public EnumWrapper<EnumCivilization> civilization = new EnumWrapper<EnumCivilization>(EnumCivilization.BRITONS);
 	
 	// PlayerData2
-	public Wrapper<String16> unknownString1 = new Wrapper<String16>(new String16(0, ""));
+	public Wrapper<Text> unknownString1 = new Wrapper<Text>(new Text(0, ""));
 	
-	public Wrapper<String16> unknownString2 = new Wrapper<String16>(new String16(0, ""));
+	public Wrapper<Text> unknownString2 = new Wrapper<Text>(new Text(0, ""));
 	
 	public static final String randomGame = "RandomGame";
-	public Wrapper<String16> aiName = new Wrapper<String16>(new String16(randomGame.length(), randomGame));
-	
-	public Wrapper<String32> perFile = new Wrapper<String32>(new String32(0, ""));
+	public Wrapper<Text> aiName = new Wrapper<Text>(new Text(randomGame.length(), randomGame));
+	public Wrapper<Text> perFile = new Wrapper<Text>(new Text(0, ""));
 
 	public EnumWrapper<EnumAiType> aiType = new EnumWrapper<EnumAiType>(EnumAiType.STANDARD);
 	
@@ -61,7 +59,7 @@ public class PlayerData {
 	
 	// PlayerData3
 	// Localized string Player N. Please notice it is localized.
-	public Wrapper<String16> constPlayerName = new Wrapper<String16>(new String16(0, ""));
+	public Wrapper<Text> constPlayerName = new Wrapper<Text>(new Text(0, ""));
 	
 	public Wrapper<Float> cameraX = new Wrapper<Float>(0.0f);
 	public Wrapper<Float> cameraY = new Wrapper<Float>(0.0f);

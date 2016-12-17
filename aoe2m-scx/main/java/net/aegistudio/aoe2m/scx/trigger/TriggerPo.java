@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import net.aegistudio.aoe2m.scx.CorruptionException;
 import net.aegistudio.aoe2m.scx.FieldTranslator;
-import net.aegistudio.aoe2m.scx.String32;
+import net.aegistudio.aoe2m.scx.Text;
 import net.aegistudio.aoe2m.scx.Wrapper;
 
 public class TriggerPo {
@@ -16,8 +16,8 @@ public class TriggerPo {
 	public Wrapper<Long> objectiveOrder = new Wrapper<Long>(0l);
 	public Wrapper<Short> unknownValue = new Wrapper<Short>((short) 0);
 	
-	public Wrapper<String32> triggerDescription = new Wrapper<String32>(new String32(0, ""));	
-	public Wrapper<String32> triggerName = new Wrapper<String32>(new String32(0, ""));
+	public Wrapper<Text> triggerDescription = new Wrapper<Text>(new Text(0, ""));	
+	public Wrapper<Text> triggerName = new Wrapper<Text>(new Text(0, ""));
 	
 	public OrderedList<EffectPo> effectList = new OrderedList<>(
 			EffectPo::new, (effect, translator) -> effect.build(translator));

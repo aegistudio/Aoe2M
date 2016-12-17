@@ -1,10 +1,10 @@
 package net.aegistudio.aoe2m.scx;
 
-public final class String32 {
+public final class Text {
 	public final long length;
 	public final String string;
 	
-	public String32(String string) {
+	public Text(String string) {
 		if(string.length() == 0) {
 			this.length = 0;
 			this.string = string;
@@ -15,10 +15,12 @@ public final class String32 {
 		}
 	}
 	
-	public String32(long length, String string) {
+	public Text(long length, String string) {
 		this.length = length;
 		this.string = string;
 	}
+	
+	public Text() {		this("");	}
 	
 	public String toString() {
 		return string.replace("\0", "\\0");

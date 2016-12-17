@@ -4,8 +4,7 @@ import java.io.IOException;
 
 import net.aegistudio.aoe2m.scx.CorruptionException;
 import net.aegistudio.aoe2m.scx.EnumWrapper;
-import net.aegistudio.aoe2m.scx.String16;
-import net.aegistudio.aoe2m.scx.String32;
+import net.aegistudio.aoe2m.scx.Text;
 import net.aegistudio.aoe2m.scx.Wrapper;
 
 public class DebugInputTranslator extends FieldInputTranslator {
@@ -40,12 +39,12 @@ public class DebugInputTranslator extends FieldInputTranslator {
 	}
 
 	@Override
-	public void string32(Wrapper<String32> field) throws IOException {
+	public void string32(Wrapper<Text> field) throws IOException {
 		debug("str32", () -> super.string32(field));
 	}
 
 	@Override
-	public void string16(Wrapper<String16> field) throws IOException {
+	public void string16(Wrapper<Text> field) throws IOException {
 		debug("str16", () -> super.string16(field));
 	}
 

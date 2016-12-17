@@ -7,7 +7,7 @@ import java.util.List;
 import net.aegistudio.aoe2m.scx.CorruptionException;
 import net.aegistudio.aoe2m.scx.EnumWrapper;
 import net.aegistudio.aoe2m.scx.FieldTranslator;
-import net.aegistudio.aoe2m.scx.String32;
+import net.aegistudio.aoe2m.scx.Text;
 import net.aegistudio.aoe2m.scx.Wrapper;
 import net.aegistudio.aoe2m.scx.player.EnumDiplomacy;
 
@@ -57,8 +57,8 @@ public class EffectPo {
 	public Wrapper<Integer> unitType2 = new Wrapper<Integer>(-1);
 	
 	public Wrapper<Integer> instructionPanel = new Wrapper<Integer>(-1);
-	public Wrapper<String32> message = new Wrapper<String32>(new String32(0, ""));
-	public Wrapper<String32> sound = new Wrapper<String32>(new String32(1, new String(new byte[]{0})));	// Very special.
+	public Wrapper<Text> message = new Wrapper<Text>(new Text(0, ""));
+	public Wrapper<Text> sound = new Wrapper<Text>(new Text(1, new String(new byte[]{0})));	// Very special.
 	
 	public void build(FieldTranslator translator) throws IOException, CorruptionException {
 		translator.enum32(type);

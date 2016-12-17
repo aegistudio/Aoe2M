@@ -24,7 +24,7 @@ public class StringFormater {
 		else hasValue = true;
 		
 		String valueString = value.toString();;
-		if(value instanceof String || value instanceof String16 || value instanceof String32) 
+		if(value instanceof String || value instanceof Text) 
 			valueString = "\"" + valueString + "\"";
 		else {
 			if(value instanceof List) 

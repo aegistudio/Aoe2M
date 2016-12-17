@@ -9,8 +9,7 @@ import java.util.function.Supplier;
 import net.aegistudio.aoe2m.scx.CorruptionException;
 import net.aegistudio.aoe2m.scx.EnumWrapper;
 import net.aegistudio.aoe2m.scx.FieldTranslator;
-import net.aegistudio.aoe2m.scx.String16;
-import net.aegistudio.aoe2m.scx.String32;
+import net.aegistudio.aoe2m.scx.Text;
 import net.aegistudio.aoe2m.scx.Wrapper;
 
 public class FieldInputTranslator implements FieldTranslator {
@@ -30,12 +29,12 @@ public class FieldInputTranslator implements FieldTranslator {
 	}
 
 	@Override
-	public void string32(Wrapper<String32> field) throws IOException {
+	public void string32(Wrapper<Text> field) throws IOException {
 		field.setValue(fieldInputStream.readString32());
 	}
 
 	@Override
-	public void string16(Wrapper<String16> field) throws IOException {
+	public void string16(Wrapper<Text> field) throws IOException {
 		field.setValue(fieldInputStream.readString16());
 	}
 
