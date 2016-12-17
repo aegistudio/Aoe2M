@@ -16,7 +16,7 @@ public class TestTriggerModified extends TestScenarioBase {
 		assertEquals(list.size(), 1);
 		
 		TriggerPo trigger = list.get(0);
-		assertEquals(trigger.triggerName.getValue().toString(), "TestTrigger\\0");
+		assertEquals(trigger.triggerName, "TestTrigger\0");
 		assertEquals(trigger.conditionList.size(), 1);
 		assertEquals(trigger.effectList.size(), 1);
 		
@@ -26,6 +26,6 @@ public class TestTriggerModified extends TestScenarioBase {
 		
 		EffectPo effect = trigger.effectList.get(0);
 		assertEquals(effect.type.getValue(), EnumEffectType.SEND_CHAT);
-		assertEquals(effect.message.getValue().toString(), "Test\\0");
+		assertEquals(effect.message, "Test\0");
 	}
 }

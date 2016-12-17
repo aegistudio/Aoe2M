@@ -18,4 +18,17 @@ public class Wrapper<T> {
 	public String toString() {
 		return value.toString();
 	}
+	
+	public int hashCode() {
+		if(value == null) return 0;
+		return value.hashCode();
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public boolean equals(Object another) {
+		if(value == null) return another == null;
+		if(another instanceof Wrapper)
+			return equals(((Wrapper)another).getValue());
+		return value.equals(another);
+	}
 }

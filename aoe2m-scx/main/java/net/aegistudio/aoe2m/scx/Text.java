@@ -25,4 +25,19 @@ public final class Text {
 	public String toString() {
 		return string.replace("\0", "\\0");
 	}
+	
+	public int hashCode() {
+		return string.hashCode();
+	}
+	
+	public boolean equals(Object another) {
+		if(another instanceof String) 
+			return string.equals(another);
+		else if(another instanceof Text) {
+			Text anoText = (Text) another;
+			if(anoText.length != length) return false;
+			return string.equals(anoText.string);
+		}
+		return false;
+	}
 }
