@@ -10,9 +10,5 @@ public class Cinematic {
 	public Wrapper<Text> victory = new Wrapper<>(new Text());
 	public Wrapper<Text> loss = new Wrapper<>(new Text());
 	public Wrapper<Text> background = new Wrapper<>(new Text());
-	
-	public Wrapper<Boolean> bitmapIncluded = new Wrapper<>(false);
-	public Wrapper<Long> width = new Wrapper<>(0l), height = new Wrapper<>(0l);
-	
-	public BufferedImage bitmap;
+	public Wrapper<BufferedImage> bitmap = new Wrapper<>(null);
 }

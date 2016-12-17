@@ -1,5 +1,6 @@
 package net.aegistudio.aoe2m.scx.input;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 import java.util.function.Supplier;
@@ -130,5 +131,10 @@ public class DebugTranslator implements FieldTranslator {
 	public <T> void array(int length, List<T> list, Supplier<T> factory, ArrayTranslation<T> translation)
 			throws IOException, CorruptionException {
 		wrapped.array(length, list, factory, translation);
+	}
+
+	@Override
+	public void bitmap(Wrapper<BufferedImage> image) throws IOException, CorruptionException {
+		wrapped.bitmap(image);
 	}
 }

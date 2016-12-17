@@ -2,6 +2,7 @@ package net.aegistudio.aoe2m.scx.msg;
 
 import java.io.IOException;
 
+import net.aegistudio.aoe2m.scx.CorruptionException;
 import net.aegistudio.aoe2m.scx.FieldTranslator;
 import net.aegistudio.aoe2m.scx.Wrapper;
 import net.aegistudio.aoe2m.scx.meta.MetadataPo;
@@ -34,20 +35,26 @@ public class MessageBuilder {
 			translator.string16(message.scouts);
 	}
 	
-	public void buildCinematic(MetadataPo metadata, FieldTranslator translator) throws IOException {
+	public void buildCinematic(MetadataPo metadata, FieldTranslator translator) throws IOException, CorruptionException {
 		translator.string16(cinematic.pregame);
 		translator.string16(cinematic.victory);
 		translator.string16(cinematic.loss);
 		translator.string16(cinematic.background);
+
+		Wrapper<Boolean> bitmapIncluded = new Wrapper<>(cinematic.bitmap.getValue() != null);
+		Wrapper<Short> shouldParse = new Wrapper<>((short) (bitmapIncluded.getValue()? -1 : 1));
 		
-		translator.bool32(cinematic.bitmapIncluded);
-		translator.unsigned32(cinematic.width);
-		translator.unsigned32(cinematic.height);
+		Wrapper<Long> width = new Wrapper<>(cinematic.bitmap.getValue() == null? 
+				0l : cinematic.bitmap.getValue().getWidth());
+		Wrapper<Long> height = new Wrapper<>(cinematic.bitmap.getValue() == null? 
+				0l : cinematic.bitmap.getValue().getHeight());
 		
-		Wrapper<Short> shouldParse = new Wrapper<Short>((short) (cinematic.bitmapIncluded.getValue()? -1 : 1));
+		translator.bool32(bitmapIncluded);
+		translator.unsigned32(width);
+		translator.unsigned32(height);
+		
 		translator.signed16(shouldParse);
-		if(shouldParse.getValue() != 1) {
-			// readBitmap
-		}
+		if(shouldParse.getValue() != 1) 
+			translator.bitmap(cinematic.bitmap);
 	}
 }

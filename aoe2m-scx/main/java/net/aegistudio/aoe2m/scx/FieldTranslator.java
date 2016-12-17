@@ -1,5 +1,6 @@
 package net.aegistudio.aoe2m.scx;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 import java.util.function.Supplier;
@@ -51,6 +52,8 @@ public interface FieldTranslator {
 	public interface ArrayTranslation<T> { 	public void translate(T value) throws IOException, CorruptionException; }
 	public <T> void array(int length, List<T> list, Supplier<T> factory, ArrayTranslation<T> translation) 
 			throws IOException, CorruptionException;
+	
+	public void bitmap(Wrapper<BufferedImage> image) throws IOException, CorruptionException;
 	
 	public void end() throws IOException, CorruptionException;
 }

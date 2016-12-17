@@ -1,9 +1,13 @@
 package net.aegistudio.aoe2m.scx.input;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
 import java.util.function.Supplier;
+
+import javax.imageio.ImageIO;
 
 import net.aegistudio.aoe2m.scx.CorruptionException;
 import net.aegistudio.aoe2m.scx.EnumWrapper;
@@ -119,5 +123,15 @@ public class FieldOutputTranslator implements FieldTranslator {
 	@Override
 	public void end() throws IOException, CorruptionException {
 		fieldOutputStream.close();
+	}
+
+	@Override
+	public void bitmap(Wrapper<BufferedImage> image) throws IOException, CorruptionException {
+		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+		ImageIO.write(image.getValue(), "bmp", buffer);
+		byte[] full = buffer.toByteArray();
+		byte[] trim = new byte[full.length - 14];
+		System.arraycopy(full, 14, trim, 0, trim.length);
+		fieldOutputStream.write(trim);
 	}
 }
