@@ -15,29 +15,27 @@ public class ScenarioDirector {
 		TriggerBuilder trigger = new TriggerBuilder(scenario.trigger);
 		
 		metadata.buildCompressedHeaderPre(fieldTranslator);
-		playerTable.buildPlayerData1(metadata.getMetadata(), fieldTranslator);
+		playerTable.buildPlayerData1(scenario.metadata, fieldTranslator);
 		metadata.buildCompressedHeaderTail(fieldTranslator);
 		
-		message.buildMessage(metadata.getMetadata(), fieldTranslator);
-		message.buildCinematic(metadata.getMetadata(), fieldTranslator);
+		message.buildMessage(scenario.metadata, fieldTranslator);
+		message.buildCinematic(scenario.metadata, fieldTranslator);
 		
-		playerTable.buildPlayerData2(metadata.getMetadata(), fieldTranslator);
+		playerTable.buildPlayerData2(scenario.metadata, fieldTranslator);
 		metadata.buildGlobalVictory(fieldTranslator);
 		
-		playerTable.buildDiplomacy(metadata.getMetadata(), fieldTranslator);
-		playerTable.buildDisable(metadata.getMetadata(), fieldTranslator);
+		playerTable.buildDiplomacy(scenario.metadata, fieldTranslator);
+		playerTable.buildDisable(scenario.metadata, fieldTranslator);
 		
-		map.buildTerrian(metadata.getMetadata(), fieldTranslator);
-		playerTable.buildPlayerData4(metadata.getMetadata(), fieldTranslator);
-		map.buildUnits(metadata.getMetadata(), fieldTranslator);
+		map.buildTerrian(scenario.metadata, fieldTranslator);
+		playerTable.buildPlayerData4(scenario.metadata, fieldTranslator);
+		map.buildUnits(scenario.metadata, fieldTranslator);
 		
-		playerTable.buildPlayerData3(metadata.getMetadata(), fieldTranslator);
+		playerTable.buildPlayerData3(scenario.metadata, fieldTranslator);
 		
-		trigger.buildTriggerSection(metadata.getMetadata(), fieldTranslator);
+		trigger.buildTriggerSection(scenario.metadata, fieldTranslator);
 		
-		// AI files, will be emitted currently.
-		fieldTranslator.constUnsigned32(0l);
-		fieldTranslator.constUnsigned32(0l);
+		scenario.include.build(fieldTranslator);
 		
 		fieldTranslator.end();
 	}

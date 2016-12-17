@@ -69,12 +69,4 @@ public class MetadataBuilder {
 		translator.unsigned32(victory.requiredScore);
 		translator.unsigned32(victory.requiredTime);
 	}
-	
-	public MetadataPo getMetadata() {
-		return this.metadata;
-	}
-	
-	public GlobalVictoryPo getGlobalVictory() {
-		return this.victory;
-	}
 }

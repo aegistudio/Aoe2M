@@ -25,6 +25,8 @@ public class Scenario {
 	public final OrderedList<TriggerPo> trigger = new OrderedList<>(TriggerPo::new,
 			(trigger, translator) -> trigger.buildTrigger(translator));
 	
+	public final IncludeSection include = new IncludeSection();
+	
 	public String toString() {
 		StringFormater toString = new StringFormater(this);
 		toString.add("Metadata", metadata);
