@@ -10,21 +10,21 @@ public enum EnumIndicator {
 		public void buildUnit(UnitPo unit, FieldTranslator translator) throws IOException {
 			translator.float32(unit.rotation);
 			translator.signed16(unit.animationFrame);
-			translator.unsigned32(unit.garrisonedId);
+			translator.signed32(unit.garrisonedId);
 		}
 	},
 	UNKNOWN {
 		public void buildUnit(UnitPo unit, FieldTranslator translator) throws IOException {
 			translator.float32(unit.rotation);
 			translator.signed16(unit.animationFrame);
-			translator.unsigned32(unit.garrisonedId);
+			translator.signed32(unit.garrisonedId);
 		}
 	},
 	NORMAL {
 		public void buildUnit(UnitPo unit, FieldTranslator translator) throws IOException {
 			translator.float32(unit.rotation);
 			translator.signed16(unit.animationFrame);
-			translator.unsigned32(unit.garrisonedId);
+			translator.signed32(unit.garrisonedId);
 		}
 	};
 	
