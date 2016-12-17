@@ -14,8 +14,6 @@ public class MetadataPo {
 	}
 	{	touch();	}
 	
-	public Text scenarioInstruction = new Text();
-	
 	public int playerCount = 2;
 	
 	public Wrapper<Long> nextUnitId = new Wrapper<>(0l);

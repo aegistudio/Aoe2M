@@ -29,7 +29,7 @@ public class ScenarioInputStream extends InputStream {
 	public void readScenario(Scenario scenario) throws IOException, CorruptionException {
 		FieldInputStream fieldInputStream = new FieldInputStream(this, charset);
 		new MetadataBuilder(scenario.metadata, scenario.globalVictory)
-			.readUncompressedHeader(fieldInputStream);
+			.readUncompressedHeader(fieldInputStream, scenario.message);
 		
 		Inflater inflater = new Inflater(true);
 		InflaterInputStream inflateInput = new InflaterInputStream(fieldInputStream, inflater);

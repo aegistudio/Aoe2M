@@ -31,7 +31,7 @@ public class ScenarioOutputStream extends OutputStream {
 	public void writeScenario(Scenario scenario) throws IOException, CorruptionException {
 		FieldOutputStream fieldOutputStream = new FieldOutputStream(this);
 		new MetadataBuilder(scenario.metadata, scenario.globalVictory)
-			.writeUncompressedHeader(fieldOutputStream);
+			.writeUncompressedHeader(fieldOutputStream, scenario.message);
 		
 		Deflater deflater = new Deflater(Deflater.BEST_COMPRESSION, true);
 		DeflaterOutputStream deflateOutput = new DeflaterOutputStream(fieldOutputStream, deflater);

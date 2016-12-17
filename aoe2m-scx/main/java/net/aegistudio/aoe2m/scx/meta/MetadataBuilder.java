@@ -7,6 +7,7 @@ import net.aegistudio.aoe2m.scx.CorruptionException;
 import net.aegistudio.aoe2m.scx.FieldTranslator;
 import net.aegistudio.aoe2m.scx.input.FieldInputStream;
 import net.aegistudio.aoe2m.scx.input.FieldOutputStream;
+import net.aegistudio.aoe2m.scx.msg.Message;
 
 public class MetadataBuilder {
 	private MetadataPo metadata;
@@ -17,7 +18,9 @@ public class MetadataBuilder {
 		this.victory = victory;
 	}
 	
-	public void readUncompressedHeader(FieldInputStream fin) throws CorruptionException, IOException {
+	public void readUncompressedHeader(FieldInputStream fin, Message message)
+			throws CorruptionException, IOException {
+		
 		String versionCode = fin.readConstLengthString(4);
 		metadata.version = EnumVersion.getVersion(versionCode);
 		
@@ -29,8 +32,8 @@ public class MetadataBuilder {
 		metadata.lastSavedTimestamp = fin.readUnsigned32();
 		headerLength -= 4;
 		
-		metadata.scenarioInstruction = fin.readString32();
-		headerLength -= (metadata.scenarioInstruction.length + 4);
+		message.instructions.setValue(fin.readString32());
+		headerLength -= (message.instructions.getValue().length + 4);
 		
 		CorruptionException.assertLong(0, fin.readUnsigned32());
 		headerLength -= 4;
@@ -42,7 +45,8 @@ public class MetadataBuilder {
 			throw new CorruptionException(headerLength, 0);
 	}
 	
-	public void writeUncompressedHeader(FieldOutputStream fout) throws IOException, CorruptionException {
+	public void writeUncompressedHeader(FieldOutputStream fout, Message message)
+			throws IOException, CorruptionException {
 		fout.writeConstString(4, metadata.version.getVersionString());
 		
 		ByteArrayOutputStream outputTemp = new ByteArrayOutputStream();
@@ -50,7 +54,7 @@ public class MetadataBuilder {
 		
 		fieldTemp.write32(2);
 		fieldTemp.write32((int) metadata.lastSavedTimestamp);
-		fieldTemp.writeString32(metadata.scenarioInstruction);
+		fieldTemp.writeString32(message.instructions.getValue());
 		fieldTemp.write32(0);
 		fieldTemp.write32(metadata.playerCount);
 		
