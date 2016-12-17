@@ -12,7 +12,7 @@ public class TestTriggerModified extends TestScenarioBase {
 	public TestTriggerModified() {super("/triggerModified.scx", "gbk"); }
 	
 	public void todo(Scenario scenario) {
-		OrderedList<TriggerPo> list = scenario.trigger.triggerList;
+		OrderedList<TriggerPo> list = scenario.trigger;
 		assertEquals(list.size(), 1);
 		
 		TriggerPo trigger = list.get(0);

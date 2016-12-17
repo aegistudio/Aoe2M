@@ -7,8 +7,12 @@ import net.aegistudio.aoe2m.scx.Wrapper;
 import net.aegistudio.aoe2m.scx.meta.MetadataPo;
 
 public class MessageBuilder {
-	private Message message = new Message();
-	private Cinematic cinematic = new Cinematic();
+	private final Message message;
+	private final Cinematic cinematic;
+	public MessageBuilder(Message message, Cinematic cinematic) {
+		this.message = message;
+		this.cinematic = cinematic;
+	}
 	
 	public void buildMessage(MetadataPo metadata, FieldTranslator translator) throws IOException {
 		if(metadata.version.getVersionFloat() >= 1.18f) {
@@ -45,13 +49,5 @@ public class MessageBuilder {
 		if(shouldParse.getValue() != 1) {
 			// readBitmap
 		}
-	}
-	
-	public Message getMessage() {
-		return this.message;
-	}
-	
-	public Cinematic getCinematic() {
-		return this.cinematic;
 	}
 }

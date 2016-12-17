@@ -7,7 +7,10 @@ import net.aegistudio.aoe2m.scx.FieldTranslator;
 import net.aegistudio.aoe2m.scx.meta.MetadataPo;
 
 public class MapBuilder {
-	private MapPo map = new MapPo();
+	private final MapPo map;
+	public MapBuilder(MapPo map) {
+		this.map = map;
+	}
 	
 	public void buildTerrian(MetadataPo metadata, FieldTranslator translator) 
 			throws CorruptionException, IOException {

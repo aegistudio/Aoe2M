@@ -6,6 +6,6 @@ public class TestEmptyScenario extends TestScenarioBase {
 	public TestEmptyScenario() { super("/emptyScenario.scx", "gbk");	}
 
 	public void todo(Scenario scenario) {
-		assertEquals(scenario.metadata.getMetadata().playerCount, 2);
+		assertEquals(scenario.metadata.playerCount, 2);
 	}
 }

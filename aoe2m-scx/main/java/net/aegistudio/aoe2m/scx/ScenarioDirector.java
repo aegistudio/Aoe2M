@@ -7,20 +7,12 @@ import net.aegistudio.aoe2m.scx.player.PlayerTableBuilder;
 import net.aegistudio.aoe2m.scx.trigger.TriggerBuilder;
 
 public class ScenarioDirector {
-	interface Directable {
-		public MetadataBuilder getMetadataBuilder();
-		public PlayerTableBuilder getPlayerTableBuilder();
-		public MessageBuilder getMessageBuilder();
-		public MapBuilder getMapBuilder();
-		public TriggerBuilder getTriggerBuilder();
-	}
-	
-	public void build(ScenarioDirector.Directable directable, FieldTranslator fieldTranslator) throws Exception {
-		MetadataBuilder metadata = directable.getMetadataBuilder();
-		PlayerTableBuilder playerTable = directable.getPlayerTableBuilder();
-		MessageBuilder message = directable.getMessageBuilder();
-		MapBuilder map = directable.getMapBuilder();
-		TriggerBuilder trigger = directable.getTriggerBuilder();
+	public void build(Scenario scenario, FieldTranslator fieldTranslator) throws Exception {
+		MetadataBuilder metadata = new MetadataBuilder(scenario.metadata, scenario.globalVictory);
+		PlayerTableBuilder playerTable = new PlayerTableBuilder(scenario.player);
+		MessageBuilder message = new MessageBuilder(scenario.message, scenario.cinematic);
+		MapBuilder map = new MapBuilder(scenario.map);
+		TriggerBuilder trigger = new TriggerBuilder(scenario.trigger);
 		
 		metadata.buildCompressedHeaderPre(fieldTranslator);
 		playerTable.buildPlayerData1(metadata.getMetadata(), fieldTranslator);

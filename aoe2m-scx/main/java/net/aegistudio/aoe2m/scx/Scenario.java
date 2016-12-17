@@ -2,99 +2,50 @@ package net.aegistudio.aoe2m.scx;
 
 import java.util.Arrays;
 
-import net.aegistudio.aoe2m.scx.map.MapBuilder;
 import net.aegistudio.aoe2m.scx.map.MapPo;
 import net.aegistudio.aoe2m.scx.meta.GlobalVictoryPo;
-import net.aegistudio.aoe2m.scx.meta.MetadataBuilder;
 import net.aegistudio.aoe2m.scx.meta.MetadataPo;
 import net.aegistudio.aoe2m.scx.msg.Cinematic;
 import net.aegistudio.aoe2m.scx.msg.Message;
-import net.aegistudio.aoe2m.scx.msg.MessageBuilder;
-import net.aegistudio.aoe2m.scx.player.PlayerData;
-import net.aegistudio.aoe2m.scx.player.PlayerTableBuilder;
+import net.aegistudio.aoe2m.scx.player.PlayerTable;
 import net.aegistudio.aoe2m.scx.trigger.OrderedList;
-import net.aegistudio.aoe2m.scx.trigger.TriggerBuilder;
 import net.aegistudio.aoe2m.scx.trigger.TriggerPo;
 
-public class Scenario implements ScenarioDirector.Directable {
-	@Override
-	public MetadataBuilder getMetadataBuilder() {
-		return metadata;
-	}
+public class Scenario {
+	public final MetadataPo metadata = new MetadataPo();
+	public final GlobalVictoryPo globalVictory = new GlobalVictoryPo();
+	
+	public final PlayerTable player = new PlayerTable();
+	
+	public final Message message = new Message();
+	public final Cinematic cinematic = new Cinematic();
+	
+	public final MapPo map = new MapPo();
 
-	@Override
-	public PlayerTableBuilder getPlayerTableBuilder() {
-		return playerTable;
-	}
-
-	@Override
-	public MessageBuilder getMessageBuilder() {
-		return message;
-	}
-	
-	MetadataBuilder metadata = new MetadataBuilder();
-	public MetadataPo getMetadata() {
-		return this.metadata.getMetadata();
-	}
-	
-	public GlobalVictoryPo getGlobalVictory() {
-		return this.metadata.getGlobalVictory();
-	}
-	
-	PlayerTableBuilder playerTable = new PlayerTableBuilder();
-	public PlayerData[] getPlayerTable() {
-		return this.playerTable.getPlayerTable();
-	}
-	
-	MessageBuilder message = new MessageBuilder();
-	public Message getMessage() {
-		return this.message.getMessage();
-	}
-	
-	public Cinematic getCinematic() {
-		return this.message.getCinematic();
-	}
-	
-	MapBuilder map = new MapBuilder();
-	public MapBuilder getMapBuilder() {
-		return this.map;
-	}
-	
-	public MapPo getMap() {
-		return this.map.getMap();
-	}
-
-	TriggerBuilder trigger = new TriggerBuilder();
-	@Override
-	public TriggerBuilder getTriggerBuilder() {
-		return trigger;
-	}
-	
-	public OrderedList<TriggerPo> getTriggerList() {
-		return trigger.triggerList;
-	}
+	public final OrderedList<TriggerPo> trigger = new OrderedList<>(TriggerPo::new,
+			(trigger, translator) -> trigger.buildTrigger(translator));
 	
 	public String toString() {
 		StringFormater toString = new StringFormater(this);
-		toString.add("Metadata", getMetadata());
+		toString.add("Metadata", metadata);
 		toString.line();
 		
-		toString.add("GlobalVictory", getGlobalVictory());
+		toString.add("GlobalVictory", globalVictory);
 		toString.line();
 		
-		toString.add("Message", getMessage());
+		toString.add("Message", message);
 		toString.line();
 		
-		toString.add("Cinematic", getCinematic());
+		toString.add("Cinematic", cinematic);
 		toString.line();
 		
-		toString.add("Map", getMap());
+		toString.add("Map", map);
 		toString.line();
 		
-		toString.add("Player", Arrays.asList(getPlayerTable()).subList(0, 
-				this.getMetadata().playerCount));
+		toString.add("Player", Arrays.asList(player.playerData).subList(0, 
+				metadata.playerCount));
 		
-		toString.add("AllTechs", getPlayerTableBuilder().allTechs.getValue());
+		toString.add("AllTechs", player.allTechs.getValue());
 		
 		return toString.toString();
 	}

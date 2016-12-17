@@ -8,10 +8,10 @@ public class TestPlayerModified extends TestScenarioBase {
 	public TestPlayerModified() {super("/playerModified.scx", "gbk"); }
 	
 	public void todo(Scenario scenario) {
-		assertEquals(scenario.metadata.getMetadata().playerCount, 2);
-		assertEquals(scenario.playerTable.getPlayerTable()[0].initFood.getValue(), 100L);
-		assertEquals(scenario.playerTable.getPlayerTable()[0]
+		assertEquals(scenario.metadata.playerCount, 2);
+		assertEquals(scenario.player.playerData[0].initFood.getValue(), 100L);
+		assertEquals(scenario.player.playerData[0]
 				.civilization.getValue(), EnumCivilization.PERSIANS);
-		assertEquals(scenario.playerTable.getPlayerTable()[0].getAsciiPlayerName(), "Test");
+		assertEquals(scenario.player.playerData[0].getAsciiPlayerName(), "Test");
 	}
 }

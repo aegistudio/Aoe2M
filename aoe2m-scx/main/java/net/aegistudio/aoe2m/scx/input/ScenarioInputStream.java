@@ -6,6 +6,7 @@ import java.util.zip.InflaterInputStream;
 
 import net.aegistudio.aoe2m.scx.Scenario;
 import net.aegistudio.aoe2m.scx.ScenarioDirector;
+import net.aegistudio.aoe2m.scx.meta.MetadataBuilder;
 
 public class ScenarioInputStream extends InputStream {
 	private final InputStream inputStream;
@@ -24,7 +25,8 @@ public class ScenarioInputStream extends InputStream {
 	public Scenario readScenario() throws Exception {
 		Scenario scenario = new Scenario();
 		FieldInputStream fieldInputStream = new FieldInputStream(inputStream, charset);
-		scenario.getMetadataBuilder().readUncompressedHeader(fieldInputStream);
+		new MetadataBuilder(scenario.metadata, scenario.globalVictory)
+			.readUncompressedHeader(fieldInputStream);
 		
 		Inflater inflater = new Inflater(true);
 		InflaterInputStream inflateInput = new InflaterInputStream(fieldInputStream, inflater);

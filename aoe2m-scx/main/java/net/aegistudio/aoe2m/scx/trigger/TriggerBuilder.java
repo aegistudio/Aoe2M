@@ -4,8 +4,10 @@ import net.aegistudio.aoe2m.scx.FieldTranslator;
 import net.aegistudio.aoe2m.scx.meta.MetadataPo;
 
 public class TriggerBuilder {
-	public final OrderedList<TriggerPo> triggerList = new OrderedList<>(TriggerPo::new,
-			(trigger, translator) -> trigger.buildTrigger(translator));
+	private final OrderedList<TriggerPo> triggerList;
+	public TriggerBuilder(OrderedList<TriggerPo> triggerList) {
+		this.triggerList = triggerList;
+	}
 	
 	public void buildTriggerSection(MetadataPo metadata, FieldTranslator translator) throws Exception {
 		translator.constByte(0);

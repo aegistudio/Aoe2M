@@ -5,9 +5,14 @@ import net.aegistudio.aoe2m.scx.FieldTranslator;
 import net.aegistudio.aoe2m.scx.input.FieldInputStream;
 
 public class MetadataBuilder {
-	private MetadataPo metadata = new MetadataPo();
-	private GlobalVictoryPo victory = new GlobalVictoryPo();
+	private MetadataPo metadata;
+	private GlobalVictoryPo victory;
 	private long headerLength;
+	
+	public MetadataBuilder(MetadataPo metadata, GlobalVictoryPo victory) {
+		this.metadata = metadata;
+		this.victory = victory;
+	}
 	
 	public void readUncompressedHeader(FieldInputStream fin) throws Exception {
 		String versionCode = fin.readConstLengthString(4);
