@@ -1,5 +1,8 @@
 package net.aegistudio.aoe2m.scx.player;
 
+import java.io.IOException;
+
+import net.aegistudio.aoe2m.scx.CorruptionException;
 import net.aegistudio.aoe2m.scx.FieldTranslator;
 import net.aegistudio.aoe2m.scx.meta.MetadataPo;
 
@@ -9,7 +12,7 @@ public class PlayerTableBuilder {
 		this.playerTable = playerTable;
 	}
 	
-	public void buildPlayerData1(MetadataPo metadata, FieldTranslator translator) throws Exception {
+	public void buildPlayerData1(MetadataPo metadata, FieldTranslator translator) throws IOException, CorruptionException {
 		for(int i = 0; i < 16; i ++) 
 			translator.constString(256, playerTable.playerData[i].asciiPlayerName);
 		
@@ -25,7 +28,7 @@ public class PlayerTableBuilder {
 		}
 	}
 	
-	public void buildPlayerData2(MetadataPo metadata, FieldTranslator translator) throws Exception {
+	public void buildPlayerData2(MetadataPo metadata, FieldTranslator translator) throws IOException, CorruptionException {
 		for(int i = 0; i < 16; i ++) {
 			translator.string16(playerTable.playerData[i].unknownString1);
 			translator.string16(playerTable.playerData[i].unknownString2);
@@ -54,7 +57,7 @@ public class PlayerTableBuilder {
 		}
 	}
 	
-	public void buildDiplomacy(MetadataPo metadata, FieldTranslator translator) throws Exception {
+	public void buildDiplomacy(MetadataPo metadata, FieldTranslator translator) throws IOException, CorruptionException {
 		for(int i = 0; i < 16; i ++) 
 			for(int j = 0; j < 16; j ++) 
 				translator.enum32(playerTable.playerData[i].diplomacy[j]);
@@ -66,7 +69,7 @@ public class PlayerTableBuilder {
 			translator.bool32(playerTable.playerData[i].alliedVictory);
 	}
 	
-	public void buildDisable(MetadataPo metadata, FieldTranslator translator) throws Exception {
+	public void buildDisable(MetadataPo metadata, FieldTranslator translator) throws IOException, CorruptionException {
 		// Disabled techs
 		for(int i = 0; i < 16; i ++) playerTable.playerData[i]
 				.diasabledTechs.buildCount(translator);
@@ -102,7 +105,7 @@ public class PlayerTableBuilder {
 	}
 	
 
-	public void buildPlayerData4(MetadataPo metadata, FieldTranslator translator) throws Exception {
+	public void buildPlayerData4(MetadataPo metadata, FieldTranslator translator) throws IOException, CorruptionException {
 		for(int i = 0; i < 8; i ++) {
 			translator.constFloat(playerTable.playerData[i].initFood.getValue());
 			translator.constFloat(playerTable.playerData[i].initWood.getValue());
@@ -114,7 +117,7 @@ public class PlayerTableBuilder {
 		}
 	}
 	
-	public void buildPlayerData3(MetadataPo metadata, FieldTranslator translator) throws Exception {
+	public void buildPlayerData3(MetadataPo metadata, FieldTranslator translator) throws IOException, CorruptionException {
 		translator.unsigned32(playerTable.playerData3Length);
 		for(int i = 0; i < playerTable.playerData3Length.getValue() - 1; i ++) {
 			PlayerData playerData = this.playerTable.playerData[i];

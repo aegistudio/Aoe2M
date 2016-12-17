@@ -36,7 +36,7 @@ public class MapBuilder {
 	}
 	
 	public void buildUnits(MetadataPo metadata, FieldTranslator translator) 
-			throws Exception {
+			throws IOException, CorruptionException {
 		map.gaia.build(translator);
 		
 		for(int i = 0; i < map.playerCount.getValue() - 1; i ++) 

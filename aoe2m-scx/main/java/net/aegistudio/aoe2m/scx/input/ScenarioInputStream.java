@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
+import net.aegistudio.aoe2m.scx.CorruptionException;
 import net.aegistudio.aoe2m.scx.FieldTranslator;
 import net.aegistudio.aoe2m.scx.Scenario;
 import net.aegistudio.aoe2m.scx.ScenarioDirector;
@@ -25,7 +26,7 @@ public class ScenarioInputStream extends InputStream {
 	
 	private static final boolean debugging = false;
 	
-	public void readScenario(Scenario scenario) throws Exception {
+	public void readScenario(Scenario scenario) throws IOException, CorruptionException {
 		FieldInputStream fieldInputStream = new FieldInputStream(inputStream, charset);
 		new MetadataBuilder(scenario.metadata, scenario.globalVictory)
 			.readUncompressedHeader(fieldInputStream);
