@@ -13,7 +13,7 @@ import net.aegistudio.aoe2m.Loader;
 
 public class ConfigLocalizer extends Loader implements Localizer {
 	public ConfigLocalizer() {	super("locale");	}
-	public static Locale locale = Locale.getDefault();
+	public Locale locale = Locale.getDefault();
 	
 	public TreeMap<String, LocalizeEntry> entry = new TreeMap<>(); class LocalizeEntry {
 		Map<Locale, String> locale = new HashMap<>();
@@ -25,7 +25,7 @@ public class ConfigLocalizer extends Loader implements Localizer {
 		}
 		
 		public String get() {
-			return locale.getOrDefault(ConfigLocalizer.locale, fallback);
+			return locale.getOrDefault(locale, fallback);
 		}
 	}
 	

@@ -1,5 +1,6 @@
 package net.aegistudio.aoe2m;
 
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -21,6 +22,10 @@ public class TestConfigLocalizer {
 		}
 	}
 	
+	public @After void tear() {
+		config.locale = Locale.getDefault();
+	}
+	
 	public @Test void testSingle() {
 		assertEquals(config.localize("test.single"), "SingleResult");
 	}
@@ -34,12 +39,12 @@ public class TestConfigLocalizer {
 	}
 	
 	public @Test void testSingleChinese() {
-		ConfigLocalizer.locale = new Locale("zh");
+		config.locale = new Locale("zh");
 		assertEquals(config.localize("test.single"), "简体结果");
 	}
 	
 	public @Test void testFallbackChinese() {
-		ConfigLocalizer.locale = new Locale("zh");
+		config.locale = new Locale("zh");
 		testParameter();
 	}
 	
