@@ -16,16 +16,16 @@ public class ConfigLocalizer extends Loader implements Localizer {
 	public Locale locale = Locale.getDefault();
 	
 	public TreeMap<String, LocalizeEntry> entry = new TreeMap<>(); class LocalizeEntry {
-		Map<Locale, String> locale = new HashMap<>();
+		Map<Locale, String> translate = new HashMap<>();
 		String fallback = null;
 		
 		public void set(Locale locale, String value) {
 			if(locale == null) fallback = value;
-			else this.locale.put(locale, value);
+			else this.translate.put(locale, value);
 		}
 		
 		public String get() {
-			return locale.getOrDefault(locale, fallback);
+			return translate.getOrDefault(locale, fallback);
 		}
 	}
 	
