@@ -21,4 +21,12 @@ public interface CoreModel {
 	 * Perform an action and push it to historic tree.
 	 */
 	public void perform(Action action);
+	
+	/**
+	 * Require another core extension as dependency.
+	 * Please notice that will cause model to break
+	 * down if requirement unsatisfied.
+	 */
+	public <C extends CoreExtension> C require(Class<C> type)
+		throws Aoe2mException;
 }

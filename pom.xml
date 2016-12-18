@@ -50,6 +50,14 @@
   	</dependency>
   </dependencies>
   
+  <dependencyManagement><dependencies>
+  	<dependency>
+  		<groupId>net.aegistudio.aoe2m</groupId>
+  		<artifactId>aoe2m-scx</artifactId>
+  		<version>${project.version}</version>
+  	</dependency>
+  </dependencies></dependencyManagement>
+  
   <modules>
   	<module>aoe2m-scx</module>
   	<module>aoe2m-abstraction</module>

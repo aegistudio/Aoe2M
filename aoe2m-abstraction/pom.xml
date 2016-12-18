@@ -8,4 +8,11 @@
   <artifactId>aoe2m-abstraction</artifactId>
   <name>Aoe2M Abstraction</name>
   <description>Common abstractions between core module and view module.</description>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>net.aegistudio.aoe2m</groupId>
+  		<artifactId>aoe2m-scx</artifactId>
+  	</dependency>
+  </dependencies>
 </project>

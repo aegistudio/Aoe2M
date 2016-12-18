@@ -31,9 +31,6 @@ public interface ViewModel {
 
 	/**
 	 * Add reactor to a key.
-	 * Please notice that the key supports
-	 * fuzzy matching, allowing subscription to
-	 * a set of values.
 	 */
 	public <T> void add(String key, BiConsumer<String, T> reactor);
 
