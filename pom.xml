@@ -52,5 +52,6 @@
   
   <modules>
   	<module>aoe2m-scx</module>
+  	<module>aoe2m-abstraction</module>
   </modules>
 </project>
