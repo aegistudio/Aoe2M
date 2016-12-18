@@ -20,7 +20,7 @@ public interface CoreExtension {
 	 * Initialize extension. You should
 	 * record your extension here.
 	 */
-	public void init(Document document, CoreModel core);
+	public void init(Document document, CoreModel core) throws Aoe2mException;
 	
 	/**
 	 * Load extension data from the model.
