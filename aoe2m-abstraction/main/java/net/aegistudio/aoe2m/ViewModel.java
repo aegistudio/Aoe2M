@@ -1,7 +1,9 @@
 package net.aegistudio.aoe2m;
 
 import java.util.List;
-import java.util.function.BiConsumer;
+
+import net.aegistudio.aoe2m.impcall.MapObserver;
+import net.aegistudio.aoe2m.impcall.ValueObserver;
 
 /**
  * CoreModel is a modal / stateful server that 
@@ -19,23 +21,15 @@ import java.util.function.BiConsumer;
  */
 
 public interface ViewModel {
-	/**
-	 * Execute a command.
-	 */
+	/** Execute a command. */
 	public void execute(String command);
 	
-	/**
-	 * Tab-complete a command.
-	 */
+	/** Tab-complete a command. */
 	public List<String> complete(String command);
 
-	/**
-	 * Add reactor to a key.
-	 */
-	public <T> void add(String key, BiConsumer<String, T> reactor);
-
-	/**
-	 * Remove the registered reactor.
-	 */
-	public <T> void remove(String key, BiConsumer<String, T> reactor);
+	/** Observe current selected document. */
+	public ValueObserver<Document> current();
+	
+	/** Observe all opened document **/
+	public MapObserver<String, Document> all();
 }

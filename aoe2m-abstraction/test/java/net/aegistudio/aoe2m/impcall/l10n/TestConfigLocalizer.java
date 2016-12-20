@@ -1,4 +1,4 @@
-package net.aegistudio.aoe2m;
+package net.aegistudio.aoe2m.impcall.l10n;
 
 import org.junit.After;
 import org.junit.BeforeClass;

@@ -4,7 +4,7 @@ import net.aegistudio.aoe2m.Aoe2mException;
 import net.aegistudio.aoe2m.scx.Scenario;
 import net.aegistudio.aoe2m.scx.map.MapPo;
 
-public interface TerrainModel extends ModelObject {
+public interface TerrainModel extends ModelObject<TerrainModel> {
 	public UnitModel getUnit(int index);
 	
 	public void addUnit(UnitModel unit);

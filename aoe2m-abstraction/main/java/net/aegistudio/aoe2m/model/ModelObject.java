@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import net.aegistudio.aoe2m.Aoe2mException;
-import net.aegistudio.aoe2m.scx.Wrapper;
+import net.aegistudio.aoe2m.impcall.ValueObserver;
 
 /**
  * Every model object is mapped to one
@@ -22,11 +22,8 @@ import net.aegistudio.aoe2m.scx.Wrapper;
  * @author aegistudio
  */
 
-public interface ModelObject {
-	/**
-	 * It's here because of the MVVM architecture.
-	 */
-	public <T> Wrapper<T> query(String key, Class<T> value) throws Aoe2mException;
+public interface ModelObject<E> {
+	public ValueObserver<E> self();
 	
 	public void read(InputStream inputStream) throws IOException, Aoe2mException;
 	

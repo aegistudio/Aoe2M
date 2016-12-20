@@ -5,7 +5,7 @@ import net.aegistudio.aoe2m.scx.Scenario;
 import net.aegistudio.aoe2m.scx.player.PlayerData;
 import net.aegistudio.aoe2m.scx.player.PlayerTable;
 
-public interface PlayerModel extends ModelObject {
+public interface PlayerModel extends ModelObject<PlayerModel> {
 	public void marshal(Scenario sceario, PlayerTable table, PlayerData player) 
 			throws Aoe2mException;
 }
