@@ -2,6 +2,7 @@ package net.aegistudio.aoe2m;
 
 import java.util.List;
 
+import net.aegistudio.aoe2m.command.CommandParseur;
 import net.aegistudio.aoe2m.impcall.MapObserver;
 import net.aegistudio.aoe2m.impcall.ValueObserver;
 
@@ -32,4 +33,6 @@ public interface ViewModel {
 	
 	/** Observe all opened document **/
 	public MapObserver<String, Document> all();
+	
+	public CommandParseur parseur();
 }

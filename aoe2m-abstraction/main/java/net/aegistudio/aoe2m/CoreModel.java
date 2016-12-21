@@ -1,5 +1,7 @@
 package net.aegistudio.aoe2m;
 
+import net.aegistudio.aoe2m.command.Command;
+
 /**
  * Core model is not accessed by view but 
  * rather extensions.

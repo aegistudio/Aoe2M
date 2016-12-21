@@ -13,15 +13,15 @@ import net.aegistudio.aoe2m.scx.Wrapper;
 public interface Document extends ModelObject<Document> {
 	public void marshal(Scenario sceario) throws Aoe2mException;
 	
-	public Wrapper<MessageModel> getMessage();
+	public Wrapper<MessageModel> message();
 	
-	public Wrapper<CinematicModel> getCinematicModel();
+	public Wrapper<CinematicModel> cinematic();
 	
-	public Wrapper<PlayerTableModel> getPlayer();
+	public Wrapper<PlayerTableModel> player();
 	
-	public Wrapper<TerrainModel> getTerrain();
+	public Wrapper<TerrainModel> terrain();
 	
-	public Wrapper<TriggerListModel> getTrigger();
+	public Wrapper<TriggerListModel> trigger();
 	
-	public Wrapper<IncludeFileModel> getIncludeFile();
+	public Wrapper<IncludeFileModel> includeFile();
 }

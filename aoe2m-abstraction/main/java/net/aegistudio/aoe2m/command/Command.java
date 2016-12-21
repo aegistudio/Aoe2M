@@ -1,6 +1,8 @@
-package net.aegistudio.aoe2m;
+package net.aegistudio.aoe2m.command;
 
 import java.util.List;
+
+import net.aegistudio.aoe2m.Aoe2mException;
 
 /**
  * An atomic operation in the system.

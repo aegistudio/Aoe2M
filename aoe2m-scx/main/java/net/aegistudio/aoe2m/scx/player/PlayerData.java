@@ -24,9 +24,9 @@ public class PlayerData {
 	public EnumWrapper<EnumCivilization> civilization = new EnumWrapper<EnumCivilization>(EnumCivilization.BRITONS);
 	
 	// PlayerData2
-	public Wrapper<Text> unknownString1 = new Wrapper<Text>(new Text(0, ""));
+	public Wrapper<Text> vcName = new Wrapper<Text>(new Text(0, ""));
 	
-	public Wrapper<Text> unknownString2 = new Wrapper<Text>(new Text(0, ""));
+	public Wrapper<Text> ctyName = new Wrapper<Text>(new Text(0, ""));
 	
 	public static final String randomGame = "RandomGame";
 	public Wrapper<Text> aiName = new Wrapper<Text>(new Text(randomGame.length(), randomGame));
@@ -120,8 +120,8 @@ public class PlayerData {
 		
 		// Strings
 		toString.append("constPlayerName=\"").append(constPlayerName.getValue()).append("\", ");
-		toString.append("unknownString1=\"").append(unknownString1.getValue()).append("\", ");
-		toString.append("unknownString2=\"").append(unknownString2.getValue()).append("\", ");
+		toString.append("vcName=\"").append(vcName.getValue()).append("\", ");
+		toString.append("ctyName=\"").append(ctyName.getValue()).append("\", ");
 		toString.append("\n\t");
 		
 		// Camera

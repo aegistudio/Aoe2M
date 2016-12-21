@@ -29,10 +29,11 @@ public class PlayerTableBuilder {
 	}
 	
 	public void buildPlayerData2(MetadataPo metadata, FieldTranslator translator) throws IOException, CorruptionException {
-		for(int i = 0; i < 16; i ++) {
-			translator.string16(playerTable.playerData[i].unknownString1);
-			translator.string16(playerTable.playerData[i].unknownString2);
-		}
+		for(int i = 0; i < 16; i ++) 
+			translator.string16(playerTable.playerData[i].vcName);
+		
+		for(int i = 0; i < 16; i ++) 
+			translator.string16(playerTable.playerData[i].ctyName);
 		
 		for(int i = 0; i < 16; i ++) 
 			translator.string16(playerTable.playerData[i].aiName);
