@@ -37,7 +37,7 @@ Though no field is required to be provided, you still need to notify view when i
 Though `ModelObjects` in the model package may fail to cover development process, it is abstracted from SCX format. Please make sure you're able to map into certain segment of Scenario object if you insist in adding out-of-model objects.
 
 
-### Command <img src="https://img.shields.io/badge/For-CoreDeveloper-green.svg"></img>
+### Command & Action <img src="https://img.shields.io/badge/For-CoreDeveloper-green.svg"></img>
 
 `Command` represents operations requesting to be done. Your user "issue" a command in a variety of ways. Besides directly typing in command line, filling a form, adding a trigger, and even selecting a unit, will cause a command to be spoken out, ... in `String` form. You will never know where your user type in the command, but to request is to be responded. You just need to execute when you receive one.
 
@@ -53,3 +53,18 @@ As users are allowed to type in commands, separated by space, it would be really
 - The `Registration` sub-invokes its `Observer` list, notifying changes.
 - The `Observer` captures the changes, and update the display.
 - When `View` gets destroyed or in other cases, it unsubscribes from the `Registration`.
+
+
+### Localization (l10n)
+`Localization` means to display the user space word in different languages. The localization process contains:
+- Defines what should be displayed. Aka `Unlocalized` word.
+- Defines replaceable parameters in the word to display. Aka `Parameters`.
+- Provide `LocaleBundle` for at least one language (usually English) for displaying.
+- When some user space word are to display to user, the `Localizer` look up `LocaleBundle`, translate `Unlocalized` and `Parameters` into `Localized` word.
+
+It is possible that some unlocalized word has no translation in corresponding language. We will handle translation in:
+- Find whether there's corresponding translation in current `LocaleBundle`.
+- Find whether there's corresponding translation in "Fallback" `LocaleBundle` (Usually in English).
+- Return the unlocalized one directly.
+
+To localize your own extension, just create a `locale` folder in your resource folder, and provide `LocaleBundles` in it. The bundle ends with `.properties` (For English or Fallback) or `.<lang>.properties` (like `.zh.properties`, for other languages).

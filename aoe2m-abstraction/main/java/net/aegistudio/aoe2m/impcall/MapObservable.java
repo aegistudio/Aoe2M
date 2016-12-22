@@ -33,9 +33,9 @@ public class MapObservable<K, V> extends CollectionObservable<K, V> implements M
 	
 	public void rename(K key1, K key2) throws Aoe2mException {
 		if(!map.containsKey(key1))
-			throw new Aoe2mException("mapreplace.keynotexists\n" + key1);
+			throw new Aoe2mException("mapreplace.keynotexists", key1.toString());
 		if(map.containsKey(key2))
-			throw new Aoe2mException("mapreplace.keyexists\n" + key2);
+			throw new Aoe2mException("mapreplace.keyexists", key2.toString());
 		map.put(key2, map.remove(key1));
 		
 		rename.fire(key1, key2);

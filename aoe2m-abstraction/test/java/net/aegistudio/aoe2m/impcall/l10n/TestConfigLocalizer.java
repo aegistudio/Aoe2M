@@ -34,7 +34,7 @@ public class TestConfigLocalizer {
 		String randomString1 = Long.toHexString(System.currentTimeMillis());
 		String randomString2 = Long.toHexString(
 				(long) (Math.random() *  System.currentTimeMillis()));
-		assertEquals(config.localize("test.parameter\n" + randomString1 + "\r" + randomString2), 
+		assertEquals(config.localize("test.parameter", randomString1, randomString2), 
 				randomString2 + randomString1);
 	}
 	

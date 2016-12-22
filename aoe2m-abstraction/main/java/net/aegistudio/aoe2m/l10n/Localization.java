@@ -11,7 +11,7 @@ public final class Localization {
 		return theOne;
 	}
 	
-	public static String localize(String string) {
-		return getInstance().localize(string);
+	public static String localize(String string, String... parameter) {
+		return getInstance().localize(string, parameter);
 	}
 }

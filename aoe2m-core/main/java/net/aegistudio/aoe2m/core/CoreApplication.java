@@ -66,7 +66,7 @@ public class CoreApplication implements CoreModel, ViewModel {
 			
 			Command target = commands.get(arguments[0]);
 			if(target == null) 
-				throw new Aoe2mException("command.notexist\n" + arguments[0]);
+				throw new Aoe2mException("command.notexist", arguments[0]);
 			
 			String[] parameters = new String[arguments.length - 1];
 			System.arraycopy(arguments, 1, parameters, 0, parameters.length);
@@ -92,7 +92,7 @@ public class CoreApplication implements CoreModel, ViewModel {
 				
 				Command target = commands.get(arguments[0]);
 				if(target == null)
-					throw new Aoe2mException("command.notexist\n" + arguments[0]);
+					throw new Aoe2mException("command.notexist", arguments[0]);
 				return target.complete(current.current(), parameters);
 			}
 			else {

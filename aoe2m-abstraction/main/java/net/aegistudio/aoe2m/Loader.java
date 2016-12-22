@@ -22,7 +22,7 @@ public abstract class Loader {
 			case "file": loadFile(loader, url);	break;
 			case "jar": loadJar(loader, url);	break;
 			default:
-				throw new Aoe2mException("loader.urlunknown\n" + url.getProtocol());
+				throw new Aoe2mException("loader.urlunknown", url.getProtocol());
 		};
 	}
 	

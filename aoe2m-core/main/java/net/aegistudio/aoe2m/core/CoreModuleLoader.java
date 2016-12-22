@@ -32,7 +32,7 @@ public class CoreModuleLoader extends Loader {
 			extensionClasses.add(extension.getCanonicalName());
 			this.extension.put(extension, (CoreExtension) instance);
 		} catch(Exception e) {
-			throw new Aoe2mException("coreload.loadclass", e);
+			throw new Aoe2mException(e, "coreload.loadclass");
 		}
 	}
 	
@@ -45,7 +45,7 @@ public class CoreModuleLoader extends Loader {
 	@SuppressWarnings("unchecked")
 	public <C extends CoreExtension> C require(Class<C> type) throws Aoe2mException {
 		if(!extensionClasses.contains(type.getCanonicalName()))
-			throw new Aoe2mException("coreload.notexists\n" + type.getCanonicalName());
+			throw new Aoe2mException("coreload.notexists", type.getCanonicalName());
 		return (C) extension.get(type);
 	}
 }

@@ -17,6 +17,7 @@ public class Observable<T> {
 	}
 	
 	public void fire(T t) {
-		consumers.forEach(c -> { if(c.get() != null) c.get().accept(t); });
+		consumers.removeIf(c -> c.get() == null);
+		consumers.forEach(c -> c.get().accept(t));
 	}
 }

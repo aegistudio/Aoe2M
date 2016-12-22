@@ -18,7 +18,7 @@ public class UrlParseur implements CommandParseur {
 			return URLEncoder.encode(parameter, encoding);
 		}
 		catch (UnsupportedEncodingException e) {
-			throw new Aoe2mException("urlparseur.unsupportedenc", e);
+			throw new Aoe2mException(e, "urlparseur.unsupportedenc");
 		}
 	}
 
@@ -31,7 +31,7 @@ public class UrlParseur implements CommandParseur {
 			return argumentList;
 		}
 		catch(UnsupportedEncodingException e) {
-			throw new Aoe2mException("urlparseur.unsupportedenc", e);
+			throw new Aoe2mException(e, "urlparseur.unsupportedenc");
 		}
 	}
 }

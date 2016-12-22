@@ -30,15 +30,13 @@ public class ConfigLocalizer extends Loader implements Localizer {
 	}
 	
 	@Override
-	public String localize(String unlocalized) {
-		String[] entries = unlocalized.split("[\n\r]+");
-		String semiLocale = entries[0];
-		
-		LocalizeEntry entry = this.entry.get(semiLocale);
+	public String localize(String unlocalized, String... entries) {
+		String semiLocale = unlocalized;
+		LocalizeEntry entry = this.entry.get(unlocalized);
 		if(entry != null) semiLocale = entry.get();
 		
-		for(int i = 1; i < entries.length; i ++)
-			semiLocale = semiLocale.replace("$" + i, entries[i]);
+		for(int i = 0; i < entries.length; i ++)
+			semiLocale = semiLocale.replace("$" + (i + 1), entries[i]);
 		return semiLocale;
 	}
 	
