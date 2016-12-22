@@ -1,19 +1,17 @@
 # Aoe2M: Age of Empires 2 Manipulator <img src="https://img.shields.io/badge/Aoe2M-1.0-green.svg"></img>
-A world and scenario editor for [Age of Empires II: The Conqueroror](https://en.wikipedia.org/wiki/Age_of_Empires_II:_The_Conquerors). AOE2 is a game developed by [Ensemble Studios](https://en.wikipedia.org/wiki/Ensemble_Studios) of Microsoft.
+A world and scenario editor for [Age of Empires II: The Conquerors](https://en.wikipedia.org/wiki/Age_of_Empires_II:_The_Conquerors). AOE2 is a game developed by [Ensemble Studios](https://en.wikipedia.org/wiki/Ensemble_Studios) of Microsoft.
 
-The editor aims to simplify scenario edit, especially for batch editing, like tesselation, per-pixel trigger, etc, and cross scenario edit, like terrain cloning, trigger cloning, etc.
+The editor aims to simplify scenario editing, especially batch editing (like tesselation, per-pixel trigger, terrain movement, etc) and cross scenario edit (like terrain cloning, terrain+unit cloning, trigger cloning), etc.
 
 
 ### Preface
-I am a [software engineer](https://en.wikipedia.org/wiki/Software_engineer) from Software Engineering department, NJU, China. I graduate with CG (Computer Graphics) specification. I use my knowledge to mine the requirement, design the software, develop the code, and ensure quality of the software at my best effort.
+I am a [software engineer](https://en.wikipedia.org/wiki/Software_engineer) from Software Engineering department, NJU, China. I graduate with CG (Computer Graphics) specification. I use my knowledge to reveal the requirements, design the software, develop the code, and ensure quality at my best effort.
 
-I would describe me as a fan of AOE2. I first contacted AOE2 when I am at grade 3, primary school. I've kept on playing it till my high school. I acquainted many friend with discussions about AOE2 game experience as pivot.
-
-The most enjoyable part of AOE2 is playing campaigns designed by different author. A campaign is a series of scenarios connected by their plot. Each campaign depicts a brand new world and bring much joy to me.
+I would describe me as a fan of AOE2. I first contacted AOE2 when I was at grade 3, primary school. I've kept on playing it till my high school. I acquainted many friend by discussing about AOE2 game experience. The most enjoyable part of AOE2 is playing campaigns designed by different author. A campaign is a series of scenarios connected by their plot. Each campaign depicts a brand new world and bring much joy to me.
 
 The idea of this software emerge from [AOKTS](https://github.com/mullikine/aokts). AOKTS is capable of editing scenario file without many constrains from the embedded scenario editor. And without these constrains, a scenario author can perform some "acrobatic" edit.
 
-I myself is not satisfied with editing scenario with just ESE+AOKTS. I think there should be more proficiency way to edit a scenario, especially when we are to do some "BIG", "abstract" work.
+I am not satisfied with editing scenario with just ESE+AOKTS. I think there should be more proficiency way to edit a scenario, especially when we are to do some "BIG", "abstract" work.
 
 As is introduced, I've stopped paying attentions to AOE2 after high school, some thing in the editor might be real legacy. Feel free to contact me and show me new things, or your thought of what this editor should be.
 
