@@ -25,6 +25,11 @@ public interface CoreModel {
 	public void perform(Action action);
 	
 	/**
+	 * 
+	 */
+	public Reaction reaction();
+	
+	/**
 	 * Require another core extension as dependency.
 	 * Please notice that will cause model to break
 	 * down if requirement unsatisfied.

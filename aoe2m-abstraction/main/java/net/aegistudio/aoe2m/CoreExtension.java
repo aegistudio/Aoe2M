@@ -18,9 +18,15 @@ import java.io.OutputStream;
 public interface CoreExtension {
 	/**
 	 * Initialize extension. You should
-	 * record your extension here.
+	 * register your extension here.
 	 */
-	public void init(Document document, CoreModel core) throws Aoe2mException;
+	public void boot(CoreModel core) throws Aoe2mException;	
+	
+	/**
+	 * For a newly created document, initialize document
+	 * specific data.
+	 */
+	public void init(Document document) throws Aoe2mException;
 	
 	/**
 	 * Load extension data from the model.

@@ -25,7 +25,9 @@ public class CoreApplication implements CoreModel, ViewModel {
 	public Map<String, Command> commands = new TreeMap<>();
 	public CoreModuleLoader coreModuleLoader = new CoreModuleLoader();
 	public PerformReactor performReactor = new PassPerformReactor();
+	
 	public Reaction reaction = null;
+	public Reaction reaction() {	return reaction;	}
 	
 	public final ValueObservable<Document> current = new ValueObservable<>();
 	public ValueObserver<Document> current() {	return current;	}
@@ -68,7 +70,7 @@ public class CoreApplication implements CoreModel, ViewModel {
 			
 			String[] parameters = new String[arguments.length - 1];
 			System.arraycopy(arguments, 1, parameters, 0, parameters.length);
-			target.execute(parameters);
+			target.execute(current.current(), parameters);
 		}
 		catch(Aoe2mException e) {
 			reaction.info(Type.ERROR, e.toString());
@@ -79,6 +81,10 @@ public class CoreApplication implements CoreModel, ViewModel {
 	public List<String> complete(String command) {
 		try {
 			String[] arguments = parseur.parse(command);
+			ArrayList<String> completing = new ArrayList<>(Arrays.asList(arguments));
+			if(command.endsWith(" ")) completing.add("");
+			arguments = completing.toArray(new String[0]);
+			
 			if(arguments.length > 1) {
 				// Sub complete command.
 				String[] parameters = new String[arguments.length - 1];
@@ -87,7 +93,7 @@ public class CoreApplication implements CoreModel, ViewModel {
 				Command target = commands.get(arguments[0]);
 				if(target == null)
 					throw new Aoe2mException("command.notexist\n" + arguments[0]);
-				return target.complete(parameters);
+				return target.complete(current.current(), parameters);
 			}
 			else {
 				// Only complete command.
