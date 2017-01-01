@@ -7,7 +7,7 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import net.aegistudio.aoe2m.wyvern.assets.TileAssetManager;
+import net.aegistudio.aoe2m.wyvern.asset.TileAssetManager;
 import net.aegistudio.aoe2m.wyvern.render.BasicTextureManager;
 import net.aegistudio.aoe2m.wyvern.render.TextureBinding;
 import net.aegistudio.aoe2m.wyvern.render.TextureManager;
