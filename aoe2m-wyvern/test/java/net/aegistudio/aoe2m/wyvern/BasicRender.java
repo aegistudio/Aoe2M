@@ -12,7 +12,6 @@ import net.aegistudio.aoe2m.wyvern.render.BasicTextureManager;
 import net.aegistudio.aoe2m.wyvern.render.TextureBinding;
 import net.aegistudio.aoe2m.wyvern.render.TextureManager;
 import net.aegistudio.aoe2m.wyvern.terrain.SimpleTerrain;
-import net.aegistudio.aoe2m.wyvern.terrain.Terrain;
 import net.aegistudio.aoe2m.wyvern.tile.BasicRenderer;
 import net.aegistudio.aoe2m.wyvern.tile.TileOutline;
 
@@ -20,14 +19,33 @@ public class BasicRender extends WyvernRider {
 	public final TileAssetManager assetManager;
 	public final TextureManager textureManager;
 	public final TileOutline outline;
-	public final Terrain terrain = new SimpleTerrain(40, 40);
 	public final BasicRenderer renderer;
 	
 	public BasicRender() throws IOException, LWJGLException {
 		assetManager = new TileAssetManager(32);
 		textureManager = new BasicTextureManager();
-		outline = new TileOutline(49, 25, 49, -25);
+		outline = new TileOutline(49, 25, 49, -25, 0, 20);
 		renderer = new BasicRenderer(assetManager, textureManager, outline);
+	}
+	
+	public final SimpleTerrain terrain = new SimpleTerrain(10, 10); {
+		for(int i = 0; i < 10; i ++)
+			for(int j = 0; j < 10; j ++)
+				terrain.elevation[i][j] = 1;
+		
+		terrain.elevation[4][4] = 0;
+		terrain.elevation[4][5] = 0;
+		terrain.elevation[4][6] = 0;
+		
+		terrain.elevation[5][4] = 0;
+		terrain.elevation[5][5] = 0;
+		terrain.elevation[5][6] = 0;
+		
+		terrain.elevation[6][4] = 0;
+		terrain.elevation[6][5] = 0;
+		terrain.elevation[6][6] = 0;
+		
+		terrain.elevation[8][8] = 2;
 	}
 	
 	public int width() { return  600; }
@@ -40,8 +58,8 @@ public class BasicRender extends WyvernRider {
 		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_DST_ALPHA);
 	}
 	
-	int translateX = -800, translateY = 0;
-	double scale = 4000;
+	int translateX = -400, translateY = 0;
+	double scale = 400;
 	TreeMap<Integer, Boolean> down = new TreeMap<>();
 	
 	public void render() throws LWJGLException {
