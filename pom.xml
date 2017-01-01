@@ -68,5 +68,7 @@
   	<module>aoe2m-scx</module>
   	<module>aoe2m-abstraction</module>
   	<module>aoe2m-core</module>
+  	<module>aoe2m-model</module>
+  	<module>aoe2m-wyvern</module>
   </modules>
 </project>
