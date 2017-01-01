@@ -4,10 +4,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.function.Supplier;
 
 import javax.imageio.ImageIO;
+
+import net.aegistudio.aoe2m.wyvern.render.SlpParentTexture;
 
 public class SlpTextureAsset implements Supplier<BufferedImage> {
 	File image, descriptor;
@@ -33,5 +36,9 @@ public class SlpTextureAsset implements Supplier<BufferedImage> {
 	
 	public InputStream descriptor() throws FileNotFoundException {
 		return new FileInputStream(descriptor);
+	}
+	
+	public SlpParentTexture toTexture() throws IOException {
+		return new SlpParentTexture(this, this.descriptor());
 	}
 }
