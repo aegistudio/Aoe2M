@@ -59,9 +59,9 @@ public class GlTexture implements Texture {
 				GL_RGBA, GL_UNSIGNED_BYTE, buffer);
 	}
 
-	public void bottomLeft(TextureCoord bind) throws LWJGLException {	bind.coord(0, 0);		}
-	public void bottomRight(TextureCoord bind) throws LWJGLException {	bind.coord(1, 0);		}
-	public void topRight(TextureCoord bind) throws LWJGLException {		bind.coord(1, 1);		}
-	public void topLeft(TextureCoord bind) throws LWJGLException {		bind.coord(0, 1);		}
-	public void center(TextureCoord bind) throws LWJGLException {		bind.coord(0.5, 0.5);	}
+	public void bottomLeft(Coordinator bind) throws LWJGLException {	bind.coord(0, 0);		}
+	public void bottomRight(Coordinator bind) throws LWJGLException {	bind.coord(1, 0);		}
+	public void topRight(Coordinator bind) throws LWJGLException {		bind.coord(1, 1);		}
+	public void topLeft(Coordinator bind) throws LWJGLException {		bind.coord(0, 1);		}
+	public void center(Coordinator bind) throws LWJGLException {		bind.coord(0.5, 0.5);	}
 }

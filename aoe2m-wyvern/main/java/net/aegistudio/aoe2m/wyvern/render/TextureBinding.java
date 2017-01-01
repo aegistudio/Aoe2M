@@ -3,7 +3,7 @@ package net.aegistudio.aoe2m.wyvern.render;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.GL11;
 
-public class TextureBinding implements TextureManager.TextureBind, Texture.TextureCoord {
+public class TextureBinding implements TextureManager.TextureBind, Coordinator {
 	public static final TextureBinding instance = new TextureBinding();
 	private TextureBinding() {}
 	

@@ -15,11 +15,13 @@ public class SlpTexture implements Texture {
 		this.centery = centery;
 	}
 	
-	public void bottomLeft(TextureCoord bind) throws LWJGLException {	bind.coord(left, bottom);		}
-	public void bottomRight(TextureCoord bind) throws LWJGLException {	bind.coord(right, bottom);		}
-	public void topRight(TextureCoord bind) throws LWJGLException {		bind.coord(right, top);			}
-	public void topLeft(TextureCoord bind) throws LWJGLException {		bind.coord(left, top);			}
-	public void center(TextureCoord bind) throws LWJGLException {		bind.coord(centerx, centery);	}
+	public void bottomLeft(Coordinator bind) throws LWJGLException {	bind.coord(left, bottom);		}
+	public void bottomRight(Coordinator bind) throws LWJGLException {	bind.coord(right, bottom);		}
+	public void topRight(Coordinator bind) throws LWJGLException {		bind.coord(right, top);			}
+	public void topLeft(Coordinator bind) throws LWJGLException {		bind.coord(left, top);			}
+	public void center(Coordinator bind) throws LWJGLException {		bind.coord(centerx, centery);	}
 	
-	public void make(int id) throws LWJGLException {	}
+	public void make(int id) throws LWJGLException {
+		throw new LWJGLException("Invalid binding of slp subtexture!");
+	}
 }

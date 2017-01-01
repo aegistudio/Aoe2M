@@ -11,7 +11,6 @@ public class TileMetadata {
 		id += y % atlasian;
 		id *= atlasian;
 		id += x % atlasian;
-		
 		return texture.get(id);
 	}
 	

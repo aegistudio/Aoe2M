@@ -13,7 +13,7 @@ import org.lwjgl.LWJGLException;
 public class SlpParentTexture implements ParentTexture {
 	protected final GlTexture texture;
 	protected final SlpTexture[] subTextures;
-	public SlpParentTexture(Supplier<BufferedImage> imageSupplier, InputStream descriptor) throws LWJGLException, IOException {
+	public SlpParentTexture(Supplier<BufferedImage> imageSupplier, InputStream descriptor) throws IOException {
 		this.texture = new GlTexture(imageSupplier);
 		BufferedImage image = imageSupplier.get();	// We won't recalculate on reload.
 		
@@ -37,11 +37,11 @@ public class SlpParentTexture implements ParentTexture {
 	public void make(int id) throws LWJGLException {	texture.make(id);	}
 	
 	private void cannotBind() {	throw new AssertionError("bind.parentTexture"); }
-	public void bottomLeft(TextureCoord bind) throws LWJGLException {	cannotBind();	}
-	public void bottomRight(TextureCoord bind) throws LWJGLException {	cannotBind();	}
-	public void topRight(TextureCoord bind) throws LWJGLException {		cannotBind();	}
-	public void topLeft(TextureCoord bind) throws LWJGLException {		cannotBind();	}
-	public void center(TextureCoord bind) throws LWJGLException {		cannotBind();	}
+	public void bottomLeft(Coordinator bind) throws LWJGLException {	cannotBind();	}
+	public void bottomRight(Coordinator bind) throws LWJGLException {	cannotBind();	}
+	public void topRight(Coordinator bind) throws LWJGLException {		cannotBind();	}
+	public void topLeft(Coordinator bind) throws LWJGLException {		cannotBind();	}
+	public void center(Coordinator bind) throws LWJGLException {		cannotBind();	}
 	
 	public SlpTexture get(int index) {	return subTextures[index];	}
 	public int count() { return subTextures.length;	}

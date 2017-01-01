@@ -28,7 +28,6 @@ public class LenaRender extends WyvernRider {
 	public int height() { return lena.getHeight(); }
 	public String title() { return "Lena"; }
 
-
 	public void prepare() throws LWJGLException {
 		texture2d.enable();
 		manager.allocate(texture);
