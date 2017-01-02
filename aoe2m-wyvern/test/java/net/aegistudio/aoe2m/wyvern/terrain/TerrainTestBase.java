@@ -35,26 +35,19 @@ public abstract class TerrainTestBase extends WyvernRider {
 		Keyboard.create();
 		TextureBinding.instance.enable();
 		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_DST_ALPHA);
 	}
 	
 	protected int translateX, translateY;
 	protected double scale;
 	
-	TreeMap<Integer, Boolean> down = new TreeMap<>();
+	protected TreeMap<Integer, Boolean> down = new TreeMap<>();
 	
 	public void render() throws LWJGLException {
 		while(Keyboard.next()) {
 			int key = Keyboard.getEventKey();
 			down.put(key, Keyboard.isKeyDown(key));
 		}
-		
-		if(down.getOrDefault(Keyboard.KEY_LEFT, false)) translateX -= 10;
-		if(down.getOrDefault(Keyboard.KEY_RIGHT, false)) translateX += 10;
-		if(down.getOrDefault(Keyboard.KEY_DOWN, false)) translateY -= 10;
-		if(down.getOrDefault(Keyboard.KEY_UP, false)) translateY += 10;
-		if(down.getOrDefault(Keyboard.KEY_LBRACKET, false)) scale -= 10;
-		if(down.getOrDefault(Keyboard.KEY_RBRACKET, false)) scale += 10;
+		processKey();
 		
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glLoadIdentity();
@@ -64,6 +57,15 @@ public abstract class TerrainTestBase extends WyvernRider {
 		GL11.glTexEnvi(GL11.GL_TEXTURE_ENV, GL11.GL_TEXTURE_ENV_MODE, GL11.GL_REPLACE);
 		
 		renderTerrain();
+	}
+	
+	protected void processKey() {
+		if(down.getOrDefault(Keyboard.KEY_LEFT, false)) translateX -= 10;
+		if(down.getOrDefault(Keyboard.KEY_RIGHT, false)) translateX += 10;
+		if(down.getOrDefault(Keyboard.KEY_DOWN, false)) translateY -= 10;
+		if(down.getOrDefault(Keyboard.KEY_UP, false)) translateY += 10;
+		if(down.getOrDefault(Keyboard.KEY_LBRACKET, false)) scale -= 10;
+		if(down.getOrDefault(Keyboard.KEY_RBRACKET, false)) scale += 10;		
 	}
 	
 	protected abstract void renderTerrain() throws LWJGLException;

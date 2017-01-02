@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.lwjgl.LWJGLException;
+
 import net.aegistudio.aoe2m.wyvern.render.ParentTexture;
 
 public class Blendomatic {
@@ -38,7 +40,8 @@ public class Blendomatic {
 		else return blendomatics[id];
 	}
 
-	public static final int[] LOOKUP = new int[] {
+	public static final int[] ADJACENCE_LOOKUP = new int[] {
+			-1,		/** .... **/
 			+4,		/** ...X **/
 			+0,		/** ..X. **/
 			25, 	/** ..XX **/
@@ -56,9 +59,23 @@ public class Blendomatic {
 			30, 	/** XXXX **/
 	};
 	
-	public int getAdjacenceBlend(int mask, int x, int y) {
-		int primary = LOOKUP[mask];
+	public static int getAdjacenceBlend(int mask, int x, int y) {
+		int primary = ADJACENCE_LOOKUP[mask];
 		if(primary <= 12) primary += ((x + y) % 4);
 		return primary;
+	}
+	
+	public static final int[] DIAGONAL_LOOKUP = new int[] {
+			16, 17, 19, 18, 
+	};
+	
+	public interface DiagonalBlendConsumer {
+		public void consume(int mask) throws LWJGLException;
+	}
+	
+	public static void getDiagonalBlend(int mask, DiagonalBlendConsumer consumer) throws LWJGLException {
+		for(int i = 0; i < 4; i ++)
+			if((mask & (1 << i)) != 0)
+				consumer.consume(DIAGONAL_LOOKUP[i]);
 	}
 }

@@ -41,8 +41,10 @@ public class BasicRender extends TerrainTestBase {
 	
 	@Override
 	protected void renderTerrain() throws LWJGLException {
+		renderer.prepare();
 		for(int i = 0; i < terrain.width(); i ++)
 			for(int j = 0; j < terrain.height(); j ++)
 				renderer.render(terrain, i, j);
+		renderer.cleanup();
 	}
 }

@@ -8,4 +8,6 @@ public interface TileRenderer {
 	public void prepare() throws LWJGLException;
 	
 	public void render(Terrain terrain, int x, int y) throws LWJGLException;
+	
+	public void cleanup() throws LWJGLException;
 }

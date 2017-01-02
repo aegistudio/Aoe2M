@@ -24,8 +24,12 @@ public class BasicRenderer implements TileRenderer {
 	@Override
 	public void render(Terrain terrain, int x, int y) throws LWJGLException {
 		TileMetadata metadata = tile.require(terrain.tile(x, y));
+		if(metadata == null) return;
+		
 		Texture unknownTexture = metadata.getTexture(x, y);
+		if(unknownTexture == null) return;
 		if(!(unknownTexture instanceof SlpTexture)) return;
+		
 		SlpTexture texture = (SlpTexture) unknownTexture;
 		textureManager.bind(metadata.texture, TextureBinding.instance);
 		
@@ -42,5 +46,10 @@ public class BasicRenderer implements TileRenderer {
 			texture.top(TextureBinding.instance);
 			outline.top(GL11::glVertex2d, terrain, x, y);
 		GL11.glEnd();
+	}
+
+	@Override
+	public void cleanup() throws LWJGLException {
+		
 	}
 }
