@@ -70,5 +70,7 @@
   	<module>aoe2m-core</module>
   	<module>aoe2m-model</module>
   	<module>aoe2m-wyvern</module>
+  	<module>aoe2m-assetdba</module>
+  	<module>aoe2m-opnagdb</module>
   </modules>
 </project>

@@ -27,5 +27,17 @@
   		<artifactId>lwjgl_util</artifactId>
   		<version>2.9.3</version>
   	</dependency>
+  	
+  	<dependency>
+	    <groupId>net.aegistudio.aoe2m</groupId>
+	    <artifactId>aoe2m-assetdba</artifactId>
+	    <version>${project.version}</version>
+  	</dependency>
+  	<dependency>
+	    <groupId>net.aegistudio.aoe2m</groupId>
+	    <artifactId>aoe2m-opnagdb</artifactId>
+	    <version>${project.version}</version>
+	    <scope>test</scope>
+  	</dependency>  	
   </dependencies>
 </project>

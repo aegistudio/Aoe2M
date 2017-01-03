@@ -21,7 +21,7 @@ public class SelectRender extends BlendingRender {
 	public SelectRender() throws IOException, LWJGLException {
 		super();
 		program = new SelectShaderProgram();
-		offlineFrame = new FrameRenderObject(300, 300, 4, GL11.GL_RGBA8, GL11.GL_RGBA,
+		offlineFrame = new FrameRenderObject(300, 300, 4, GL11.GL_RGBA16, GL11.GL_RGBA,
 				ARBFramebufferObject.GL_COLOR_ATTACHMENT0);
 		selection = new SelectRenderer(outline, offlineFrame, program);
 	}
