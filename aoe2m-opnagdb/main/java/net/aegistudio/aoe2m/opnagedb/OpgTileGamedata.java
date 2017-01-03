@@ -3,11 +3,11 @@ package net.aegistudio.aoe2m.opnagedb;
 import java.io.File;
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.assetdba.blob.SlpTexture;
+import net.aegistudio.aoe2m.assetdba.blob.SlpImage;
 import net.aegistudio.aoe2m.assetdba.terrain.TileGamedata;
 
 public class OpgTileGamedata extends TileGamedata {
-	protected final SlpTexture slp;
+	protected final SlpImage slp;
 	
 	// enabled,name0,name1,slp_id,sound_id,blend_priority,blend_mode,
 	// map_color_hi,map_color_med,map_color_low,map_color_cliff_lt,map_color_cliff_rt,passable_terrain,
@@ -18,7 +18,7 @@ public class OpgTileGamedata extends TileGamedata {
 		name0 = parameters[1];
 		name1 = parameters[2];
 		
-		slp = new OpgSlpTexture(terrainRoot, parameters[3] + ".slp");
+		slp = new OpgSlpImage(terrainRoot, parameters[3] + ".slp");
 		
 		sound = parameters[4];
 		overlay = Integer.parseInt(parameters[5]);
@@ -40,7 +40,7 @@ public class OpgTileGamedata extends TileGamedata {
 	}
 
 	@Override
-	public SlpTexture open() {
+	public SlpImage open() {
 		return slp;
 	}
 }

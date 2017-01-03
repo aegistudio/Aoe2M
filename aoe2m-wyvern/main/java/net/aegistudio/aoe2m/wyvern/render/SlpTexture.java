@@ -11,8 +11,8 @@ public class SlpTexture implements Texture {
 		this.right = right;
 		this.bottom = bottom;
 		this.top = top;
-		this.centerx = 0.5 * (left + right);
-		this.centery = 0.5 * (top + bottom);
+		this.centerx = centerx;
+		this.centery = centery;
 	}
 	
 	public void bottomLeft(Coordinator bind) throws LWJGLException {	bind.coord(left, bottom);		}

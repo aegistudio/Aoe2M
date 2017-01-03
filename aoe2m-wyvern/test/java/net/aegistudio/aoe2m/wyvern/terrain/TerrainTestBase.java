@@ -1,5 +1,6 @@
 package net.aegistudio.aoe2m.wyvern.terrain;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.TreeMap;
 
@@ -7,23 +8,27 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
+import net.aegistudio.aoe2m.assetdba.AssetConnection;
+import net.aegistudio.aoe2m.opnagedb.OpgAssetConnection;
 import net.aegistudio.aoe2m.wyvern.WyvernRider;
 import net.aegistudio.aoe2m.wyvern.asset.Blendomatic;
-import net.aegistudio.aoe2m.wyvern.asset.TileAssetManager;
+import net.aegistudio.aoe2m.wyvern.asset.TileMetaManager;
 import net.aegistudio.aoe2m.wyvern.render.BasicTextureManager;
 import net.aegistudio.aoe2m.wyvern.render.TextureBinding;
 import net.aegistudio.aoe2m.wyvern.render.TextureManager;
 import net.aegistudio.aoe2m.wyvern.tile.TileOutline;
 
 public abstract class TerrainTestBase extends WyvernRider {
+	public final AssetConnection connection;
 	public final Blendomatic blendomatic;
-	public final TileAssetManager assetManager;
+	public final TileMetaManager assetManager;
 	public final TextureManager textureManager;
 	public final TileOutline outline;
 	
 	public TerrainTestBase() throws IOException, LWJGLException {
-		blendomatic = new Blendomatic();
-		assetManager = new TileAssetManager(blendomatic);
+		connection = new OpgAssetConnection(new File("assets"));
+		blendomatic = new Blendomatic(connection.blendomatic());
+		assetManager = new TileMetaManager(connection.terrain(), blendomatic);
 		textureManager = new BasicTextureManager();
 		outline = new TileOutline(49, 25, 49, -25, 0, 20);
 	}

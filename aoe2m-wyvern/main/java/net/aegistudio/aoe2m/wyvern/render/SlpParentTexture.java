@@ -1,34 +1,31 @@
 package net.aegistudio.aoe2m.wyvern.render;
 
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.function.Supplier;
 
 import org.lwjgl.LWJGLException;
 
+import net.aegistudio.aoe2m.assetdba.blob.SlpImage;
+
 public class SlpParentTexture implements ParentTexture {
 	protected final GlTexture texture;
 	protected final SlpTexture[] subTextures;
-	public SlpParentTexture(Supplier<BufferedImage> imageSupplier, InputStream descriptor) throws IOException {
-		this.texture = new GlTexture(imageSupplier);
-		BufferedImage image = imageSupplier.get();	// We won't recalculate on reload.
+	public SlpParentTexture(Supplier<SlpImage> imageSupplier) throws IOException {
+		SlpImage image = imageSupplier.get();
+		this.texture = new GlTexture(() -> imageSupplier.get().image());
+		int width = image.width();
+		int height = image.height();
 		
-		this.subTextures = new BufferedReader(new InputStreamReader(descriptor)).lines().map(line -> {
-			if(line.length() == 0) return null;
-			if(line.startsWith("#")) return null;
-			Double[] numbers = Arrays.stream(line.split(","))
-					.map(Double::parseDouble).toArray(Double[]::new);
+		this.subTextures = Arrays.stream(image.subTextures()).map(subTexture -> {
+			if(subTexture == null) return null;
 			
-			double x = numbers[0];		double left = 		(x + 0) / image.getWidth();
-			double y = numbers[1];		double bottom = 	(y + 0) / image.getHeight();
-			double w = numbers[2];		double right =	 	(x + w) / image.getWidth();
-			double h = numbers[3];		double top = 		(y + h) / image.getHeight();
-			double cx = numbers[4];		double centerx =	(x + cx) / image.getWidth();
-			double cy = numbers[5];		double centery = 	(y + cy) / image.getHeight();
+			double x = subTexture.x;	double left = 		x / width;
+			double y = subTexture.y;	double bottom = 	y / height;
+			double w = subTexture.w;	double right =	 	(x + w) / width;
+			double h = subTexture.h;	double top = 		(y + h) / height;
+			double cx = subTexture.cx;	double centerx =	(x + cx) / width;
+			double cy = subTexture.cy;	double centery = 	(y + cy) / height;
 			
 			return new SlpTexture(left, right, bottom, top, centerx, centery);
 		}).filter(slp -> slp != null).toArray(SlpTexture[]::new);

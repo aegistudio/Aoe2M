@@ -1,17 +1,16 @@
 package net.aegistudio.aoe2m.wyvern.tile;
 
-import java.io.File;
 import java.io.IOException;
 
+import net.aegistudio.aoe2m.assetdba.terrain.TileGamedata;
 import net.aegistudio.aoe2m.wyvern.asset.Blendomatic;
-import net.aegistudio.aoe2m.wyvern.asset.SlpTextureAsset;
-import net.aegistudio.aoe2m.wyvern.asset.TileGamedata;
 import net.aegistudio.aoe2m.wyvern.render.ParentTexture;
+import net.aegistudio.aoe2m.wyvern.render.SlpParentTexture;
 import net.aegistudio.aoe2m.wyvern.render.Texture;
 
 public class TileMetadata {
-	public TileMetadata(File parent, Blendomatic blendomatics, TileGamedata gamedata) throws IOException {
-		texture = new SlpTextureAsset(parent, gamedata.slp).toTexture();
+	public TileMetadata(Blendomatic blendomatics, TileGamedata gamedata) throws IOException {
+		texture = new SlpParentTexture(gamedata::open);
 		atlassian = gamedata.dimension0;
 		overlay = gamedata.overlay;
 		blendomatic = blendomatics.getMaskTexture(gamedata.mask);

@@ -10,14 +10,14 @@ package net.aegistudio.aoe2m.assetdba.blob;
  * @author aegistudio
  */
 
-public class SlpSubTexture {
+public class SlpSubImage {
 	public int x, y, w, h, cx, cy;
 	
-	public SlpSubTexture() {}
+	public SlpSubImage() {}
 	
-	public SlpSubTexture(int x, int y, int w, int h, int cx, int cy) {
+	public SlpSubImage(int x, int y, int w, int h, int cx, int cy) {
 		this.x = x;		this.y = y;
 		this.w = w;		this.h = h;
-		this.x = cx;	this.y = cy;
+		this.cx = cx;	this.cy = cy;
 	}
 }
