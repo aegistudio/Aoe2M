@@ -31,6 +31,8 @@ public class BlendingRender extends TerrainTestBase {
 		terrain.terrain[6][4] = 2;
 		terrain.terrain[6][5] = 2;
 		terrain.terrain[6][6] = 2;		
+		
+		terrain.elevation[3][3] = 1;
 	}
 	
 	public void prepare() throws LWJGLException {

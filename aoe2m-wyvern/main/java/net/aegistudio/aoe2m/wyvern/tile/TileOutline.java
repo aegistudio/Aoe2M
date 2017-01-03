@@ -13,7 +13,7 @@ public class TileOutline {
 		this.atX = atX; this.atY = atY;
 	}
 	
-	public void left(Coordinator coord, Terrain terrain, int x, int y) throws LWJGLException {
+	public int elevation(Terrain terrain, int x, int y) {
 		int z = terrain.elevation(x + 0, y + 0);
 		
 		int z1 = terrain.elevation(x - 1, y + 0);
@@ -21,6 +21,11 @@ public class TileOutline {
 		int z3 = terrain.elevation(x + 0, y - 1);
 		
 		if(z1 == z + 1 || z2 == z + 1 || z3 == z + 1) z = z + 1;
+		return z;
+	}
+	
+	public void left(Coordinator coord, Terrain terrain, int x, int y) throws LWJGLException {
+		int z = elevation(terrain, x, y);
 		coord.coord(seX * x + neX * y + atX * z, seY * x + neY * y + atY * z);
 	}
 	

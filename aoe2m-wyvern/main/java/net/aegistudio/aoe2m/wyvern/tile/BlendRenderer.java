@@ -75,27 +75,27 @@ public class BlendRenderer implements TileRenderer {
 	}
 	
 	private void renderTile(BlendingObject object, int x, int y, Terrain terrain, int mask) throws LWJGLException {
-		textureManager.bind(object.metadata.texture, program::neighbour);
+		textureManager.bind(object.metadata.texture, program.neighbour);
 		SlpTexture neighbourTexture = (SlpTexture) object.metadata.getTexture(x, y);
 		
-		textureManager.bind(object.metadata.blendomatic, program::mask);
+		textureManager.bind(object.metadata.blendomatic, program.mask);
 		SlpTexture maskTexture = (SlpTexture) object.metadata.blendomatic.get(mask);
 		
 		GL11.glBegin(GL11.GL_QUADS);
-			neighbourTexture.left(program::neighbourCoord);
-			maskTexture.left(program::maskCoord); 
+			neighbourTexture.left(program.neighbour);
+			maskTexture.left(program.mask); 
 			outline.left(GL11::glVertex2d, terrain, x, y);
 
-			neighbourTexture.bottom(program::neighbourCoord);
-			maskTexture.bottom(program::maskCoord);
+			neighbourTexture.bottom(program.neighbour);
+			maskTexture.bottom(program.mask);
 			outline.bottom(GL11::glVertex2d, terrain, x, y);
 
-			neighbourTexture.right(program::neighbourCoord);
-			maskTexture.right(program::maskCoord);
+			neighbourTexture.right(program.neighbour);
+			maskTexture.right(program.mask);
 			outline.right(GL11::glVertex2d, terrain, x, y);
 			
-			neighbourTexture.top(program::neighbourCoord);
-			maskTexture.top(program::maskCoord);
+			neighbourTexture.top(program.neighbour);
+			maskTexture.top(program.mask);
 			outline.top(GL11::glVertex2d, terrain, x, y);
 		GL11.glEnd();
 	}
