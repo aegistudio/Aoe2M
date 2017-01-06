@@ -64,4 +64,7 @@ public class GlTexture implements Texture {
 	public void topRight(Coordinator bind) throws LWJGLException {		bind.coord(1, 1);		}
 	public void topLeft(Coordinator bind) throws LWJGLException {		bind.coord(0, 1);		}
 	public void center(Coordinator bind) throws LWJGLException {		bind.coord(0.5, 0.5);	}
+
+	@Override
+	public void destroy(int id) throws LWJGLException {	}
 }

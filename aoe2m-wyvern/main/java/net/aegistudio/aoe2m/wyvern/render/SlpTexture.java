@@ -26,7 +26,6 @@ public class SlpTexture implements Texture {
 	public void right(Coordinator bind) throws LWJGLException {			bind.coord(right, centery);		}
 	public void top(Coordinator bind) throws LWJGLException {			bind.coord(centerx, top);		}
 	
-	public void make(int id) throws LWJGLException {
-		throw new LWJGLException("Invalid binding of slp subtexture!");
-	}
+	public void make(int id) throws LWJGLException {	}
+	public void destroy(int id) throws LWJGLException {		}
 }

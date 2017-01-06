@@ -9,6 +9,7 @@ import org.lwjgl.opengl.ARBFramebufferObject;
 import org.lwjgl.opengl.GL11;
 
 import net.aegistudio.aoe2m.wyvern.asset.SelectShaderProgram;
+import net.aegistudio.aoe2m.wyvern.render.FrameBufferObject;
 import net.aegistudio.aoe2m.wyvern.render.FrameRenderObject;
 import net.aegistudio.aoe2m.wyvern.tile.SelectRenderer;
 import net.aegistudio.aoe2m.wyvern.tile.TapSelection;
@@ -49,17 +50,17 @@ public class SelectRender extends BlendingRender {
 				TapSelection tap = new TapSelection(offlineFrame) {
 					@Override
 					protected void select(double x, double y, double z) {
-						System.out.println(x + " " + y + " " + z);
+						selectPos(x, y, z);
 					}
 				};
 				tap.selectionTest(terrain, Mouse.getEventX(), Mouse.getEventY(), width(), height());
 			}
 		
 		if(down.getOrDefault(Keyboard.KEY_TAB, false)) {
-			ARBFramebufferObject.glBindFramebuffer(
-					ARBFramebufferObject.GL_READ_FRAMEBUFFER, offlineFrame.fboid);
+			offlineFrame.bind(ARBFramebufferObject.GL_READ_FRAMEBUFFER);
 			ARBFramebufferObject.glBlitFramebuffer(0, 0, offlineFrame.width, offlineFrame.height, 
 					0, 0, offlineFrame.width, offlineFrame.height, GL11.GL_COLOR_BUFFER_BIT, GL11.GL_NEAREST);
+			FrameBufferObject.unbind(ARBFramebufferObject.GL_READ_FRAMEBUFFER);
 		}
 	}
 	
@@ -68,5 +69,9 @@ public class SelectRender extends BlendingRender {
 		program.destroy();
 		offlineFrame.destroy();
 		Mouse.destroy();
+	}
+	
+	protected void selectPos(double x, double y, double z) {
+		System.out.println(x + " " + y + " " + z);
 	}
 }

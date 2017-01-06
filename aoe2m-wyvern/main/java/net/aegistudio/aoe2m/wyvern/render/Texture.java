@@ -14,4 +14,6 @@ public interface Texture {
 	public void topLeft(Coordinator bind) throws LWJGLException;
 	
 	public void center(Coordinator bind) throws LWJGLException;
+	
+	public void destroy(int id) throws LWJGLException;
 }

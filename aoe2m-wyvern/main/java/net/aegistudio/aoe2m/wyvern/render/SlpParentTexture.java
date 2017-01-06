@@ -42,4 +42,8 @@ public class SlpParentTexture implements ParentTexture {
 	
 	public SlpTexture get(int index) {	return subTextures[index];	}
 	public int count() { return subTextures.length;	}
+	
+	public void destroy(int id) throws LWJGLException {
+		texture.destroy(id);
+	}
 }

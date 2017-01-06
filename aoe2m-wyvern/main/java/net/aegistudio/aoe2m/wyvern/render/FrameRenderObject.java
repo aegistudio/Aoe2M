@@ -18,55 +18,16 @@ import static org.lwjgl.opengl.ARBFramebufferObject.*;
  * @author aegistudio
  */
 
-public class FrameRenderObject {
-	public final int width, height;
+public class FrameRenderObject extends FrameBufferObject {
 	public final int stride, format, internalFormat;
-	public int fboid = 0, rboid = 0, attachment;
+	public int rboid = 0, attachment;
 	
 	public FrameRenderObject(int w, int h, int stride, int internalFormat, int format, int attachment) {
-		this.width = w;
-		this.height = h;
+		super(w, h);
 		this.stride = stride;
 		this.format = format;
 		this.internalFormat = internalFormat;
 		this.attachment = attachment;
-	}
-	
-	public void create() throws LWJGLException {
-		if(rboid > 0 && fboid > 0) return;
-		
-		rboid = glGenRenderbuffers();
-		glBindRenderbuffer(GL_RENDERBUFFER, rboid);
-		glRenderbufferStorage(GL_RENDERBUFFER, internalFormat, width, height);
-		if(glGetError() != GL11.GL_NO_ERROR)
-			throw new LWJGLException("frameBufferObject.renderObjectError");
-		glBindRenderbuffer(GL_RENDERBUFFER, 0);
-		
-		fboid = glGenFramebuffers();
-		glBindFramebuffer(GL_FRAMEBUFFER, fboid);
-		glFramebufferRenderbuffer(GL_FRAMEBUFFER, attachment, 
-				GL_RENDERBUFFER, rboid);
-		if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-			throw new LWJGLException("frameBufferObject.imcomplete");
-		
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	}
-	
-	public void begin() {
-		glPushAttrib(GL_ALL_ATTRIB_BITS);
-		glBindFramebuffer(GL_FRAMEBUFFER, fboid);
-		glViewport(0, 0, width, height);
-	}
-	
-	public void end() {
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glPopAttrib();
-	}
-	
-	public void destroy() throws LWJGLException {
-		glDeleteRenderbuffers(rboid);
-		glDeleteFramebuffers(fboid);
-		rboid = 0; fboid = 0;
 	}
 	
 	public float[][][] download(int x, int y, int w, int h) {
@@ -84,5 +45,27 @@ public class FrameRenderObject {
 		glBindFramebuffer(GL_READ_FRAMEBUFFER, fboid);
 		glReadPixels(x, y, w, h, format, GL_FLOAT, floatBuffer);
 		glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
+	}
+
+	@Override
+	protected void subcreate() throws LWJGLException {
+		rboid = glGenRenderbuffers();
+		glBindRenderbuffer(GL_RENDERBUFFER, rboid);
+		glRenderbufferStorage(GL_RENDERBUFFER, internalFormat, width, height);
+		if(glGetError() != GL11.GL_NO_ERROR)
+			throw new LWJGLException("frameBufferObject.renderObjectError");
+		glBindRenderbuffer(GL_RENDERBUFFER, 0);
+	}
+
+	@Override
+	protected void subattach() throws LWJGLException {
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, attachment, 
+				GL_RENDERBUFFER, rboid);
+	}
+
+	@Override
+	protected void subdestroy() throws LWJGLException {
+		glDeleteRenderbuffers(rboid);
+		rboid = 0;
 	}
 }
