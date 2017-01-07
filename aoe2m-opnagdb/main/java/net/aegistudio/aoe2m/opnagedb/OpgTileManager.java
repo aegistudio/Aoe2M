@@ -9,9 +9,9 @@ import java.util.function.BiConsumer;
 import net.aegistudio.aoe2m.assetdba.AssetManager;
 import net.aegistudio.aoe2m.assetdba.TileGamedata;
 
-public class OpgTileAssetManager implements AssetManager<TileGamedata> {
+public class OpgTileManager implements AssetManager<TileGamedata> {
 	protected final TileGamedata[] tiles;
-	public OpgTileAssetManager(File root) throws IOException {
+	public OpgTileManager(File root) throws IOException {
 		File parent = new File(root, "terrain");
 		File terrainGamedata = new File(new File(new File(root, "gamedata"), 
 				"gamedata-empiresdat"), "0000-terrains.docx");

@@ -2,8 +2,8 @@ package net.aegistudio.aoe2m.wyvern.tile;
 
 import org.lwjgl.LWJGLException;
 
+import net.aegistudio.aoe2m.wyvern.Terrain;
 import net.aegistudio.aoe2m.wyvern.render.Coordinator;
-import net.aegistudio.aoe2m.wyvern.terrain.Terrain;
 
 public class TileOutline {
 	private final double neX, neY, seX, seY, atX, atY;

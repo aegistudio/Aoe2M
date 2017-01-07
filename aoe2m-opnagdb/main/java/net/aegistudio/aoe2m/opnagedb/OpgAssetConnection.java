@@ -10,7 +10,8 @@ import net.aegistudio.aoe2m.assetdba.GraphicsGamedata;
 public class OpgAssetConnection implements AssetConnection {
 	public OpgAssetConnection(File root) throws IOException {
 		blendomatic = new OpgBlendomaticManager(root);
-		tileAsset = new OpgTileAssetManager(root);
+		tile = new OpgTileManager(root);
+		graphics = new OpgGraphicsManager(root);
 	}
 	
 	protected OpgBlendomaticManager blendomatic;
@@ -18,14 +19,14 @@ public class OpgAssetConnection implements AssetConnection {
 		return blendomatic;
 	}
 
-	protected OpgTileAssetManager tileAsset;
-	public OpgTileAssetManager terrain() {
-		return tileAsset;
+	protected OpgTileManager tile;
+	public OpgTileManager terrain() {
+		return tile;
 	}
 	
-	@Override
+	protected OpgGraphicsManager graphics;
 	public AssetManager<GraphicsGamedata> graphics() {
-		return null;
+		return graphics;
 	}
 
 }

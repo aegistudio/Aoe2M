@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.lwjgl.LWJGLException;
 
-import net.aegistudio.aoe2m.wyvern.terrain.SimpleTerrain;
+import net.aegistudio.aoe2m.wyvern.SimpleTerrain;
 import net.aegistudio.aoe2m.wyvern.tile.BasicRenderer;
 
 public class BasicRender extends TerrainTestBase {

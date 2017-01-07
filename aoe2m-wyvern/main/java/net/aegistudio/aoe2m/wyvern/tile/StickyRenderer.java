@@ -3,9 +3,9 @@ package net.aegistudio.aoe2m.wyvern.tile;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.GL11;
 
+import net.aegistudio.aoe2m.wyvern.Terrain;
 import net.aegistudio.aoe2m.wyvern.asset.StickyShaderProgram;
 import net.aegistudio.aoe2m.wyvern.render.TextureManager;
-import net.aegistudio.aoe2m.wyvern.terrain.Terrain;
 
 public class StickyRenderer implements TileRenderer {
 	protected final TextureManager manager;

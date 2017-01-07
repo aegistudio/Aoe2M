@@ -2,8 +2,8 @@ package net.aegistudio.aoe2m.wyvern.tile;
 
 import org.lwjgl.LWJGLException;
 
+import net.aegistudio.aoe2m.wyvern.Terrain;
 import net.aegistudio.aoe2m.wyvern.render.FrameRenderObject;
-import net.aegistudio.aoe2m.wyvern.terrain.Terrain;
 
 public abstract class TapSelection {
 	public final FrameRenderObject accessFrameObject;

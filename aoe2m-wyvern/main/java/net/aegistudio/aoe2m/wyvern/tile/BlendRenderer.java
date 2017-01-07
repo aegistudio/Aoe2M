@@ -6,11 +6,11 @@ import java.util.TreeSet;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.GL11;
 
+import net.aegistudio.aoe2m.wyvern.Terrain;
 import net.aegistudio.aoe2m.wyvern.asset.BlendShaderProgram;
 import net.aegistudio.aoe2m.wyvern.asset.Blendomatic;
 import net.aegistudio.aoe2m.wyvern.render.SlpTexture;
 import net.aegistudio.aoe2m.wyvern.render.TextureManager;
-import net.aegistudio.aoe2m.wyvern.terrain.Terrain;
 
 public class BlendRenderer implements TileRenderer {
 	public final TextureManager textureManager;

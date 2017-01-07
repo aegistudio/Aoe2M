@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 
+import net.aegistudio.aoe2m.wyvern.SimpleTerrain;
 import net.aegistudio.aoe2m.wyvern.asset.BlendShaderProgram;
 import net.aegistudio.aoe2m.wyvern.tile.BasicRenderer;
 import net.aegistudio.aoe2m.wyvern.tile.BlendRenderer;

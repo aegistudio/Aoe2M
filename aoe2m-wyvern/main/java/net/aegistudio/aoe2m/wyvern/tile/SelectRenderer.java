@@ -3,9 +3,9 @@ package net.aegistudio.aoe2m.wyvern.tile;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.GL11;
 
+import net.aegistudio.aoe2m.wyvern.Terrain;
 import net.aegistudio.aoe2m.wyvern.asset.SelectShaderProgram;
 import net.aegistudio.aoe2m.wyvern.render.FrameRenderObject;
-import net.aegistudio.aoe2m.wyvern.terrain.Terrain;
 
 public class SelectRenderer implements TileRenderer {
 	protected final TileOutline outline;

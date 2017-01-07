@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-import net.aegistudio.aoe2m.wyvern.terrain.Terrain;
+import net.aegistudio.aoe2m.wyvern.Terrain;
 
 public enum TileNeighbour {
 	EAST			(+1, +1, false,	0),

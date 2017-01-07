@@ -1,4 +1,4 @@
-package net.aegistudio.aoe2m.wyvern.terrain;
+package net.aegistudio.aoe2m.wyvern;
 
 public interface Terrain {
 	/**
