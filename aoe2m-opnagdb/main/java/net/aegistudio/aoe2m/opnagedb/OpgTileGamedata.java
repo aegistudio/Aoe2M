@@ -8,9 +8,7 @@ public class OpgTileGamedata extends TileGamedata {
 	// enabled,name0,name1,slp_id,sound_id,blend_priority,blend_mode,
 	// map_color_hi,map_color_med,map_color_low,map_color_cliff_lt,map_color_cliff_rt,passable_terrain,
 	// impassaable_terrain,elevation_graphics,terrain_dimension0,terrain_dimension1
-	public OpgTileGamedata(File terrainRoot, String line) throws IOException {
-		String[] parameters = line.split(",");
-		
+	public OpgTileGamedata(File terrainRoot, String[] parameters) throws IOException {
 		name0 = parameters[1];
 		name1 = parameters[2];
 		

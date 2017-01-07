@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import net.aegistudio.aoe2m.assetdba.AssetConnection;
+import net.aegistudio.aoe2m.assetdba.AssetManager;
+import net.aegistudio.aoe2m.assetdba.GraphicsGamedata;
 
 public class OpgAssetConnection implements AssetConnection {
 	public OpgAssetConnection(File root) throws IOException {
@@ -19,6 +21,11 @@ public class OpgAssetConnection implements AssetConnection {
 	protected OpgTileAssetManager tileAsset;
 	public OpgTileAssetManager terrain() {
 		return tileAsset;
+	}
+	
+	@Override
+	public AssetManager<GraphicsGamedata> graphics() {
+		return null;
 	}
 
 }

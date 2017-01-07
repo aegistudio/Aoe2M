@@ -18,16 +18,11 @@ public class OpgTileAssetManager implements AssetManager<TileGamedata> {
 		
 		try(BufferedReader gamedataReader = new BufferedReader(new FileReader(terrainGamedata))) {
 			tiles = gamedataReader.lines()
-				.filter(line -> line.length() > 0 && line.startsWith("1,"))
-				.map(line -> {
-					try {
-						return new OpgTileGamedata(parent, line);
-					}
-					catch(IOException e) {
-						e.printStackTrace();
-						return null;
-					}
-				}).toArray(TileGamedata[]::new);
+				.filter(CsvFilter::filter).map(CsvFilter::map)
+				.filter(params -> params[0].equals("1"))	// enabled
+				.map(FunctionWrapper.mapIgnoreExcept(
+						params -> new OpgTileGamedata(parent, params)))
+				.toArray(TileGamedata[]::new);
 		}	
 	}
 	

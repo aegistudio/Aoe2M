@@ -5,7 +5,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import javax.imageio.ImageIO;
@@ -35,14 +35,14 @@ public class OpgSlpImage implements SlpImage {
 		File descriptor = new File(root, name + ".docx");
 
 		try(BufferedReader reader = new BufferedReader(new FileReader(descriptor))) {
-			this.subImages = reader.lines().map(line -> {
-				if(line.length() == 0) return null;
-				if(line.startsWith("#")) return null;
-				Integer[] numbers = Arrays.stream(line.split(","))
-						.map(Integer::parseInt).toArray(Integer[]::new);
-				return new SlpSubImage(numbers[0], numbers[1], 
-						numbers[2], numbers[3], numbers[4], numbers[5]);
-			}).filter(slp -> slp != null).toArray(SlpSubImage[]::new);
+			this.subImages = reader.lines()
+				.filter(CsvFilter::filter)
+				.map(CsvFilter::map)
+				.map(FunctionWrapper.highOrder(Integer::parseInt, Integer[]::new))
+				.map(numbers -> new SlpSubImage(numbers[0], numbers[1], 
+							numbers[2], numbers[3], numbers[4], numbers[5]))
+				.filter(Objects::nonNull)
+				.toArray(SlpSubImage[]::new);
 		}
 		calculateSize();
 	}
