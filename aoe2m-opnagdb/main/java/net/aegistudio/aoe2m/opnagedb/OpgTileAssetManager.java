@@ -4,12 +4,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.function.BiConsumer;
 
-import net.aegistudio.aoe2m.assetdba.terrain.TileAssetManager;
-import net.aegistudio.aoe2m.assetdba.terrain.TileGamedata;
+import net.aegistudio.aoe2m.assetdba.AssetManager;
+import net.aegistudio.aoe2m.assetdba.TileGamedata;
 
-public class OpgTileAssetManager implements TileAssetManager {
+public class OpgTileAssetManager implements AssetManager<TileGamedata> {
 	protected final TileGamedata[] tiles;
 	public OpgTileAssetManager(File root) throws IOException {
 		File parent = new File(root, "terrain");
@@ -37,7 +37,13 @@ public class OpgTileAssetManager implements TileAssetManager {
 	}
 
 	@Override
-	public TileGamedata[] list() {
-		return Arrays.copyOf(tiles, tiles.length);
+	public int max() {
+		return tiles.length;
+	}
+
+	@Override
+	public void iterate(BiConsumer<Integer, TileGamedata> iterator) {
+		for(int i = 0; i < tiles.length; i ++)
+			iterator.accept(i, tiles[i]);
 	}
 }

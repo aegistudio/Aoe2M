@@ -6,11 +6,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.function.Supplier;
 
 import javax.imageio.ImageIO;
 
-import net.aegistudio.aoe2m.assetdba.blob.SlpSubImage;
-import net.aegistudio.aoe2m.assetdba.blob.SlpImage;
+import net.aegistudio.aoe2m.assetdba.SlpImage;
+import net.aegistudio.aoe2m.assetdba.SlpSubImage;
 
 public class OpgSlpImage implements SlpImage {
 	protected File image;
@@ -19,6 +20,15 @@ public class OpgSlpImage implements SlpImage {
 	public int height() {	return height;	}
 	
 	protected SlpSubImage[] subImages;
+	
+	public static Supplier<SlpImage> open(File root, String name) {
+		return () -> { try {
+			return new OpgSlpImage(root, name);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}};
+	}
 	
 	public OpgSlpImage(File root, String name) throws IOException {
 		image = new File(root, name + ".png");

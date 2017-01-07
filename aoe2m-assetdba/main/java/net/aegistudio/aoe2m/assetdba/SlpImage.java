@@ -1,4 +1,4 @@
-package net.aegistudio.aoe2m.assetdba.blob;
+package net.aegistudio.aoe2m.assetdba;
 
 import java.awt.image.BufferedImage;
 

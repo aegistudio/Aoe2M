@@ -5,11 +5,12 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.BiConsumer;
 
-import net.aegistudio.aoe2m.assetdba.blob.SlpImage;
-import net.aegistudio.aoe2m.assetdba.terrain.BlendomaticManager;
+import net.aegistudio.aoe2m.assetdba.AssetManager;
+import net.aegistudio.aoe2m.assetdba.SlpImage;
 
-public class OpgBlendomaticManager implements BlendomaticManager {
+public class OpgBlendomaticManager implements AssetManager<SlpImage> {
 	protected final SlpImage[] blendomatics;
 	
 	public OpgBlendomaticManager(File root) {
@@ -31,13 +32,20 @@ public class OpgBlendomaticManager implements BlendomaticManager {
 		for(Map.Entry<Integer, SlpImage> entry : maps.entrySet())
 			blendomatics[entry.getKey()] = entry.getValue();
 	}
-	@Override
-	public int modes() {
-		return blendomatics.length;
-	}
 
 	@Override
 	public SlpImage query(int mode) {
 		return blendomatics[mode];
+	}
+	@Override
+	public void iterate(BiConsumer<Integer, SlpImage> iterator) {
+		for(int i = 0; i < blendomatics.length; i ++)
+			if(blendomatics[i] != null)
+				iterator.accept(i, blendomatics[i]);
+	}
+
+	@Override
+	public int max() {
+		return blendomatics.length;
 	}
 }

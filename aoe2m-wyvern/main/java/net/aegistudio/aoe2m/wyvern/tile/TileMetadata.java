@@ -2,7 +2,7 @@ package net.aegistudio.aoe2m.wyvern.tile;
 
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.assetdba.terrain.TileGamedata;
+import net.aegistudio.aoe2m.assetdba.TileGamedata;
 import net.aegistudio.aoe2m.wyvern.asset.Blendomatic;
 import net.aegistudio.aoe2m.wyvern.render.ParentTexture;
 import net.aegistudio.aoe2m.wyvern.render.SlpParentTexture;
@@ -10,7 +10,7 @@ import net.aegistudio.aoe2m.wyvern.render.Texture;
 
 public class TileMetadata {
 	public TileMetadata(Blendomatic blendomatics, TileGamedata gamedata) throws IOException {
-		texture = new SlpParentTexture(gamedata::open);
+		texture = new SlpParentTexture(gamedata.slp);
 		atlassian = gamedata.dimension0;
 		overlay = gamedata.overlay;
 		blendomatic = blendomatics.getMaskTexture(gamedata.mask);

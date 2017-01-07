@@ -1,15 +1,14 @@
-package net.aegistudio.aoe2m.assetdba.terrain;
+package net.aegistudio.aoe2m.assetdba;
 
-import net.aegistudio.aoe2m.assetdba.blob.SlpImage;
+import java.util.function.Supplier;
 
-public abstract class TileGamedata {
+public class TileGamedata {
 	public String name0, name1, sound;
 	public int mapHi, mapMid, mapLo, mapCliffLeft, mapCliffRight;
+	public Supplier<SlpImage> slp;
 	public int overlay, mask;
 	public int passable, impassable;
 	public String elevationGraphics;
 	
 	public int dimension0, dimension1;
-	
-	public abstract SlpImage open();
 }

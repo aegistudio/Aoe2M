@@ -27,8 +27,8 @@ public abstract class TerrainTestBase extends WyvernRider {
 	
 	public TerrainTestBase() throws IOException, LWJGLException {
 		connection = new OpgAssetConnection(new File("assets"));
-		blendomatic = new Blendomatic(connection.blendomatic());
-		assetManager = new TileMetaManager(connection.terrain(), blendomatic);
+		blendomatic = new Blendomatic(connection);
+		assetManager = new TileMetaManager(connection, blendomatic);
 		textureManager = new BasicTextureManager();
 		outline = new TileOutline(49, 25, 49, -25, 0, 20);
 	}

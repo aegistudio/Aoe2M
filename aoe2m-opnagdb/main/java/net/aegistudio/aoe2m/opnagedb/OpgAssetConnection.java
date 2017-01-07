@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 
 import net.aegistudio.aoe2m.assetdba.AssetConnection;
-import net.aegistudio.aoe2m.assetdba.terrain.BlendomaticManager;
-import net.aegistudio.aoe2m.assetdba.terrain.TileAssetManager;
 
 public class OpgAssetConnection implements AssetConnection {
 	public OpgAssetConnection(File root) throws IOException {
@@ -13,13 +11,13 @@ public class OpgAssetConnection implements AssetConnection {
 		tileAsset = new OpgTileAssetManager(root);
 	}
 	
-	protected BlendomaticManager blendomatic;
-	public BlendomaticManager blendomatic() {
+	protected OpgBlendomaticManager blendomatic;
+	public OpgBlendomaticManager blendomatic() {
 		return blendomatic;
 	}
 
-	protected TileAssetManager tileAsset;
-	public TileAssetManager terrain() {
+	protected OpgTileAssetManager tileAsset;
+	public OpgTileAssetManager terrain() {
 		return tileAsset;
 	}
 

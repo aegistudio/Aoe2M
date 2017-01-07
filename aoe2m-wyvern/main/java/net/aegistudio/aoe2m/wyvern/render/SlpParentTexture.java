@@ -6,7 +6,7 @@ import java.util.function.Supplier;
 
 import org.lwjgl.LWJGLException;
 
-import net.aegistudio.aoe2m.assetdba.blob.SlpImage;
+import net.aegistudio.aoe2m.assetdba.SlpImage;
 
 public class SlpParentTexture implements ParentTexture {
 	protected final GlTexture texture;

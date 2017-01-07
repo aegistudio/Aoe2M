@@ -3,21 +3,22 @@ package net.aegistudio.aoe2m.wyvern.asset;
 import java.io.IOException;
 import org.lwjgl.LWJGLException;
 
-import net.aegistudio.aoe2m.assetdba.blob.SlpImage;
-import net.aegistudio.aoe2m.assetdba.terrain.BlendomaticManager;
+import net.aegistudio.aoe2m.assetdba.AssetConnection;
+import net.aegistudio.aoe2m.assetdba.AssetManager;
+import net.aegistudio.aoe2m.assetdba.SlpImage;
 import net.aegistudio.aoe2m.wyvern.render.ParentTexture;
 import net.aegistudio.aoe2m.wyvern.render.SlpParentTexture;
 
 public class Blendomatic {
 	public final ParentTexture[] blendomatics;
 	
-	public Blendomatic(BlendomaticManager blendomaticManager) throws IOException {
-		blendomatics = new ParentTexture[blendomaticManager.modes()];
-		for(int i = 0; i < blendomatics.length; i ++) {
-			SlpImage texture = blendomaticManager.query(i);
-			if(texture == null) continue;
+	public Blendomatic(AssetConnection connection) {
+		AssetManager<SlpImage> blendomaticManager = connection.blendomatic();
+		blendomatics = new ParentTexture[blendomaticManager.max()];
+		blendomaticManager.iterate((i, texture) -> { try {
+			if(texture == null) return;
 			blendomatics[i] = new SlpParentTexture(() -> texture);
-		}
+		} catch(IOException e) { e.printStackTrace(); } });
 	}
 	
 	public ParentTexture getMaskTexture(int id) {
