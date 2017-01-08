@@ -10,11 +10,13 @@ public class GraphicsGamedata {
 	
 	public int playerColor, adaptColor;
 	public int replay;
-	public int deltaCount;	public String graphicsDelta;
-	public String soundId;	public boolean attackSoundUsed;
+	public String soundId;	
+	public boolean attackSoundUsed;
 	
 	public int frameCount, angleCount;
 	public double frameRate, replayDelay;
 	public int sequenceType;
 	public int mirroringMode;
+	
+	public GraphicsDelta[] deltas;
 }

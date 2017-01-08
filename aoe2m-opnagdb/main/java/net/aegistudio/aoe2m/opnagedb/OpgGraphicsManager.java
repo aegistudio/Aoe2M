@@ -13,14 +13,15 @@ public class OpgGraphicsManager implements AssetManager<GraphicsGamedata>{
 	protected final OpgGraphicsGamedata[] graphics;
 	public OpgGraphicsManager(File root) throws IOException {
 		File parent = new File(root, "graphics");
-		File graphicsGamedata = new File(new File(new File(root, "gamedata"), 
-				"gamedata-empiresdat"), "0000-graphics.docx");
+		File gamedata = new File(new File(root, "gamedata"), "gamedata-empiresdat");
+		File graphicsDelta = new File(gamedata, "0000-graphics");
+		File graphicsGamedata = new File(gamedata, "0000-graphics.docx");
 		
 		try(BufferedReader gamedataReader = new BufferedReader(new FileReader(graphicsGamedata))) {
 			OpgGraphicsGamedata[] tempGraphics = gamedataReader.lines()
 				.filter(CsvFilter::filter).map(CsvFilter::map)
 				.map(FunctionWrapper.mapIgnoreExcept(
-						params -> new OpgGraphicsGamedata(parent, params)))
+						params -> new OpgGraphicsGamedata(parent, graphicsDelta, params)))
 				.toArray(OpgGraphicsGamedata[]::new);
 			
 			int maxGraphics = 0;
@@ -28,7 +29,7 @@ public class OpgGraphicsManager implements AssetManager<GraphicsGamedata>{
 				if(tempGraphics[i] != null)
 					maxGraphics = Math.max(tempGraphics[i].id, maxGraphics);
 			
-			graphics = new OpgGraphicsGamedata[maxGraphics];
+			graphics = new OpgGraphicsGamedata[maxGraphics + 1];
 			for(int i = 0; i < tempGraphics.length; i ++)
 				if(tempGraphics[i] != null)
 					graphics[tempGraphics[i].id] = tempGraphics[i];

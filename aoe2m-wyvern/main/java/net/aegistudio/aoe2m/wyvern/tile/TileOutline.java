@@ -24,9 +24,12 @@ public class TileOutline {
 		return z;
 	}
 	
-	public void left(Coordinator coord, Terrain terrain, int x, int y) throws LWJGLException {
-		int z = elevation(terrain, x, y);
+	private void map(Coordinator coord, Terrain terrain, double x, double y, double z) throws LWJGLException {
 		coord.coord(seX * x + neX * y + atX * z, seY * x + neY * y + atY * z);
+	}
+	
+	public void left(Coordinator coord, Terrain terrain, int x, int y) throws LWJGLException {
+		map(coord, terrain, x, y, elevation(terrain, x, y));
 	}
 	
 	public void top(Coordinator coord, Terrain terrain, int x, int y) throws LWJGLException {
@@ -39,5 +42,20 @@ public class TileOutline {
 	
 	public void right(Coordinator coord, Terrain terrain, int x, int y) throws LWJGLException {
 		left(coord, terrain, x + 1, y + 1);
+	}
+	
+	public void any(Coordinator coord, Terrain terrain, double x, double y, double z) throws LWJGLException {
+		int xi = (int) Math.floor(x);
+		int yi = (int) Math.floor(y);
+		double xd = x - xi;	double yd = y - yi;
+		int e00 = elevation(terrain, xi + 0, yi + 0);
+		int e01 = elevation(terrain, xi + 0, yi + 1);
+		int e11 = elevation(terrain, xi + 1, yi + 1);
+		int e10 = elevation(terrain, xi + 1, yi + 0);
+		
+		double e0 = yd * e00 + (1 - yd) * e01;
+		double e1 = yd * e10 + (1 - yd) * e11;
+		double e = xd * e0 + (1 - xd) * e1;
+		map(coord, terrain, x, y, e + z);
 	}
 }

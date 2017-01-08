@@ -1,12 +1,18 @@
 package net.aegistudio.aoe2m.opnagedb;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 import net.aegistudio.aoe2m.assetdba.EnumLayer;
+import net.aegistudio.aoe2m.assetdba.GraphicsDelta;
 import net.aegistudio.aoe2m.assetdba.GraphicsGamedata;
 
 public class OpgGraphicsGamedata extends GraphicsGamedata {
-	public OpgGraphicsGamedata(File graphicsRoot, String[] parameters) {
+	public OpgGraphicsGamedata(File graphicsRoot, 
+			File graphicsDeltaRoot, String[] parameters) throws IOException {
+		
 		name0 = parameters[0];
 		name1 = parameters[1];
 		
@@ -17,7 +23,7 @@ public class OpgGraphicsGamedata extends GraphicsGamedata {
 		adaptColor = Integer.parseInt(parameters[5]);
 		
 		replay = Integer.parseInt(parameters[6]);
-		deltaCount = Integer.parseInt(parameters[7]);
+		
 		soundId = parameters[8];
 		attackSoundUsed = Integer.parseInt(parameters[9]) == 1;
 		
@@ -31,6 +37,16 @@ public class OpgGraphicsGamedata extends GraphicsGamedata {
 		id = Integer.parseInt(parameters[15]);
 		
 		mirroringMode = Integer.parseInt(parameters[16]);
-		graphicsDelta = parameters[17];
+		
+		String deltaFilename = parameters[17].substring(parameters[17].indexOf('/') + 1);
+		File deltaFile = new File(graphicsDeltaRoot, deltaFilename);
+		try(BufferedReader reader = new BufferedReader(new FileReader(deltaFile))) {
+			deltas = reader.lines().filter(CsvFilter::filter)
+						.map(CsvFilter::map)
+						.map(FunctionWrapper.highOrder(Integer::parseInt, Integer[]::new))
+						.map(deltaParams -> new GraphicsDelta(deltaParams[0], deltaParams[1], deltaParams[2]))
+						.toArray(GraphicsDelta[]::new);
+		}
+		assert Integer.parseInt(parameters[7]) == deltas.length;
 	}
 }
