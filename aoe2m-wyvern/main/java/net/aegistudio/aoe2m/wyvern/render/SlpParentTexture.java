@@ -9,11 +9,19 @@ import org.lwjgl.LWJGLException;
 import net.aegistudio.aoe2m.assetdba.SlpImage;
 
 public class SlpParentTexture implements ParentTexture {
+	protected final Supplier<SlpImage> imageSupplier;
 	protected final GlTexture texture;
-	protected final SlpTexture[] subTextures;
+	protected SlpTexture[] subTextures;
+	
 	public SlpParentTexture(Supplier<SlpImage> imageSupplier) throws IOException {
-		SlpImage image = imageSupplier.get();
+		this.imageSupplier = imageSupplier;
 		this.texture = new GlTexture(() -> imageSupplier.get().image());
+	}
+	
+	public void make(int id) throws LWJGLException {
+		texture.make(id);
+
+		SlpImage image = imageSupplier.get();
 		int width = image.width();
 		int height = image.height();
 		
@@ -31,8 +39,6 @@ public class SlpParentTexture implements ParentTexture {
 		}).filter(slp -> slp != null).toArray(SlpTexture[]::new);
 	}
 	
-	public void make(int id) throws LWJGLException {	texture.make(id);	}
-	
 	private void cannotBind() {	throw new AssertionError("bind.parentTexture"); }
 	public void bottomLeft(Coordinator bind) throws LWJGLException {	cannotBind();	}
 	public void bottomRight(Coordinator bind) throws LWJGLException {	cannotBind();	}
@@ -45,5 +51,6 @@ public class SlpParentTexture implements ParentTexture {
 	
 	public void destroy(int id) throws LWJGLException {
 		texture.destroy(id);
+		this.subTextures = null;
 	}
 }

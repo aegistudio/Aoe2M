@@ -26,12 +26,13 @@ public class BasicRenderer implements TileRenderer {
 		TileMetadata metadata = tile.require(terrain.tile(x, y));
 		if(metadata == null) return;
 		
+		textureManager.bind(metadata.texture, TextureBinding.instance);
+		
 		Texture unknownTexture = metadata.getTexture(x, y);
+		SlpTexture texture = (SlpTexture) unknownTexture;
+		
 		if(unknownTexture == null) return;
 		if(!(unknownTexture instanceof SlpTexture)) return;
-		
-		SlpTexture texture = (SlpTexture) unknownTexture;
-		textureManager.bind(metadata.texture, TextureBinding.instance);
 		
 		GL11.glBegin(GL11.GL_QUADS);
 			texture.left(TextureBinding.instance); 
