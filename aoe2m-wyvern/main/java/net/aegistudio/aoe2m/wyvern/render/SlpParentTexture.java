@@ -1,5 +1,6 @@
 package net.aegistudio.aoe2m.wyvern.render;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.function.Supplier;
@@ -20,10 +21,11 @@ public class SlpParentTexture implements ParentTexture {
 	
 	public void make(int id) throws LWJGLException {
 		texture.make(id);
-
+		
 		SlpImage image = imageSupplier.get();
-		int width = image.width();
-		int height = image.height();
+		BufferedImage bimage = image.image();
+		int width = bimage.getWidth();
+		int height = bimage.getHeight();
 		
 		this.subTextures = Arrays.stream(image.subTextures()).map(subTexture -> {
 			if(subTexture == null) return null;

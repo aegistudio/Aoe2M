@@ -44,13 +44,6 @@ public class OpgSlpImage implements SlpImage {
 				.filter(Objects::nonNull)
 				.toArray(SlpSubImage[]::new);
 		}
-		calculateSize();
-	}
-	
-	protected void calculateSize() throws IOException {
-		BufferedImage bimage = image();
-		width = bimage.getWidth();
-		height = bimage.getHeight();
 	}
 	
 	public BufferedImage image() {

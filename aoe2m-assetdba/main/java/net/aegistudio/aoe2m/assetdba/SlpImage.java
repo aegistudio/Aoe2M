@@ -10,10 +10,6 @@ import java.awt.image.BufferedImage;
  */
 
 public interface SlpImage {
-	public int width();
-	
-	public int height();
-	
 	public BufferedImage image();
 	
 	public SlpSubImage[] subTextures();
