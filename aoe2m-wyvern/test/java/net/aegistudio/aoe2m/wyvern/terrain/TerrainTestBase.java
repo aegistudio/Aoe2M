@@ -12,10 +12,10 @@ import net.aegistudio.aoe2m.assetdba.AssetConnection;
 import net.aegistudio.aoe2m.opnagedb.OpgAssetConnection;
 import net.aegistudio.aoe2m.wyvern.WyvernRider;
 import net.aegistudio.aoe2m.wyvern.asset.Blendomatic;
-import net.aegistudio.aoe2m.wyvern.asset.TileMetaManager;
 import net.aegistudio.aoe2m.wyvern.render.BasicTextureManager;
 import net.aegistudio.aoe2m.wyvern.render.TextureBinding;
 import net.aegistudio.aoe2m.wyvern.render.TextureManager;
+import net.aegistudio.aoe2m.wyvern.tile.TileMetaManager;
 import net.aegistudio.aoe2m.wyvern.tile.TileOutline;
 
 public abstract class TerrainTestBase extends WyvernRider {

@@ -1,6 +1,5 @@
 package net.aegistudio.aoe2m.wyvern.asset;
 
-import java.io.IOException;
 import org.lwjgl.LWJGLException;
 
 import net.aegistudio.aoe2m.assetdba.AssetConnection;
@@ -15,10 +14,10 @@ public class Blendomatic {
 	public Blendomatic(AssetConnection connection) {
 		AssetManager<SlpImage> blendomaticManager = connection.blendomatic();
 		blendomatics = new ParentTexture[blendomaticManager.max()];
-		blendomaticManager.iterate((i, texture) -> { try {
+		blendomaticManager.iterate((i, texture) -> { 
 			if(texture == null) return;
-			blendomatics[i] = new SlpParentTexture(() -> texture);
-		} catch(IOException e) { e.printStackTrace(); } });
+			blendomatics[i] = new SlpParentTexture(texture);
+		});
 	}
 	
 	public ParentTexture getMaskTexture(int id) {

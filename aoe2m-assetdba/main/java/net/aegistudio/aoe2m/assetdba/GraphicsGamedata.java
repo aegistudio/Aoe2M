@@ -1,11 +1,9 @@
 package net.aegistudio.aoe2m.assetdba;
 
-import java.util.function.Supplier;
-
 public class GraphicsGamedata {
 	public int id;
 	public String name0, name1;
-	public Supplier<SlpImage> slp;
+	public SlpImage slp;
 	public EnumLayer layer;
 	
 	public int playerColor, adaptColor;

@@ -1,29 +1,30 @@
 package net.aegistudio.aoe2m.wyvern.render;
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.Arrays;
-import java.util.function.Supplier;
 
 import org.lwjgl.LWJGLException;
 
 import net.aegistudio.aoe2m.assetdba.SlpImage;
 
 public class SlpParentTexture implements ParentTexture {
-	protected final Supplier<SlpImage> imageSupplier;
+	protected final SlpImage image;
 	protected final GlTexture texture;
 	protected SlpTexture[] subTextures;
 	
-	public SlpParentTexture(Supplier<SlpImage> imageSupplier) throws IOException {
-		this.imageSupplier = imageSupplier;
-		this.texture = new GlTexture(() -> imageSupplier.get().image());
+	public SlpParentTexture(SlpImage image) {
+		this.image = image;
+		this.texture = new GlTexture(this::getImage);
+	}
+	
+	public BufferedImage getImage() {
+		return image.image();
 	}
 	
 	public void make(int id) throws LWJGLException {
 		texture.make(id);
 		
-		SlpImage image = imageSupplier.get();
-		BufferedImage bimage = image.image();
+		BufferedImage bimage = getImage();
 		int width = bimage.getWidth();
 		int height = bimage.getHeight();
 		

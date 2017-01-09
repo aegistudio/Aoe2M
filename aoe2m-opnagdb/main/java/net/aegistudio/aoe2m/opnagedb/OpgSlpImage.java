@@ -3,10 +3,10 @@ package net.aegistudio.aoe2m.opnagedb;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Objects;
-import java.util.function.Supplier;
 
 import javax.imageio.ImageIO;
 
@@ -21,17 +21,17 @@ public class OpgSlpImage implements SlpImage {
 	
 	protected SlpSubImage[] subImages;
 	
-	public static Supplier<SlpImage> open(File root, String name) {
-		return () -> { try {
+	public static SlpImage open(File root, String name) {
+		try {
 			return new OpgSlpImage(root, name);
 		} catch (IOException e) {
-			e.printStackTrace();
 			return null;
-		}};
+		}
 	}
 	
 	public OpgSlpImage(File root, String name) throws IOException {
 		image = new File(root, name + ".png");
+		if(!image.exists()) throw new FileNotFoundException(name);
 		File descriptor = new File(root, name + ".docx");
 
 		try(BufferedReader reader = new BufferedReader(new FileReader(descriptor))) {

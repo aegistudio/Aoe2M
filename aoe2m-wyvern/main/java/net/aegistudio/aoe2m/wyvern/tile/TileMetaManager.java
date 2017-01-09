@@ -1,12 +1,11 @@
-package net.aegistudio.aoe2m.wyvern.asset;
+package net.aegistudio.aoe2m.wyvern.tile;
 
 import java.io.IOException;
 
 import net.aegistudio.aoe2m.assetdba.AssetConnection;
 import net.aegistudio.aoe2m.assetdba.AssetManager;
 import net.aegistudio.aoe2m.assetdba.TileGamedata;
-import net.aegistudio.aoe2m.wyvern.tile.TileManager;
-import net.aegistudio.aoe2m.wyvern.tile.TileMetadata;
+import net.aegistudio.aoe2m.wyvern.asset.Blendomatic;
 
 public class TileMetaManager implements TileManager {
 	private final TileMetadata[] tiles;

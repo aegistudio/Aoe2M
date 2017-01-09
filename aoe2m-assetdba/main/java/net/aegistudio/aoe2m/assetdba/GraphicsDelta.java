@@ -7,5 +7,9 @@ public class GraphicsDelta {
 	
 	public GraphicsDelta() {}
 	
-	public GraphicsDelta(int deltaGraphic, int directionX, int directionY){}
+	public GraphicsDelta(int deltaGraphic, int directionX, int directionY){
+		this.deltaGraphic = deltaGraphic;
+		this.directionX = directionX;
+		this.directionY = directionY;
+	}
 }

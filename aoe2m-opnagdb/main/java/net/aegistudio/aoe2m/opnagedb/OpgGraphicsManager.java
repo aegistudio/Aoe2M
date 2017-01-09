@@ -41,6 +41,8 @@ public class OpgGraphicsManager implements AssetManager<GraphicsGamedata>{
 	}
 	@Override
 	public GraphicsGamedata query(int id) {
+		if(id < 0 || id >= graphics.length)
+			return null;
 		return graphics[id];
 	}
 	
