@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.function.Supplier;
 
-import net.aegistudio.aoe2m.scx.Text;
-
 /**
  * As we know, the order we read fields from the file is the same as we write them to file.
  * The field translator takes in the field, and write them to file if needed.

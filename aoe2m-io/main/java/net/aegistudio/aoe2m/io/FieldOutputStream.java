@@ -3,7 +3,7 @@ package net.aegistudio.aoe2m.io;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import net.aegistudio.aoe2m.scx.Text;
+import net.aegistudio.aoe2m.Text;
 
 public class FieldOutputStream extends OutputStream {
 	private OutputStream outputStream;

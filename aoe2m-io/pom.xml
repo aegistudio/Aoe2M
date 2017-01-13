@@ -5,15 +5,8 @@
     <artifactId>aoe2m</artifactId>
     <version>1.0</version>
   </parent>
-  <artifactId>aoe2m-core</artifactId>
+  <artifactId>aoe2m-io</artifactId>
   
-  <name>Aoe2m Core Module</name>
-  <description>Core module that serves as a view model and core model in the system.</description>
-  
-  <dependencies>
-  	<dependency>
-  	    <groupId>net.aegistudio.aoe2m</groupId>
-	    <artifactId>aoe2m-abstraction</artifactId>
-  	</dependency>
-  </dependencies>
+  <name>Aoe2m I/O Common</name>
+  <description>Common classes for handling input/output in Aoe2M, based on translator.</description>
 </project>

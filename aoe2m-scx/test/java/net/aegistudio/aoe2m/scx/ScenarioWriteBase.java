@@ -7,7 +7,7 @@ import java.io.FileOutputStream;
 
 import org.junit.Test;
 
-import net.aegistudio.aoe2m.io.ScenarioOutputStream;
+import net.aegistudio.aoe2m.Text;
 
 /**
  * This file will not be run in maven automated 

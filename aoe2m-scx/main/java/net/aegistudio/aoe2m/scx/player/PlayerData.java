@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.aegistudio.aoe2m.EnumWrapper;
+import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.Wrapper;
-import net.aegistudio.aoe2m.scx.Text;
 
 public class PlayerData {
 	// PlayerData1

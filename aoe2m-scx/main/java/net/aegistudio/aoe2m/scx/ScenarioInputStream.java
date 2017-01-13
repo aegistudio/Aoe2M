@@ -1,4 +1,4 @@
-package net.aegistudio.aoe2m.io;
+package net.aegistudio.aoe2m.scx;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.Inflater;
@@ -6,8 +6,10 @@ import java.util.zip.InflaterInputStream;
 
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.FieldTranslator;
-import net.aegistudio.aoe2m.scx.Scenario;
-import net.aegistudio.aoe2m.scx.ScenarioDirector;
+import net.aegistudio.aoe2m.io.DebugInputStream;
+import net.aegistudio.aoe2m.io.FieldInputStream;
+import net.aegistudio.aoe2m.io.FieldInputTranslator;
+import net.aegistudio.aoe2m.io.StackDebugTranslator;
 import net.aegistudio.aoe2m.scx.meta.MetadataBuilder;
 
 public class ScenarioInputStream extends InputStream {

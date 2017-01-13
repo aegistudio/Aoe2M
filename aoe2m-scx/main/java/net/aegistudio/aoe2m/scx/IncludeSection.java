@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.VariantList;
 import net.aegistudio.aoe2m.Wrapper;
 

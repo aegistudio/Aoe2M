@@ -1,4 +1,4 @@
-package net.aegistudio.aoe2m.scx;
+package net.aegistudio.aoe2m;
 
 public final class Text {
 	public final long length;

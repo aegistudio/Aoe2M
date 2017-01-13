@@ -1,5 +1,7 @@
 package net.aegistudio.aoe2m.scx;
 
+import net.aegistudio.aoe2m.Text;
+
 public class MessageWrite extends ScenarioWriteBase {
 
 	public MessageWrite() {	super("messageWrite.scx");	}

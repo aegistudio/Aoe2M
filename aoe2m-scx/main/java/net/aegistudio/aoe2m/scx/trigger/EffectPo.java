@@ -7,8 +7,8 @@ import java.util.List;
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.EnumWrapper;
 import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.Wrapper;
-import net.aegistudio.aoe2m.scx.Text;
 import net.aegistudio.aoe2m.scx.player.EnumDiplomacy;
 
 public class EffectPo {

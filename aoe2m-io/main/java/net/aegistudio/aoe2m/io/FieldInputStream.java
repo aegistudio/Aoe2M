@@ -4,7 +4,7 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import net.aegistudio.aoe2m.scx.Text;
+import net.aegistudio.aoe2m.Text;
 
 public class FieldInputStream extends InputStream {
 	private final InputStream inputStream;

@@ -6,10 +6,14 @@
     <version>1.0</version>
   </parent>
   <artifactId>aoe2m-abstraction</artifactId>
-  <name>Aoe2M Abstraction</name>
+  <name>Aoe2m Abstraction</name>
   <description>Common abstractions between core module and view module.</description>
   
   <dependencies>
+    <dependency>
+  		<groupId>net.aegistudio.aoe2m</groupId>
+  		<artifactId>aoe2m-io</artifactId>
+  	</dependency>
   	<dependency>
   		<groupId>net.aegistudio.aoe2m</groupId>
   		<artifactId>aoe2m-scx</artifactId>

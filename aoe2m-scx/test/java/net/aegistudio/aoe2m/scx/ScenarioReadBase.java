@@ -4,8 +4,6 @@ import java.io.InputStream;
 
 import org.junit.Test;
 
-import net.aegistudio.aoe2m.io.ScenarioInputStream;
-
 import static org.junit.Assert.*;
 
 public abstract class ScenarioReadBase {

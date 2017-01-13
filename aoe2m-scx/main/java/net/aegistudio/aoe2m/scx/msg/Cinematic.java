@@ -2,8 +2,8 @@ package net.aegistudio.aoe2m.scx.msg;
 
 import java.awt.image.BufferedImage;
 
+import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.Wrapper;
-import net.aegistudio.aoe2m.scx.Text;
 
 public class Cinematic {
 	public Wrapper<Text> pregame = new Wrapper<>(new Text());

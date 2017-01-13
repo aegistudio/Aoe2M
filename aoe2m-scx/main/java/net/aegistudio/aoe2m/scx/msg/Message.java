@@ -1,6 +1,6 @@
 package net.aegistudio.aoe2m.scx.msg;
 
-import net.aegistudio.aoe2m.scx.Text;
+import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.scx.StringFormater;
 

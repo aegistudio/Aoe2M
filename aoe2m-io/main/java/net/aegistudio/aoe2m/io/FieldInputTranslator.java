@@ -15,7 +15,7 @@ import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.EnumWrapper;
 import net.aegistudio.aoe2m.FieldTranslator;
 import net.aegistudio.aoe2m.Wrapper;
-import net.aegistudio.aoe2m.scx.Text;
+import net.aegistudio.aoe2m.Text;
 
 public class FieldInputTranslator implements FieldTranslator {
 	private final String charset;

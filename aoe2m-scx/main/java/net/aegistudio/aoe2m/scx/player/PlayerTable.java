@@ -1,7 +1,7 @@
 package net.aegistudio.aoe2m.scx.player;
 
+import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.Wrapper;
-import net.aegistudio.aoe2m.scx.Text;
 
 public class PlayerTable {
 	public final PlayerData playerData[] = new PlayerData[16]; { 

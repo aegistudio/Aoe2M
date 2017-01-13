@@ -51,6 +51,12 @@
   </dependencies>
   
   <dependencyManagement><dependencies>
+    <dependency>
+  		<groupId>net.aegistudio.aoe2m</groupId>
+  		<artifactId>aoe2m-io</artifactId>
+  		<version>${project.version}</version>
+  	</dependency>
+  	
   	<dependency>
   		<groupId>net.aegistudio.aoe2m</groupId>
   		<artifactId>aoe2m-scx</artifactId>
@@ -72,5 +78,6 @@
   	<module>aoe2m-wyvern</module>
   	<module>aoe2m-assetdba</module>
   	<module>aoe2m-opnagdb</module>
+  	<module>aoe2m-io</module>
   </modules>
 </project>

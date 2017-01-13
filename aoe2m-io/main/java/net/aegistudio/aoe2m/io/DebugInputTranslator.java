@@ -1,23 +1,18 @@
 package net.aegistudio.aoe2m.io;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.List;
-import java.util.function.Supplier;
 
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.EnumWrapper;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.Wrapper;
-import net.aegistudio.aoe2m.scx.Text;
 
-public class DebugTranslator implements FieldTranslator {
-	private Debuggable debug;
-	private FieldTranslator wrapped;
+public class DebugInputTranslator extends FieldInputTranslator {
+	private DebugInputStream debug;
 	
-	public DebugTranslator(Debuggable debug, FieldTranslator wrapped) {
+	public DebugInputTranslator(DebugInputStream debug, String charset) {
+		super(debug, charset);
 		this.debug = debug;
-		this.wrapped = wrapped;
 	}
 
 	protected interface IOECallable { public void call() throws IOException;}
@@ -35,106 +30,92 @@ public class DebugTranslator implements FieldTranslator {
 	
 	@Override
 	public void unsigned32(Wrapper<Long> field) throws IOException {
-		debug("u32", () -> wrapped.unsigned32(field));
+		debug("u32", () -> super.unsigned32(field));
 	}
 
 	@Override
 	public void signed32(Wrapper<Integer> field) throws IOException {
-		debug("s32", () -> wrapped.signed32(field));
+		debug("s32", () -> super.signed32(field));
 	}
 
 	@Override
 	public void string32(Wrapper<Text> field) throws IOException {
-		debug("str32", () -> wrapped.string32(field));
+		debug("str32", () -> super.string32(field));
 	}
 
 	@Override
 	public void string16(Wrapper<Text> field) throws IOException {
-		debug("str16", () -> wrapped.string16(field));
+		debug("str16", () -> super.string16(field));
 	}
 
 	@Override
 	public void division() throws CorruptionException, IOException {
-		constDebug("division", () -> wrapped.division());
+		constDebug("division", () -> super.division());
 	}
 
 	@Override
 	public void unused() throws CorruptionException, IOException {
-		constDebug("unused", () -> wrapped.unused());
+		constDebug("unused", () -> super.unused());
 	}
 
 	@Override
 	public void constUnsigned32(long field) throws CorruptionException, IOException {
-		constDebug("cu32", () -> wrapped.constUnsigned32(field));
+		constDebug("cu32", () -> super.constUnsigned32(field));
 	}
 
 	@Override
 	public void constByte(int field) throws CorruptionException, IOException {
-		constDebug("cu8", () -> wrapped.constByte(field));
+		constDebug("cu8", () -> super.constByte(field));
 	}
 
 	@Override
 	public void skip(long length) throws IOException {
-		debug("skip" + length, () -> wrapped.skip(length));
+		debug("skip" + length, () -> super.skip(length));
 	}
 
 	@Override
 	public void constString(int length, Wrapper<String> string) throws IOException {
-		debug("cstr" + length, () -> wrapped.constString(length, string));
+		debug("cstr" + length, () -> super.constString(length, string));
 	}
 
 	@Override
 	public void bool32(Wrapper<Boolean> field) throws IOException {
-		debug("bool32", () -> wrapped.bool32(field));
+		debug("bool32", () -> super.bool32(field));
 	}
 
 	@Override
 	public <T extends Enum<T>> void enum32(EnumWrapper<T> field) throws IOException {
-		debug("enum32", () -> wrapped.enum32(field));
+		debug("enum32", () -> super.enum32(field));
 	}
 	
 	@Override
 	public <T extends Enum<T>> void enum8(EnumWrapper<T> field) throws IOException {
-		debug("enum8", () -> wrapped.enum8(field));
+		debug("enum8", () -> super.enum8(field));
 	}
 
 	@Override
 	public void signed16(Wrapper<Short> field) throws IOException {
-		debug("s16", () -> wrapped.signed16(field));
+		debug("s16", () -> super.signed16(field));
 	}
 
 	@Override
 	public void float32(Wrapper<Float> field) throws IOException {
-		debug("f32", () -> wrapped.float32(field));
+		debug("f32", () -> super.float32(field));
 	}
 	
 	@Override
 	public void constFloat(float expected) throws IOException, CorruptionException {
-		constDebug("cf32", () -> wrapped.constFloat(expected));
+		constDebug("cf32", () -> super.constFloat(expected));
 	}
 
 	@Override
 	public void signed8(Wrapper<Byte> field) throws IOException {
-		debug("s8", () -> wrapped.signed8(field));
+		debug("s8", () -> super.signed8(field));
 	}
 
 	@Override
 	public void constUnsigned16(int field) throws CorruptionException, IOException {
-		constDebug("cu16", () -> wrapped.constUnsigned16(field));
-	}
-	
-	public void end() throws IOException, CorruptionException {
-		wrapped.end();
+		constDebug("cu16", () -> super.constUnsigned16(field));
 	}
 
-	@Override
-	public <T> void array(int length, List<T> list, Supplier<T> factory, ArrayTranslation<T> translation)
-			throws IOException, CorruptionException {
-		wrapped.array(length, list, factory, translation);
-	}
-
-	@Override
-	public void bitmap(Wrapper<BufferedImage> image) throws IOException, CorruptionException {
-		wrapped.bitmap(image);
-	}
 }

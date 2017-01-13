@@ -7,5 +7,10 @@
   </parent>
   <artifactId>aoe2m-scx</artifactId>
   <name>Aoe2m Scenario File</name>
-  <description>Submodule that represents and presists scenario.</description>
+  <description>Submodule that represents and persists scenario.</description>
+  
+  <dependencies><dependency>
+    <groupId>net.aegistudio.aoe2m</groupId>
+    <artifactId>aoe2m-io</artifactId>
+  </dependency></dependencies>
 </project>
