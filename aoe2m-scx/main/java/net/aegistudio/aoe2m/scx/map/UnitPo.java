@@ -2,9 +2,9 @@ package net.aegistudio.aoe2m.scx.map;
 
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.scx.FieldTranslator;
+import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.scx.StringFormater;
-import net.aegistudio.aoe2m.scx.Wrapper;
 
 public class UnitPo {
 	public Wrapper<Float> positionX = new Wrapper<Float>(0.0f);

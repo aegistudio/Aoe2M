@@ -1,7 +1,7 @@
 package net.aegistudio.aoe2m.scx.meta;
 
-import net.aegistudio.aoe2m.scx.EnumWrapper;
-import net.aegistudio.aoe2m.scx.Wrapper;
+import net.aegistudio.aoe2m.EnumWrapper;
+import net.aegistudio.aoe2m.Wrapper;
 
 public class GlobalVictoryPo {
 	public Wrapper<Boolean> customConquer = new Wrapper<Boolean>(false);

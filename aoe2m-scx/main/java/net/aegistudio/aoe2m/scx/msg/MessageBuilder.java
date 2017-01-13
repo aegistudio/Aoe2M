@@ -2,9 +2,9 @@ package net.aegistudio.aoe2m.scx.msg;
 
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.scx.CorruptionException;
-import net.aegistudio.aoe2m.scx.FieldTranslator;
-import net.aegistudio.aoe2m.scx.Wrapper;
+import net.aegistudio.aoe2m.CorruptionException;
+import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.scx.meta.MetadataPo;
 
 public class MessageBuilder {

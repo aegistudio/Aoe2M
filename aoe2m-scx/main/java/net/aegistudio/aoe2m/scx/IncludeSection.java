@@ -2,6 +2,11 @@ package net.aegistudio.aoe2m.scx;
 
 import java.io.IOException;
 
+import net.aegistudio.aoe2m.CorruptionException;
+import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.VariantList;
+import net.aegistudio.aoe2m.Wrapper;
+
 public class IncludeSection {
 	public static class IncludedFile {
 		public final Wrapper<Text> name = new Wrapper<>(new Text());

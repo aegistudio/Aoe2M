@@ -3,9 +3,9 @@ package net.aegistudio.aoe2m.scx.player;
 import java.util.Arrays;
 import java.util.List;
 
-import net.aegistudio.aoe2m.scx.EnumWrapper;
+import net.aegistudio.aoe2m.EnumWrapper;
+import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.scx.Text;
-import net.aegistudio.aoe2m.scx.Wrapper;
 
 public class PlayerData {
 	// PlayerData1

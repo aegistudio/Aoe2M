@@ -1,4 +1,4 @@
-package net.aegistudio.aoe2m.scx.input;
+package net.aegistudio.aoe2m.io;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package net.aegistudio.aoe2m.scx;
+package net.aegistudio.aoe2m;
 
 import java.io.IOException;
 import java.util.ArrayList;

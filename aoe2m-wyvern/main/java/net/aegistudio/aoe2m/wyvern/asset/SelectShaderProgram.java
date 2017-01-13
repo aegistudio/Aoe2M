@@ -29,10 +29,10 @@ public class SelectShaderProgram extends ShaderProgram {
 		elevation = vertexAttribute("elevation");
 	}
 	
-	public void coord(int x, int y, int z) {
+	public void coord(int x, int y, double d) {
 		glVertexAttrib1fARB(this.x, x);
 		glVertexAttrib1fARB(this.y, y);
-		glVertexAttrib1fARB(this.elevation, z);
+		glVertexAttrib1fARB(this.elevation, (float)d);
 	}
 	
 	public void size(int x, int y, int z) {

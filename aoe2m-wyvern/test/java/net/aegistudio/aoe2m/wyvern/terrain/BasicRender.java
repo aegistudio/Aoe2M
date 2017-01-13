@@ -12,7 +12,7 @@ public class BasicRender extends TerrainTestBase {
 	public final SimpleTerrain terrain = new SimpleTerrain(10, 10);
 	public BasicRender() throws IOException, LWJGLException {
 		super();
-		renderer = new BasicRenderer(assetManager, textureManager, outline);
+		renderer = new BasicRenderer(assetManager, textureManager, biasOutline);
 		for(int i = 0; i < 10; i ++)
 			for(int j = 0; j < 10; j ++)
 				terrain.elevation[i][j] = 1;

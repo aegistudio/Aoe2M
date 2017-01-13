@@ -2,8 +2,8 @@ package net.aegistudio.aoe2m.scx.player;
 
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.scx.FieldTranslator;
-import net.aegistudio.aoe2m.scx.Wrapper;
+import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Wrapper;
 
 @SuppressWarnings("unchecked")
 public class DisableList {

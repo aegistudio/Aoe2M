@@ -1,7 +1,7 @@
 package net.aegistudio.aoe2m.scx.map;
 
-import net.aegistudio.aoe2m.scx.VariantList;
-import net.aegistudio.aoe2m.scx.Wrapper;
+import net.aegistudio.aoe2m.VariantList;
+import net.aegistudio.aoe2m.Wrapper;
 
 public class MapPo {
 	public Wrapper<Integer> weCameraX = new Wrapper<Integer>(0);

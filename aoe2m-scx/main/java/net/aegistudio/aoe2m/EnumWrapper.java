@@ -1,10 +1,9 @@
-package net.aegistudio.aoe2m.scx;
+package net.aegistudio.aoe2m;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 
 public class EnumWrapper<T extends Enum<T>> extends Wrapper<T> {
-
 	public EnumWrapper(T initValue) {
 		super(initValue);
 	}

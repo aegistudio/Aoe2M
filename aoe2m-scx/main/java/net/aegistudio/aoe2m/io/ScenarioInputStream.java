@@ -1,11 +1,11 @@
-package net.aegistudio.aoe2m.scx.input;
+package net.aegistudio.aoe2m.io;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
-import net.aegistudio.aoe2m.scx.CorruptionException;
-import net.aegistudio.aoe2m.scx.FieldTranslator;
+import net.aegistudio.aoe2m.CorruptionException;
+import net.aegistudio.aoe2m.FieldTranslator;
 import net.aegistudio.aoe2m.scx.Scenario;
 import net.aegistudio.aoe2m.scx.ScenarioDirector;
 import net.aegistudio.aoe2m.scx.meta.MetadataBuilder;

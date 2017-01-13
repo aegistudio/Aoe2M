@@ -2,10 +2,10 @@ package net.aegistudio.aoe2m.scx.trigger;
 
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.scx.CorruptionException;
-import net.aegistudio.aoe2m.scx.EnumWrapper;
-import net.aegistudio.aoe2m.scx.FieldTranslator;
-import net.aegistudio.aoe2m.scx.Wrapper;
+import net.aegistudio.aoe2m.CorruptionException;
+import net.aegistudio.aoe2m.EnumWrapper;
+import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Wrapper;
 
 public class ConditionPo {
 	public EnumWrapper<EnumConditionType> type = new EnumWrapper<>(EnumConditionType.NONE);

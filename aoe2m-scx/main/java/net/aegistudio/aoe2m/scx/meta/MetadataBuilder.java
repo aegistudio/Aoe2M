@@ -3,10 +3,10 @@ package net.aegistudio.aoe2m.scx.meta;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.scx.CorruptionException;
-import net.aegistudio.aoe2m.scx.FieldTranslator;
-import net.aegistudio.aoe2m.scx.input.FieldInputStream;
-import net.aegistudio.aoe2m.scx.input.FieldOutputStream;
+import net.aegistudio.aoe2m.CorruptionException;
+import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.io.FieldInputStream;
+import net.aegistudio.aoe2m.io.FieldOutputStream;
 import net.aegistudio.aoe2m.scx.msg.Message;
 
 public class MetadataBuilder {

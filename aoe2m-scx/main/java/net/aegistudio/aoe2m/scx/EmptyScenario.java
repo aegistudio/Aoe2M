@@ -1,6 +1,6 @@
 package net.aegistudio.aoe2m.scx;
 
-import net.aegistudio.aoe2m.scx.input.ScenarioInputStream;
+import net.aegistudio.aoe2m.io.ScenarioInputStream;
 
 /**
  * This file assists scenario creation,

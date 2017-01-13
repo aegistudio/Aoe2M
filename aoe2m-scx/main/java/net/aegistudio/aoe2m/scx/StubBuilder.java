@@ -3,6 +3,10 @@ package net.aegistudio.aoe2m.scx;
 import java.io.EOFException;
 import java.io.IOException;
 
+import net.aegistudio.aoe2m.CorruptionException;
+import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Wrapper;
+
 public class StubBuilder {
 	public void buildStub(FieldTranslator translator) throws IOException, CorruptionException {
 		int accum = 0;

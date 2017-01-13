@@ -1,9 +1,9 @@
-package net.aegistudio.aoe2m.scx.input;
+package net.aegistudio.aoe2m.io;
 
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.scx.CorruptionException;
-import net.aegistudio.aoe2m.scx.FieldTranslator;
+import net.aegistudio.aoe2m.CorruptionException;
+import net.aegistudio.aoe2m.FieldTranslator;
 
 public class StackDebugTranslator extends DebugTranslator {
 

@@ -1,4 +1,4 @@
-package net.aegistudio.aoe2m.scx.input;
+package net.aegistudio.aoe2m.io;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -11,11 +11,11 @@ import java.util.function.Supplier;
 
 import javax.imageio.ImageIO;
 
-import net.aegistudio.aoe2m.scx.CorruptionException;
-import net.aegistudio.aoe2m.scx.EnumWrapper;
-import net.aegistudio.aoe2m.scx.FieldTranslator;
+import net.aegistudio.aoe2m.CorruptionException;
+import net.aegistudio.aoe2m.EnumWrapper;
+import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.scx.Text;
-import net.aegistudio.aoe2m.scx.Wrapper;
 
 public class FieldInputTranslator implements FieldTranslator {
 	private final String charset;

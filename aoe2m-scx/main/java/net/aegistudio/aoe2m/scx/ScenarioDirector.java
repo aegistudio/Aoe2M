@@ -2,6 +2,8 @@ package net.aegistudio.aoe2m.scx;
 
 import java.io.IOException;
 
+import net.aegistudio.aoe2m.CorruptionException;
+import net.aegistudio.aoe2m.FieldTranslator;
 import net.aegistudio.aoe2m.scx.map.MapBuilder;
 import net.aegistudio.aoe2m.scx.meta.MetadataBuilder;
 import net.aegistudio.aoe2m.scx.msg.MessageBuilder;

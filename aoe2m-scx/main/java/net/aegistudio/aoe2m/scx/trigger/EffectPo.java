@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.scx.CorruptionException;
-import net.aegistudio.aoe2m.scx.EnumWrapper;
-import net.aegistudio.aoe2m.scx.FieldTranslator;
+import net.aegistudio.aoe2m.CorruptionException;
+import net.aegistudio.aoe2m.EnumWrapper;
+import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.scx.Text;
-import net.aegistudio.aoe2m.scx.Wrapper;
 import net.aegistudio.aoe2m.scx.player.EnumDiplomacy;
 
 public class EffectPo {

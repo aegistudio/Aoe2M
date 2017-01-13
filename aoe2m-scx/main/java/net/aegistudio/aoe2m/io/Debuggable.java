@@ -1,4 +1,4 @@
-package net.aegistudio.aoe2m.scx.input;
+package net.aegistudio.aoe2m.io;
 
 public interface Debuggable {
 	public void start(String type);

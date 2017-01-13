@@ -2,8 +2,8 @@ package net.aegistudio.aoe2m.scx.meta;
 
 import java.util.Date;
 
+import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.scx.Text;
-import net.aegistudio.aoe2m.scx.Wrapper;
 
 public class MetadataPo {
 	public EnumVersion version = EnumVersion.AGE_OF_EMPIRE_II_THE_CONQUEROR;

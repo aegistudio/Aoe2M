@@ -1,9 +1,11 @@
-package net.aegistudio.aoe2m.scx;
+package net.aegistudio.aoe2m;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 import java.util.function.Supplier;
+
+import net.aegistudio.aoe2m.scx.Text;
 
 /**
  * As we know, the order we read fields from the file is the same as we write them to file.

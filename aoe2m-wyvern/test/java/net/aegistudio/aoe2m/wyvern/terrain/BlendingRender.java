@@ -17,9 +17,9 @@ public class BlendingRender extends TerrainTestBase {
 	public final SimpleTerrain terrain = new SimpleTerrain(10, 10);
 	public BlendingRender() throws IOException, LWJGLException {
 		super();
-		basicRenderer = new BasicRenderer(assetManager, textureManager, outline);
+		basicRenderer = new BasicRenderer(assetManager, textureManager, biasOutline);
 		blendProgram = new BlendShaderProgram();
-		blendRenderer = new BlendRenderer(assetManager, textureManager, outline, blendProgram);
+		blendRenderer = new BlendRenderer(assetManager, textureManager, biasOutline, blendProgram);
 
 		terrain.terrain[4][4] = 2;
 		terrain.terrain[4][5] = 2;

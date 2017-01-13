@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-import net.aegistudio.aoe2m.scx.Wrapper;
-import net.aegistudio.aoe2m.scx.CorruptionException;
-import net.aegistudio.aoe2m.scx.FieldTranslator;
-import net.aegistudio.aoe2m.scx.VariantList;
+import net.aegistudio.aoe2m.CorruptionException;
+import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.VariantList;
+import net.aegistudio.aoe2m.Wrapper;
 
 public class OrderedList<T> extends VariantList<T> {
 	public final List<Wrapper<Integer>> order = new ArrayList<>();

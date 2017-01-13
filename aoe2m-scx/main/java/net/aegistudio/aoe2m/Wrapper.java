@@ -1,7 +1,7 @@
-package net.aegistudio.aoe2m.scx;
+package net.aegistudio.aoe2m;
 
 public class Wrapper<T> {
-	T value;
+	protected T value;
 	
 	public Wrapper(T initValue) {
 		this.value = initValue;

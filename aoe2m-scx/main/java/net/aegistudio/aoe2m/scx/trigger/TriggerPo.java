@@ -2,10 +2,10 @@ package net.aegistudio.aoe2m.scx.trigger;
 
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.scx.CorruptionException;
-import net.aegistudio.aoe2m.scx.FieldTranslator;
+import net.aegistudio.aoe2m.CorruptionException;
+import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.scx.Text;
-import net.aegistudio.aoe2m.scx.Wrapper;
 
 public class TriggerPo {
 	public Wrapper<Boolean> enabled = new Wrapper<Boolean>(true);

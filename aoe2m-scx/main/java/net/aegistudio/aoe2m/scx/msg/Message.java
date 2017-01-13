@@ -1,8 +1,8 @@
 package net.aegistudio.aoe2m.scx.msg;
 
 import net.aegistudio.aoe2m.scx.Text;
+import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.scx.StringFormater;
-import net.aegistudio.aoe2m.scx.Wrapper;
 
 public class Message {
 	public Wrapper<Text> instructions = new Wrapper<Text>(new Text());

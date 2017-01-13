@@ -1,9 +1,12 @@
-package net.aegistudio.aoe2m.scx;
+package net.aegistudio.aoe2m;
 
 @SuppressWarnings("serial")
 public class CorruptionException extends Exception {
+	protected final Object original, expected;
 	public <T> CorruptionException(T original, T expected) {
 		super("Corrupted value " + expected + " where " + original + " should be presented.");
+		this.original = original;
+		this.expected = expected;
 	}
 	
 	public static void assertLong(long original, long expected) throws CorruptionException {

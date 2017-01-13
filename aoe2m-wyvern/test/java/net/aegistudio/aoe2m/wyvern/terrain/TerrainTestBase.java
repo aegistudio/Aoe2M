@@ -15,6 +15,8 @@ import net.aegistudio.aoe2m.wyvern.asset.Blendomatic;
 import net.aegistudio.aoe2m.wyvern.render.BasicTextureManager;
 import net.aegistudio.aoe2m.wyvern.render.TextureBinding;
 import net.aegistudio.aoe2m.wyvern.render.TextureManager;
+import net.aegistudio.aoe2m.wyvern.tile.TileBaseOutline;
+import net.aegistudio.aoe2m.wyvern.tile.TileBiasOutline;
 import net.aegistudio.aoe2m.wyvern.tile.TileMetaManager;
 import net.aegistudio.aoe2m.wyvern.tile.TileOutline;
 
@@ -23,14 +25,16 @@ public abstract class TerrainTestBase extends WyvernRider {
 	public final Blendomatic blendomatic;
 	public final TileMetaManager assetManager;
 	public final TextureManager textureManager;
-	public final TileOutline outline;
+	public final TileOutline outline, biasOutline;
 	
 	public TerrainTestBase() throws IOException, LWJGLException {
 		connection = new OpgAssetConnection(new File("assets"));
 		blendomatic = new Blendomatic(connection);
 		assetManager = new TileMetaManager(connection, blendomatic);
 		textureManager = new BasicTextureManager();
-		outline = new TileOutline(49, 25, 49, -25, 0, 20);
+		outline = new TileBaseOutline(49, 25, 49, -25, 0, 20);
+		//biasOutline = new TileBiasOutline(outline, 3.96, 0, 0, 2);
+		biasOutline = new TileBiasOutline(outline, 1.98, 0, 0, 1);
 	}
 	
 	public int width() { return  600; }
@@ -40,6 +44,8 @@ public abstract class TerrainTestBase extends WyvernRider {
 		Keyboard.create();
 		TextureBinding.instance.enable();
 		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, 
+				GL11.GL_ONE_MINUS_SRC_ALPHA);
 	}
 	
 	protected int translateX, translateY;
