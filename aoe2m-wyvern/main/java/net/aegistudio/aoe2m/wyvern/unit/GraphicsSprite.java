@@ -13,9 +13,7 @@ public class GraphicsSprite {
 	}
 	
 	public int whichTexture(int frame, int angle) {
-		return (frame % gamedata.frameCount) 
-				+ (angle % gamedata.angleCount);
+		return ((frame % gamedata.frameCount) + gamedata.frameCount
+				* (angle % gamedata.angleCount)) % texture.count();
 	}
-	
-	
 }

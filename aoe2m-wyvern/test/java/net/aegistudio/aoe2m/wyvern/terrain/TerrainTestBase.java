@@ -62,7 +62,7 @@ public abstract class TerrainTestBase extends WyvernRider {
 		
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
-		GL11.glScaled(1./scale, 1./scale, 0);
+		GL11.glScaled(1./scale, 1.21/scale, 0);
 		GL11.glTranslated(translateX, translateY, 0);
 		
 		GL11.glTexEnvi(GL11.GL_TEXTURE_ENV, GL11.GL_TEXTURE_ENV_MODE, GL11.GL_REPLACE);

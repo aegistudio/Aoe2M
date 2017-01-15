@@ -11,14 +11,11 @@ import net.aegistudio.aoe2m.wyvern.render.TextureManager;
 import net.aegistudio.aoe2m.wyvern.tile.TileOutline;
 
 public class SpriteRenderer implements GraphicsRenderer {
-	protected final GraphicsManager graphicsManager;
 	protected final TileOutline outline;
 	protected final TextureManager textureManager;
 	
-	public SpriteRenderer(TileOutline outline, GraphicsManager graphicsManager,
-			TextureManager textureManager) {
+	public SpriteRenderer(TileOutline outline, TextureManager textureManager) {
 		this.outline = outline;
-		this.graphicsManager = graphicsManager;
 		this.textureManager = textureManager;
 	}
 	
@@ -27,23 +24,23 @@ public class SpriteRenderer implements GraphicsRenderer {
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 	
-	public void draw(Terrain terrain, double x, double y, double z, 
-			int graphics, int frame, int angle) throws LWJGLException {
+	public void draw(Terrain terrain, GraphicsInstruction instruction) throws LWJGLException {
 		// Retrive sprite.
-		GraphicsSprite sprite = this.graphicsManager.require(graphics);
+		GraphicsSprite sprite = instruction.sprite;
 		if(sprite == null) return;
 		
 		// Model transform to image position.
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
 		glLoadIdentity();
-		outline.any((u, v) -> glTranslated(u, v, 0), terrain, x, y, z);
+		outline.any((u, v) -> glTranslated(u, v, 0), terrain, 
+				instruction.x, instruction.y, instruction.z);
 		
 		// Use the texture.
 		textureManager.bind(sprite.texture, TextureBinding.instance);
 		
 		// Retrieve texture information.
-		int index = sprite.whichTexture(frame, angle);
+		int index = sprite.whichTexture(instruction.frame, instruction.angle);
 		SlpTexture slpTexture = sprite.texture.get(index);
 		SlpSubImage subImage = sprite.gamedata.slp.subTextures()[index];
 		
