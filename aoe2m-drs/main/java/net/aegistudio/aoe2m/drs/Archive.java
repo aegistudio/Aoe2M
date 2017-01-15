@@ -1,61 +1,67 @@
 package net.aegistudio.aoe2m.drs;
 
+import java.io.EOFException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.aoe2m.drs.format.ArchiveHeader;
+import net.aegistudio.aoe2m.drs.format.TableEntry;
+import net.aegistudio.aoe2m.drs.format.TableHeader;
+import net.aegistudio.aoe2m.ra.AccessInputStream;
+import net.aegistudio.aoe2m.ra.AccessOutputStream;
+import net.aegistudio.aoe2m.ra.RandomAccessible;
 
 /**
- * A .drs archive is a composite of data number 
- * indexed files. 
- * 
- * Please notice we require a random access file
- * in order to perform read write operation, the
- * archive itself only manipulate the header and
- * table header(s).
+ * Represents a .DRS archive file.
  * 
  * @author aegistudio
- *
  */
 
 public class Archive {
-	public static final String trademark, tribe; static {
-		byte[] trademarkString = new byte[40];
-		byte[] asciiPart = "Copyright (c) 1997 Ensemble Studios.".getBytes();
-		System.arraycopy(asciiPart, 0, trademarkString, 0, asciiPart.length);
-		trademarkString[asciiPart.length] = 0x1a;
-		trademark = new String(trademarkString);
-		
-		byte[] tribeString = new byte[12];
-		System.arraycopy("tribe".getBytes(), 0, 
-				tribeString, 0, "tribe".getBytes().length);
-		tribe = new String(tribeString);
+	protected final RandomAccessible access;
+	protected final ArchiveHeader header;
+	protected final AccessInputStream inputStream;
+	protected final AccessOutputStream outputStream;
+	
+	public Archive(RandomAccessible input, ArchiveHeader header) {
+		this.access = input;
+		this.header = header;
+		inputStream = new AccessInputStream(access);
+		outputStream = new AccessOutputStream(access);
 	}
 	
-	public final Wrapper<String> signature = new Wrapper<>(trademark);
+	public static Archive open(RandomAccessible randomAccessible) 
+			throws CorruptionException, IOException {
+		ArchiveHeader header = ArchiveIO.read(randomAccessible);
+		return new Archive(randomAccessible, header);
+	}
 	
-	public final Wrapper<String> version = new Wrapper<>("1.00");
+	public int numTables() {
+		return header.tableList.size();
+	}
 	
-	public final Wrapper<String> type = new Wrapper<>(tribe);
+	public TableHeader getTable(int tableIndex) {
+		return header.tableList.get(tableIndex);
+	}
 	
-	public final List<Table> tableList = new ArrayList<>();
+	public List<TableEntry> list(int tableIndex) {
+		return getTable(tableIndex).entries.list();
+	}
 	
-	public final Wrapper<Long> fileSectionOffset = new Wrapper<>(1024L);
+	public TableEntry getEntry(int tableIndex, int fileIndex) {
+		return getTable(tableIndex).entries.find(fileIndex);
+	}
 	
-	public void translate(FieldTranslator translator) throws CorruptionException, IOException {
-		translator.constString(40, signature);
-		translator.constString(4, version);
-		translator.constString(12, type);
+	public synchronized byte[] open(TableEntry entry) throws IOException {
+		long length = (long)(Long)(entry.length.getValue());
+		byte[] buffer = new byte[(int)length];
 		
-		Wrapper<Integer> tableListLength = new Wrapper<>(tableList.size());
-		translator.signed32(tableListLength);
-		
-		translator.unsigned32(fileSectionOffset);
-		
-		translator.array(tableListLength.getValue(), tableList, 
-				Table::new, table -> table.translateHeader(translator));
+		synchronized(access) {
+			access.seek(entry.offset.getValue());
+			if(inputStream.read(buffer) != length)
+				throw new EOFException();
+		}
+		return buffer;
 	}
 }

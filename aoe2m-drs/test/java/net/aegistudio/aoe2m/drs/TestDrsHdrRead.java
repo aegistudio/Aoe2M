@@ -3,12 +3,12 @@ package net.aegistudio.aoe2m.drs;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-import java.net.URL;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import net.aegistudio.aoe2m.CorruptionException;
+import net.aegistudio.aoe2m.drs.format.ArchiveHeader;
+import net.aegistudio.aoe2m.drs.format.TableHeader;
 import net.aegistudio.aoe2m.io.FieldInputTranslator;
 
 /**
@@ -21,22 +21,17 @@ import net.aegistudio.aoe2m.io.FieldInputTranslator;
  *
  */
 
-public class TestDrsHdrRead {
-	URL url;
-	public @Before void before() {
-		url = getClass().getResource("/gamedata.drs");
-		if(url == null) throw new AssertionError(
-				"Please provide a gamedata.drs (find your AOK Data directory) in test/resources to test");
-	}
-	
+public class TestDrsHdrRead extends ArchiveTestBase {
+	public TestDrsHdrRead() {	super("gamedata.drs");	}
+
 	public @Test void test() throws IOException, CorruptionException {
 		FieldInputTranslator inputTranslator = 
 				new FieldInputTranslator(url.openStream(), "utf-8");
-		Archive archive = new Archive();
+		ArchiveHeader archive = new ArchiveHeader();
 		archive.translate(inputTranslator);
 		
 		// Uniform header.
-		Archive archiveConst = new Archive();
+		ArchiveHeader archiveConst = new ArchiveHeader();
 		assertEquals(archive.signature, archiveConst.signature);
 		assertEquals(archive.version, archiveConst.version);
 		assertEquals(archive.type, archiveConst.type);
@@ -44,7 +39,7 @@ public class TestDrsHdrRead {
 		assertEquals(archive.fileSectionOffset.getValue(), 0x028cl);
 		
 		// Table header.
-		Table table = archive.tableList.get(0);
+		TableHeader table = archive.tableList.get(0);
 		assertEquals(table.format.getValue(), "anib");
 		assertEquals(table.entryOffset.getValue(), 0x004cl);
 	}
