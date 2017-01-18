@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.util.List;
 
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.drs.format.ArchiveHeader;
-import net.aegistudio.aoe2m.drs.format.TableEntry;
-import net.aegistudio.aoe2m.drs.format.TableHeader;
 import net.aegistudio.aoe2m.ra.AccessInputStream;
 import net.aegistudio.aoe2m.ra.AccessOutputStream;
 import net.aegistudio.aoe2m.ra.RandomAccessible;

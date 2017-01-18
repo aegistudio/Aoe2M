@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import net.aegistudio.aoe2m.SequentialList;
-import net.aegistudio.aoe2m.drs.format.TableEntry;
 
 /**
  * As there're binary search algorithm there,

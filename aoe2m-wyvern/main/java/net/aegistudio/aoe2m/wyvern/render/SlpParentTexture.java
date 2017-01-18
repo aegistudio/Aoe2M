@@ -2,6 +2,7 @@ package net.aegistudio.aoe2m.wyvern.render;
 
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
+import java.util.function.Function;
 
 import org.lwjgl.LWJGLException;
 
@@ -9,16 +10,22 @@ import net.aegistudio.aoe2m.assetdba.SlpImage;
 
 public class SlpParentTexture implements ParentTexture {
 	protected final SlpImage image;
+	protected final Function<SlpImage, BufferedImage> getImage;
 	protected final GlTexture texture;
 	protected SlpTexture[] subTextures;
-	
+
 	public SlpParentTexture(SlpImage image) {
+		this(image, img -> img.normal());
+	}
+	
+	public SlpParentTexture(SlpImage image, Function<SlpImage, BufferedImage> getImage) {
 		this.image = image;
+		this.getImage = getImage;
 		this.texture = new GlTexture(this::getImage);
 	}
 	
 	public BufferedImage getImage() {
-		return image.image();
+		return this.getImage.apply(image);
 	}
 	
 	public void make(int id) throws LWJGLException {

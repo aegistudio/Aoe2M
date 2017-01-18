@@ -6,9 +6,6 @@ import java.io.RandomAccessFile;
 
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.FieldTranslator;
-import net.aegistudio.aoe2m.drs.format.ArchiveHeader;
-import net.aegistudio.aoe2m.drs.format.TableEntry;
-import net.aegistudio.aoe2m.drs.format.TableHeader;
 import net.aegistudio.aoe2m.io.FieldInputTranslator;
 import net.aegistudio.aoe2m.io.FieldOutputTranslator;
 import net.aegistudio.aoe2m.ra.AccessInputStream;

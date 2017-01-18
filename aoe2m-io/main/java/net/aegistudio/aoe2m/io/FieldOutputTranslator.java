@@ -134,4 +134,9 @@ public class FieldOutputTranslator implements FieldTranslator {
 		System.arraycopy(full, 14, trim, 0, trim.length);
 		fieldOutputStream.write(trim);
 	}
+
+	@Override
+	public void constString(String field) throws CorruptionException, IOException {
+		fieldOutputStream.write(field.getBytes());
+	}
 }

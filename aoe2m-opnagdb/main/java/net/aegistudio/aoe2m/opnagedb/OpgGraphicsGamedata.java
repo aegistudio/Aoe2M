@@ -10,13 +10,13 @@ import net.aegistudio.aoe2m.assetdba.GraphicsDelta;
 import net.aegistudio.aoe2m.assetdba.GraphicsGamedata;
 
 public class OpgGraphicsGamedata extends GraphicsGamedata {
-	public OpgGraphicsGamedata(File graphicsRoot, 
+	public OpgGraphicsGamedata(OpgPlayerPalette playerPalette, File graphicsRoot, 
 			File graphicsDeltaRoot, String[] parameters) throws IOException {
 		
 		name0 = parameters[0];
 		name1 = parameters[1];
 		
-		slp = OpgSlpImage.open(graphicsRoot, parameters[2] + ".slp");
+		slp = OpgSlpPaletteImage.open(graphicsRoot, parameters[2] + ".slp", playerPalette);
 		layer = EnumLayer.valueOf(parameters[3]);
 		
 		playerColor = Integer.parseInt(parameters[4]);

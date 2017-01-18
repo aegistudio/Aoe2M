@@ -1,5 +1,6 @@
 package net.aegistudio.aoe2m.opnagedb;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,12 +15,8 @@ import net.aegistudio.aoe2m.assetdba.SlpImage;
 import net.aegistudio.aoe2m.assetdba.SlpSubImage;
 
 public class OpgSlpImage implements SlpImage {
-	protected File image;
-	protected int width, height;
-	public int width() {	return width;	}
-	public int height() {	return height;	}
-	
-	protected SlpSubImage[] subImages;
+	protected final File image;
+	protected final SlpSubImage[] subImages;
 	
 	public static SlpImage open(File root, String name) {
 		try {
@@ -30,7 +27,7 @@ public class OpgSlpImage implements SlpImage {
 	}
 	
 	public OpgSlpImage(File root, String name) throws IOException {
-		image = new File(root, name + ".png");
+		this.image = new File(root, name + ".png");
 		if(!image.exists()) throw new FileNotFoundException(name);
 		File descriptor = new File(root, name + ".docx");
 
@@ -46,7 +43,7 @@ public class OpgSlpImage implements SlpImage {
 		}
 	}
 	
-	public BufferedImage image() {
+	public BufferedImage open() {
 		try {
 			return ImageIO.read(image);
 		} catch (IOException e) {
@@ -54,7 +51,22 @@ public class OpgSlpImage implements SlpImage {
 			return null;
 		}
 	}
+	
+	public static final Color TRANSPARENT = new Color(0, 0, 0, 0);
+	public BufferedImage normal() {
+		return open();
+	}
 
+	@Override
+	public BufferedImage player() {
+		return open();
+	}
+	
+	@Override
+	public BufferedImage obstruct() {
+		return open();
+	}
+	
 	@Override
 	public SlpSubImage[] subTextures() {
 		return subImages;

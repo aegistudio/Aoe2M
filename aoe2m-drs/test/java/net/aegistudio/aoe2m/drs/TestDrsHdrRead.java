@@ -7,8 +7,6 @@ import java.io.IOException;
 import org.junit.Test;
 
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.drs.format.ArchiveHeader;
-import net.aegistudio.aoe2m.drs.format.TableHeader;
 import net.aegistudio.aoe2m.io.FieldInputTranslator;
 
 /**

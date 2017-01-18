@@ -10,7 +10,11 @@ import java.awt.image.BufferedImage;
  */
 
 public interface SlpImage {
-	public BufferedImage image();
+	public BufferedImage normal();
+	
+	public BufferedImage player();
+	
+	public BufferedImage obstruct();
 	
 	public SlpSubImage[] subTextures();
 }

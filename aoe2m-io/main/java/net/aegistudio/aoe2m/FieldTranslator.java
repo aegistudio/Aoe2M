@@ -39,6 +39,8 @@ public interface FieldTranslator {
 	
 	public void unused() throws CorruptionException, IOException;
 
+	public void constString(String field) throws CorruptionException, IOException;
+	
 	public void constUnsigned16(int field) throws CorruptionException, IOException;
 	
 	public void constUnsigned32(long field) throws CorruptionException, IOException;

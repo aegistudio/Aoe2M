@@ -137,4 +137,9 @@ public class DebugTranslator implements FieldTranslator {
 	public void bitmap(Wrapper<BufferedImage> image) throws IOException, CorruptionException {
 		wrapped.bitmap(image);
 	}
+
+	@Override
+	public void constString(String field) throws CorruptionException, IOException {
+		wrapped.constString(field);
+	}
 }

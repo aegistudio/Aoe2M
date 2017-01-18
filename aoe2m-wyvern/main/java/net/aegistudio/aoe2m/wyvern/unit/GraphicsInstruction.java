@@ -17,8 +17,11 @@ public class GraphicsInstruction {
 	/** Location for drawing the graphics. */
 	public double x, y, z;
 	
+	/** Graphic delta for the target image. */
+	public double deltaw, deltah;
+	
 	/** Other basic info for a unit graphics. */
-	public int frame, angle;
+	public double frame, angle;
 	
 	/** Exclusive renderer hints, like player color, etc. */
 	public final Map<String, Object> hint = new TreeMap<>();

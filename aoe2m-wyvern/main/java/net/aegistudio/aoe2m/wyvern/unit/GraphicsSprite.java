@@ -5,15 +5,19 @@ import net.aegistudio.aoe2m.wyvern.render.SlpParentTexture;
 
 public class GraphicsSprite {
 	protected final GraphicsGamedata gamedata;
-	protected final SlpParentTexture texture;
+	protected final SlpParentTexture normalTexture;
+	protected final SlpParentTexture playerTexture;
+	protected final SlpParentTexture obstructTexture;
 	
 	public GraphicsSprite(GraphicsGamedata gamedata) {
 		this.gamedata = gamedata;
-		this.texture = new SlpParentTexture(gamedata.slp);
+		normalTexture 	= new SlpParentTexture(gamedata.slp, img -> img.normal());
+		playerTexture 	= new SlpParentTexture(gamedata.slp, img -> img.player());
+		obstructTexture = new SlpParentTexture(gamedata.slp, img -> img.obstruct());
 	}
 	
 	public int whichTexture(int frame, int angle) {
 		return ((frame % gamedata.frameCount) + gamedata.frameCount
-				* (angle % gamedata.angleCount)) % texture.count();
+				* (angle % gamedata.angleCount)) % normalTexture.count();
 	}
 }

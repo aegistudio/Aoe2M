@@ -1,4 +1,4 @@
-package net.aegistudio.aoe2m.drs.format;
+package net.aegistudio.aoe2m.drs;
 
 import java.io.IOException;
 

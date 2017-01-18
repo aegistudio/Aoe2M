@@ -11,7 +11,7 @@ import net.aegistudio.aoe2m.assetdba.GraphicsGamedata;
 
 public class OpgGraphicsManager implements AssetManager<GraphicsGamedata>{
 	protected final OpgGraphicsGamedata[] graphics;
-	public OpgGraphicsManager(File root) throws IOException {
+	public OpgGraphicsManager(OpgPlayerPalette playerPalette, File root) throws IOException {
 		File parent = new File(root, "graphics");
 		File gamedata = new File(new File(root, "gamedata"), "gamedata-empiresdat");
 		File graphicsDelta = new File(gamedata, "0000-graphics");
@@ -21,7 +21,7 @@ public class OpgGraphicsManager implements AssetManager<GraphicsGamedata>{
 			OpgGraphicsGamedata[] tempGraphics = gamedataReader.lines()
 				.filter(CsvFilter::filter).map(CsvFilter::map)
 				.map(FunctionWrapper.mapIgnoreExcept(
-						params -> new OpgGraphicsGamedata(parent, graphicsDelta, params)))
+						params -> new OpgGraphicsGamedata(playerPalette, parent, graphicsDelta, params)))
 				.toArray(OpgGraphicsGamedata[]::new);
 			
 			int maxGraphics = 0;

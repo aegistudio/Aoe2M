@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.lwjgl.LWJGLException;
 
+import net.aegistudio.aoe2m.assetdba.EnumLayer;
 import net.aegistudio.aoe2m.assetdba.GraphicsDelta;
 import net.aegistudio.aoe2m.assetdba.GraphicsGamedata;
 import net.aegistudio.aoe2m.wyvern.terrain.BlendingRender;
@@ -38,8 +39,11 @@ public class SpriteRender extends BlendingRender {
 					GraphicsInstruction[] result = make(Integer.parseInt(p[0]), 
 							Double.parseDouble(p[1]), Double.parseDouble(p[2]));
 					for(GraphicsInstruction item : result) {
-						item.angle = Integer.parseInt(p[4]);
-						item.frame = Integer.parseInt(p[3]);
+						if(item.sprite != null && item.sprite.gamedata.layer.ordinal() >= EnumLayer.UNIT.ordinal())
+							item.z = Integer.parseInt(p[3]);
+						
+						item.frame = Integer.parseInt(p[4]);
+						item.angle = Integer.parseInt(p[5]);
 					}
 					instructions.add(result);
 					instructions.sort((inst1, inst2) -> {
@@ -64,8 +68,6 @@ public class SpriteRender extends BlendingRender {
 		placementThread.start();
 	}
 	
-	int timer = 0;
-	
 	public void render() throws LWJGLException {
 		super.render();
 		
@@ -73,11 +75,10 @@ public class SpriteRender extends BlendingRender {
 			for(GraphicsInstruction[] insts : instructions)
 				for(GraphicsInstruction inst : insts) {
 					spriteRenderer.draw(terrain, inst);
-					if(timer % 5 == 0) inst.frame += 1;
+					if(inst.sprite != null)
+						inst.frame += inst.sprite.gamedata.frameRate;
 				}
 		spriteRenderer.cleanup();
-		
-		timer ++;
 	}
 	
 	public GraphicsInstruction[] make(int graphics, double unitX, double unitY) {

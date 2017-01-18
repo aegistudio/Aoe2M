@@ -37,11 +37,11 @@ public class SpriteRenderer implements GraphicsRenderer {
 				instruction.x, instruction.y, instruction.z);
 		
 		// Use the texture.
-		textureManager.bind(sprite.texture, TextureBinding.instance);
+		textureManager.bind(sprite.normalTexture, TextureBinding.instance);
 		
 		// Retrieve texture information.
-		int index = sprite.whichTexture(instruction.frame, instruction.angle);
-		SlpTexture slpTexture = sprite.texture.get(index);
+		int index = sprite.whichTexture((int)instruction.frame, (int)instruction.angle);
+		SlpTexture slpTexture = sprite.normalTexture.get(index);
 		SlpSubImage subImage = sprite.gamedata.slp.subTextures()[index];
 		
 		// Retrieve texture information.

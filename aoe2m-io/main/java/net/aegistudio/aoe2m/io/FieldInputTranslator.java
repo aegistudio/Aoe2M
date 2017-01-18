@@ -188,4 +188,10 @@ public class FieldInputTranslator implements FieldTranslator {
 		
 		image.setValue(bufferedImage);
 	}
+
+	@Override
+	public void constString(String field) throws CorruptionException, IOException {
+		String newString = fieldInputStream.readConstLengthString(field.length());
+		if(!newString.equals(field)) throw new CorruptionException(field, newString);
+	}
 }
