@@ -77,8 +77,8 @@ public class OpgSlpPaletteImage extends OpgSlpImage {
 		}
 	}
 	
-	public static final Color TRANSPARENT = new Color(0, 0, 0, 0);
-	public static final Color OPAQUE = new Color(1, 1, 1, 1);
+	public static final Color TRANSPARENT = new Color(0f, 0f, 0f, 0f);
+	public static final Color OPAQUE = new Color(1f, 1f, 1f, 1f);
 	public BufferedImage normal() {
 		return open((color, border) -> {
 			if(palette.query(color) >= 0)
@@ -88,14 +88,14 @@ public class OpgSlpPaletteImage extends OpgSlpImage {
 	}
 
 	public static final Color[] PALETTE_MAP = new Color[] {
-			new Color(0, 0, 0, 1),	// 0
-			new Color(1, 0, 0, 1),	// 1
-			new Color(0, 1, 0, 1),	// 2
-			new Color(1, 1, 0, 1),	// 3
-			new Color(0, 0, 1, 1),	// 4
-			new Color(1, 0, 1, 1),	// 5
-			new Color(0, 1, 1, 1),	// 6
-			new Color(1, 1, 1, 1),	// 7
+			new Color(0f, 0f, 0f, 1f),	// 0
+			new Color(1f, 0f, 0f, 1f),	// 1
+			new Color(0f, 1f, 0f, 1f),	// 2
+			new Color(1f, 1f, 0f, 1f),	// 3
+			new Color(0f, 0f, 1f, 1f),	// 4
+			new Color(1f, 0f, 1f, 1f),	// 5
+			new Color(0f, 1f, 1f, 1f),	// 6
+			new Color(1f, 1f, 1f, 1f),	// 7
 	};
 	
 	@Override

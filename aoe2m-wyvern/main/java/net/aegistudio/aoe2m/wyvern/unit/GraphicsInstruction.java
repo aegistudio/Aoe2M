@@ -12,7 +12,7 @@ import java.util.TreeMap;
 
 public class GraphicsInstruction {
 	/** The sprite to render.	*/
-	public GraphicsSprite sprite;
+	public int sprite;
 	
 	/** Location for drawing the graphics. */
 	public double x, y, z;
