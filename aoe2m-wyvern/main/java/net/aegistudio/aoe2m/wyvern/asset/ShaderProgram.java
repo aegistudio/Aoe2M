@@ -3,12 +3,10 @@ package net.aegistudio.aoe2m.wyvern.asset;
 import static org.lwjgl.opengl.ARBShaderObjects.*;
 import static org.lwjgl.opengl.ARBVertexShader.*;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.GL11;
@@ -16,36 +14,30 @@ import org.lwjgl.opengl.GL11;
 public class ShaderProgram {
 	protected boolean valid = false;
 	protected int programObject = 0;
-	protected final Map<Integer, String> sources = new TreeMap<>();
-	protected final Map<Integer, Integer> objects = new TreeMap<>();
+	protected final List<ShaderObject> objects = new ArrayList<>();
 	
-	protected void loadSource(int type, InputStream file) throws IOException {
-		StringBuilder vertexSourceBuilder = new StringBuilder();
-		new BufferedReader(new InputStreamReader(file))
-			.lines().forEachOrdered(line -> vertexSourceBuilder.append(line).append("\n"));
-		sources.put(type, new String(vertexSourceBuilder));
+	protected void loadSource(int type, String title, InputStream file) throws IOException {
+		loadSource(file, title, type);
 	}
 	
-	protected void compileSource(int type, String source) throws LWJGLException {
-		int object = glCreateShaderObjectARB(type);
-		glShaderSourceARB(object, sources.get(type));
-		glCompileShaderARB(object);
-		
-		String log = glGetInfoLogARB(object, 128);
-		if(log != null && log.length() > 0)
-			throw new LWJGLException(log);
+	protected void loadSource(InputStream file, String title, int... type) throws IOException {
+		loadObject(new ShaderObject(title, file, type));
+	}
 	
-		objects.put(type, object);
+	protected void loadObject(ShaderObject custom) {
+		objects.add(custom);
 	}
 	
 	public void create() throws LWJGLException {
 		if(valid) return;
-		for(Map.Entry<Integer, String> source : sources.entrySet())
-			compileSource(source.getKey(), source.getValue());
+		for(ShaderObject object : objects) {
+			object.preprocess(objects);
+			object.compile();
+		}
 		
 		programObject = glCreateProgramObjectARB();
-		for(Map.Entry<Integer, Integer> object : objects.entrySet())
-			glAttachObjectARB(programObject, object.getValue());
+		for(ShaderObject object : objects) 
+			object.attach(programObject);
 		
 		glLinkProgramARB(programObject);
 		if(GL11.glGetError() != GL11.GL_NO_ERROR)
@@ -64,19 +56,25 @@ public class ShaderProgram {
 	
 	public void destroy() throws LWJGLException {
 		valid = false;
-		for(Map.Entry<Integer, Integer> object : objects.entrySet()) 
-			glDetachObjectARB(programObject, object.getValue());	
-		for(Map.Entry<Integer, Integer> object : objects.entrySet()) 
-			glDeleteObjectARB(object.getValue());
-		objects.clear();
+		for(ShaderObject object : objects) {
+			object.detach(programObject);
+			object.delete();
+		}
 		glDeleteObjectARB(programObject);
 	}
 	
+	protected static int verifyAddress(int address, String name) throws LWJGLException {
+		if(address < 0) throw new LWJGLException(name);
+		return address;
+	}
+	
 	public int uniform(String name) throws LWJGLException {
-		return glGetUniformLocationARB(programObject, name);
+		return verifyAddress(glGetUniformLocationARB(programObject, name), 
+				"shader.missingUniform." + name);
 	}
 	
 	public int vertexAttribute(String name) throws LWJGLException {
-		return glGetAttribLocationARB(programObject, name);
+		return verifyAddress(glGetAttribLocationARB(programObject, name),
+				"shader.missingAttribute." + name);
 	}
 }

@@ -1,8 +1,7 @@
-uniform float priority;
-uniform float priorityBottom, priorityTop;
+#include "priority.hdr.glsl"
 
 float priority() {
-	float delta = priority - priorityBottom;
+	float delta = priorityValue - priorityBottom;
 	float stride = priorityTop - priorityBottom;
 	return delta / stride;
 }

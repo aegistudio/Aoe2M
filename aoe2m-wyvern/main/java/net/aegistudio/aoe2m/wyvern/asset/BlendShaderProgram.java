@@ -13,9 +13,9 @@ import net.aegistudio.aoe2m.wyvern.render.SamplerBinding;
 
 public class BlendShaderProgram extends ShaderProgram {
 	public BlendShaderProgram() throws IOException {	
-		super.loadSource(GL_VERTEX_SHADER_ARB, 
+		super.loadSource(GL_VERTEX_SHADER_ARB, "blend.vsh.glsl",
 				getClass().getResourceAsStream("/blend.vsh.glsl"));
-		super.loadSource(GL_FRAGMENT_SHADER_ARB, 
+		super.loadSource(GL_FRAGMENT_SHADER_ARB, "blend.vsh.glsl",
 				getClass().getResourceAsStream("/blend.fsh.glsl"));
 	}
 	

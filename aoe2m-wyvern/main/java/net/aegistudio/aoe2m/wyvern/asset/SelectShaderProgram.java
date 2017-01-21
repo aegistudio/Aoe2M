@@ -10,9 +10,9 @@ import org.lwjgl.LWJGLException;
 
 public class SelectShaderProgram extends ShaderProgram {
 	public SelectShaderProgram() throws IOException {	
-		super.loadSource(GL_VERTEX_SHADER_ARB, 
+		super.loadSource(GL_VERTEX_SHADER_ARB, "selectTile.vsh.glsl",
 				getClass().getResourceAsStream("/selectTile.vsh.glsl"));
-		super.loadSource(GL_FRAGMENT_SHADER_ARB, 
+		super.loadSource(GL_FRAGMENT_SHADER_ARB, "selectTile.fsh.glsl",
 				getClass().getResourceAsStream("/selectTile.fsh.glsl"));
 	}
 

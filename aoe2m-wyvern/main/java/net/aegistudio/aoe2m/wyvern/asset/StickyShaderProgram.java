@@ -13,9 +13,9 @@ import net.aegistudio.aoe2m.wyvern.render.SamplerBinding;
 
 public class StickyShaderProgram extends ShaderProgram {
 	public StickyShaderProgram() throws IOException {	
-		super.loadSource(GL_VERTEX_SHADER_ARB, 
+		super.loadSource(GL_VERTEX_SHADER_ARB, "sticky.vsh.glsl",
 				getClass().getResourceAsStream("/sticky.vsh.glsl"));
-		super.loadSource(GL_FRAGMENT_SHADER_ARB, 
+		super.loadSource(GL_FRAGMENT_SHADER_ARB, "sticky.fsh.glsl",
 				getClass().getResourceAsStream("/sticky.fsh.glsl"));
 	}
 	

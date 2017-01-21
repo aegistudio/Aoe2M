@@ -1,9 +1,11 @@
 package net.aegistudio.aoe2m.wyvern.unit;
 
 import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.GL11;
 
 import net.aegistudio.aoe2m.wyvern.Terrain;
 import net.aegistudio.aoe2m.wyvern.asset.ProfileShaderProgram;
+import net.aegistudio.aoe2m.wyvern.render.SlpTexture;
 import net.aegistudio.aoe2m.wyvern.render.TextureBufferObject;
 import net.aegistudio.aoe2m.wyvern.render.TextureManager;
 import net.aegistudio.aoe2m.wyvern.tile.TileOutline;
@@ -25,6 +27,8 @@ public class ProfileRenderer extends BasicRenderer {
 	public void prepare() throws LWJGLException {
 		priority.begin();
 		shaderProgram.use();
+		
+		GL11.glClearColor(0, 0, 0, 0);
 	}
 
 	@Override
@@ -35,7 +39,14 @@ public class ProfileRenderer extends BasicRenderer {
 		textureManager.bind(sprite.normalTexture, shaderProgram.normal);
 		textureManager.bind(sprite.playerTexture, shaderProgram.player);
 		
+		int index = sprite.whichTexture((int)instruction.frame, (int)instruction.angle);
+		SlpTexture slpTexture = sprite.playerTexture.get(index);
 		
+		actualDraw(terrain, instruction, sprite, 
+				() -> slpTexture.topLeft(shaderProgram::texCoord),
+				() -> slpTexture.topRight(shaderProgram::texCoord),
+				() -> slpTexture.bottomRight(shaderProgram::texCoord), 
+				() -> slpTexture.bottomLeft(shaderProgram::texCoord));
 	}
 
 	@Override
