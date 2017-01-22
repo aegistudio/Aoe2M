@@ -1,8 +1,10 @@
 package net.aegistudio.aoe2m.wyvern.unit;
 
 import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.GL11;
 
+import static org.lwjgl.opengl.GL11.*;
+
+import net.aegistudio.aoe2m.assetdba.SlpSubImage;
 import net.aegistudio.aoe2m.wyvern.Terrain;
 import net.aegistudio.aoe2m.wyvern.asset.ProfileShaderProgram;
 import net.aegistudio.aoe2m.wyvern.render.SlpTexture;
@@ -28,21 +30,24 @@ public class ProfileRenderer extends BasicRenderer {
 		priority.begin();
 		shaderProgram.use();
 		
-		GL11.glClearColor(0, 0, 0, 0);
+		glClearColor(0, 0, 0, 0);
+		glClearDepth(-1);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
 	@Override
-	public void subDraw(Terrain terrain, GraphicsInstruction instruction, GraphicsSprite sprite) throws LWJGLException {
-		shaderProgram.priority.boundary(terrain.width(), -terrain.height());
+	public void subDraw(Terrain terrain, GraphicsInstruction instruction, 
+			GraphicsSprite sprite, int slpIndex, SlpSubImage subImage) throws LWJGLException {
+		
+		shaderProgram.priority.boundary(-terrain.height(), terrain.width());
 		shaderProgram.priority.priority((float) (instruction.x - instruction.y));
 		
 		textureManager.bind(sprite.normalTexture, shaderProgram.normal);
 		textureManager.bind(sprite.playerTexture, shaderProgram.player);
 		
-		int index = sprite.whichTexture((int)instruction.frame, (int)instruction.angle);
-		SlpTexture slpTexture = sprite.playerTexture.get(index);
+		SlpTexture slpTexture = sprite.normalTexture.get(slpIndex);
 		
-		actualDraw(terrain, instruction, sprite, 
+		actualDraw(terrain, instruction, sprite, subImage,
 				() -> slpTexture.topLeft(shaderProgram::texCoord),
 				() -> slpTexture.topRight(shaderProgram::texCoord),
 				() -> slpTexture.bottomRight(shaderProgram::texCoord), 

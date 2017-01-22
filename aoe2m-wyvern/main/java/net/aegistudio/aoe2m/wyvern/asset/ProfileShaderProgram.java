@@ -18,6 +18,11 @@ public class ProfileShaderProgram extends ShaderProgram {
 				getClass().getResourceAsStream("/profile.vsh.glsl"));
 		super.loadSource(GL_FRAGMENT_SHADER_ARB, "profile.fsh.glsl",
 				getClass().getResourceAsStream("/profile.fsh.glsl"));
+		super.loadSource(GL_FRAGMENT_SHADER_ARB, "quantization.glsl",
+				getClass().getResourceAsStream("/quantization.glsl"));
+		
+		super.loadSource(getClass().getResourceAsStream(
+				"/quantization.hdr.glsl"), "quantization.hdr.glsl");
 		
 		priority = new PriorityShaderObjects(
 				GL_VERTEX_SHADER_ARB, GL_FRAGMENT_SHADER_ARB);
@@ -49,6 +54,7 @@ public class ProfileShaderProgram extends ShaderProgram {
 	public void use() throws LWJGLException {
 		super.use();
 		
+		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 		normal.enable();
 		player.enable();
 		

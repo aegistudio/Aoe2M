@@ -13,8 +13,13 @@ import org.lwjgl.opengl.GL11;
 
 public class ShaderProgram {
 	protected boolean valid = false;
+	protected boolean verify = true;
 	protected int programObject = 0;
 	protected final List<ShaderObject> objects = new ArrayList<>();
+	
+	protected void verifyFlag(boolean flag) {
+		verify = flag;
+	}
 	
 	protected void loadSource(int type, String title, InputStream file) throws IOException {
 		loadSource(file, title, type);
@@ -63,8 +68,8 @@ public class ShaderProgram {
 		glDeleteObjectARB(programObject);
 	}
 	
-	protected static int verifyAddress(int address, String name) throws LWJGLException {
-		if(address < 0) throw new LWJGLException(name);
+	protected int verifyAddress(int address, String name) throws LWJGLException {
+		if(verify) if(address < 0) throw new LWJGLException(name);
 		return address;
 	}
 	

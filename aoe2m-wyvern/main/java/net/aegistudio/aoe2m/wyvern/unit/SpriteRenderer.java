@@ -3,6 +3,7 @@ package net.aegistudio.aoe2m.wyvern.unit;
 import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.LWJGLException;
 
+import net.aegistudio.aoe2m.assetdba.SlpSubImage;
 import net.aegistudio.aoe2m.wyvern.Terrain;
 import net.aegistudio.aoe2m.wyvern.render.SlpParentTexture;
 import net.aegistudio.aoe2m.wyvern.render.SlpTexture;
@@ -23,17 +24,16 @@ public class SpriteRenderer extends BasicRenderer implements GraphicsRenderer {
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 	
-	public void subDraw(Terrain terrain, GraphicsInstruction instruction, GraphicsSprite sprite) throws LWJGLException {
+	public void subDraw(Terrain terrain, GraphicsInstruction instruction, 
+			GraphicsSprite sprite, int slpTextureIndex, SlpSubImage subImage) throws LWJGLException {
+		
 		// Use the texture.
 		SlpParentTexture texture = sprite.normalTexture;
 		textureManager.bind(texture, TextureBinding.instance);
-		
-		// Retrieve texture information.
-		int index = sprite.whichTexture((int)instruction.frame, (int)instruction.angle);
-		SlpTexture slpTexture = texture.get(index);
+		SlpTexture slpTexture = texture.get(slpTextureIndex);
 		
 		// Render actually.
-		actualDraw(terrain, instruction, sprite,
+		actualDraw(terrain, instruction, sprite, subImage,
 				() -> slpTexture.topLeft(TextureBinding.instance), 
 				() -> slpTexture.topRight(TextureBinding.instance), 
 				() -> slpTexture.bottomRight(TextureBinding.instance), 

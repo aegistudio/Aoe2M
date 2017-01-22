@@ -41,8 +41,34 @@ public class ProfileVisqRender extends BlendingRender {
 	public void render() throws LWJGLException {
 		super.render();
 		placement.render(profileRenderer, terrain);
+		renderProfile();
+	}
+	
+	public void renderProfile() throws LWJGLException {
+		visqProgram.use();
+		textureManager.bind(profileMap, visqProgram.profileMap);
+		glMatrixMode(GL_PROJECTION);
+		glPushMatrix();
+		glLoadIdentity();
 		
+		glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+		glLoadIdentity();
 		
+		glBegin(GL_QUADS);
+			visqProgram.profileMap.coord(0, 0); glVertex2d(-1, -1);
+			visqProgram.profileMap.coord(1, 0); glVertex2d(+1, -1);
+			visqProgram.profileMap.coord(1, 1); glVertex2d(+1, +1);
+			visqProgram.profileMap.coord(0, 1); glVertex2d(-1, +1);
+		glEnd();
+		
+		glMatrixMode(GL_PROJECTION);
+		glPopMatrix();
+		
+		glMatrixMode(GL_MODELVIEW);
+		glPopMatrix();
+		
+		visqProgram.unuse();
 	}
 	
 	public void dispose() throws LWJGLException {

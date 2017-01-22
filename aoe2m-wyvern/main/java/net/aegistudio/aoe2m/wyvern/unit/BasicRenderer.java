@@ -27,25 +27,29 @@ public abstract class BasicRenderer implements GraphicsRenderer {
 		GraphicsSprite sprite = manager.require(id);
 		if(sprite == null) return;
 		
-		subDraw(terrain, instruction, sprite);
+		int index = sprite.whichTexture((int)instruction.frame, (int)instruction.angle);
+		SlpSubImage subImage = sprite.subImages[index];
+		
+		subDraw(terrain, instruction, sprite, index, subImage);
 	}
 	
-	protected void subDraw(Terrain terrain, GraphicsInstruction instruction, GraphicsSprite sprite) throws LWJGLException {
-		actualDraw(terrain, instruction, sprite, () -> {}, () -> {}, () -> {}, () -> {});
+	protected void subDraw(Terrain terrain, GraphicsInstruction instruction, GraphicsSprite sprite, 
+			int slpTextureIndex, SlpSubImage subImage) throws LWJGLException {
+		actualDraw(terrain, instruction, sprite, subImage, 
+				() -> {}, () -> {}, () -> {}, () -> {});
 	}
 	
-	public void actualDraw(Terrain terrain, GraphicsInstruction instruction, GraphicsSprite sprite,
-			VertexBound topLeft, VertexBound topRight, VertexBound bottomRight, VertexBound bottomLeft) throws LWJGLException {
+	public void actualDraw(Terrain terrain, GraphicsInstruction instruction, 
+			GraphicsSprite sprite, SlpSubImage subImage,
+			VertexBound topLeft, VertexBound topRight, 
+			VertexBound bottomRight, VertexBound bottomLeft) throws LWJGLException {
+		
 		// Model transform to image position.
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
 		glLoadIdentity();
 		outline.any((u, v) -> glTranslated(u, v, 0), terrain, 
 				instruction.x, instruction.y, instruction.z);
-		
-		// Retrieve texture information.
-		int index = sprite.whichTexture((int)instruction.frame, (int)instruction.angle);
-		SlpSubImage subImage = sprite.subImages[index];
 		
 		// Retrieve texture information.
 		int w = subImage.w;		int h = subImage.h;

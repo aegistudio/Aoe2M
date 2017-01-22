@@ -16,6 +16,7 @@ public class ProfileVisqProgram extends ShaderProgram {
 				getClass().getResourceAsStream("/profileVisq.vsh.glsl"));
 		super.loadSource(GL_FRAGMENT_SHADER_ARB, "profileVisq.fsh.glsl",
 				getClass().getResourceAsStream("/profileVisq.fsh.glsl"));
+		super.verifyFlag(false);
 	}
 
 	public SamplerBinding profileMap;
