@@ -30,15 +30,17 @@ public class TextureBufferObject extends FrameBufferObject implements Texture {
 		this.attachment = attachment;
 	}
 
-	protected void subcreate() throws LWJGLException {
+	public void subcreate() throws LWJGLException {
 		if(tboid == 0) 
 			throw new LWJGLException("textureBufferObject.notAllocated");
 	}
-	protected void subattach() throws LWJGLException {
+	
+	public void subattach() throws LWJGLException {
 		glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,
 				attachment, GL_TEXTURE_2D, tboid, 0);
 	}
-	protected void subdestroy() throws LWJGLException {	}
+	
+	public void subdestroy() throws LWJGLException {	}
 
 	@Override
 	public void make(int id) throws LWJGLException {

@@ -57,8 +57,6 @@ public class ProfileShaderProgram extends ShaderProgram {
 		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 		normal.enable();
 		player.enable();
-		
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
 	}
 	
 	public void unuse() throws LWJGLException {

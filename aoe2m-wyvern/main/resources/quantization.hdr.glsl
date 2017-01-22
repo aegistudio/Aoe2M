@@ -9,6 +9,8 @@
  * reverse process.
  */
 
+const float defaultFactor = 16.0;
+
 vec4 quantize(float value, float factor);
 
 float dequantize(vec4 quantized, float factor);

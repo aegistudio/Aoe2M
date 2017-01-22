@@ -11,14 +11,12 @@ bool or(bool left, bool right) {
 	return right;
 }
 
-const float multiplier = 16.0;
-
 void main() {
 	bool fill = false;
 	fill = or(fill, texture2D(texNormal, texCoordVarying).a >= 0.5);
 	fill = or(fill, texture2D(texPlayer, texCoordVarying).a >= 0.5);
 	
 	if(fill) 
-		gl_FragColor = quantize(priority(), multiplier);
+		gl_FragColor = quantize(priority(), defaultFactor);
 	else discard;
 }

@@ -39,13 +39,6 @@ public class PlacementConsole {
 				for(String line = reader.readLine(); line != null; line = reader.readLine()) try {
 					String[] p = line.split(" ");
 					instructions.add(create(p));
-					instructions.sort((inst1, inst2) -> {
-						double sig1 = inst1[0].x - inst1[0].y;
-						double sig2 = inst2[0].x - inst2[0].y;
-						if(sig1 > sig2) return +1;
-						if(sig1 < sig2) return -1;
-						return 0;
-					});
 				} catch (RuntimeException e) {
 					e.printStackTrace(System.out);
 				}

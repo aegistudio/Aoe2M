@@ -3,7 +3,6 @@ package net.aegistudio.aoe2m.wyvern.unit;
 import java.io.IOException;
 
 import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.ARBFramebufferObject;
 import static org.lwjgl.opengl.GL11.*;
 
 import net.aegistudio.aoe2m.wyvern.asset.ProfileShaderProgram;
@@ -17,23 +16,25 @@ public class ProfileVisqRender extends BlendingRender {
 	protected final ProfileRenderer profileRenderer;
 	protected final TextureBufferObject profileMap;
 	protected final ProfileVisqProgram visqProgram;
+	protected final Arbitrator arbitrator;
 	
 	public ProfileVisqRender() throws IOException, LWJGLException {
 		graphicsManager = new GraphicsManager(connection);
 		placement = new PlacementConsole(connection.graphics(), graphicsManager);
 		profileProgram = new ProfileShaderProgram();
 		visqProgram = new ProfileVisqProgram();
+		arbitrator = new CoordinateArbitrator();
 		
-		profileMap = new TextureBufferObject(300, 300, GL_FLOAT, 
-				GL_RGBA, GL_RGBA, ARBFramebufferObject.GL_COLOR_ATTACHMENT0);
+		profileMap = new ProfileTexture(300, 300);
 		profileRenderer = new ProfileRenderer(graphicsManager, biasOutline, 
-				textureManager, profileMap, profileProgram);
+				textureManager, profileMap, profileProgram, arbitrator);
 	}
 	
 	public void prepare() throws LWJGLException {
 		super.prepare();
 		textureManager.allocate(profileMap);
 		profileProgram.create();
+		profileMap.create();
 		visqProgram.create();
 		placement.start();
 	}
@@ -74,6 +75,7 @@ public class ProfileVisqRender extends BlendingRender {
 	public void dispose() throws LWJGLException {
 		super.dispose();
 		placement.stop();
+		profileMap.destroy();
 		profileProgram.destroy();
 		visqProgram.destroy();
 	}

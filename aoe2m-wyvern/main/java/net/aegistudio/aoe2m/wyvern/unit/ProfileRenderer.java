@@ -16,13 +16,15 @@ public class ProfileRenderer extends BasicRenderer {
 	public final TextureManager textureManager;
 	public final TextureBufferObject priority;
 	public final ProfileShaderProgram shaderProgram;
+	public final Arbitrator arbitrator;
 	public ProfileRenderer(GraphicsManager manager, TileOutline outline,
 			TextureManager textureManager, TextureBufferObject priority, 
-			ProfileShaderProgram shaderProgram) {
+			ProfileShaderProgram shaderProgram, Arbitrator arbitrator) {
 		super(manager, outline);
 		this.textureManager = textureManager;
 		this.priority = priority;
 		this.shaderProgram = shaderProgram;
+		this.arbitrator = arbitrator;
 	}
 	
 	@Override
@@ -30,8 +32,11 @@ public class ProfileRenderer extends BasicRenderer {
 		priority.begin();
 		shaderProgram.use();
 		
+		glEnable(GL_DEPTH_TEST);	
+		glDepthFunc(GL_LEQUAL);
+		
 		glClearColor(0, 0, 0, 0);
-		glClearDepth(-1);
+		glClearDepth(1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
@@ -39,8 +44,7 @@ public class ProfileRenderer extends BasicRenderer {
 	public void subDraw(Terrain terrain, GraphicsInstruction instruction, 
 			GraphicsSprite sprite, int slpIndex, SlpSubImage subImage) throws LWJGLException {
 		
-		shaderProgram.priority.boundary(-terrain.height(), terrain.width());
-		shaderProgram.priority.priority((float) (instruction.x - instruction.y));
+		arbitrator.priority(shaderProgram.priority, terrain, instruction);
 		
 		textureManager.bind(sprite.normalTexture, shaderProgram.normal);
 		textureManager.bind(sprite.playerTexture, shaderProgram.player);

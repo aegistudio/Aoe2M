@@ -6,5 +6,5 @@ varying vec2 texCoordVarying;
 void main() {
 	gl_Position = ftransform();
 	texCoordVarying = texCoordInput;
-	gl_Position.z = 2.0 * priority() - 1.0;
+	gl_Position.z = 1.0 - priority();
 }

@@ -48,7 +48,7 @@ public class FrameRenderObject extends FrameBufferObject {
 	}
 
 	@Override
-	protected void subcreate() throws LWJGLException {
+	public void subcreate() throws LWJGLException {
 		rboid = glGenRenderbuffers();
 		glBindRenderbuffer(GL_RENDERBUFFER, rboid);
 		glRenderbufferStorage(GL_RENDERBUFFER, internalFormat, width, height);
@@ -58,13 +58,13 @@ public class FrameRenderObject extends FrameBufferObject {
 	}
 
 	@Override
-	protected void subattach() throws LWJGLException {
+	public void subattach() throws LWJGLException {
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, attachment, 
 				GL_RENDERBUFFER, rboid);
 	}
 
 	@Override
-	protected void subdestroy() throws LWJGLException {
+	public void subdestroy() throws LWJGLException {
 		glDeleteRenderbuffers(rboid);
 		rboid = 0;
 	}
