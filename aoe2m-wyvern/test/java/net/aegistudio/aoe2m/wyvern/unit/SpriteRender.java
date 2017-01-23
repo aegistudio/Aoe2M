@@ -20,6 +20,8 @@ public class SpriteRender extends BlendingRender {
 	protected final SpriteShaderProgram spriteProgram;
 	protected final SpriteRenderer spriteRenderer;
 	
+	protected final NullRenderer nullRenderer;
+	
 	public SpriteRender() throws IOException, LWJGLException {
 		super();
 		graphicsManager = new GraphicsManager(connection);
@@ -34,6 +36,8 @@ public class SpriteRender extends BlendingRender {
 		spriteProgram = new SpriteShaderProgram();
 		spriteRenderer = new SpriteRenderer(spriteProgram, profileMap, 
 				arbitrator, graphicsManager, outline, textureManager);
+		
+		nullRenderer = new NullRenderer(graphicsManager, biasOutline, textureManager);
 	}
 	
 	public void prepare() throws LWJGLException {
@@ -49,6 +53,7 @@ public class SpriteRender extends BlendingRender {
 	public void render() throws LWJGLException {
 		super.render();
 		placement.render(profileRenderer, terrain);
+		placement.render(nullRenderer, terrain);
 		placement.render(spriteRenderer, terrain);
 	}
 	

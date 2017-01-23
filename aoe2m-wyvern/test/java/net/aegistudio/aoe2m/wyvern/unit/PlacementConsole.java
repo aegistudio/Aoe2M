@@ -68,16 +68,14 @@ public class PlacementConsole {
 		GraphicsDelta[] populate = new GraphicsDelta[unit.deltas.length + 1];
 		populate[0] = new GraphicsDelta(unit.id, 0, 0);
 		System.arraycopy(unit.deltas, 0, populate, 1, unit.deltas.length);
-		populate = Arrays.stream(populate)
-			.filter(item -> asset.query(item.deltaGraphic) != null)
-			.sorted((item1, item2) -> {
-				int ly1 = asset.query(item1.deltaGraphic).layer.ordinal();
-				int ly2 = asset.query(item2.deltaGraphic).layer.ordinal();
-				return ly1 - ly2;
-			}).toArray(GraphicsDelta[]::new);
-		
-		GraphicsInstruction[] instructions = Arrays.stream(populate)
-				.map(delta -> {
+
+		return Arrays.stream(populate)
+				.filter(item -> asset.query(item.deltaGraphic) != null)
+				.sorted((item1, item2) -> {
+					int ly1 = asset.query(item1.deltaGraphic).layer.ordinal();
+					int ly2 = asset.query(item2.deltaGraphic).layer.ordinal();
+					return ly1 - ly2;
+				}).map(delta -> {
 					GraphicsInstruction instruction = new GraphicsInstruction();
 					instruction.sprite = delta.deltaGraphic;
 					instruction.angle = 0;
@@ -87,7 +85,6 @@ public class PlacementConsole {
 					instruction.z = 0;
 					return instruction;
 				}).toArray(GraphicsInstruction[]::new);
-		return instructions;
 	}
 	
 	public void start() {
@@ -96,12 +93,14 @@ public class PlacementConsole {
 	
 	public void render(GraphicsRenderer renderer, Terrain terrain) throws LWJGLException {
 		renderer.prepare();
-		for(GraphicsInstruction[] insts : instructions)
-			for(GraphicsInstruction inst : insts) {
-				renderer.draw(terrain, inst);
-				GraphicsSprite sprite = graphicsManager.require(inst.sprite);
-				if(sprite != null) inst.frame += sprite.gamedata.frameRate;
-			}
+		synchronized (instructions) {
+			for(GraphicsInstruction[] insts : instructions)
+				for(GraphicsInstruction inst : insts) {
+					renderer.draw(terrain, inst);
+					GraphicsSprite sprite = graphicsManager.require(inst.sprite);
+					if(sprite != null) inst.frame += sprite.gamedata.frameRate;
+				}	
+		}
 		renderer.cleanup();
 	}
 	
