@@ -18,4 +18,7 @@ varying vec2 priorityCoord;
 
 void priomapVertex();
 void priomapFragment();
+
+vec4 priomapVector();
 float priomapSample(float level);
+bool priomapLessThan(float sampled, float level);

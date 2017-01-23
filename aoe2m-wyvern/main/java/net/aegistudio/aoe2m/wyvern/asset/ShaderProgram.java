@@ -29,6 +29,10 @@ public class ShaderProgram {
 		loadObject(new ShaderObject(title, file, type));
 	}
 	
+	protected void loadSource(String title, Class<?> clazz, int... type) throws IOException {
+		loadObject(new ShaderObject(title, clazz, type));
+	}
+	
 	protected void loadObject(ShaderObject custom) {
 		objects.add(custom);
 	}

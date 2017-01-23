@@ -3,6 +3,8 @@ package net.aegistudio.aoe2m.wyvern.unit;
 import java.io.IOException;
 
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
+
 import static org.lwjgl.opengl.GL11.*;
 
 import net.aegistudio.aoe2m.wyvern.asset.ProfileShaderProgram;
@@ -38,15 +40,29 @@ public class ProfileVisqRender extends BlendingRender {
 		visqProgram.create();
 		placement.start();
 	}
+
+	int maskMapIndex = 0;
+	float[][] maskMap = new float[][] {
+		{1, 1, 1}, {1, 0, 0}, {0, 1, 0}, {0, 0, 1}, 
+	};
 	
 	public void render() throws LWJGLException {
 		super.render();
+		
+		maskMapIndex = 0;
+		if(super.down.getOrDefault(Keyboard.KEY_1, false)) maskMapIndex = 1;
+		if(super.down.getOrDefault(Keyboard.KEY_2, false)) maskMapIndex = 2;
+		if(super.down.getOrDefault(Keyboard.KEY_3, false)) maskMapIndex = 3;
+		
 		placement.render(profileRenderer, terrain);
 		renderProfile();
 	}
 	
 	public void renderProfile() throws LWJGLException {
 		visqProgram.use();
+		float[] maskVector = maskMap[maskMapIndex];
+		visqProgram.mask(maskVector[0], maskVector[1], maskVector[2]);
+		
 		textureManager.bind(profileMap, visqProgram.profileMap);
 		glMatrixMode(GL_PROJECTION);
 		glPushMatrix();

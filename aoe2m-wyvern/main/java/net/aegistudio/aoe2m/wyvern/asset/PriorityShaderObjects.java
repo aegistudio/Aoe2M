@@ -9,10 +9,8 @@ import net.aegistudio.aoe2m.wyvern.render.SamplerBinding;
 public class PriorityShaderObjects {
 	public final ShaderObject header, source;
 	public PriorityShaderObjects(int... linkage) throws IOException {
-		header = new ShaderObject("priority.hdr.glsl", PriorityShaderObjects.class
-				.getResourceAsStream("/priority.hdr.glsl"));
-		source = new ShaderObject("priority.glsl", PriorityShaderObjects.class
-				.getResourceAsStream("/priority.glsl"), linkage);
+		header = new ShaderObject("priority.hdr.glsl", getClass());
+		source = new ShaderObject("priority.glsl", getClass(), linkage);
 	}
 	
 	public void loadObjects(ShaderProgram program) {

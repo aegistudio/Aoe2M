@@ -19,6 +19,10 @@ public class ShaderObject {
 	public final int[] object;
 	public final String title;
 	
+	public ShaderObject(String title, Class<?> clazz, int... linkage) throws IOException {
+		this(title, clazz.getResourceAsStream("/" + title), linkage);
+	}
+	
 	public ShaderObject(String title, InputStream inputStream, int... linkage) throws IOException{
 		this.title = title;
 		StringBuilder sourceBuilder = new StringBuilder();

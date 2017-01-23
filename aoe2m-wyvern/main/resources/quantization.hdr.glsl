@@ -9,8 +9,10 @@
  * reverse process.
  */
 
-const float defaultFactor = 16.0;
+const float defaultFactor = 64.0;
 
 vec4 quantize(float value, float factor);
 
 float dequantize(vec4 quantized, float factor);
+
+bool quanLessThan(float value, vec4 sampled, float factor);

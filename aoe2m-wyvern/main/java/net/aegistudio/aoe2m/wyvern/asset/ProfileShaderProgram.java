@@ -14,15 +14,11 @@ import net.aegistudio.aoe2m.wyvern.render.SamplerBinding;
 public class ProfileShaderProgram extends ShaderProgram {
 	public final PriorityShaderObjects priority;
 	public ProfileShaderProgram() throws IOException {	
-		super.loadSource(GL_VERTEX_SHADER_ARB, "profile.vsh.glsl",
-				getClass().getResourceAsStream("/profile.vsh.glsl"));
-		super.loadSource(GL_FRAGMENT_SHADER_ARB, "profile.fsh.glsl",
-				getClass().getResourceAsStream("/profile.fsh.glsl"));
-		super.loadSource(GL_FRAGMENT_SHADER_ARB, "quantization.glsl",
-				getClass().getResourceAsStream("/quantization.glsl"));
+		super.loadSource("profile.vsh.glsl", getClass(), GL_VERTEX_SHADER_ARB);
+		super.loadSource("profile.fsh.glsl", getClass(), GL_FRAGMENT_SHADER_ARB);
+		super.loadSource("quantization.glsl", getClass(), GL_FRAGMENT_SHADER_ARB);
 		
-		super.loadSource(getClass().getResourceAsStream(
-				"/quantization.hdr.glsl"), "quantization.hdr.glsl");
+		super.loadSource("quantization.hdr.glsl", getClass());
 		
 		priority = new PriorityShaderObjects(
 				GL_VERTEX_SHADER_ARB, GL_FRAGMENT_SHADER_ARB);

@@ -7,6 +7,7 @@ vec4 quantize(float value, float factor) {
 	
 	pv0 = float(int(pv0 * factor));
 	pv0 /= factor;
+	
 	pv1 = pv1 - float(int(pv1));
 	pv2 = pv2 - float(int(pv2));
 	
@@ -15,4 +16,12 @@ vec4 quantize(float value, float factor) {
 
 float dequantize(vec4 quantized, float factor) {
 	return quantized.x + quantized.y / factor + quantized.z / factor / factor;
+}
+
+bool quanLessThan(float value, vec4 sampled, float factor) {
+	vec4 left = quantize(value, factor);
+	if(int(left.r * factor) < int(sampled.r * factor)) return true;
+	if(int(left.g * factor) < int(sampled.g * factor)) return true;
+	if(int(left.b * factor) < int(sampled.b * factor)) return true;
+	return false;
 }
