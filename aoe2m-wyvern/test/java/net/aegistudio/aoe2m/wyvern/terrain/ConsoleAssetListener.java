@@ -56,20 +56,30 @@ public class ConsoleAssetListener implements AssetListener {
 	}
 
 	public final Map<String, PerformanceLogger> subsystems = new TreeMap<>();
+	public final Map<String, Integer> estimation = new TreeMap<>();
 	@Override
 	public void initSubsystem(String name, Class<?> assetClass, int estimatedAmount) {
 		PerformanceLogger logger = new PerformanceLogger(name + " manager");
-		subsystems.put(name, logger);	logger.init();
+		subsystems.put(name, logger);	
+		estimation.put(name, estimatedAmount);
+		logger.init();
+		output.println("We assume there'll be at most " + estimatedAmount
+				+ " of " + name + " asset will be loaded.");
 	}
 
+	public final Map<String, Integer> statistics = new TreeMap<>();	
 	@Override
 	public void initAsset(String name, Class<?> assetClass, int assetId) {
-		
+		statistics.putIfAbsent(name, 0);
 	}
 
+	int alertFrequency = 100;
 	@Override
 	public void readyAsset(String name, Class<?> assetClass, int assetId) {
-		
+		statistics.put(name, statistics.get(name) + 1);
+		if(statistics.get(name) % alertFrequency == 0)
+			output.println("We have loaded " + statistics.get(name) 
+				+ "/" + estimation.get(name) + " of " + name + " asset!");
 	}
 
 	@Override

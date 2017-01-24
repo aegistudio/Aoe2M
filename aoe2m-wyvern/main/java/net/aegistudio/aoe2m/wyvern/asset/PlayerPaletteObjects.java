@@ -18,15 +18,19 @@ public class PlayerPaletteObjects {
 		program.loadObject(source);
 	}
 	
-	protected int playerPalette;
+	protected int allMask, subLength, subMask, items;
 	protected int playerIndex;
+	
 	public void create(ShaderProgram program) throws LWJGLException {
-		playerPalette = program.uniformBlock("playerPalette");
+		allMask = program.uniform("playerPalette_allMask");
+		subLength = program.uniform("playerPalette_subLength");
+		subMask = program.uniform("playerPalette_subMask");
+		items = program.uniform("playerPalette_items");
 		playerIndex = program.uniform("playerIndex");
 	}
 	
 	public void palette() {
-		paletteBuffer.set(playerPalette);
+		paletteBuffer.set(allMask, subLength, subMask, items);
 	}
 	
 	public void player(int index) {

@@ -3,10 +3,7 @@
 
 #include "playerPalette.hdr.glsl"
 
-uniform bool enable;
-
 vec4 paletteQuery(int brightness) {
 	return playerPalette_items[(playerIndex * playerPalette_subLength
-		 + brightness & playerPalette_subMask) & playerPalette_allMask];
-	}
+		 + (brightness & playerPalette_subMask)) & playerPalette_allMask];
 }

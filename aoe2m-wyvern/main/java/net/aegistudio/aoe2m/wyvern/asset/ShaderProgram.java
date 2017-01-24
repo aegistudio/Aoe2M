@@ -74,7 +74,8 @@ public class ShaderProgram {
 	}
 	
 	protected int verifyAddress(int address, String name) throws LWJGLException {
-		if(verify) if(address < 0) throw new LWJGLException(name);
+		if(verify) if(address == GL_INVALID_INDEX) 
+			throw new LWJGLException(name);
 		return address;
 	}
 	
@@ -89,7 +90,7 @@ public class ShaderProgram {
 	}
 	
 	public int uniformBlock(String name) throws LWJGLException {
-		return verifyAddress(glGetUniformBlockIndex(programObject, name), 
+		return verifyAddress(glGetUniformBlockIndex(programObject, name),
 				"shader.missingUniformBlock." + name);
 	}
 }

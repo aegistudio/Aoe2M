@@ -17,10 +17,9 @@ const int playerMaxLength = 256;
 
 uniform int playerIndex;
 
-uniform playerPalette {
-	int playerPalette_allMask;
-	int playerPalette_subLength;
-	int playerPalette_subMask;
-	vec4 playerPalette_items[playerMaxLength];
-};
+uniform int playerPalette_allMask;
+uniform int playerPalette_subLength;
+uniform int playerPalette_subMask;
+uniform vec4 playerPalette_items[playerMaxLength];
+
 vec4 paletteQuery(int brightness);

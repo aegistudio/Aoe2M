@@ -39,6 +39,7 @@ public class PlayerColorShaderProgram extends ShaderProgram {
 		player = new SamplerBinding(0, uniform("player"), 
 				vertexAttribute("texCoordInput"));
 		
+		playerPalette.create(this);
 		priority.create(this);
 		priorityMap.create(this);
 	}
