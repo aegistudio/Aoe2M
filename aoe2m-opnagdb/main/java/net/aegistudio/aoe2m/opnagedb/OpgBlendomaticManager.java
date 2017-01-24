@@ -1,6 +1,5 @@
 package net.aegistudio.aoe2m.opnagedb;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
@@ -10,21 +9,23 @@ import java.util.function.BiConsumer;
 import net.aegistudio.aoe2m.assetdba.AssetListener;
 import net.aegistudio.aoe2m.assetdba.AssetManager;
 import net.aegistudio.aoe2m.assetdba.SlpImage;
+import net.aegistudio.aoe2m.media.Storage;
+
 import static net.aegistudio.aoe2m.assetdba.AssetConnection.*;
 
 public class OpgBlendomaticManager implements AssetManager<SlpImage> {
 	protected final SlpImage[] blendomatics;
 	
-	public OpgBlendomaticManager(AssetListener perfLog, File root) {
-		File blendomatic = new File(root, "blendomatic");
-		File[] blendomaticFiles = blendomatic.listFiles();
+	public OpgBlendomaticManager(AssetListener perfLog, Storage root) throws IOException {
+		Storage blendomatic = root.chdir("blendomatic");
+		Storage[] blendomaticFiles = blendomatic.list();
 		perfLog.initSubsystem(BLENDOMATIC_NAME, BLENDOMATIC_CLASS, blendomaticFiles.length);
 		
 		TreeMap<Integer, SlpImage> maps = new TreeMap<>();
 		Arrays.stream(blendomaticFiles)
-				.filter(file -> file.getName().endsWith(".docx"))
+				.filter(file -> file.name().endsWith(".docx"))
 				.forEach(file -> { try {
-					String name = file.getName();
+					String name = file.name();
 					name = name.substring(0, name.length() - ".docx".length());
 					int order = Integer.parseInt(name.substring("mode".length()));
 					

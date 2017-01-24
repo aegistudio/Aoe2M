@@ -15,5 +15,9 @@
   		<artifactId>aoe2m-assetdba</artifactId>
   		<version>${project.version}</version>
   	</dependency>
+	<dependency>
+  		<groupId>net.aegistudio.aoe2m</groupId>
+  		<artifactId>aoe2m-io</artifactId>
+  	</dependency>
   </dependencies>
 </project>

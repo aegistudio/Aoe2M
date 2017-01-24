@@ -3,18 +3,18 @@ package net.aegistudio.aoe2m.opnagedb;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
-import java.io.File;
 import java.io.IOException;
 import java.util.function.BiFunction;
 
 import javax.imageio.ImageIO;
 
 import net.aegistudio.aoe2m.assetdba.SlpImage;
+import net.aegistudio.aoe2m.media.Storage;
 
 public class OpgSlpPaletteImage extends OpgSlpImage {
 	protected final OpgPlayerPalette palette;
 	
-	public static SlpImage open(Runnable perfLog, File root, String name, OpgPlayerPalette palette) {
+	public static SlpImage open(Runnable perfLog, Storage root, String name, OpgPlayerPalette palette) {
 		try {
 			return new OpgSlpPaletteImage(perfLog, root, name, palette);
 		} catch (IOException e) {
@@ -22,7 +22,7 @@ public class OpgSlpPaletteImage extends OpgSlpImage {
 		}
 	}
 	
-	public OpgSlpPaletteImage(Runnable perfLog, File root, String name, OpgPlayerPalette palette) throws IOException {
+	public OpgSlpPaletteImage(Runnable perfLog, Storage root, String name, OpgPlayerPalette palette) throws IOException {
 		super(perfLog, root, name);
 		this.palette = palette;
 	}
@@ -30,7 +30,7 @@ public class OpgSlpPaletteImage extends OpgSlpImage {
 	public BufferedImage open(BiFunction<Color, Boolean, Color> colorFilter) {
 		try {
 			perfLog.run();
-			BufferedImage bufferImage = ImageIO.read(image);
+			BufferedImage bufferImage = ImageIO.read(image.read());
 			BufferedImage copyImage = new BufferedImage(bufferImage.getWidth(), 
 					bufferImage.getHeight(), bufferImage.getType());
 			

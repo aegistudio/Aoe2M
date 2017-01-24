@@ -35,6 +35,11 @@
   	</dependency>
   	<dependency>
 	    <groupId>net.aegistudio.aoe2m</groupId>
+	    <artifactId>aoe2m-io</artifactId>
+	    <scope>test</scope>
+  	</dependency>  	
+  	<dependency>
+	    <groupId>net.aegistudio.aoe2m</groupId>
 	    <artifactId>aoe2m-opnagdb</artifactId>
 	    <version>${project.version}</version>
 	    <scope>test</scope>

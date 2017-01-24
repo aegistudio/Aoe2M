@@ -2,19 +2,19 @@ package net.aegistudio.aoe2m.opnagedb;
 
 import java.awt.Color;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import net.aegistudio.aoe2m.assetdba.AssetListener;
 import net.aegistudio.aoe2m.assetdba.PlayerPalette;
+import net.aegistudio.aoe2m.media.Storage;
 
 public class OpgPlayerPalette extends PlayerPalette {
-	public OpgPlayerPalette(AssetListener perfLog, File root) throws IOException {
+	public OpgPlayerPalette(AssetListener perfLog, Storage root) throws IOException {
 		perfLog.initPlayerPalette();
-		File descriptor = new File(root, "player_palette.docx");
+		Storage descriptor = root.chdir("player_palette.docx");
 
-		try(BufferedReader reader = new BufferedReader(new FileReader(descriptor))) {
+		try(BufferedReader reader = new BufferedReader(new InputStreamReader(descriptor.read()))) {
 			this.items = reader.lines()
 				.filter(CsvFilter::filter)
 				.map(CsvFilter::map)

@@ -1,25 +1,26 @@
 package net.aegistudio.aoe2m.opnagedb;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.function.BiConsumer;
 
 import net.aegistudio.aoe2m.assetdba.AssetListener;
 import net.aegistudio.aoe2m.assetdba.AssetManager;
 import net.aegistudio.aoe2m.assetdba.TileGamedata;
+import net.aegistudio.aoe2m.media.Storage;
+
 import static net.aegistudio.aoe2m.assetdba.AssetConnection.*;
 
 public class OpgTileManager implements AssetManager<TileGamedata> {
 	protected final TileGamedata[] tiles;
-	public OpgTileManager(AssetListener perfLog, File root) throws IOException {
-		File parent = new File(root, "terrain");
-		File terrainGamedata = new File(new File(new File(root, "gamedata"), 
-				"gamedata-empiresdat"), "0000-terrains.docx");
+	public OpgTileManager(AssetListener perfLog, Storage root) throws IOException {
+		Storage parent = root.chdir("terrain");
+		Storage terrainGamedata = root.chdir("gamedata")
+				.chdir("gamedata-empiresdat").chdir("0000-terrains.docx");
 		
-		try(BufferedReader gamedataReader = new BufferedReader(new FileReader(terrainGamedata))) {
+		try(BufferedReader gamedataReader = new BufferedReader(new InputStreamReader(terrainGamedata.read()))) {
 			String[] lines = gamedataReader.lines().toArray(String[]::new);
 			perfLog.initSubsystem(TILE_NAME, TILE_CLASS, lines.length);
 			tiles = Arrays.stream(lines).filter(CsvFilter::filter).map(CsvFilter::map)

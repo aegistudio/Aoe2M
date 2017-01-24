@@ -1,26 +1,27 @@
 package net.aegistudio.aoe2m.opnagedb;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.function.BiConsumer;
 
 import net.aegistudio.aoe2m.assetdba.AssetListener;
 import net.aegistudio.aoe2m.assetdba.AssetManager;
 import net.aegistudio.aoe2m.assetdba.GraphicsGamedata;
+import net.aegistudio.aoe2m.media.Storage;
+
 import static net.aegistudio.aoe2m.assetdba.AssetConnection.*;
 
 public class OpgGraphicsManager implements AssetManager<GraphicsGamedata>{
 	protected final OpgGraphicsGamedata[] graphics;
-	public OpgGraphicsManager(AssetListener perfLog, OpgPlayerPalette playerPalette, File root) throws IOException {
-		File parent = new File(root, "graphics");
-		File gamedata = new File(new File(root, "gamedata"), "gamedata-empiresdat");
-		File graphicsDelta = new File(gamedata, "0000-graphics");
-		File graphicsGamedata = new File(gamedata, "0000-graphics.docx");
+	public OpgGraphicsManager(AssetListener perfLog, OpgPlayerPalette playerPalette, Storage root) throws IOException {
+		Storage parent = root.chdir("graphics");
+		Storage gamedata = root.chdir("gamedata").chdir("gamedata-empiresdat");
+		Storage graphicsDelta = gamedata.chdir("0000-graphics");
+		Storage graphicsGamedata = gamedata.chdir("0000-graphics.docx");
 		
-		try(BufferedReader gamedataReader = new BufferedReader(new FileReader(graphicsGamedata))) {
+		try(BufferedReader gamedataReader = new BufferedReader(new InputStreamReader(graphicsGamedata.read()))) {
 			String[] lines = gamedataReader.lines().toArray(String[]::new);
 			perfLog.initSubsystem(GRAPHICS_NAME, GRAPHICS_CLASS, lines.length);
 			

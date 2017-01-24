@@ -1,17 +1,18 @@
 package net.aegistudio.aoe2m.opnagedb;
 
-import java.io.File;
 import java.io.IOException;
 
 import net.aegistudio.aoe2m.assetdba.AssetListener;
 import net.aegistudio.aoe2m.assetdba.TileGamedata;
+import net.aegistudio.aoe2m.media.Storage;
+
 import static net.aegistudio.aoe2m.assetdba.AssetConnection.*;
 
 public class OpgTileGamedata extends TileGamedata {
 	// enabled,name0,name1,slp_id,sound_id,blend_priority,blend_mode,
 	// map_color_hi,map_color_med,map_color_low,map_color_cliff_lt,map_color_cliff_rt,passable_terrain,
 	// impassaable_terrain,elevation_graphics,terrain_dimension0,terrain_dimension1
-	public OpgTileGamedata(AssetListener perfLog, File terrainRoot, String[] parameters) throws IOException {
+	public OpgTileGamedata(AssetListener perfLog, Storage terrainRoot, String[] parameters) throws IOException {
 		int slpIndex = Integer.parseInt(parameters[3]);
 		perfLog.initAsset(TILE_NAME, TILE_CLASS, slpIndex);
 		

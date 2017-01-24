@@ -1,6 +1,5 @@
 package net.aegistudio.aoe2m.opnagedb;
 
-import java.io.File;
 import java.io.IOException;
 
 import net.aegistudio.aoe2m.assetdba.AssetConnection;
@@ -9,9 +8,10 @@ import net.aegistudio.aoe2m.assetdba.AssetManager;
 import net.aegistudio.aoe2m.assetdba.GraphicsGamedata;
 import net.aegistudio.aoe2m.assetdba.NullAssetListener;
 import net.aegistudio.aoe2m.assetdba.PlayerPalette;
+import net.aegistudio.aoe2m.media.Storage;
 
 public class OpgAssetConnection implements AssetConnection {
-	public OpgAssetConnection(File root, AssetListener perfLog) throws IOException {
+	public OpgAssetConnection(Storage root, AssetListener perfLog) throws IOException {
 		perfLog.initDatabase();
 		
 		palette = new OpgPlayerPalette(perfLog, root);
@@ -22,7 +22,7 @@ public class OpgAssetConnection implements AssetConnection {
 		perfLog.readyDatabase();
 	}
 	
-	public OpgAssetConnection(File root) throws IOException {
+	public OpgAssetConnection(Storage root) throws IOException {
 		this(root, new NullAssetListener());
 	}
 	

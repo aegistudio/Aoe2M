@@ -3,23 +3,22 @@ package net.aegistudio.aoe2m.opnagedb;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Objects;
 
 import javax.imageio.ImageIO;
 
 import net.aegistudio.aoe2m.assetdba.SlpImage;
 import net.aegistudio.aoe2m.assetdba.SlpSubImage;
+import net.aegistudio.aoe2m.media.Storage;
 
 public class OpgSlpImage implements SlpImage {
-	protected final File image;
+	protected final Storage image;
 	protected final SlpSubImage[] subImages;
 	protected final Runnable perfLog;
 	
-	public static SlpImage open(Runnable perfLog, File root, String name) {
+	public static SlpImage open(Runnable perfLog, Storage root, String name) {
 		try {
 			return new OpgSlpImage(perfLog, root, name);
 		} catch (IOException e) {
@@ -27,13 +26,12 @@ public class OpgSlpImage implements SlpImage {
 		}
 	}
 	
-	public OpgSlpImage(Runnable perfLog, File root, String name) throws IOException {
+	public OpgSlpImage(Runnable perfLog, Storage root, String name) throws IOException {
 		this.perfLog = perfLog;
-		this.image = new File(root, name + ".png");
-		if(!image.exists()) throw new FileNotFoundException(name);
-		File descriptor = new File(root, name + ".docx");
+		this.image = root.chdir(name + ".png");
+		Storage descriptor = root.chdir(name + ".docx");
 
-		try(BufferedReader reader = new BufferedReader(new FileReader(descriptor))) {
+		try(BufferedReader reader = new BufferedReader(new InputStreamReader(descriptor.read()))) {
 			this.subImages = reader.lines()
 				.filter(CsvFilter::filter)
 				.map(CsvFilter::map)
@@ -48,7 +46,7 @@ public class OpgSlpImage implements SlpImage {
 	public BufferedImage open() {
 		try {
 			perfLog.run();
-			return ImageIO.read(image);
+			return ImageIO.read(image.read());
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;

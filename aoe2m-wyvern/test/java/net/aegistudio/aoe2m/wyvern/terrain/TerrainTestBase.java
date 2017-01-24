@@ -1,6 +1,5 @@
 package net.aegistudio.aoe2m.wyvern.terrain;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.TreeMap;
 
@@ -9,6 +8,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import net.aegistudio.aoe2m.assetdba.AssetConnection;
+import net.aegistudio.aoe2m.media.Storage;
 import net.aegistudio.aoe2m.opnagedb.OpgAssetConnection;
 import net.aegistudio.aoe2m.wyvern.WyvernRider;
 import net.aegistudio.aoe2m.wyvern.asset.Blendomatic;
@@ -28,7 +28,11 @@ public abstract class TerrainTestBase extends WyvernRider {
 	public final TileOutline outline, biasOutline;
 	
 	public TerrainTestBase() throws IOException, LWJGLException {
-		connection = new OpgAssetConnection(new File("assets"), new ConsoleAssetListener());
+		//Storage storage = new net.aegistudio.aoe2m.media.FileStorage(new File("assets"));
+		Storage storage = new net.aegistudio.aoe2m.media.ZipStorage(
+				new java.util.zip.ZipFile("asset.zip"), "converted");
+		
+		connection = new OpgAssetConnection(storage, new ConsoleAssetListener());
 		blendomatic = new Blendomatic(connection);
 		assetManager = new TileMetaManager(connection, blendomatic);
 		textureManager = new BasicTextureManager();
