@@ -18,7 +18,9 @@ public interface AssetListener {
 	
 	public void readyDatabase();
 	
-	public void archive(String name, Class<?> assetClass, int id);
+	public void initArchive(String name, Class<?> assetClass, int id);
+	
+	public void readyArchive(String name, Class<?> assetClass, int id);
 	
 	public void initPlayerPalette();
 	

@@ -14,22 +14,22 @@ import net.aegistudio.aoe2m.media.Storage;
 public class OpgSlpPaletteImage extends OpgSlpImage {
 	protected final OpgPlayerPalette palette;
 	
-	public static SlpImage open(Runnable perfLog, Storage root, String name, OpgPlayerPalette palette) {
+	public static SlpImage open(Runnable initArchive, Runnable readyArchive, Storage root, String name, OpgPlayerPalette palette) {
 		try {
-			return new OpgSlpPaletteImage(perfLog, root, name, palette);
+			return new OpgSlpPaletteImage(initArchive, readyArchive, root, name, palette);
 		} catch (IOException e) {
 			return null;
 		}
 	}
 	
-	public OpgSlpPaletteImage(Runnable perfLog, Storage root, String name, OpgPlayerPalette palette) throws IOException {
-		super(perfLog, root, name);
+	public OpgSlpPaletteImage(Runnable initArchive, Runnable readyArchive, Storage root, String name, OpgPlayerPalette palette) throws IOException {
+		super(initArchive, readyArchive, root, name);
 		this.palette = palette;
 	}
 	
 	public BufferedImage open(BiFunction<Color, Boolean, Color> colorFilter) {
 		try {
-			perfLog.run();
+			initArchive.run();
 			BufferedImage bufferImage = ImageIO.read(image.read());
 			BufferedImage copyImage = new BufferedImage(bufferImage.getWidth(), 
 					bufferImage.getHeight(), bufferImage.getType());
@@ -70,6 +70,7 @@ public class OpgSlpPaletteImage extends OpgSlpImage {
 					oal.setSample(i, j, 0, result.getAlpha());
 				}
 			copyImage.flush();
+			readyArchive.run();
 			
 			return copyImage;
 		} catch (IOException e) {

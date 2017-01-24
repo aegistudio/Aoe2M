@@ -23,7 +23,13 @@ public class NullAssetListener implements AssetListener {
 	}
 
 	@Override
-	public void archive(String name, Class<?> assetClass, int id) {
+	public void initArchive(String name, Class<?> assetClass, int id) {
+		
+	}
+	
+	@Override
+	public void readyArchive(String name, Class<?> assetClass, int id) {
+		
 	}
 
 	@Override

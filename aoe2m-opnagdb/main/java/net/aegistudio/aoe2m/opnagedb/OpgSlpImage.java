@@ -16,18 +16,19 @@ import net.aegistudio.aoe2m.media.Storage;
 public class OpgSlpImage implements SlpImage {
 	protected final Storage image;
 	protected final SlpSubImage[] subImages;
-	protected final Runnable perfLog;
+	protected final Runnable initArchive, readyArchive;
 	
-	public static SlpImage open(Runnable perfLog, Storage root, String name) {
+	public static SlpImage open(Runnable initArchive, Runnable readyArchive, Storage root, String name) {
 		try {
-			return new OpgSlpImage(perfLog, root, name);
+			return new OpgSlpImage(initArchive, readyArchive, root, name);
 		} catch (IOException e) {
 			return null;
 		}
 	}
 	
-	public OpgSlpImage(Runnable perfLog, Storage root, String name) throws IOException {
-		this.perfLog = perfLog;
+	public OpgSlpImage(Runnable initArchive, Runnable readyArchive, Storage root, String name) throws IOException {
+		this.initArchive = initArchive;
+		this.readyArchive = readyArchive;
 		this.image = root.chdir(name + ".png");
 		Storage descriptor = root.chdir(name + ".docx");
 
@@ -45,8 +46,10 @@ public class OpgSlpImage implements SlpImage {
 	
 	public BufferedImage open() {
 		try {
-			perfLog.run();
-			return ImageIO.read(image.read());
+			initArchive.run();
+			BufferedImage imageResult = ImageIO.read(image.read());
+			readyArchive.run();
+			return imageResult;
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;

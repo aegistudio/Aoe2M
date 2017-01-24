@@ -22,9 +22,10 @@ public class OpgGraphicsGamedata extends GraphicsGamedata {
 		name0 = parameters[0];
 		name1 = parameters[1];
 		
-		slp = OpgSlpPaletteImage.open(() ->  {
-			perfLog.archive(GRAPHICS_NAME, GRAPHICS_CLASS, id);
-		}, graphicsRoot, parameters[2] + ".slp", playerPalette);
+		slp = OpgSlpPaletteImage.open(
+				() -> perfLog.initArchive(GRAPHICS_NAME, GRAPHICS_CLASS, id),
+				() -> perfLog.readyArchive(GRAPHICS_NAME, GRAPHICS_CLASS, id), 
+				graphicsRoot, parameters[2] + ".slp", playerPalette);
 		layer = EnumLayer.valueOf(parameters[3]);
 		
 		playerColor = Integer.parseInt(parameters[4]);

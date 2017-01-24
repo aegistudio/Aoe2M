@@ -1,6 +1,7 @@
 package net.aegistudio.aoe2m.wyvern.terrain;
 
 import java.io.PrintStream;
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -40,8 +41,13 @@ public class ConsoleAssetListener implements AssetListener {
 	}
 
 	@Override
-	public void archive(String name, Class<?> assetClass, int id) {
-		output.println("Accessing archive for " + name + " #" + id);
+	public void initArchive(String name, Class<?> assetClass, int id) {
+		output.println("Begin accessing archive for " + name + " #" + id + "...");
+	}
+	
+	@Override
+	public void readyArchive(String name, Class<?> assetClass, int id) {
+		output.println("Accessing archive for " + name + " #" + id + " prepared!");
 	}
 
 	public final PerformanceLogger palette = new PerformanceLogger("player palette");
@@ -55,8 +61,8 @@ public class ConsoleAssetListener implements AssetListener {
 		palette.ready();
 	}
 
-	public final Map<String, PerformanceLogger> subsystems = new TreeMap<>();
-	public final Map<String, Integer> estimation = new TreeMap<>();
+	public final Map<String, PerformanceLogger> subsystems = Collections.synchronizedMap(new TreeMap<>());
+	public final Map<String, Integer> estimation = Collections.synchronizedMap(new TreeMap<>());
 	@Override
 	public void initSubsystem(String name, Class<?> assetClass, int estimatedAmount) {
 		PerformanceLogger logger = new PerformanceLogger(name + " manager");
@@ -67,7 +73,7 @@ public class ConsoleAssetListener implements AssetListener {
 				+ " of " + name + " asset will be loaded.");
 	}
 
-	public final Map<String, Integer> statistics = new TreeMap<>();	
+	public final Map<String, Integer> statistics = Collections.synchronizedMap(new TreeMap<>());
 	@Override
 	public void initAsset(String name, Class<?> assetClass, int assetId) {
 		statistics.putIfAbsent(name, 0);

@@ -19,9 +19,10 @@ public class OpgTileGamedata extends TileGamedata {
 		name0 = parameters[1];
 		name1 = parameters[2];
 		
-		slp = OpgSlpImage.open(() -> {
-			perfLog.archive(TILE_NAME, TILE_CLASS, slpIndex);
-		}, terrainRoot, slpIndex + ".slp");
+		slp = OpgSlpImage.open(
+				() -> perfLog.initArchive(TILE_NAME, TILE_CLASS, slpIndex), 
+				() -> perfLog.readyArchive(TILE_NAME, TILE_CLASS, slpIndex),
+				terrainRoot, slpIndex + ".slp");
 		
 		sound = parameters[4];
 		overlay = Integer.parseInt(parameters[5]);

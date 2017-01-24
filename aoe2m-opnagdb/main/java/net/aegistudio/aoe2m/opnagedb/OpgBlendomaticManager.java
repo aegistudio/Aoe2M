@@ -30,9 +30,10 @@ public class OpgBlendomaticManager implements AssetManager<SlpImage> {
 					int order = Integer.parseInt(name.substring("mode".length()));
 					
 					perfLog.initAsset(BLENDOMATIC_NAME, BLENDOMATIC_CLASS, order);
-					maps.put(order, new OpgSlpImage(() -> {
-						perfLog.archive(BLENDOMATIC_NAME, BLENDOMATIC_CLASS, order);
-					}, blendomatic, name));
+					maps.put(order, new OpgSlpImage(
+							() -> perfLog.initArchive(BLENDOMATIC_NAME, BLENDOMATIC_CLASS, order),
+							() -> perfLog.readyArchive(BLENDOMATIC_NAME, BLENDOMATIC_CLASS, order), 
+							blendomatic, name));
 					perfLog.readyAsset(BLENDOMATIC_NAME, BLENDOMATIC_CLASS, order);
 				} catch(IOException e) {}});
 		
