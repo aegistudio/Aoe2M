@@ -1,15 +1,14 @@
 package net.aegistudio.aoe2m.opnagedb;
 
-import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 
 import net.aegistudio.aoe2m.assetdba.AssetConnection;
 import net.aegistudio.aoe2m.assetdba.AssetManager;
 import net.aegistudio.aoe2m.assetdba.GraphicsGamedata;
+import net.aegistudio.aoe2m.assetdba.PlayerPalette;
 
 public class OpgAssetConnection implements AssetConnection {
-	protected OpgPlayerPalette palette;
 	public OpgAssetConnection(File root) throws IOException {
 		palette = new OpgPlayerPalette(root);
 		blendomatic = new OpgBlendomaticManager(root);
@@ -32,8 +31,8 @@ public class OpgAssetConnection implements AssetConnection {
 		return graphics;
 	}
 	
-	@Override
-	public Color[] playerPalette() {
-		return palette.palette();
+	protected OpgPlayerPalette palette;
+	public PlayerPalette playerPalette() {
+		return palette;
 	}
 }

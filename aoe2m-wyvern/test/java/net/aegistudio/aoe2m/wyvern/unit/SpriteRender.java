@@ -10,7 +10,7 @@ import net.aegistudio.aoe2m.wyvern.terrain.BlendingRender;
 
 public class SpriteRender extends BlendingRender {
 	protected final GraphicsManager graphicsManager;
-	protected final PlacementConsole placement;
+	protected PlacementConsole placement; // Replacable.
 	
 	protected final ProfileShaderProgram profileProgram;
 	protected final ProfileRenderer profileRenderer;

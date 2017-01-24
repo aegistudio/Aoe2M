@@ -2,6 +2,7 @@ package net.aegistudio.aoe2m.wyvern.asset;
 
 import static org.lwjgl.opengl.ARBShaderObjects.*;
 import static org.lwjgl.opengl.ARBVertexShader.*;
+import static org.lwjgl.opengl.ARBUniformBufferObject.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -85,5 +86,10 @@ public class ShaderProgram {
 	public int vertexAttribute(String name) throws LWJGLException {
 		return verifyAddress(glGetAttribLocationARB(programObject, name),
 				"shader.missingAttribute." + name);
+	}
+	
+	public int uniformBlock(String name) throws LWJGLException {
+		return verifyAddress(glGetUniformBlockIndex(programObject, name), 
+				"shader.missingUniformBlock." + name);
 	}
 }

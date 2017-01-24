@@ -29,16 +29,20 @@ public class PlacementConsole {
 	
 	public List<GraphicsInstruction[]> instructions = Collections.synchronizedList(new ArrayList<>());
 	
+	protected void consoleWelcome() {
+		System.out.println("Please entry the graphic id to render.");
+		System.out.println("Format: <id> <x> <y> <z> <frame> <angle>");
+	}
+	
 	// To place unit from user instruction.
 	public Thread placementThread = new Thread() {
 		public void run() {
 			try {
-				System.out.println("Please entry the graphic id to render.");
-				System.out.println("Format: <id> <x> <y> <z> <frame> <angle>");
+				consoleWelcome();
 				BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 				for(String line = reader.readLine(); line != null; line = reader.readLine()) try {
 					String[] p = line.split(" ");
-					instructions.add(create(p));
+					instructions.add(parse(p));
 				} catch (RuntimeException e) {
 					e.printStackTrace(System.out);
 				}
@@ -49,7 +53,7 @@ public class PlacementConsole {
 		}
 	};
 	
-	protected GraphicsInstruction[] create(String[] p) {
+	protected GraphicsInstruction[] parse(String[] p) {
 		GraphicsInstruction[] result = make(Integer.parseInt(p[0]), 
 				Double.parseDouble(p[1]), Double.parseDouble(p[2]));
 		for(GraphicsInstruction item : result) {

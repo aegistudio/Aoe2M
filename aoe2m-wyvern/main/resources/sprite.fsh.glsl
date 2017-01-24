@@ -6,6 +6,7 @@ varying vec2 texCoordVarying;
 uniform sampler2D sprite;
 
 void main() {
+	priomapFragment();
 	vec4 color = texture2D(sprite, texCoordVarying);
 	if(color.a < 0.2) { discard; return; }
 	

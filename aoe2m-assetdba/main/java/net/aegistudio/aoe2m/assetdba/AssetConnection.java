@@ -1,7 +1,5 @@
 package net.aegistudio.aoe2m.assetdba;
 
-import java.awt.Color;
-
 public interface AssetConnection {
 	public AssetManager<SlpImage> blendomatic();
 	
@@ -9,5 +7,5 @@ public interface AssetConnection {
 	
 	public AssetManager<GraphicsGamedata> graphics();
 	
-	public Color[] playerPalette();
+	public PlayerPalette playerPalette();
 }
