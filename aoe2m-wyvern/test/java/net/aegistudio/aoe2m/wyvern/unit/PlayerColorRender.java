@@ -26,7 +26,6 @@ public class PlayerColorRender extends SpriteRender {
 				if(p.length >= 7) 
 					for(GraphicsInstruction item : previous) 
 						item.hint.put("playerColor.index", Integer.parseInt(p[6]));
-				
 				return previous;
 			}
 		};

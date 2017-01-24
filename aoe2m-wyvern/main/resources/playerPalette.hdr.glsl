@@ -7,10 +7,6 @@
  * palate. The player palate is a big array with
  * multiple subarrays describing player colors
  * in different brightness.
- *
- * Please specify macro `extension 
- * GL_ARB_uniform_buffer_object : require`, as
- * uniform buffer object (UBO) is in use.
  */
  
 const int playerMaxLength = 256;

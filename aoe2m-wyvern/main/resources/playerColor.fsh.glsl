@@ -1,5 +1,3 @@
-#extension GL_ARB_uniform_buffer_object : require
-
 #include "priority.hdr.glsl"
 #include "priorityMap.hdr.glsl"
 #include "quantization.hdr.glsl"
