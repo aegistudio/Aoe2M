@@ -14,21 +14,22 @@ import net.aegistudio.aoe2m.assetdba.SlpImage;
 public class OpgSlpPaletteImage extends OpgSlpImage {
 	protected final OpgPlayerPalette palette;
 	
-	public static SlpImage open(File root, String name, OpgPlayerPalette palette) {
+	public static SlpImage open(Runnable perfLog, File root, String name, OpgPlayerPalette palette) {
 		try {
-			return new OpgSlpPaletteImage(root, name, palette);
+			return new OpgSlpPaletteImage(perfLog, root, name, palette);
 		} catch (IOException e) {
 			return null;
 		}
 	}
 	
-	public OpgSlpPaletteImage(File root, String name, OpgPlayerPalette palette) throws IOException {
-		super(root, name);
+	public OpgSlpPaletteImage(Runnable perfLog, File root, String name, OpgPlayerPalette palette) throws IOException {
+		super(perfLog, root, name);
 		this.palette = palette;
 	}
 	
 	public BufferedImage open(BiFunction<Color, Boolean, Color> colorFilter) {
 		try {
+			perfLog.run();
 			BufferedImage bufferImage = ImageIO.read(image);
 			BufferedImage copyImage = new BufferedImage(bufferImage.getWidth(), 
 					bufferImage.getHeight(), bufferImage.getType());

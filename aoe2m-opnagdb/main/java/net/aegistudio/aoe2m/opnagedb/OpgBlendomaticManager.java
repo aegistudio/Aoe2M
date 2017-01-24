@@ -7,22 +7,32 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.BiConsumer;
 
+import net.aegistudio.aoe2m.assetdba.AssetListener;
 import net.aegistudio.aoe2m.assetdba.AssetManager;
 import net.aegistudio.aoe2m.assetdba.SlpImage;
+import static net.aegistudio.aoe2m.assetdba.AssetConnection.*;
 
 public class OpgBlendomaticManager implements AssetManager<SlpImage> {
 	protected final SlpImage[] blendomatics;
 	
-	public OpgBlendomaticManager(File root) {
+	public OpgBlendomaticManager(AssetListener perfLog, File root) {
 		File blendomatic = new File(root, "blendomatic");
+		File[] blendomaticFiles = blendomatic.listFiles();
+		perfLog.initSubsystem(BLENDOMATIC_NAME, BLENDOMATIC_CLASS, blendomaticFiles.length);
+		
 		TreeMap<Integer, SlpImage> maps = new TreeMap<>();
-		Arrays.stream(blendomatic.listFiles())
+		Arrays.stream(blendomaticFiles)
 				.filter(file -> file.getName().endsWith(".docx"))
 				.forEach(file -> { try {
 					String name = file.getName();
 					name = name.substring(0, name.length() - ".docx".length());
 					int order = Integer.parseInt(name.substring("mode".length()));
-					maps.put(order, new OpgSlpImage(blendomatic, name));
+					
+					perfLog.initAsset(BLENDOMATIC_NAME, BLENDOMATIC_CLASS, order);
+					maps.put(order, new OpgSlpImage(() -> {
+						perfLog.archive(BLENDOMATIC_NAME, BLENDOMATIC_CLASS, order);
+					}, blendomatic, name));
+					perfLog.readyAsset(BLENDOMATIC_NAME, BLENDOMATIC_CLASS, order);
 				} catch(IOException e) {}});
 		
 		int max = 0;
@@ -31,6 +41,8 @@ public class OpgBlendomaticManager implements AssetManager<SlpImage> {
 		
 		for(Map.Entry<Integer, SlpImage> entry : maps.entrySet())
 			blendomatics[entry.getKey()] = entry.getValue();
+		
+		perfLog.readySubsystem(BLENDOMATIC_NAME, BLENDOMATIC_CLASS);
 	}
 
 	@Override

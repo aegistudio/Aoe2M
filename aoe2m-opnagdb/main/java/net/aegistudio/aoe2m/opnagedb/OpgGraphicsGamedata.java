@@ -5,18 +5,25 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import net.aegistudio.aoe2m.assetdba.AssetListener;
 import net.aegistudio.aoe2m.assetdba.EnumLayer;
 import net.aegistudio.aoe2m.assetdba.GraphicsDelta;
 import net.aegistudio.aoe2m.assetdba.GraphicsGamedata;
+import static net.aegistudio.aoe2m.assetdba.AssetConnection.*;
 
 public class OpgGraphicsGamedata extends GraphicsGamedata {
-	public OpgGraphicsGamedata(OpgPlayerPalette playerPalette, File graphicsRoot, 
+	public OpgGraphicsGamedata(AssetListener perfLog, OpgPlayerPalette playerPalette, File graphicsRoot, 
 			File graphicsDeltaRoot, String[] parameters) throws IOException {
+		
+		id = Integer.parseInt(parameters[15]);
+		perfLog.initAsset(GRAPHICS_NAME, GRAPHICS_CLASS, id);
 		
 		name0 = parameters[0];
 		name1 = parameters[1];
 		
-		slp = OpgSlpPaletteImage.open(graphicsRoot, parameters[2] + ".slp", playerPalette);
+		slp = OpgSlpPaletteImage.open(() ->  {
+			perfLog.archive(GRAPHICS_NAME, GRAPHICS_CLASS, id);
+		}, graphicsRoot, parameters[2] + ".slp", playerPalette);
 		layer = EnumLayer.valueOf(parameters[3]);
 		
 		playerColor = Integer.parseInt(parameters[4]);
@@ -34,7 +41,6 @@ public class OpgGraphicsGamedata extends GraphicsGamedata {
 		replayDelay = Double.parseDouble(parameters[13]);
 		
 		sequenceType = Integer.parseInt(parameters[14]);
-		id = Integer.parseInt(parameters[15]);
 		
 		mirroringMode = Integer.parseInt(parameters[16]);
 		
@@ -48,5 +54,7 @@ public class OpgGraphicsGamedata extends GraphicsGamedata {
 						.toArray(GraphicsDelta[]::new);
 		}
 		assert Integer.parseInt(parameters[7]) == deltas.length;
+		
+		perfLog.readyAsset(GRAPHICS_NAME, GRAPHICS_CLASS, id);
 	}
 }

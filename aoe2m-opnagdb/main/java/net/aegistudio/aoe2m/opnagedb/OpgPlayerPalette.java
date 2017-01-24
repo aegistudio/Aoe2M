@@ -6,10 +6,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import net.aegistudio.aoe2m.assetdba.AssetListener;
 import net.aegistudio.aoe2m.assetdba.PlayerPalette;
 
 public class OpgPlayerPalette extends PlayerPalette {
-	public OpgPlayerPalette(File root) throws IOException {
+	public OpgPlayerPalette(AssetListener perfLog, File root) throws IOException {
+		perfLog.initPlayerPalette();
 		File descriptor = new File(root, "player_palette.docx");
 
 		try(BufferedReader reader = new BufferedReader(new FileReader(descriptor))) {
@@ -23,6 +25,7 @@ public class OpgPlayerPalette extends PlayerPalette {
 		
 		super.allLength = items.length;
 		super.subLength = 8;
+		perfLog.readyPlayerPalette();
 	}
 	
 	public Color[] palette() {

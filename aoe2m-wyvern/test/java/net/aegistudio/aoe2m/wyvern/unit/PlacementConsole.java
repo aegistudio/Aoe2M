@@ -41,8 +41,11 @@ public class PlacementConsole {
 				consoleWelcome();
 				BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 				for(String line = reader.readLine(); line != null; line = reader.readLine()) try {
-					String[] p = line.split(" ");
-					instructions.add(parse(p));
+					if(line.length() == 0) consoleWelcome();
+					else {
+						String[] p = line.split(" ");
+						instructions.add(parse(p));
+					}
 				} catch (RuntimeException e) {
 					e.printStackTrace(System.out);
 				}

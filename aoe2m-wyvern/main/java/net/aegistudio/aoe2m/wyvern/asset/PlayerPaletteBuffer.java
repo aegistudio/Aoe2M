@@ -64,7 +64,7 @@ public class PlayerPaletteBuffer {
 	}
 	
 	public void set(int location) {
-		glBindBufferBase(GL_UNIFORM_BUFFER, location, 0);
+		glBindBufferBase(GL_UNIFORM_BUFFER, location, id);
 	}
 	
 	public void destroy() {
