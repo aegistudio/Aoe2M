@@ -10,9 +10,11 @@ public class PlayerColorRender extends SpriteRender {
 	public final PlayerPaletteBuffer paletteBuffer;
 	public final PlayerColorShaderProgram paletteProgram;
 	public final PlayerColorRenderer paletteRenderer;
+	public final PlayerPaletteHint paletteHint;
 	
 	public PlayerColorRender() throws IOException, LWJGLException {
 		super();
+		paletteHint = new PlayerPaletteHint();
 		super.placement = new PlacementConsole(
 				connection.graphics(), graphicsManager) {
 			
@@ -25,13 +27,13 @@ public class PlayerColorRender extends SpriteRender {
 				GraphicsInstruction[] previous = super.parse(p);
 				if(p.length >= 7) 
 					for(GraphicsInstruction item : previous) 
-						item.hint.put("playerColor.index", Integer.parseInt(p[6]));
+						paletteHint.playerIndex(item, Integer.parseInt(p[6]));
 				return previous;
 			}
 		};
 		paletteBuffer = new PlayerPaletteBuffer(connection::playerPalette);
 		paletteProgram = new PlayerColorShaderProgram(paletteBuffer);
-		paletteRenderer = new PlayerColorRenderer(paletteProgram, profileMap, 
+		paletteRenderer = new PlayerColorRenderer(paletteProgram, paletteHint, profileMap, 
 				arbitrator, graphicsManager, biasOutline, textureManager);
 	}
 	

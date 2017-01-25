@@ -28,7 +28,7 @@ public abstract class TerrainTestBase extends WyvernRider {
 	public final TileOutline outline, biasOutline;
 	
 	public TerrainTestBase() throws IOException, LWJGLException {
-		//Storage storage = new net.aegistudio.aoe2m.media.FileStorage(new File("assets"));
+		//Storage storage = new net.aegistudio.aoe2m.media.FileStorage(new java.io.File("assets"));
 		Storage storage = new net.aegistudio.aoe2m.media.ZipStorage(
 				new java.util.zip.ZipFile("asset.zip"), "converted");
 		

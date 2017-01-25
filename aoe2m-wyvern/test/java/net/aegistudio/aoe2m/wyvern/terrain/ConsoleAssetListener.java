@@ -91,5 +91,7 @@ public class ConsoleAssetListener implements AssetListener {
 	@Override
 	public void readySubsystem(String name, Class<?> assetClass) {
 		subsystems.get(name).ready();
+		output.println("We've loaded " + statistics.get(name)
+				+ " of " + name + " by this subsystem ready.");
 	}
 }
