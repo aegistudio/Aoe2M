@@ -25,7 +25,7 @@ public class ProfileShaderProgram extends ShaderProgram {
 		priority.loadObjects(this);
 	}
 	
-	public SamplerBinding normal, player;
+	public SamplerBinding normal, player, obstruct;
 	public int texCoord;
 	public void create() throws LWJGLException {
 		super.create();
@@ -38,6 +38,10 @@ public class ProfileShaderProgram extends ShaderProgram {
 		
 		player = new SamplerBinding(1, 
 				uniform("texPlayer"), 
+				vertexAttribute("texCoordInput"));
+		
+		obstruct = new SamplerBinding(1, 
+				uniform("texObstruct"), 
 				vertexAttribute("texCoordInput"));
 		
 		texCoord = vertexAttribute("texCoordInput");

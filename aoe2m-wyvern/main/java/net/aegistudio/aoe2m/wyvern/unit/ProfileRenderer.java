@@ -48,6 +48,7 @@ public class ProfileRenderer extends BasicRenderer {
 		
 		textureManager.bind(sprite.normalTexture, shaderProgram.normal);
 		textureManager.bind(sprite.playerTexture, shaderProgram.player);
+		textureManager.bind(sprite.obstructTexture, shaderProgram.obstruct);
 		
 		SlpTexture slpTexture = sprite.normalTexture.get(slpIndex);
 		
