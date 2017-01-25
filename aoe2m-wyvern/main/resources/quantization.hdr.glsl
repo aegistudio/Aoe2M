@@ -15,4 +15,5 @@ vec4 quantize(float value, float factor);
 
 float dequantize(vec4 quantized, float factor);
 
-bool quanLessThan(float value, vec4 sampled, float factor);
+int quanCompare(vec4 left, vec4 right);
+int quanCompareFV(float value, vec4 sampled, float factor);

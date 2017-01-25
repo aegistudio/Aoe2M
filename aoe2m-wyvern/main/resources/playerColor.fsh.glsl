@@ -11,7 +11,8 @@ void main() {
 	vec4 color = texture2D(player, texCoordVarying);
 	if(color.a < 0.5) { discard; return; }
 	
-	if(priomapLessThan(priority(), defaultFactor)) { discard; return; }
+	if(priomapCompare(priority(), defaultFactor) < 0) 
+		{ discard; return; }
 	
 	int index = 0;
 	index += (color.r >= 0.5)? 1 : 0;

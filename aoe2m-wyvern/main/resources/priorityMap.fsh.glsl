@@ -12,11 +12,11 @@ float priomapSample(float level) {
 	return dequantize(mapValue, level);
 }
 
-bool priomapLessThan(float sampled, float level) {
+int priomapCompare(float sampled, float level) {
 	vec4 mapValue = priomapVector();
-	if(mapValue.a < 0.5) return false;
+	if(mapValue.a < 0.5) return 1;
 	
-	return quanLessThan(sampled, mapValue, level);
+	return quanCompareFV(sampled, mapValue, level);
 }
 
 void priomapFragment() {

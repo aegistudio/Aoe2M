@@ -21,4 +21,4 @@ void priomapFragment();
 
 vec4 priomapVector();
 float priomapSample(float level);
-bool priomapLessThan(float sampled, float level);
+int priomapCompare(float sampled, float level);

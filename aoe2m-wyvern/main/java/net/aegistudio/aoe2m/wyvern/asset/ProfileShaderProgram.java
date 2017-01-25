@@ -40,7 +40,7 @@ public class ProfileShaderProgram extends ShaderProgram {
 				uniform("texPlayer"), 
 				vertexAttribute("texCoordInput"));
 		
-		obstruct = new SamplerBinding(1, 
+		obstruct = new SamplerBinding(2, 
 				uniform("texObstruct"), 
 				vertexAttribute("texCoordInput"));
 		

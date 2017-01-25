@@ -43,7 +43,7 @@ public class ObstructRenderer extends BasicRenderer {
 			GraphicsSprite sprite, int slpTextureIndex, SlpSubImage subImage) throws LWJGLException {
 		
 		// Parse player color.
-		obstructProgram.outline(paletteSupplier.get().subLength / 2);
+		obstructProgram.outline(paletteSupplier.get().subLength / 3);
 		paletteHint.playerIndex(obstructProgram.playerPalette, instruction);
 		
 		// Use the texture.

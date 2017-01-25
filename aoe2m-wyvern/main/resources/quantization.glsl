@@ -18,10 +18,20 @@ float dequantize(vec4 quantized, float factor) {
 	return quantized.x + quantized.y / factor + quantized.z / factor / factor;
 }
 
-bool quanLessThan(float value, vec4 sampled, float factor) {
+int quanCompare(vec4 left, vec4 right, float factor) {
+	int compareRed =  int(left.r * factor) - int(right.r * factor);
+	if(compareRed != 0) return compareRed;
+	
+	int compareGreen =  int(left.g * factor) - int(right.g * factor);
+	if(compareGreen != 0) return compareGreen;
+	
+	int compareBlue =  int(left.b * factor) - int(right.b * factor);
+	if(compareBlue != 0) return compareBlue;
+	
+	return 0;
+}
+
+int quanCompareFV(float value, vec4 sampled, float factor) {
 	vec4 left = quantize(value, factor);
-	if(int(left.r * factor) < int(sampled.r * factor)) return true;
-	if(int(left.g * factor) < int(sampled.g * factor)) return true;
-	if(int(left.b * factor) < int(sampled.b * factor)) return true;
-	return false;
+	return quanCompare(left, sampled, factor);
 }

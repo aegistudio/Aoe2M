@@ -12,7 +12,7 @@ void main() {
 	vec4 color = texture2D(obstruct, texCoordVarying);
 	if(color.a < 0.5) { discard; return; }
 	
-	if(priomapLessThan(priority(), defaultFactor))
+	if(priomapCompare(priority(), defaultFactor) < 0)
 		gl_FragColor = paletteQuery(outline);
 	else { discard; return; }
 }
