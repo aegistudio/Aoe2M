@@ -8,6 +8,7 @@ import net.aegistudio.aoe2m.assetdba.AssetManager;
 import net.aegistudio.aoe2m.assetdba.GraphicsGamedata;
 import net.aegistudio.aoe2m.assetdba.NullAssetListener;
 import net.aegistudio.aoe2m.assetdba.PlayerPalette;
+import net.aegistudio.aoe2m.assetdba.unit.UnitGamedata;
 import net.aegistudio.aoe2m.media.Storage;
 
 public class OpgAssetConnection implements AssetConnection {
@@ -44,5 +45,11 @@ public class OpgAssetConnection implements AssetConnection {
 	protected OpgPlayerPalette palette;
 	public PlayerPalette playerPalette() {
 		return palette;
+	}
+
+	@Override
+	public AssetManager<UnitGamedata> unit(int civ) {
+		// NOT YET IMPLEMENTED!
+		return null;
 	}
 }
