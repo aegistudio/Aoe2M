@@ -19,6 +19,7 @@ public class OpgAssetConnection implements AssetConnection {
 		blendomatic = new OpgBlendomaticManager(perfLog, root);
 		tile = new OpgTileManager(perfLog, root);
 		graphics = new OpgGraphicsManager(perfLog, palette, root);
+		language = new OpgStringManager(perfLog, root);
 		
 		perfLog.readyDatabase();
 	}
@@ -49,7 +50,12 @@ public class OpgAssetConnection implements AssetConnection {
 
 	@Override
 	public AssetManager<UnitGamedata> unit(int civ) {
-		// NOT YET IMPLEMENTED!
+		assert false: "Not yet implemented!";
 		return null;
+	}
+
+	protected OpgStringManager language;
+	public AssetManager<String> language(String locale) {
+		return language.locale(locale);
 	}
 }

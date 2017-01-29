@@ -20,4 +20,8 @@ public interface AssetConnection {
 	public static final String UNIT_NAME = "unit";
 	public static final Class<?> UNIT_CLASS = UnitGamedata.class;
 	public AssetManager<UnitGamedata> unit(int civ);
+	
+	public static final String LANGUAGE_NAME = "language";
+	public static final Class<?> LANGUAGE_CLASS = String.class;
+	public AssetManager<String> language(String locale);
 }
