@@ -16,7 +16,7 @@ public class OpgDamageGraphics {
 		= new FieldMapping<>(DamageGraphics.class)
 			.integerField("graphic_id", "graphicsId")
 			.integerField("damage_percent", "damagePercent")
-			.enumField("apply_mode", "applyMode", EnumDamageApply.class);
+			.enumField("apply_mode", EnumDamageApply.class, "applyMode");
 	
 	public final DamageGraphics[] damages;
 	public OpgDamageGraphics(Storage file) throws IOException {

@@ -41,7 +41,7 @@ public abstract class UnitGamedata {
 	
 	public float clearanceX, clearanceY;
 	
-	public int buildingMode;
+	public EnumBuildingMode buildingMode;
 	
 	public boolean visibleInFog;
 	

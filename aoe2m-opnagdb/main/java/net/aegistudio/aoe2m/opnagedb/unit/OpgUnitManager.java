@@ -23,18 +23,19 @@ public class OpgUnitManager implements AssetManager<UnitGamedata> {
 	public Map<Integer, OpgUnitGamedata> units = new TreeMap<>();
 	
 	public OpgUnitManager(int estimatedCount, AssetListener perfLog, Storage civ) throws IOException {
-		perfLog.initSubsystem(UNIT_NAME, UNIT_CLASS, estimatedCount);
-		
 		OpgUnitFactory factory = new OpgUnitFactory();
 		List<OpgUnitGamedata> unitList = new ArrayList<>();
 		build(unitList, perfLog, factory, civ, EnumUnitType.EYE_CANDY, "object");
 		build(unitList, perfLog, factory, civ, EnumUnitType.FLAG, "flag");
 		build(unitList, perfLog, factory, civ, EnumUnitType.BIRD, "bird");
+		build(unitList, perfLog, factory, civ, EnumUnitType.DEAD_OR_FISH, "dead_or_fish");
+		build(unitList, perfLog, factory, civ, EnumUnitType.LIVING, "living");
+		build(unitList, perfLog, factory, civ, EnumUnitType.PROJECTILE, "projectile");
+		build(unitList, perfLog, factory, civ, EnumUnitType.BUILDING, "building");
+		build(unitList, perfLog, factory, civ, EnumUnitType.TREE, "tree");
 		
 		maximal = unitList.stream().mapToInt(unit -> unit.id0).max().getAsInt();
 		unitList.forEach(unit -> units.put(unit.id0, unit));
-		
-		perfLog.readySubsystem(UNIT_NAME, UNIT_CLASS);
 	}
 	
 	private void build(List<OpgUnitGamedata> unitList, AssetListener perfLog, 

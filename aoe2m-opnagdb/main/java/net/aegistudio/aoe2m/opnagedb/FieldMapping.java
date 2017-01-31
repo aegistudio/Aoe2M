@@ -23,11 +23,22 @@ public class FieldMapping<E> {
 		return this;
 	}
 	
-	public FieldMapping<E> field(String field, String fieldInternal, Function<String, ?> parser) {
+	public FieldMapping<E> field(String field, Function<String, ?> parser, String... fieldInternal) {
 		try {
-			Field fieldObject = type.getField(fieldInternal);
+			Field[] fieldObjects = new Field[fieldInternal.length];
+			for(int i = 0; i < fieldInternal.length; i ++) {
+				Class<?> classType = i == 0? type : fieldObjects[i - 1].getType();
+				fieldObjects[i] = classType.getField(fieldInternal[i]);
+			}
 			return map(field, (object, string) -> {
-				try { fieldObject.set(object, parser.apply(string)); } 
+				try { 
+					Object left = object;
+					for(int i = 0; i < fieldObjects.length - 1; i ++)
+						left = fieldObjects[i].get(left);
+					
+					fieldObjects[fieldObjects.length - 1]
+							.set(left, parser.apply(string)); 
+				} 
 				catch(Exception e) { 
 					System.err.println("Error parsing field " + field);
 					e.printStackTrace();
@@ -38,31 +49,31 @@ public class FieldMapping<E> {
 		}
 	}
 	
-	public FieldMapping<E> stringField(String field, String fieldInternal) {
-		return field(field, fieldInternal, i -> i);
+	public FieldMapping<E> stringField(String field, String... fieldInternal) {
+		return field(field, i -> i, fieldInternal);
 	}
 	
-	public FieldMapping<E> integerField(String field, String fieldInternal) {
-		return field(field, fieldInternal, Integer::parseInt);
+	public FieldMapping<E> integerField(String field, String... fieldInternal) {
+		return field(field, Integer::parseInt, fieldInternal);
 	}
 	
-	public FieldMapping<E> floatField(String field, String fieldInternal) {
-		return field(field, fieldInternal, Float::parseFloat);
+	public FieldMapping<E> floatField(String field, String... fieldInternal) {
+		return field(field, Float::parseFloat, fieldInternal);
 	}
 	
-	public FieldMapping<E> booleanField(String field, String fieldInternal, String trueWord) {
-		return field(field, fieldInternal, i -> i.equals(trueWord));
+	public FieldMapping<E> booleanField(String field, String trueWord, String... fieldInternal) {
+		return field(field, i -> i.equals(trueWord), fieldInternal);
 	}
 	
-	public <F extends Enum<?>> FieldMapping<E> enumField(String field, String fieldInternal, Class<F> enumType) {
+	public <F extends Enum<?>> FieldMapping<E> enumField(String field, Class<F> enumType, String... fieldInternal) {
 		try {
 			Method valueOf = enumType.getMethod("valueOf", String.class);
-			return field(field, fieldInternal, i -> { try {
+			return field(field, i -> { try {
 				return valueOf.invoke(null, i);
 			} catch(Exception e) {
 				e.printStackTrace();
 				return null;
-			}});
+			}}, fieldInternal);
 		}
 		catch(Exception e) {
 			throw new AssertionError(e);
