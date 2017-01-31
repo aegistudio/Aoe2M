@@ -1,7 +1,7 @@
 package net.aegistudio.aoe2m.assetdba.unit;
 
-public class BuildingData {
-	public int graphicConstruction;
+public abstract class BuildingData {
+	public int graphicsConstruction;
 	public int graphicsSnow;
 	public int modeAdjacent;
 	public int iconDisabler;
@@ -16,11 +16,13 @@ public class BuildingData {
 		public float misplacedX;
 		public float misplacedY;
 	}
-	public BuildingAnnex[] buildingAnnex = new BuildingAnnex[4];
+	
+	public abstract int annexLength();
+	public abstract BuildingAnnex annex(int id);
 	
 	public int headUnit;
 	public int transformUnit;
 	public int constructionSound;
-	public int garrisonType;
+	public EnumGarrisonType garrisonType;
 	public float garrisonHealRate;
 }

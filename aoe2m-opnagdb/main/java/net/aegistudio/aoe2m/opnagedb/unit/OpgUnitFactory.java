@@ -11,6 +11,7 @@ import net.aegistudio.aoe2m.assetdba.unit.EnumBlastAttack;
 import net.aegistudio.aoe2m.assetdba.unit.EnumBlastDefence;
 import net.aegistudio.aoe2m.assetdba.unit.EnumBuildingMode;
 import net.aegistudio.aoe2m.assetdba.unit.EnumCreatable;
+import net.aegistudio.aoe2m.assetdba.unit.EnumGarrisonType;
 import net.aegistudio.aoe2m.assetdba.unit.EnumInteractionMode;
 import net.aegistudio.aoe2m.assetdba.unit.EnumInteractionType;
 import net.aegistudio.aoe2m.assetdba.unit.EnumUnitType;
@@ -26,7 +27,7 @@ public class OpgUnitFactory {
 	public final FieldMapping<OpgUnitGamedata> mapping;
 	private OpgUnitFactory() {
 		mapping = new FieldMapping<>(OpgUnitGamedata.class)
-				/** Common unit headers. **/
+				/** common unit headers. **/
 				.integerField("id0", "id0")
 				.integerField("language_dll_name", "dllName")
 				.integerField("language_dll_creation", "dllCreation")
@@ -60,14 +61,14 @@ public class OpgUnitFactory {
 				.integerField("id1", "id1")
 				.integerField("id2", "id2")
 				
-				/** Flag unit. **/
+				/** flag unit. **/
 				.floatField("speed", "speed")
 				
-				/** Dead or fish unit. **/
+				/** dead or fish unit. **/
 				.integerField("walking_graphics0", "walking", "graphicsWalking0")
 				.integerField("walking_graphics1", "walking", "graphicsWalking1")
 
-				/** Bird unit. **/
+				/** bird unit. **/
 				.floatField("work_rate", "discover", "workRate")
 				.integerField("drop_site0", "discover", "dropSite0")
 				.integerField("drop_site1", "discover", "dropSite1")
@@ -91,7 +92,15 @@ public class OpgUnitFactory {
 				.integerField("creation_time", "production", "creationTime")
 				.integerField("creation_location_id", "production", "creationLocationId")
 				.enumField("creatable_type", EnumCreatable.class, "production", "creatableType")
-				.integerField("garrison_graphic", "production", "graphicsGarrison");
+				.integerField("garrison_graphic", "production", "graphicsGarrison")
+				
+				/** building unit. **/
+				.integerField("construction_graphic_id", "building", "graphicsConstruction")
+				.integerField("stack_unit_id", "building", "stackUnitId")
+				.integerField("terrain_id", "building", "terrainId")
+				.map("building_annex", (obj, path) -> ((OpgBuildingData)obj.building).annex
+						= new OpgBuildingAnnex(obj.storage.chdir(path)))
+				.enumField("garrison_type", EnumGarrisonType.class, "building", "garrisonType");
 	}
 	
 	public OpgUnitGamedata[] build(EnumUnitType unitType, Storage storage, 

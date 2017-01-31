@@ -51,8 +51,8 @@ public class OpgUnitGamedata extends UnitGamedata {
 			}
 
 			@Override
-			public BuildingData building(BuildingData buildingData) throws RuntimeException {
-				return null;
+			public BuildingData building(BuildingData building) throws RuntimeException {
+				return building == null? new OpgBuildingData() : building;
 			}
 		});
 	}
