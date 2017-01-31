@@ -51,7 +51,7 @@ public abstract class UnitGamedata {
 	
 	public float resourceDecay;
 	
-	public EnumBlastType blastDefence;
+	public EnumBlastDefence blastDefence;
 	
 	public int subType;
 	

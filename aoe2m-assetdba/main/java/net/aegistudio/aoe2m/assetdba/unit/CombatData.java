@@ -11,7 +11,7 @@ public abstract class CombatData {
 	public abstract int armorType(int index);
 	public abstract int armorAmount(int index);
 	
-	public int interactionType;
+	public EnumInteractionType interactionType;
 	public float maxRange;
 	public float blastWidth;
 	public float reloadTime;
@@ -22,7 +22,7 @@ public abstract class CombatData {
 	public float displacementLayer;
 	public float displacementDistance;
 	public float displacementHeight;
-	public int blastAttackLevel;
+	public EnumBlastAttack blastAttackLevel;
 	public float minRange;
 	public float accuracyDispersion;
 	public int graphicsAttack;

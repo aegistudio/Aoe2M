@@ -7,9 +7,12 @@ import java.io.InputStreamReader;
 import java.util.function.Consumer;
 
 import net.aegistudio.aoe2m.assetdba.unit.EnumAttackMode;
-import net.aegistudio.aoe2m.assetdba.unit.EnumBlastType;
+import net.aegistudio.aoe2m.assetdba.unit.EnumBlastAttack;
+import net.aegistudio.aoe2m.assetdba.unit.EnumBlastDefence;
 import net.aegistudio.aoe2m.assetdba.unit.EnumBuildingMode;
+import net.aegistudio.aoe2m.assetdba.unit.EnumCreatable;
 import net.aegistudio.aoe2m.assetdba.unit.EnumInteractionMode;
+import net.aegistudio.aoe2m.assetdba.unit.EnumInteractionType;
 import net.aegistudio.aoe2m.assetdba.unit.EnumUnitType;
 import net.aegistudio.aoe2m.media.Storage;
 import net.aegistudio.aoe2m.opnagedb.CsvFilter;
@@ -17,10 +20,13 @@ import net.aegistudio.aoe2m.opnagedb.FieldMapping;
 import net.aegistudio.aoe2m.opnagedb.FunctionWrapper;
 
 public class OpgUnitFactory {
+	protected static OpgUnitFactory instance = new OpgUnitFactory();
+	public static OpgUnitFactory get() { return instance; }
+	
 	public final FieldMapping<OpgUnitGamedata> mapping;
-	public OpgUnitFactory() {
+	private OpgUnitFactory() {
 		mapping = new FieldMapping<>(OpgUnitGamedata.class)
-				/** Common unit headers. */
+				/** Common unit headers. **/
 				.integerField("id0", "id0")
 				.integerField("language_dll_name", "dllName")
 				.integerField("language_dll_creation", "dllCreation")
@@ -38,7 +44,7 @@ public class OpgUnitFactory {
 				.enumField("building_mode", EnumBuildingMode.class, "buildingMode")
 				.booleanField("visible_in_fog", "VISIBLE", "visibleInFog")
 				.integerField("fly_mode", "flyMode")
-				.enumField("blast_defense_level", EnumBlastType.class, "blastDefence")
+				.enumField("blast_defense_level", EnumBlastDefence.class, "blastDefence")
 				.enumField("interaction_mode", EnumInteractionMode.class, "interactionMode")
 				.integerField("language_dll_help", "dllHelp")
 				.integerField("selection_shape", "selectionShape")
@@ -61,13 +67,31 @@ public class OpgUnitFactory {
 				.integerField("walking_graphics0", "walking", "graphicsWalking0")
 				.integerField("walking_graphics1", "walking", "graphicsWalking1")
 
-				/** Bird or fish unit. **/
+				/** Bird unit. **/
 				.floatField("work_rate", "discover", "workRate")
 				.integerField("drop_site0", "discover", "dropSite0")
 				.integerField("drop_site1", "discover", "dropSite1")
 				.integerField("task_swap_group_id", "discover", "taskSwapGroupId")
 				.integerField("move_sound", "discover", "moveSound")
-				.integerField("stop_sound", "discover", "stopSound");
+				.integerField("stop_sound", "discover", "stopSound")
+				
+				/** projectile unit. **/
+				.enumField("interaction_type", EnumInteractionType.class, "combat", "interactionType")
+				.floatField("max_range", "combat", "maxRange")
+				.integerField("projectile_unit_id", "combat", "projectileUnit")
+				.enumField("blast_attack_level", EnumBlastAttack.class, "combat", "blastAttackLevel")
+				.integerField("attack_graphic", "combat", "graphicsAttack")
+				
+				/** projectile only. **/
+				.floatField("projectile_arc", "projectile", "projectileArc")
+				
+				/** living unit. **/
+				.map("resource_cost", (obj, path) -> ((OpgProductionData)obj.production).costs 
+						= new OpgResourceStorage(obj.storage.chdir(path)))
+				.integerField("creation_time", "production", "creationTime")
+				.integerField("creation_location_id", "production", "creationLocationId")
+				.enumField("creatable_type", EnumCreatable.class, "production", "creatableType")
+				.integerField("garrison_graphic", "production", "graphicsGarrison");
 	}
 	
 	public OpgUnitGamedata[] build(EnumUnitType unitType, Storage storage, 

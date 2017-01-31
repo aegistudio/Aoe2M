@@ -1,6 +1,6 @@
 package net.aegistudio.aoe2m.assetdba.unit;
 
-public enum EnumBlastType {
+public enum EnumBlastDefence {
 	UNIT_0,
 	OTHER,
 	BUILDING,

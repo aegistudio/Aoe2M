@@ -23,26 +23,25 @@ public class OpgUnitManager implements AssetManager<UnitGamedata> {
 	public Map<Integer, OpgUnitGamedata> units = new TreeMap<>();
 	
 	public OpgUnitManager(int estimatedCount, AssetListener perfLog, Storage civ) throws IOException {
-		OpgUnitFactory factory = new OpgUnitFactory();
 		List<OpgUnitGamedata> unitList = new ArrayList<>();
-		build(unitList, perfLog, factory, civ, EnumUnitType.EYE_CANDY, "object");
-		build(unitList, perfLog, factory, civ, EnumUnitType.FLAG, "flag");
-		build(unitList, perfLog, factory, civ, EnumUnitType.BIRD, "bird");
-		build(unitList, perfLog, factory, civ, EnumUnitType.DEAD_OR_FISH, "dead_or_fish");
-		build(unitList, perfLog, factory, civ, EnumUnitType.LIVING, "living");
-		build(unitList, perfLog, factory, civ, EnumUnitType.PROJECTILE, "projectile");
-		build(unitList, perfLog, factory, civ, EnumUnitType.BUILDING, "building");
-		build(unitList, perfLog, factory, civ, EnumUnitType.TREE, "tree");
+		build(unitList, perfLog, civ, EnumUnitType.EYE_CANDY, "object");
+		build(unitList, perfLog, civ, EnumUnitType.FLAG, "flag");
+		build(unitList, perfLog, civ, EnumUnitType.FLAG, "doppelganger");
+		build(unitList, perfLog, civ, EnumUnitType.BIRD, "bird");
+		build(unitList, perfLog, civ, EnumUnitType.DEAD_OR_FISH, "dead_or_fish");
+		build(unitList, perfLog, civ, EnumUnitType.LIVING, "living");
+		build(unitList, perfLog, civ, EnumUnitType.PROJECTILE, "projectile");
+		build(unitList, perfLog, civ, EnumUnitType.BUILDING, "building");
+		build(unitList, perfLog, civ, EnumUnitType.TREE, "tree");
 		
 		maximal = unitList.stream().mapToInt(unit -> unit.id0).max().getAsInt();
 		unitList.forEach(unit -> units.put(unit.id0, unit));
 	}
 	
-	private void build(List<OpgUnitGamedata> unitList, AssetListener perfLog, 
-			OpgUnitFactory factory, Storage civ, 
+	private void build(List<OpgUnitGamedata> unitList, AssetListener perfLog, Storage civ, 
 			EnumUnitType type, String uniform) throws IOException {
 		unitList.addAll(Arrays.asList(
-				factory.build(type, /*civ.chdir(uniform)*/ civ, 
+				OpgUnitFactory.get().build(type, /*civ.chdir(uniform)*/ civ, 
 						p -> perfLog.initAsset(UNIT_NAME, UNIT_CLASS, Integer.parseInt(p[0])),
 						p -> perfLog.readyAsset(UNIT_NAME, UNIT_CLASS, Integer.parseInt(p[0])),
 						civ.chdir(uniform + ".docx").read(), 

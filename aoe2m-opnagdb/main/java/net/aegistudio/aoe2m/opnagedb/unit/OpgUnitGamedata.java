@@ -37,17 +37,17 @@ public class OpgUnitGamedata extends UnitGamedata {
 
 			@Override
 			public CombatData combat(CombatData combat) throws RuntimeException {
-				return null;
+				return combat == null? new OpgCombatData() : combat;
 			}
 
 			@Override
 			public ProjectileData projectile(ProjectileData projectile) throws RuntimeException {
-				return null;
+				return projectile == null? new ProjectileData() : projectile;
 			}
 
 			@Override
 			public ProductionData production(ProductionData production) throws RuntimeException {
-				return null;
+				return production == null? new OpgProductionData() : production;
 			}
 
 			@Override

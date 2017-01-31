@@ -1,14 +1,15 @@
 package net.aegistudio.aoe2m.assetdba.unit;
 
-public class ProductionData {
-	public final ResourceStorage[] costs = new ResourceStorage[3];
+public abstract class ProductionData {
+	public abstract int costLength();
+	public abstract ResourceStorage cost(int index);
 	
 	public int creationTime;
 	public int creationLocationId;
 	public int creationButtonId;
-	public int creatableType;
+	public EnumCreatable creatableType;
 	public int heroMode;
-	public int graphicGarrison;
+	public int graphicsGarrison;
 	
 	public static class AttackProjectile {
 		public float count;

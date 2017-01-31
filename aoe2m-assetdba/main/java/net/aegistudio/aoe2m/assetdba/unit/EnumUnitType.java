@@ -11,6 +11,9 @@ public enum EnumUnitType {
 	TREE;
 	
 	public <E extends Exception> void build(UnitGamedata gamedata, UnitDataBuilder<E> dataBuilder) throws E {
+		if(ordinal() == TREE.ordinal())
+			return;	// done.
+		
 		if(ordinal() >= FLAG.ordinal()) 
 			gamedata.speed = dataBuilder.flagSpeed(gamedata.speed);
 		
