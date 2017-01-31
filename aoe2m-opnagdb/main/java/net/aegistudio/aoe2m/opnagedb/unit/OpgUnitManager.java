@@ -41,7 +41,7 @@ public class OpgUnitManager implements AssetManager<UnitGamedata> {
 			OpgUnitFactory factory, Storage civ, 
 			EnumUnitType type, String uniform) throws IOException {
 		unitList.addAll(Arrays.asList(
-				factory.build(type, civ.chdir(uniform), 
+				factory.build(type, /*civ.chdir(uniform)*/ civ, 
 						p -> perfLog.initAsset(UNIT_NAME, UNIT_CLASS, Integer.parseInt(p[0])),
 						p -> perfLog.readyAsset(UNIT_NAME, UNIT_CLASS, Integer.parseInt(p[0])),
 						civ.chdir(uniform + ".docx").read(), 

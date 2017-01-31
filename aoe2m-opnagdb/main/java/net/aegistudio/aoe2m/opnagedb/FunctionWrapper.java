@@ -4,11 +4,12 @@ import java.util.Arrays;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 
+import net.aegistudio.aoe2m.opnagedb.fp.FunctionExcept;
+
 public class FunctionWrapper {
-	public interface ExceptionalFunction<S, T> { public T func(S params) throws Exception; }
-	public static <S, T> Function<S, T> mapIgnoreExcept(ExceptionalFunction<S, T> function) {
+	public static <S, T> Function<S, T> mapIgnoreExcept(FunctionExcept<S, T> function) {
 		return s -> { try {
-				return function.func(s);
+				return function.apply(s);
 			}
 			catch(Exception e) {
 				return null;

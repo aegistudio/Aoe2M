@@ -51,11 +51,13 @@ public abstract class UnitGamedata {
 	
 	public float resourceDecay;
 	
-	public int blastDefence;
+	public EnumBlastType blastDefence;
 	
 	public int subType;
 	
-	public int minimapMode, interactionMode;
+	public int minimapMode;
+	
+	public EnumInteractionMode interactionMode;
 	
 	public int commandAttribute;
 	
@@ -69,8 +71,6 @@ public abstract class UnitGamedata {
 	
 	public int selectionMask;
 	
-	public int selectionShapeType;
-	
 	public int selectionShape;
 	
 	public int attribute;
@@ -83,14 +83,15 @@ public abstract class UnitGamedata {
 	
 	public float selectionShapeX, selectionShapeY, selectionShapeZ;
 	
-	public final ResourceStorage[] storage = new ResourceStorage[3];
+	public abstract int storageLength();
+	public abstract ResourceStorage storage(int index);
 	
 	public abstract int damageLength();
 	public abstract DamageGraphics damageGraphics(int index);
 	
 	public int soundSelection, soundDying;
 	
-	public int attackMode;
+	public EnumAttackMode attackMode;
 	
 	public String name;
 	
