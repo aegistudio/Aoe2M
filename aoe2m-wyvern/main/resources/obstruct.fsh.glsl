@@ -13,6 +13,6 @@ void main() {
 	if(color.a < 0.5) { discard; return; }
 	
 	if(priomapCompare(priority(), defaultFactor) < 0)
-		gl_FragColor = paletteQuery(outline);
+		gl_FragColor = paletteQuery(outline) + vec4(0.5);
 	else { discard; return; }
 }

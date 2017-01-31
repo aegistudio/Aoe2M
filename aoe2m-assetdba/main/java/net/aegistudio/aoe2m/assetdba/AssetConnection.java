@@ -1,5 +1,6 @@
 package net.aegistudio.aoe2m.assetdba;
 
+import net.aegistudio.aoe2m.assetdba.unit.Civilization;
 import net.aegistudio.aoe2m.assetdba.unit.UnitGamedata;
 
 public interface AssetConnection {
@@ -20,6 +21,10 @@ public interface AssetConnection {
 	public static final String UNIT_NAME = "unit";
 	public static final Class<?> UNIT_CLASS = UnitGamedata.class;
 	public AssetManager<UnitGamedata> unit(int civ);
+
+	public static final String CIV_NAME = "civilization";
+	public static final Class<?> CIV_CLASS = Civilization.class;
+	public AssetManager<Civilization> civilization(int civ);
 	
 	public static final String LANGUAGE_NAME = "language";
 	public static final Class<?> LANGUAGE_CLASS = String.class;

@@ -8,8 +8,11 @@ import net.aegistudio.aoe2m.assetdba.AssetManager;
 import net.aegistudio.aoe2m.assetdba.GraphicsGamedata;
 import net.aegistudio.aoe2m.assetdba.NullAssetListener;
 import net.aegistudio.aoe2m.assetdba.PlayerPalette;
+import net.aegistudio.aoe2m.assetdba.unit.Civilization;
 import net.aegistudio.aoe2m.assetdba.unit.UnitGamedata;
 import net.aegistudio.aoe2m.media.Storage;
+import net.aegistudio.aoe2m.opnagedb.unit.OpgCivManager;
+import net.aegistudio.aoe2m.opnagedb.unit.OpgUnitSubsystem;
 
 public class OpgAssetConnection implements AssetConnection {
 	public OpgAssetConnection(Storage root, AssetListener perfLog) throws IOException {
@@ -20,6 +23,8 @@ public class OpgAssetConnection implements AssetConnection {
 		tile = new OpgTileManager(perfLog, root);
 		graphics = new OpgGraphicsManager(perfLog, palette, root);
 		language = new OpgStringManager(perfLog, root);
+		civilization = new OpgCivManager(perfLog, root);
+		units = new OpgUnitSubsystem(civilization, perfLog, root);
 		
 		perfLog.readyDatabase();
 	}
@@ -48,10 +53,14 @@ public class OpgAssetConnection implements AssetConnection {
 		return palette;
 	}
 
-	@Override
+	protected OpgCivManager civilization;
+	public AssetManager<Civilization> civilization(int civ) {
+		return civilization;
+	}
+	
+	protected OpgUnitSubsystem units;
 	public AssetManager<UnitGamedata> unit(int civ) {
-		assert false: "Not yet implemented!";
-		return null;
+		return units.unit(civ);
 	}
 
 	protected OpgStringManager language;
