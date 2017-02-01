@@ -6,14 +6,14 @@ import java.util.List;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.EnumWrapper;
+import net.aegistudio.aoe2m.EnumContainer;
 import net.aegistudio.aoe2m.FieldTranslator;
 import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.scx.player.EnumDiplomacy;
 
 public class EffectPo {
-	public EnumWrapper<EnumEffectType> type = new EnumWrapper<>(EnumEffectType.NONE);
+	public EnumContainer<EnumEffectType> type = new EnumContainer<>(EnumEffectType.NONE);
 	public Wrapper<Integer> aiGoal = new Container<Integer>(-1);
 	public Wrapper<Integer> amount = new Container<Integer>(-1);
 	
@@ -62,7 +62,7 @@ public class EffectPo {
 	public Wrapper<Text> sound = new Container<Text>(new Text(1, new String(new byte[]{0})));	// Very special.
 	
 	public void build(FieldTranslator translator) throws IOException, CorruptionException {
-		translator.enum32(type);
+		translator.enum32(type.enumWrapper());
 		translator.constUnsigned32(0x17);
 		
 		translator.signed32(aiGoal);

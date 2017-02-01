@@ -23,7 +23,7 @@ public class PlayerTableBuilder {
 		for(int i = 0; i < 16; i ++) {
 			translator.bool32(playerTable.playerData[i].active);
 			translator.bool32(playerTable.playerData[i].human);
-			translator.enum32(playerTable.playerData[i].civilization);
+			translator.enum32(playerTable.playerData[i].civilization.enumWrapper());
 			translator.constUnsigned32(4);
 		}
 	}
@@ -44,7 +44,7 @@ public class PlayerTableBuilder {
 		}
 		
 		for(int i = 0; i < 16; i ++)
-			translator.enum8(playerTable.playerData[i].aiType);
+			translator.enum8(playerTable.playerData[i].aiType.enumWrapper());
 		
 		translator.division();
 		
@@ -61,7 +61,7 @@ public class PlayerTableBuilder {
 	public void buildDiplomacy(MetadataPo metadata, FieldTranslator translator) throws IOException, CorruptionException {
 		for(int i = 0; i < 16; i ++) 
 			for(int j = 0; j < 16; j ++) 
-				translator.enum32(playerTable.playerData[i].diplomacy[j]);
+				translator.enum32(playerTable.playerData[i].diplomacy[j].enumWrapper());
 			
 		translator.skip(11520);	// 16 * 720, WTF
 		translator.division();
@@ -134,7 +134,7 @@ public class PlayerTableBuilder {
 
 			translator.constByte(EnumDiplomacy.ENEMY.ordinal());
 			for(int d = 0; d < playerTable.playerData3Length.getValue() - 1; d ++) {
-				translator.enum8(this.playerTable.playerData[i].diplomacy[d]);
+				translator.enum8(this.playerTable.playerData[i].diplomacy[d].enumWrapper());
 			}
 			
 			translator.constUnsigned32(0);
@@ -148,7 +148,7 @@ public class PlayerTableBuilder {
 			translator.constUnsigned32(i); // WTF?
 			
 			translator.float32(playerData.unknownedArrayIncluded);
-			translator.enum32(playerData.playerColor);
+			translator.enum32(playerData.playerColor.enumWrapper());
 			translator.signed16(playerData.grandTheftEmpirePlayers);
 			translator.constUnsigned16(0);
 			

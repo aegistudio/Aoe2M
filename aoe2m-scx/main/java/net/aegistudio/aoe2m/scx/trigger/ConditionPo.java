@@ -4,12 +4,12 @@ import java.io.IOException;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.EnumWrapper;
+import net.aegistudio.aoe2m.EnumContainer;
 import net.aegistudio.aoe2m.FieldTranslator;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class ConditionPo {
-	public EnumWrapper<EnumConditionType> type = new EnumWrapper<>(EnumConditionType.NONE);
+	public EnumContainer<EnumConditionType> type = new EnumContainer<>(EnumConditionType.NONE);
 	public Wrapper<Integer> amount = new Container<Integer>(-1);
 	
 	public Wrapper<Integer> resourceType = new Container<Integer>(-1);
@@ -42,7 +42,7 @@ public class ConditionPo {
 	public Wrapper<Integer> aiSignal = new Container<Integer>(-1);
 	
 	public void build(FieldTranslator translator) throws IOException, CorruptionException {
-		translator.enum32(type);
+		translator.enum32(type.enumWrapper());
 		translator.constUnsigned32(0x10l);
 		
 		translator.signed32(amount);

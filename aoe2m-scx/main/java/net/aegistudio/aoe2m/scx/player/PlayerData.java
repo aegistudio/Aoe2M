@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.EnumWrapper;
+import net.aegistudio.aoe2m.EnumContainer;
 import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.Wrapper;
 
@@ -22,7 +22,7 @@ public class PlayerData {
 	public Wrapper<Long> stringTableIndex = new Container<Long>(-1l);
 	public Wrapper<Boolean> active = new Container<Boolean>(false);
 	public Wrapper<Boolean> human = new Container<Boolean>(false);
-	public EnumWrapper<EnumCivilization> civilization = new EnumWrapper<EnumCivilization>(EnumCivilization.BRITONS);
+	public EnumContainer<EnumCivilization> civilization = new EnumContainer<>(EnumCivilization.BRITONS);
 	
 	// PlayerData2
 	public Wrapper<Text> vcName = new Container<Text>(new Text(0, ""));
@@ -33,7 +33,7 @@ public class PlayerData {
 	public Wrapper<Text> aiName = new Container<Text>(new Text(randomGame.length(), randomGame));
 	public Wrapper<Text> perFile = new Container<Text>(new Text(0, ""));
 
-	public EnumWrapper<EnumAiType> aiType = new EnumWrapper<EnumAiType>(EnumAiType.STANDARD);
+	public EnumContainer<EnumAiType> aiType = new EnumContainer<>(EnumAiType.STANDARD);
 	
 	public Wrapper<Long> initGold = new Container<Long>(0l);
 	public Wrapper<Long> initWood = new Container<Long>(0l);
@@ -43,8 +43,8 @@ public class PlayerData {
 	
 	// Diplomacy
 	@SuppressWarnings("unchecked")
-	public EnumWrapper<EnumDiplomacy>[] diplomacy = new EnumWrapper[16];
-	{ for(int i = 0; i < 16; i ++) diplomacy[i] = new EnumWrapper<EnumDiplomacy>(EnumDiplomacy.ENEMY); }
+	public EnumContainer<EnumDiplomacy>[] diplomacy = new EnumContainer[16];
+	{ for(int i = 0; i < 16; i ++) diplomacy[i] = new EnumContainer<EnumDiplomacy>(EnumDiplomacy.ENEMY); }
 	
 	public Wrapper<Boolean> alliedVictory = new Container<Boolean>(false);
 	
@@ -70,7 +70,7 @@ public class PlayerData {
 	
 	public Wrapper<Float> unknownedArrayIncluded = new Container<Float>(2.0f);	// Included when 2.0f
 	
-	public EnumWrapper<EnumPlayerColor> playerColor = new EnumWrapper<EnumPlayerColor>(EnumPlayerColor.RED);
+	public EnumContainer<EnumPlayerColor> playerColor = new EnumContainer<>(EnumPlayerColor.RED);
 	
 	public Wrapper<Short> grandTheftEmpirePlayers = new Container<Short>((short)0);
 	

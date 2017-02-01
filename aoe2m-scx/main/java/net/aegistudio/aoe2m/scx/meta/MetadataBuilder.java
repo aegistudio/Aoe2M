@@ -89,7 +89,7 @@ public class MetadataBuilder {
 		translator.unused();
 		
 		translator.bool32(victory.allCustomCondition);
-		translator.enum32(victory.victoryMode);
+		translator.enum32(victory.victoryMode.enumWrapper());
 		
 		translator.unsigned32(victory.requiredScore);
 		translator.unsigned32(victory.requiredTime);

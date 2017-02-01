@@ -3,20 +3,25 @@ package net.aegistudio.aoe2m;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 
-public class EnumWrapper<T extends Enum<T>> extends Container<T> {
-	public EnumWrapper(T initValue) {
+public class EnumWrapper<T extends Enum<T>> extends Delegate<T> {
+	protected Method values;
+	public EnumWrapper(Class<T> enumClass, Wrapper<T> initValue) {
 		super(initValue);
+		try {
+			values = enumClass.getMethod("values");
+		} catch (Exception e) {
+			throw new AssertionError(e);
+		}
 	}
 
 	public int intValue() {
-		return super.value.ordinal();
+		return super.getValue().ordinal();
 	}
 	
 	@SuppressWarnings("unchecked")
 	public void setOrdinal(int value) {
 		try {
-			Method method = super.value.getClass().getMethod("values");
-			super.value = (T) Array.get(method.invoke(null), value);
+			super.setValue((T) Array.get(values.invoke(null), value));
 		}
 		catch(Exception e) {
 			//e.printStackTrace();
