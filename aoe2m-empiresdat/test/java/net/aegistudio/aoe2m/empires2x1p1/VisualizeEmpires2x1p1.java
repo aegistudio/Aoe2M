@@ -22,6 +22,9 @@ public class VisualizeEmpires2x1p1 {
 			
 			FieldTranslator inputTranslator = new StackDebugTranslator(
 					debugInput, new FieldInputTranslator(debugInput, "gbk"));
+	
+			//FieldTranslator inputTranslator 
+			//	= new FieldInputTranslator(inflateInput, "gbk");
 			
 			Empires2x1p1 empires2x1p1 = new Empires2x1p1();
 			empires2x1p1.translate(inputTranslator);

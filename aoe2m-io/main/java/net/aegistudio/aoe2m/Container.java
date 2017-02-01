@@ -31,4 +31,29 @@ public class Container<T> implements Wrapper<T> {
 			return equals(((Container)another).getValue());
 		return value.equals(another);
 	}
+	
+	/* Some candies for functional interfaces */
+	public static Container<Byte> byte0() {
+		return new Container<>((byte)0);
+	}
+	
+	public static Container<Short> short0() {
+		return new Container<>((short)0);
+	}
+	
+	public static Container<Integer> int0() {
+		return new Container<>(0);
+	}
+	
+	public static Container<Long> long0() {
+		return new Container<>(0l);
+	}
+	
+	public static Container<Float> float0() {
+		return new Container<>(0f);
+	}
+	
+	public static Container<String> string0() {
+		return new Container<>("");
+	}
 }

@@ -11,6 +11,8 @@ import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.empires2x1p1.graphics.Graphics;
 import net.aegistudio.aoe2m.empires2x1p1.restriction.TerrainRestriction;
 import net.aegistudio.aoe2m.empires2x1p1.sound.Sound;
+import net.aegistudio.aoe2m.empires2x1p1.terrain.MapData;
+import net.aegistudio.aoe2m.empires2x1p1.terrain.Terrain;
 
 public class Empires2x1p1 {
 	public final Wrapper<String> version = new Container<String>("");
@@ -23,6 +25,10 @@ public class Empires2x1p1 {
 	
 	public final Graphics graphics = new Graphics();
 	
+	public final MapData map = new MapData();
+	
+	public final List<Terrain> terrain = new ArrayList<>();
+	
 	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
 		translator.constString(8, version);
 		
@@ -31,7 +37,7 @@ public class Empires2x1p1 {
 		translator.unsigned16(restrictionLength);
 		
 		Wrapper<Integer> terrainLength 
-			= new Container<>(/*terrain.terrains.size()*/ 0);
+			= new Container<>(terrain.size());
 		translator.unsigned16(terrainLength);
 		
 		terrainRestriction.translate(
@@ -50,5 +56,10 @@ public class Empires2x1p1 {
 				Sound::new, item -> item.translate(translator));
 		
 		graphics.translate(translator);
+		
+		map.translate(translator);
+		
+		translator.array(terrainLength.getValue(), terrain, Terrain::new, 
+				terrain -> terrain.translate(translator));
 	}
 }

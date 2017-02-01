@@ -12,6 +12,7 @@ import net.aegistudio.aoe2m.Wrapper;
 public class Graphics {
 	public final List<Wrapper<Integer>> offsets = new ArrayList<>();
 	public final List<GraphicsItem> items = new ArrayList<>();
+	public final Wrapper<String> renderingData = new Container<String>("");
 	
 	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
 		Wrapper<Integer> graphicsCount = new Container<>(offsets.size());
@@ -26,5 +27,8 @@ public class Graphics {
 		
 		translator.array((int)actualLength, items, 
 				GraphicsItem::new, item -> item.translate(translator));
+		
+		// WTF? Version issue?
+		//translator.constString(138, renderingData);
 	}
 }

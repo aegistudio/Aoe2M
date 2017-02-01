@@ -15,8 +15,7 @@ public class RestrictionItem {
 	
 	public void translateItem(int terrain, FieldTranslator translator) throws IOException, CorruptionException {
 		translator.array(terrain, accessible, 
-				() -> new Container<Float>(0.0f), 
-				item -> translator.float32(item));
+				Container::float0, translator::float32);
 		
 		translator.array(terrain, sprites, 
 				RestrictionSprites::new, 

@@ -19,12 +19,10 @@ public class TerrainRestriction {
 			throws IOException, CorruptionException {
 		
 		translator.array(restriction, offset0, 
-				() -> new Container<Integer>(0), 
-				item -> translator.signed32(item));
-
+				Container::int0, translator::signed32);
+		
 		translator.array(restriction, offset1, 
-				() -> new Container<Integer>(0), 
-				item -> translator.signed32(item));
+				Container::int0, translator::signed32);
 		
 		translator.array(restriction, restrictions, 
 				RestrictionItem::new, 
