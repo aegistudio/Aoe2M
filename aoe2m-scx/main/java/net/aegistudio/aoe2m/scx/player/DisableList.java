@@ -2,20 +2,21 @@ package net.aegistudio.aoe2m.scx.player;
 
 import java.io.IOException;
 
+import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.FieldTranslator;
 import net.aegistudio.aoe2m.Wrapper;
 
 @SuppressWarnings("unchecked")
 public class DisableList {
-	public Wrapper<Long> disabledCount = new Wrapper<Long>(0l);
+	public Wrapper<Long> disabledCount = new Container<Long>(0l);
 	public Wrapper<Long> disabledId[];
 	public Wrapper<Long> extraDisabledId[];
 	
 	public DisableList(int maxDisableId, int maxExtraDisableId) {
 		disabledId = new Wrapper[maxDisableId];
-		for(int i = 0; i < maxDisableId; i ++) disabledId[i] = new Wrapper<Long>(0l);
+		for(int i = 0; i < maxDisableId; i ++) disabledId[i] = new Container<Long>(0l);
 		extraDisabledId = new Wrapper[maxExtraDisableId];
-		for(int i = 0; i < maxExtraDisableId; i ++) extraDisabledId[i] = new Wrapper<Long>(0l);
+		for(int i = 0; i < maxExtraDisableId; i ++) extraDisabledId[i] = new Container<Long>(0l);
 	}
 	
 	public void buildCount(FieldTranslator translator) throws IOException {

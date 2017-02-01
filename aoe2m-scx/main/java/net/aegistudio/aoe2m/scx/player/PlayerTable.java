@@ -1,5 +1,6 @@
 package net.aegistudio.aoe2m.scx.player;
 
+import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.Wrapper;
 
@@ -12,6 +13,6 @@ public class PlayerTable {
 		}
 	}
 	
-	public final Wrapper<Boolean> allTechs = new Wrapper<Boolean>(false);
-	public final Wrapper<Long> playerData3Length = new Wrapper<Long>(9l);
+	public final Wrapper<Boolean> allTechs = new Container<Boolean>(false);
+	public final Wrapper<Long> playerData3Length = new Container<Long>(9l);
 }

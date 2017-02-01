@@ -2,6 +2,7 @@ package net.aegistudio.aoe2m.scx.trigger;
 
 import java.io.IOException;
 
+import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.EnumWrapper;
 import net.aegistudio.aoe2m.FieldTranslator;
@@ -9,9 +10,9 @@ import net.aegistudio.aoe2m.Wrapper;
 
 public class ConditionPo {
 	public EnumWrapper<EnumConditionType> type = new EnumWrapper<>(EnumConditionType.NONE);
-	public Wrapper<Integer> amount = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> amount = new Container<Integer>(-1);
 	
-	public Wrapper<Integer> resourceType = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> resourceType = new Container<Integer>(-1);
 	public EnumResourceType getResourceType() { 
 		return EnumResourceType.getByAuxOrder(resourceType.getValue());
 	}
@@ -20,25 +21,25 @@ public class ConditionPo {
 		resourceType.setValue(type.auxilliaryOrder);
 	}
 	
-	public Wrapper<Integer> object = new Wrapper<Integer>(-1);
-	public Wrapper<Integer> locate = new Wrapper<Integer>(-1);
-	public Wrapper<Integer> unitType = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> object = new Container<Integer>(-1);
+	public Wrapper<Integer> locate = new Container<Integer>(-1);
+	public Wrapper<Integer> unitType = new Container<Integer>(-1);
 	
-	public Wrapper<Integer> player = new Wrapper<Integer>(-1);
-	public Wrapper<Integer> technology = new Wrapper<Integer>(-1);
-	public Wrapper<Integer> timer = new Wrapper<Integer>(-1);
-	public Wrapper<Integer> unknown = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> player = new Container<Integer>(-1);
+	public Wrapper<Integer> technology = new Container<Integer>(-1);
+	public Wrapper<Integer> timer = new Container<Integer>(-1);
+	public Wrapper<Integer> unknown = new Container<Integer>(-1);
 	
-	public Wrapper<Integer> selectLowerLeftX = new Wrapper<Integer>(-1);
-	public Wrapper<Integer> selectLowerLeftY = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> selectLowerLeftX = new Container<Integer>(-1);
+	public Wrapper<Integer> selectLowerLeftY = new Container<Integer>(-1);
 	
-	public Wrapper<Integer> selectUpperRightX = new Wrapper<Integer>(-1);
-	public Wrapper<Integer> selectUpperRightY = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> selectUpperRightX = new Container<Integer>(-1);
+	public Wrapper<Integer> selectUpperRightY = new Container<Integer>(-1);
 	
-	public Wrapper<Integer> unitGroup = new Wrapper<Integer>(-1);
-	public Wrapper<Integer> unitType2 = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> unitGroup = new Container<Integer>(-1);
+	public Wrapper<Integer> unitType2 = new Container<Integer>(-1);
 	
-	public Wrapper<Integer> aiSignal = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> aiSignal = new Container<Integer>(-1);
 	
 	public void build(FieldTranslator translator) throws IOException, CorruptionException {
 		translator.enum32(type);

@@ -2,6 +2,7 @@ package net.aegistudio.aoe2m.scx.msg;
 
 import java.io.IOException;
 
+import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.FieldTranslator;
 import net.aegistudio.aoe2m.Wrapper;
@@ -41,12 +42,12 @@ public class MessageBuilder {
 		translator.string16(cinematic.loss);
 		translator.string16(cinematic.background);
 
-		Wrapper<Boolean> bitmapIncluded = new Wrapper<>(cinematic.bitmap.getValue() != null);
-		Wrapper<Short> shouldParse = new Wrapper<>((short) (bitmapIncluded.getValue()? -1 : 1));
+		Wrapper<Boolean> bitmapIncluded = new Container<>(cinematic.bitmap.getValue() != null);
+		Wrapper<Short> shouldParse = new Container<>((short) (bitmapIncluded.getValue()? -1 : 1));
 		
-		Wrapper<Long> width = new Wrapper<>(cinematic.bitmap.getValue() == null? 
+		Wrapper<Long> width = new Container<>(cinematic.bitmap.getValue() == null? 
 				0l : cinematic.bitmap.getValue().getWidth());
-		Wrapper<Long> height = new Wrapper<>(cinematic.bitmap.getValue() == null? 
+		Wrapper<Long> height = new Container<>(cinematic.bitmap.getValue() == null? 
 				0l : cinematic.bitmap.getValue().getHeight());
 		
 		translator.bool32(bitmapIncluded);

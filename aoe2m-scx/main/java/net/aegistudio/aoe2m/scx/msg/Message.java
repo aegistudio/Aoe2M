@@ -1,25 +1,26 @@
 package net.aegistudio.aoe2m.scx.msg;
 
+import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.scx.StringFormater;
 
 public class Message {
-	public Wrapper<Text> instructions = new Wrapper<Text>(new Text());
-	public Wrapper<Long> instructionsIndex = new Wrapper<Long>(-1l);
-	public Wrapper<Text> hints = new Wrapper<Text>(new Text());
-	public Wrapper<Long> hintsIndex = new Wrapper<Long>(-1l);
-	public Wrapper<Text> victory = new Wrapper<Text>(new Text());
-	public Wrapper<Long> victoryIndex = new Wrapper<Long>(-1l);
-	public Wrapper<Text> loss = new Wrapper<Text>(new Text());
-	public Wrapper<Long> lossIndex = new Wrapper<Long>(-1l);
-	public Wrapper<Text> history = new Wrapper<Text>(new Text());
-	public Wrapper<Long> historyIndex = new Wrapper<Long>(-1l);
+	public Wrapper<Text> instructions = new Container<Text>(new Text());
+	public Wrapper<Long> instructionsIndex = new Container<Long>(-1l);
+	public Wrapper<Text> hints = new Container<Text>(new Text());
+	public Wrapper<Long> hintsIndex = new Container<Long>(-1l);
+	public Wrapper<Text> victory = new Container<Text>(new Text());
+	public Wrapper<Long> victoryIndex = new Container<Long>(-1l);
+	public Wrapper<Text> loss = new Container<Text>(new Text());
+	public Wrapper<Long> lossIndex = new Container<Long>(-1l);
+	public Wrapper<Text> history = new Container<Text>(new Text());
+	public Wrapper<Long> historyIndex = new Container<Long>(-1l);
 	
 	// version >= 1.22
-	public Wrapper<Text> scouts = new Wrapper<Text>(new Text(0, ""));
-	public Wrapper<Long> scoutsIndex = new Wrapper<Long>(-1l);
-	public Wrapper<Integer> shouldParse = new Wrapper<Integer>(1);
+	public Wrapper<Text> scouts = new Container<Text>(new Text(0, ""));
+	public Wrapper<Long> scoutsIndex = new Container<Long>(-1l);
+	public Wrapper<Integer> shouldParse = new Container<Integer>(1);
 	
 	public String toString() {
 		StringFormater toString = new StringFormater(this);

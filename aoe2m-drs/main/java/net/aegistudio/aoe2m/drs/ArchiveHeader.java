@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.FieldTranslator;
 import net.aegistudio.aoe2m.Wrapper;
@@ -35,22 +36,22 @@ public class ArchiveHeader {
 		tribe = new String(tribeString);
 	}
 	
-	public final Wrapper<String> signature = new Wrapper<>(trademark);
+	public final Wrapper<String> signature = new Container<>(trademark);
 	
-	public final Wrapper<String> version = new Wrapper<>("1.00");
+	public final Wrapper<String> version = new Container<>("1.00");
 	
-	public final Wrapper<String> type = new Wrapper<>(tribe);
+	public final Wrapper<String> type = new Container<>(tribe);
 	
 	public final List<TableHeader> tableList = new ArrayList<>();
 	
-	public final Wrapper<Long> fileSectionOffset = new Wrapper<>(1024L);
+	public final Wrapper<Long> fileSectionOffset = new Container<>(1024L);
 	
 	public void translate(FieldTranslator translator) throws CorruptionException, IOException {
 		translator.constString(40, signature);
 		translator.constString(4, version);
 		translator.constString(12, type);
 		
-		Wrapper<Integer> tableListLength = new Wrapper<>(tableList.size());
+		Wrapper<Integer> tableListLength = new Container<>(tableList.size());
 		translator.signed32(tableListLength);
 		
 		translator.unsigned32(fileSectionOffset);

@@ -3,6 +3,7 @@ package net.aegistudio.aoe2m.scx;
 import java.io.EOFException;
 import java.io.IOException;
 
+import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.FieldTranslator;
 import net.aegistudio.aoe2m.Wrapper;
@@ -20,7 +21,7 @@ public class StubBuilder {
 					System.out.print(": ");
 				}
 				
-				Wrapper<Byte> value = new Wrapper<>((byte) 0);
+				Wrapper<Byte> value = new Container<>((byte) 0);
 				translator.signed8(value);
 				String string = "0" + Integer.toHexString(value.getValue());
 				System.out.print(string.substring(string.length() - 2));

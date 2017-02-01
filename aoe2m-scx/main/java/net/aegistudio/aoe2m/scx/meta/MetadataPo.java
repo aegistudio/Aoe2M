@@ -2,6 +2,7 @@ package net.aegistudio.aoe2m.scx.meta;
 
 import java.util.Date;
 
+import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.Wrapper;
 
@@ -16,7 +17,7 @@ public class MetadataPo {
 	
 	public int playerCount = 2;
 	
-	public Wrapper<Long> nextUnitId = new Wrapper<>(0l);
+	public Wrapper<Long> nextUnitId = new Container<>(0l);
 	
-	public Wrapper<Text> originalFileName = new Wrapper<>(new Text());
+	public Wrapper<Text> originalFileName = new Container<>(new Text());
 }

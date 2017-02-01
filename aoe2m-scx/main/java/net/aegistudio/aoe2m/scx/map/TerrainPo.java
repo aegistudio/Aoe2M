@@ -1,8 +1,8 @@
 package net.aegistudio.aoe2m.scx.map;
 
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.aoe2m.Container;
 
-public class TerrainPo extends Wrapper<Byte> {
+public class TerrainPo extends Container<Byte> {
 	public byte[][] terrianValue;
 	public TerrainPo(int width, int height) {
 		super((byte) 0);

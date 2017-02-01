@@ -2,6 +2,7 @@ package net.aegistudio.aoe2m.drs;
 
 import java.io.IOException;
 
+import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.FieldTranslator;
 import net.aegistudio.aoe2m.SequentialList;
@@ -19,11 +20,11 @@ import net.aegistudio.aoe2m.Wrapper;
  */
 
 public class TableHeader {
-	public final Wrapper<String> format = new Wrapper<>("anib");
+	public final Wrapper<String> format = new Container<>("anib");
 	
-	public final Wrapper<Long> entryOffset = new Wrapper<>(0L);
+	public final Wrapper<Long> entryOffset = new Container<>(0L);
 	
-	private final Wrapper<Integer> entryCount = new Wrapper<Integer>(0);
+	private final Wrapper<Integer> entryCount = new Container<Integer>(0);
 	
 	public final SequentialList<TableEntry> entries = new SequentialList<>();
 	

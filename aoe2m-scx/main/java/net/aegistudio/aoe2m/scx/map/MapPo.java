@@ -1,15 +1,16 @@
 package net.aegistudio.aoe2m.scx.map;
 
+import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.VariantList;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class MapPo {
-	public Wrapper<Integer> weCameraX = new Wrapper<Integer>(0);
-	public Wrapper<Integer> weCameraY = new Wrapper<Integer>(0);
+	public Wrapper<Integer> weCameraX = new Container<Integer>(0);
+	public Wrapper<Integer> weCameraY = new Container<Integer>(0);
 	public AiMapWrapper aiMapType = new AiMapWrapper(-1);
 	
-	public Wrapper<Long> mapWidth = new Wrapper<Long>(0l);
-	public Wrapper<Long> mapHeight = new Wrapper<Long>(0l);
+	public Wrapper<Long> mapWidth = new Container<Long>(0l);
+	public Wrapper<Long> mapHeight = new Container<Long>(0l);
 	
 	public TerrainPo terrainId = new TerrainPo(256, 256);
 	public TerrainPo elevation = new TerrainPo(256, 256); {
@@ -22,7 +23,7 @@ public class MapPo {
 			}
 	}
 	
-	public Wrapper<Long> playerCount = new Wrapper<Long>(9l);
+	public Wrapper<Long> playerCount = new Container<Long>(9l);
 	
 	public VariantList<UnitPo> gaia = new VariantList<>(UnitPo::new, UnitPo::build);
 	

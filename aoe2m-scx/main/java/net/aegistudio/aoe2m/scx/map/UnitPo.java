@@ -2,22 +2,23 @@ package net.aegistudio.aoe2m.scx.map;
 
 import java.io.IOException;
 
+import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.FieldTranslator;
 import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.scx.StringFormater;
 
 public class UnitPo {
-	public Wrapper<Float> positionX = new Wrapper<Float>(0.0f);
-	public Wrapper<Float> positionY = new Wrapper<Float>(0.0f);
-	public Wrapper<Float> positionZ = new Wrapper<Float>(2.0f);
+	public Wrapper<Float> positionX = new Container<Float>(0.0f);
+	public Wrapper<Float> positionY = new Container<Float>(0.0f);
+	public Wrapper<Float> positionZ = new Container<Float>(2.0f);
 	
-	public Wrapper<Long> unitId = new Wrapper<Long>(0l);
-	public Wrapper<Short> unitType = new Wrapper<Short>((short) 0);
-	public Wrapper<Byte> indicator = new Wrapper<Byte>((byte)2);
+	public Wrapper<Long> unitId = new Container<Long>(0l);
+	public Wrapper<Short> unitType = new Container<Short>((short) 0);
+	public Wrapper<Byte> indicator = new Container<Byte>((byte)2);
 	
-	public Wrapper<Float> rotation = new Wrapper<Float>(0.f);
-	public Wrapper<Short> animationFrame = new Wrapper<Short>((short) 0);
-	public Wrapper<Integer> garrisonedId = new Wrapper<Integer>(-1);
+	public Wrapper<Float> rotation = new Container<Float>(0.f);
+	public Wrapper<Short> animationFrame = new Container<Short>((short) 0);
+	public Wrapper<Integer> garrisonedId = new Container<Integer>(-1);
 	
 	public void buildUnit(FieldTranslator translator) throws IOException {
 		translator.float32(positionX);

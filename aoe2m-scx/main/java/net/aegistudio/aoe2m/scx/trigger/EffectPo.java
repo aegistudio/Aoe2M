@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.EnumWrapper;
 import net.aegistudio.aoe2m.FieldTranslator;
@@ -13,10 +14,10 @@ import net.aegistudio.aoe2m.scx.player.EnumDiplomacy;
 
 public class EffectPo {
 	public EnumWrapper<EnumEffectType> type = new EnumWrapper<>(EnumEffectType.NONE);
-	public Wrapper<Integer> aiGoal = new Wrapper<Integer>(-1);
-	public Wrapper<Integer> amount = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> aiGoal = new Container<Integer>(-1);
+	public Wrapper<Integer> amount = new Container<Integer>(-1);
 	
-	public Wrapper<Integer> resourceType = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> resourceType = new Container<Integer>(-1);
 	public EnumResourceType getResourceType() { 
 		return EnumResourceType.getByAuxOrder(resourceType.getValue());
 	}
@@ -25,40 +26,40 @@ public class EffectPo {
 		resourceType.setValue(type.auxilliaryOrder);
 	}
 	
-	public Wrapper<Integer> diplomacy = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> diplomacy = new Container<Integer>(-1);
 	public EnumDiplomacy getDiplomacy() { return EnumDiplomacy.getByAuxOrder(diplomacy.getValue()); }
 	public void setDiplomacy(EnumDiplomacy value) { diplomacy.setValue(value.auxiliaryOrder); }
 	
 	public List<Wrapper<Integer>> units;
 	
-	public Wrapper<Integer> unitIdToLocate = new Wrapper<Integer>(-1);
-	public Wrapper<Integer> unitType = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> unitIdToLocate = new Container<Integer>(-1);
+	public Wrapper<Integer> unitType = new Container<Integer>(-1);
 
-	public Wrapper<Integer> playerSource = new Wrapper<Integer>(-1);
-	public Wrapper<Integer> playerTarget = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> playerSource = new Container<Integer>(-1);
+	public Wrapper<Integer> playerTarget = new Container<Integer>(-1);
 	
-	public Wrapper<Integer> technology = new Wrapper<Integer>(-1);
-	public Wrapper<Integer> stringTableIndex = new Wrapper<Integer>(-1);
-	public Wrapper<Integer> unknown = new Wrapper<Integer>(-1);
-	public Wrapper<Integer> displayTime = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> technology = new Container<Integer>(-1);
+	public Wrapper<Integer> stringTableIndex = new Container<Integer>(-1);
+	public Wrapper<Integer> unknown = new Container<Integer>(-1);
+	public Wrapper<Integer> displayTime = new Container<Integer>(-1);
 	
-	public Wrapper<Integer> triggerTarget = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> triggerTarget = new Container<Integer>(-1);
 	
-	public Wrapper<Integer> locationX = new Wrapper<Integer>(-1);
-	public Wrapper<Integer> locationY = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> locationX = new Container<Integer>(-1);
+	public Wrapper<Integer> locationY = new Container<Integer>(-1);
 	
-	public Wrapper<Integer> selectLowerLeftX = new Wrapper<Integer>(-1);
-	public Wrapper<Integer> selectLowerLeftY = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> selectLowerLeftX = new Container<Integer>(-1);
+	public Wrapper<Integer> selectLowerLeftY = new Container<Integer>(-1);
 	
-	public Wrapper<Integer> selectUpperRightX = new Wrapper<Integer>(-1);
-	public Wrapper<Integer> selectUpperRightY = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> selectUpperRightX = new Container<Integer>(-1);
+	public Wrapper<Integer> selectUpperRightY = new Container<Integer>(-1);
 	
-	public Wrapper<Integer> unitGroup = new Wrapper<Integer>(-1);
-	public Wrapper<Integer> unitType2 = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> unitGroup = new Container<Integer>(-1);
+	public Wrapper<Integer> unitType2 = new Container<Integer>(-1);
 	
-	public Wrapper<Integer> instructionPanel = new Wrapper<Integer>(-1);
-	public Wrapper<Text> message = new Wrapper<Text>(new Text(0, ""));
-	public Wrapper<Text> sound = new Wrapper<Text>(new Text(1, new String(new byte[]{0})));	// Very special.
+	public Wrapper<Integer> instructionPanel = new Container<Integer>(-1);
+	public Wrapper<Text> message = new Container<Text>(new Text(0, ""));
+	public Wrapper<Text> sound = new Container<Text>(new Text(1, new String(new byte[]{0})));	// Very special.
 	
 	public void build(FieldTranslator translator) throws IOException, CorruptionException {
 		translator.enum32(type);
@@ -69,7 +70,7 @@ public class EffectPo {
 		translator.signed32(resourceType);
 		translator.signed32(diplomacy);
 	
-		Wrapper<Integer> unitsBeSelected = new Wrapper<Integer>(
+		Wrapper<Integer> unitsBeSelected = new Container<Integer>(
 				units != null? units.size() : -1);
 		translator.signed32(unitsBeSelected);
 		if(unitsBeSelected.getValue() >= 0 && units == null)
@@ -101,7 +102,7 @@ public class EffectPo {
 		translator.string32(sound);
 		
 		translator.array(unitsBeSelected.getValue(), units, 
-				() -> new Wrapper<Integer>(0), 
+				() -> new Container<Integer>(0), 
 				unit -> translator.signed32(unit));
 	}
 }

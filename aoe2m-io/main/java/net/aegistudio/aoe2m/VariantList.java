@@ -21,7 +21,7 @@ public class VariantList<T> {
 	}
 	
 	public void build(FieldTranslator translator) throws IOException, CorruptionException {
-		Wrapper<Integer> count = new Wrapper<Integer>(element.size());
+		Wrapper<Integer> count = new Container<Integer>(element.size());
 		translator.signed32(count);
 		translator.array(count.getValue(), element, factory, 
 				element -> translation.translate(element, translator));

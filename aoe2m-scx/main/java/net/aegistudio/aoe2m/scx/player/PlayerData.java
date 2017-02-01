@@ -3,13 +3,14 @@ package net.aegistudio.aoe2m.scx.player;
 import java.util.Arrays;
 import java.util.List;
 
+import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.EnumWrapper;
 import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class PlayerData {
 	// PlayerData1
-	public Wrapper<String> asciiPlayerName = new Wrapper<String>("");
+	public Wrapper<String> asciiPlayerName = new Container<String>("");
 	public String getAsciiPlayerName() {
 		String effectiveAsciiPlayerName = asciiPlayerName.getValue();
 		effectiveAsciiPlayerName = effectiveAsciiPlayerName.substring(
@@ -18,60 +19,60 @@ public class PlayerData {
 	}
 	
 	// version >= 1.18
-	public Wrapper<Long> stringTableIndex = new Wrapper<Long>(-1l);
-	public Wrapper<Boolean> active = new Wrapper<Boolean>(false);
-	public Wrapper<Boolean> human = new Wrapper<Boolean>(false);
+	public Wrapper<Long> stringTableIndex = new Container<Long>(-1l);
+	public Wrapper<Boolean> active = new Container<Boolean>(false);
+	public Wrapper<Boolean> human = new Container<Boolean>(false);
 	public EnumWrapper<EnumCivilization> civilization = new EnumWrapper<EnumCivilization>(EnumCivilization.BRITONS);
 	
 	// PlayerData2
-	public Wrapper<Text> vcName = new Wrapper<Text>(new Text(0, ""));
+	public Wrapper<Text> vcName = new Container<Text>(new Text(0, ""));
 	
-	public Wrapper<Text> ctyName = new Wrapper<Text>(new Text(0, ""));
+	public Wrapper<Text> ctyName = new Container<Text>(new Text(0, ""));
 	
 	public static final String randomGame = "RandomGame";
-	public Wrapper<Text> aiName = new Wrapper<Text>(new Text(randomGame.length(), randomGame));
-	public Wrapper<Text> perFile = new Wrapper<Text>(new Text(0, ""));
+	public Wrapper<Text> aiName = new Container<Text>(new Text(randomGame.length(), randomGame));
+	public Wrapper<Text> perFile = new Container<Text>(new Text(0, ""));
 
 	public EnumWrapper<EnumAiType> aiType = new EnumWrapper<EnumAiType>(EnumAiType.STANDARD);
 	
-	public Wrapper<Long> initGold = new Wrapper<Long>(0l);
-	public Wrapper<Long> initWood = new Wrapper<Long>(0l);
-	public Wrapper<Long> initFood = new Wrapper<Long>(0l);
-	public Wrapper<Long> initStone = new Wrapper<Long>(0l);
-	public Wrapper<Long> initOreX = new Wrapper<Long>(0l);
+	public Wrapper<Long> initGold = new Container<Long>(0l);
+	public Wrapper<Long> initWood = new Container<Long>(0l);
+	public Wrapper<Long> initFood = new Container<Long>(0l);
+	public Wrapper<Long> initStone = new Container<Long>(0l);
+	public Wrapper<Long> initOreX = new Container<Long>(0l);
 	
 	// Diplomacy
 	@SuppressWarnings("unchecked")
 	public EnumWrapper<EnumDiplomacy>[] diplomacy = new EnumWrapper[16];
 	{ for(int i = 0; i < 16; i ++) diplomacy[i] = new EnumWrapper<EnumDiplomacy>(EnumDiplomacy.ENEMY); }
 	
-	public Wrapper<Boolean> alliedVictory = new Wrapper<Boolean>(false);
+	public Wrapper<Boolean> alliedVictory = new Container<Boolean>(false);
 	
 	// Disable section
 	public DisableList diasabledTechs = new DisableList(30, 30);
 	public DisableList diasabledUnits = new DisableList(30, 30);
 	public DisableList diasabledBuildings = new DisableList(20, 40);
 	
-	public Wrapper<Integer> startingAge = new Wrapper<Integer>(-1);
+	public Wrapper<Integer> startingAge = new Container<Integer>(-1);
 	
 	// PlayerData4
-	public Wrapper<Float> populationLimit = new Wrapper<Float>(75f);
+	public Wrapper<Float> populationLimit = new Container<Float>(75f);
 	
 	// PlayerData3
 	// Localized string Player N. Please notice it is localized.
-	public Wrapper<Text> constPlayerName = new Wrapper<Text>(new Text(0, ""));
+	public Wrapper<Text> constPlayerName = new Container<Text>(new Text(0, ""));
 	
-	public Wrapper<Float> cameraX = new Wrapper<Float>(0.0f);
-	public Wrapper<Float> cameraY = new Wrapper<Float>(0.0f);
+	public Wrapper<Float> cameraX = new Container<Float>(0.0f);
+	public Wrapper<Float> cameraY = new Container<Float>(0.0f);
 	
-	public Wrapper<Short> unknownedX = new Wrapper<Short>((short) 72);
-	public Wrapper<Short> unknownedY = new Wrapper<Short>((short) 72);
+	public Wrapper<Short> unknownedX = new Container<Short>((short) 72);
+	public Wrapper<Short> unknownedY = new Container<Short>((short) 72);
 	
-	public Wrapper<Float> unknownedArrayIncluded = new Wrapper<Float>(2.0f);	// Included when 2.0f
+	public Wrapper<Float> unknownedArrayIncluded = new Container<Float>(2.0f);	// Included when 2.0f
 	
 	public EnumWrapper<EnumPlayerColor> playerColor = new EnumWrapper<EnumPlayerColor>(EnumPlayerColor.RED);
 	
-	public Wrapper<Short> grandTheftEmpirePlayers = new Wrapper<Short>((short)0);
+	public Wrapper<Short> grandTheftEmpirePlayers = new Container<Short>((short)0);
 	
 	// Format the player data in a readable style.
 	public String toString() {
