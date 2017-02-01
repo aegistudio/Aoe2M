@@ -20,8 +20,7 @@ public class Sound {
 	
 	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
 		translator.signed32(id);
-		translator.signed16(playAtUpdate);
-		
+		//translator.signed16(playAtUpdate);	// WTF?
 		Wrapper<Integer> itemsLength = new Container<>(items.size());
 		translator.unsigned16(itemsLength);
 		translator.signed32(cacheTime);
