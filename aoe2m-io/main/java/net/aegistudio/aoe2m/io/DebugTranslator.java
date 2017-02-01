@@ -142,4 +142,9 @@ public class DebugTranslator implements FieldTranslator {
 	public void constString(String field) throws CorruptionException, IOException {
 		wrapped.constString(field);
 	}
+
+	@Override
+	public void unsigned16(Wrapper<Integer> field) throws IOException {
+		debug("u16", () -> wrapped.unsigned16(field));
+	}
 }

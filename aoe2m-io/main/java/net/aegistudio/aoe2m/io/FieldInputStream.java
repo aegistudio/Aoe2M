@@ -42,7 +42,7 @@ public class FieldInputStream extends InputStream {
 	}
 	
 	public int readUnsigned16() throws IOException {
-		return (short) readBytes(2, false);
+		return (int) readBytes(2, false);
 	}
 	
 	public short readSigned16() throws IOException {

@@ -14,6 +14,8 @@ import java.util.function.Supplier;
 
 public interface FieldTranslator {
 	public void constString(int length, Wrapper<String> string) throws IOException;
+
+	public void unsigned16(Wrapper<Integer> field) throws IOException;
 	
 	public void unsigned32(Wrapper<Long> field) throws IOException;
 	

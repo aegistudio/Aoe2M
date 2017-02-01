@@ -27,6 +27,11 @@ public class FieldOutputTranslator implements FieldTranslator {
 	}
 
 	@Override
+	public void unsigned16(Wrapper<Integer> field) throws IOException {
+		fieldOutputStream.write16((short)(int)field.getValue());
+	}
+	
+	@Override
 	public void unsigned32(Wrapper<Long> field) throws IOException {
 		fieldOutputStream.write32((int)(long)field.getValue());
 	}

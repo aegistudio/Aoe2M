@@ -80,5 +80,6 @@
   	<module>aoe2m-opnagdb</module>
   	<module>aoe2m-io</module>
   	<module>aoe2m-drs</module>
+  	<module>aoe2m-empiresdat</module>
   </modules>
 </project>

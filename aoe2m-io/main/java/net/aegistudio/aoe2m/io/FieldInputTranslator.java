@@ -26,6 +26,11 @@ public class FieldInputTranslator implements FieldTranslator {
 	}
 	
 	@Override
+	public void unsigned16(Wrapper<Integer> field) throws IOException {
+		field.setValue(fieldInputStream.readUnsigned16());
+	}
+	
+	@Override
 	public void unsigned32(Wrapper<Long> field) throws IOException {
 		field.setValue(fieldInputStream.readUnsigned32());
 	}
