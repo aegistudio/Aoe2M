@@ -63,9 +63,14 @@ public class FieldInputStream extends InputStream {
 	
 	public long readBytes(int length, boolean sext) throws IOException {
 		read(bytes, 0, length);
-		long value = 0;
-		for(int i = 0; i < length; i ++)
-			value += sext? makeFieldSext(i) : makeField(i);
+		//long value = 0;
+		//for(int i = 0; i < length; i ++)
+		//	value += sext? makeFieldSext(i) : makeField(i);
+		
+		long value = sext? makeFieldSext(length - 1) 
+				: makeField(length - 1);
+		for(int i = 0; i < length - 1; i ++)
+			value += makeField(i);
 		return value;	
 	}
 	

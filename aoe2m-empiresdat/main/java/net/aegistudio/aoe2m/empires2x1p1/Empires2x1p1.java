@@ -16,6 +16,7 @@ import net.aegistudio.aoe2m.empires2x1p1.sound.Sound;
 import net.aegistudio.aoe2m.empires2x1p1.terrain.Terrain;
 import net.aegistudio.aoe2m.empires2x1p1.terrain.TerrainBlob;
 import net.aegistudio.aoe2m.empires2x1p1.terrain.TerrainBorder;
+import net.aegistudio.aoe2m.empires2x1p1.unit.UnitHeader;
 
 import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
 
@@ -40,6 +41,10 @@ public class Empires2x1p1 {
 	public final TerrainBlob terrainBlob = new TerrainBlob();
 	
 	public final RandomMapData randomMap = new RandomMapData();
+	
+	public final List<Technology> technology = new ArrayList<>();
+	
+	public final List<UnitHeader> unitHeader = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
 	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
@@ -85,5 +90,15 @@ public class Empires2x1p1 {
 		terrainBlob.translate(translator);
 		
 		randomMap.translate(translator);
+		
+		Wrapper<Integer> techLength = new Container<>(sound.size());
+		translator.signed32(techLength);
+		translator.array(techLength.getValue(), technology, 
+				Technology::new, wrap(translator, Technology::translate));
+		
+		Wrapper<Integer> unitHeaderLength = new Container<>(unitHeader.size());
+		translator.signed32(unitHeaderLength);
+		translator.array(unitHeaderLength.getValue(), unitHeader, 
+				UnitHeader::new, wrap(translator, UnitHeader::translate));
 	}
 }
