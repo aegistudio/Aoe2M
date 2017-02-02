@@ -46,6 +46,7 @@ public class ArchiveHeader {
 	
 	public final Wrapper<Long> fileSectionOffset = new Container<>(1024L);
 	
+	@SuppressWarnings("unchecked")
 	public void translate(FieldTranslator translator) throws CorruptionException, IOException {
 		translator.constString(40, signature);
 		translator.constString(4, version);

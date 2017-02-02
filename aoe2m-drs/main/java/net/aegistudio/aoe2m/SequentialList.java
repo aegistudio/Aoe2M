@@ -114,6 +114,7 @@ public class SequentialList<E extends IntegerIndexed> {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void entranslate(FieldTranslator translator, int length, Supplier<E> supplier, 
 			ArrayTranslation<E> translation) throws IOException, CorruptionException {
 		translator.array(length, elements, supplier, translation);

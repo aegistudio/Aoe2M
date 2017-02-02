@@ -15,6 +15,7 @@ public class TerrainRestriction {
 	public List<Wrapper<Integer>> offset0 = new ArrayList<>();
 	public List<Wrapper<Integer>> offset1 = new ArrayList<>();
 	
+	@SuppressWarnings("unchecked")
 	public void translate(int restriction, int terrain, FieldTranslator translator) 
 			throws IOException, CorruptionException {
 		

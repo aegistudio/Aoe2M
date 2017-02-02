@@ -128,7 +128,8 @@ public class DebugTranslator implements FieldTranslator {
 	}
 
 	@Override
-	public <T> void array(int length, List<T> list, Supplier<T> factory, ArrayTranslation<T> translation)
+	public <T> void array(int length, List<T> list, Supplier<T> factory, 
+			@SuppressWarnings("unchecked") ArrayTranslation<T>... translation)
 			throws IOException, CorruptionException {
 		wrapped.array(length, list, factory, translation);
 	}

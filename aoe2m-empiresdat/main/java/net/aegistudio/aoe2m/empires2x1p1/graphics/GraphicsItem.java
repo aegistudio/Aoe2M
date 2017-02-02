@@ -46,6 +46,7 @@ public class GraphicsItem {
 	public final List<GraphicsDelta> deltas = new ArrayList<>();
 	public final List<GraphicsAttackSound> attackSounds = new ArrayList<>();
 	
+	@SuppressWarnings("unchecked")
 	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
 		translator.constString(21, name0);
 		translator.constString(13, name1);

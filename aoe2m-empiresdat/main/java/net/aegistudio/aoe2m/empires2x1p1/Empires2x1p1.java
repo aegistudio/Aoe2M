@@ -9,10 +9,13 @@ import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.FieldTranslator;
 import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.empires2x1p1.graphics.Graphics;
+import net.aegistudio.aoe2m.empires2x1p1.map.MapData;
+import net.aegistudio.aoe2m.empires2x1p1.map.RandomMapData;
 import net.aegistudio.aoe2m.empires2x1p1.restriction.TerrainRestriction;
 import net.aegistudio.aoe2m.empires2x1p1.sound.Sound;
-import net.aegistudio.aoe2m.empires2x1p1.terrain.MapData;
 import net.aegistudio.aoe2m.empires2x1p1.terrain.Terrain;
+import net.aegistudio.aoe2m.empires2x1p1.terrain.TerrainBlob;
+import net.aegistudio.aoe2m.empires2x1p1.terrain.TerrainBorder;
 
 public class Empires2x1p1 {
 	public final Wrapper<String> version = new Container<String>("");
@@ -28,7 +31,15 @@ public class Empires2x1p1 {
 	public final MapData map = new MapData();
 	
 	public final List<Terrain> terrain = new ArrayList<>();
+	public final Terrain emptyTerrain = new Terrain();
 	
+	public final List<TerrainBorder> terrainBorder = new ArrayList<>();
+	
+	public final TerrainBlob terrainBlob = new TerrainBlob();
+	
+	public final RandomMapData randomMap = new RandomMapData();
+	
+	@SuppressWarnings("unchecked")
 	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
 		translator.constString(8, version);
 		
@@ -57,9 +68,21 @@ public class Empires2x1p1 {
 		
 		graphics.translate(translator);
 		
-		map.translate(translator);
+		map.translateMapData1(translator);
 		
 		translator.array(terrainLength.getValue(), terrain, Terrain::new, 
 				terrain -> terrain.translate(translator));
+		
+		//emptyTerrain.translate(translator);
+		translator.skip(438);
+		
+		translator.array(16, terrainBorder, TerrainBorder::new, 
+				border -> border.translate(translator));
+		
+		map.translateMapData2(translator);
+		
+		terrainBlob.translate(translator);
+		
+		randomMap.translate(translator);
 	}
 }

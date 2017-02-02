@@ -18,6 +18,7 @@ public class Sound {
 	
 	public List<SoundItem> items = new ArrayList<>();
 	
+	@SuppressWarnings("unchecked")
 	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
 		translator.signed32(id);
 		//translator.signed16(playAtUpdate);	// WTF?

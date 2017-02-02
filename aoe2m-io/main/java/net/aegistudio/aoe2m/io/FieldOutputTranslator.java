@@ -117,12 +117,15 @@ public class FieldOutputTranslator implements FieldTranslator {
 	}
 
 	@Override
-	public <T> void array(int length, List<T> list, Supplier<T> factory, ArrayTranslation<T> translation)
+	public <T> void array(int length, List<T> list, Supplier<T> factory, 
+			@SuppressWarnings("unchecked") ArrayTranslation<T>... translations)
 			throws IOException, CorruptionException {
-		for(int i = 0; i < list.size(); i ++) {
-			T value = list.get(i);
-			translation.translate(value);
-		}
+		
+		for( ArrayTranslation<T> translation : translations)
+			for(int i = 0; i < list.size(); i ++) {
+				T value = list.get(i);
+				translation.translate(value);
+			}
 	}
 
 	@Override

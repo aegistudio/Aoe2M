@@ -18,10 +18,10 @@ public class OrderedList<T> extends VariantList<T> {
 		super(factory, translation);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void build(FieldTranslator translator) throws IOException, CorruptionException {
 		super.build(translator);
 		translator.array(element.size(), order, 
-				() -> new Container<Integer>(0), 
-				order -> translator.signed32(order));
+				Container::int0, translator::signed32);
 	}
 }

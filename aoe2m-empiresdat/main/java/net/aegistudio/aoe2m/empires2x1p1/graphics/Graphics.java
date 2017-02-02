@@ -14,6 +14,7 @@ public class Graphics {
 	public final List<GraphicsItem> items = new ArrayList<>();
 	public final Wrapper<String> renderingData = new Container<String>("");
 	
+	@SuppressWarnings("unchecked")
 	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
 		Wrapper<Integer> graphicsCount = new Container<>(offsets.size());
 		translator.unsigned16(graphicsCount);

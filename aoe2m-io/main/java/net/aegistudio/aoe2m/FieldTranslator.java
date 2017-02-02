@@ -54,7 +54,8 @@ public interface FieldTranslator {
 	public void constFloat(float expected) throws IOException, CorruptionException;
 	
 	public interface ArrayTranslation<T> { 	public void translate(T value) throws IOException, CorruptionException; }
-	public <T> void array(int length, List<T> list, Supplier<T> factory, ArrayTranslation<T> translation) 
+	public <T> void array(int length, List<T> list, Supplier<T> factory, 
+			@SuppressWarnings("unchecked") ArrayTranslation<T>... translation) 
 			throws IOException, CorruptionException;
 	
 	public void bitmap(Wrapper<BufferedImage> image) throws IOException, CorruptionException;

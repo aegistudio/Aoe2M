@@ -61,6 +61,7 @@ public class EffectPo {
 	public Wrapper<Text> message = new Container<Text>(new Text(0, ""));
 	public Wrapper<Text> sound = new Container<Text>(new Text(1, new String(new byte[]{0})));	// Very special.
 	
+	@SuppressWarnings("unchecked")
 	public void build(FieldTranslator translator) throws IOException, CorruptionException {
 		translator.enum32(type.enumWrapper());
 		translator.constUnsigned32(0x17);
@@ -102,7 +103,6 @@ public class EffectPo {
 		translator.string32(sound);
 		
 		translator.array(unitsBeSelected.getValue(), units, 
-				() -> new Container<Integer>(0), 
-				unit -> translator.signed32(unit));
+				Container::int0, translator::signed32);
 	}
 }

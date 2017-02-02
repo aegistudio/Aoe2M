@@ -28,14 +28,22 @@ public class Terrain {
 	
 	public Wrapper<Integer> blendMode = new Container<>(0);
 	
-	public Wrapper<Byte> color0 = new Container<>((byte)0);
+	public Wrapper<Byte> colorHi = new Container<>((byte)0);
 	
-	public Wrapper<Byte> color1 = new Container<>((byte)0);
+	public Wrapper<Byte> colorMed = new Container<>((byte)0);
 	
-	public Wrapper<Byte> color2 = new Container<>((byte)0);
+	public Wrapper<Byte> colorLo = new Container<>((byte)0);
 	
-	public Wrapper<String> uk3 = new Container<>("");
+	public Wrapper<Byte> colorCliffLt = new Container<>((byte)0);
+	
+	public Wrapper<Byte> colorCliffRt = new Container<>((byte)0);
 
+	public Wrapper<Byte> passable = new Container<>((byte)-1);
+	
+	public Wrapper<Byte> impassable = new Container<>((byte)-1);
+	
+	public Wrapper<Byte> uk3 = new Container<>((byte)0);
+	
 	public Wrapper<Float> uk4 = new Container<>(0f);
 	
 	public Wrapper<String> uk5 = new Container<>("");
@@ -64,6 +72,7 @@ public class Terrain {
 	
 	public Wrapper<Short> unitsUsed = new Container<>((short)0);
 	
+	@SuppressWarnings("unchecked")
 	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
 		translator.signed16(uk0);
 		translator.signed16(uk1);
@@ -78,11 +87,15 @@ public class Terrain {
 		translator.signed32(blendPriority);
 		translator.signed32(blendMode);
 		
-		translator.signed8(color0);
-		translator.signed8(color1);
-		translator.signed8(color2);
+		translator.signed8(colorHi);
+		translator.signed8(colorMed);
+		translator.signed8(colorLo);
+		translator.signed8(colorCliffLt);
+		translator.signed8(colorCliffRt);
+		translator.signed8(passable);
+		translator.signed8(impassable);
+		translator.signed8(uk3);
 		
-		translator.constString(5, uk3);
 		translator.float32(uk4);
 		translator.constString(18, uk5);
 		

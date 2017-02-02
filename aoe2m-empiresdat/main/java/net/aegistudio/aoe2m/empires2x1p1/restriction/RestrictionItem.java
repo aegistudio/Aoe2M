@@ -13,6 +13,7 @@ public class RestrictionItem {
 	public final List<Wrapper<Float>> accessible = new ArrayList<>();
 	public final List<RestrictionSprites> sprites = new ArrayList<>();
 	
+	@SuppressWarnings("unchecked")
 	public void translateItem(int terrain, FieldTranslator translator) throws IOException, CorruptionException {
 		translator.array(terrain, accessible, 
 				Container::float0, translator::float32);

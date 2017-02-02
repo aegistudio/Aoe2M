@@ -20,9 +20,11 @@ public class VariantList<T> {
 		this.translation = translation;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void build(FieldTranslator translator) throws IOException, CorruptionException {
 		Wrapper<Integer> count = new Container<Integer>(element.size());
 		translator.signed32(count);
+		
 		translator.array(count.getValue(), element, factory, 
 				element -> translation.translate(element, translator));
 	}

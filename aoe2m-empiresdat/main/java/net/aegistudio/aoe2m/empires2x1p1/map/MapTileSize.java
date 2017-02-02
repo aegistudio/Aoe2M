@@ -1,4 +1,4 @@
-package net.aegistudio.aoe2m.empires2x1p1.terrain;
+package net.aegistudio.aoe2m.empires2x1p1.map;
 
 import java.io.IOException;
 
