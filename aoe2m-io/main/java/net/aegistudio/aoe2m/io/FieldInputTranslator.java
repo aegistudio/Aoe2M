@@ -203,4 +203,9 @@ public class FieldInputTranslator implements FieldTranslator {
 		String newString = fieldInputStream.readConstLengthString(field.length());
 		if(!newString.equals(field)) throw new CorruptionException(field, newString);
 	}
+
+	@Override
+	public void constSigned32(int field) throws CorruptionException, IOException {
+		CorruptionException.assertInt(field, fieldInputStream.readSigned32());
+	}
 }

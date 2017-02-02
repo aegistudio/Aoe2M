@@ -147,4 +147,9 @@ public class FieldOutputTranslator implements FieldTranslator {
 	public void constString(String field) throws CorruptionException, IOException {
 		fieldOutputStream.write(field.getBytes());
 	}
+
+	@Override
+	public void constSigned32(int field) throws CorruptionException, IOException {
+		fieldOutputStream.write32(field);
+	}
 }

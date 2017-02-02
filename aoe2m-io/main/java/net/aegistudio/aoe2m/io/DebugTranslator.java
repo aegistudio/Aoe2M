@@ -148,4 +148,9 @@ public class DebugTranslator implements FieldTranslator {
 	public void unsigned16(Wrapper<Integer> field) throws IOException {
 		debug("u16", () -> wrapped.unsigned16(field));
 	}
+
+	@Override
+	public void constSigned32(int field) throws CorruptionException, IOException {
+		constDebug("cs32", () -> wrapped.constSigned32(field));
+	}
 }

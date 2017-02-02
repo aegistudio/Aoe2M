@@ -45,6 +45,8 @@ public interface FieldTranslator {
 	
 	public void constUnsigned16(int field) throws CorruptionException, IOException;
 	
+	public void constSigned32(int field) throws CorruptionException, IOException;
+	
 	public void constUnsigned32(long field) throws CorruptionException, IOException;
 	
 	public void constByte(int field) throws CorruptionException, IOException;
