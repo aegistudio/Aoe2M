@@ -9,6 +9,8 @@ import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.FieldTranslator;
 import net.aegistudio.aoe2m.Wrapper;
 
+import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
+
 public class GraphicsItem {
 	public final Wrapper<String> name0 = new Container<>("");
 	public final Wrapper<String> name1 = new Container<>("");
@@ -82,12 +84,10 @@ public class GraphicsItem {
 		//translator.signed8(uk1);
 		
 		translator.array(deltasCount.getValue(), deltas, 
-				GraphicsDelta::new, 
-				delta -> delta.translate(translator));
+				GraphicsDelta::new, wrap(translator, GraphicsDelta::translate));
 		
 		if(attackSoundUsed.getValue() != 0) 
 			translator.array(angleCount.getValue(), attackSounds, 
-					GraphicsAttackSound::new, 
-					sound -> sound.translate(translator));
+					GraphicsAttackSound::new, wrap(translator, GraphicsAttackSound::translate));
 	}
 }

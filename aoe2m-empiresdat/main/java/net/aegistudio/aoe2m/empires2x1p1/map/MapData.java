@@ -7,6 +7,7 @@ import java.util.List;
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.FieldTranslator;
+import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class MapData {
@@ -34,7 +35,7 @@ public class MapData {
 		translator.signed32(worldHeight);
 		
 		translator.array(19, tileSizes, MapTileSize::new, 
-				tileSize -> tileSize.translate(translator));
+				wrap(translator, MapTileSize::translate));
 	}
 	
 	public final Wrapper<Integer> uk1 = new Container<>(0);

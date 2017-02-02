@@ -9,6 +9,8 @@ import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.FieldTranslator;
 import net.aegistudio.aoe2m.Wrapper;
 
+import static net.aegistudio.aoe2m.TranslateWrapper.wrapAll;
+
 public class RandomMapData {
 	public final Wrapper<Integer> randomMapPointer = new Container<>(0);
 	
@@ -21,8 +23,8 @@ public class RandomMapData {
 		translator.signed32(randomMapPointer);
 		
 		translator.array(randomMapCount.getValue(), randomMaps, 
-				RandomMap::new, 
-				rm -> rm.translateHeader(translator),
-				rm -> rm.translateBody(translator));
+				RandomMap::new, wrapAll(translator,
+				RandomMap::translateHeader,
+				RandomMap::translateBody));
 	}
 }

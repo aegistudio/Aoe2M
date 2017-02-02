@@ -17,6 +17,8 @@ import net.aegistudio.aoe2m.empires2x1p1.terrain.Terrain;
 import net.aegistudio.aoe2m.empires2x1p1.terrain.TerrainBlob;
 import net.aegistudio.aoe2m.empires2x1p1.terrain.TerrainBorder;
 
+import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
+
 public class Empires2x1p1 {
 	public final Wrapper<String> version = new Container<String>("");
 	
@@ -53,31 +55,30 @@ public class Empires2x1p1 {
 		
 		terrainRestriction.translate(
 				restrictionLength.getValue(), 
-				terrainLength.getValue(), 
-				translator);
+				terrainLength.getValue(), translator);
 		
 		Wrapper<Integer> playerColorLength = new Container<>(playerColor.size());
 		translator.unsigned16(playerColorLength);
 		translator.array(playerColorLength.getValue(), playerColor, 
-				PlayerColor::new, item -> item.translate(translator));
+				PlayerColor::new, wrap(translator, PlayerColor::translate));
 		
 		Wrapper<Integer> soundLength = new Container<>(sound.size());
 		translator.unsigned16(soundLength);
 		translator.array(soundLength.getValue(), sound, 
-				Sound::new, item -> item.translate(translator));
+				Sound::new, wrap(translator, Sound::translate));
 		
 		graphics.translate(translator);
 		
 		map.translateMapData1(translator);
 		
 		translator.array(terrainLength.getValue(), terrain, Terrain::new, 
-				terrain -> terrain.translate(translator));
+				wrap(translator, Terrain::translate));
 		
 		//emptyTerrain.translate(translator);
 		translator.skip(438);
 		
 		translator.array(16, terrainBorder, TerrainBorder::new, 
-				border -> border.translate(translator));
+				wrap(translator, TerrainBorder::translate));
 		
 		map.translateMapData2(translator);
 		

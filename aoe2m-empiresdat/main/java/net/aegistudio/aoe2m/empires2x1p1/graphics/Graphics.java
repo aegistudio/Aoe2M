@@ -9,6 +9,8 @@ import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.FieldTranslator;
 import net.aegistudio.aoe2m.Wrapper;
 
+import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
+
 public class Graphics {
 	public final List<Wrapper<Integer>> offsets = new ArrayList<>();
 	public final List<GraphicsItem> items = new ArrayList<>();
@@ -20,14 +22,14 @@ public class Graphics {
 		translator.unsigned16(graphicsCount);
 		
 		translator.array(graphicsCount.getValue(), offsets, 
-				() -> new Container<>(0), translator::signed32);
+				Container::int0, translator::signed32);
 		
 		long actualLength = offsets.stream()
 				.map(Wrapper::getValue)
 				.filter(i -> i != 0).count();
 		
 		translator.array((int)actualLength, items, 
-				GraphicsItem::new, item -> item.translate(translator));
+				GraphicsItem::new, wrap(translator, GraphicsItem::translate));
 		
 		// WTF? Version issue?
 		//translator.constString(138, renderingData);
