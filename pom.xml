@@ -68,6 +68,18 @@
   		<artifactId>aoe2m-abstraction</artifactId>
   		<version>${project.version}</version>
   	</dependency>
+
+  	<dependency>
+  		<groupId>net.aegistudio.aoe2m</groupId>
+  		<artifactId>aoe2m-assetdba</artifactId>
+  		<version>${project.version}</version>
+  	</dependency>
+
+	<dependency>
+  		<groupId>net.aegistudio.aoe2m</groupId>
+  		<artifactId>aoe2m-unittype</artifactId>
+  		<version>${project.version}</version>
+	</dependency>
   </dependencies></dependencyManagement>
   
   <modules>
@@ -81,5 +93,6 @@
   	<module>aoe2m-io</module>
   	<module>aoe2m-drs</module>
   	<module>aoe2m-empiresdat</module>
+  	<module>aoe2m-unittype</module>
   </modules>
 </project>

@@ -14,9 +14,9 @@ import java.util.function.BiConsumer;
 import static net.aegistudio.aoe2m.assetdba.AssetConnection.*;
 import net.aegistudio.aoe2m.assetdba.AssetListener;
 import net.aegistudio.aoe2m.assetdba.AssetManager;
-import net.aegistudio.aoe2m.assetdba.unit.EnumUnitType;
 import net.aegistudio.aoe2m.assetdba.unit.UnitGamedata;
 import net.aegistudio.aoe2m.media.Storage;
+import net.aegistudo.aoe2m.unittype.EnumUnitType;
 
 public class OpgUnitManager implements AssetManager<UnitGamedata> {
 	public final int maximal;
@@ -24,7 +24,7 @@ public class OpgUnitManager implements AssetManager<UnitGamedata> {
 	
 	public OpgUnitManager(int estimatedCount, AssetListener perfLog, Storage civ) throws IOException {
 		List<OpgUnitGamedata> unitList = new ArrayList<>();
-		build(unitList, perfLog, civ, EnumUnitType.EYE_CANDY, "object");
+		build(unitList, perfLog, civ, net.aegistudo.aoe2m.unittype.EnumUnitType.EYE_CANDY, "object");
 		build(unitList, perfLog, civ, EnumUnitType.FLAG, "flag");
 		build(unitList, perfLog, civ, EnumUnitType.FLAG, "doppelganger");
 		build(unitList, perfLog, civ, EnumUnitType.BIRD, "bird");

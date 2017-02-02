@@ -1,6 +1,7 @@
 package net.aegistudio.aoe2m.assetdba.unit;
 
 import net.aegistudio.aoe2m.assetdba.SlpImage;
+import net.aegistudo.aoe2m.unittype.EnumUnitType;
 
 /**
  * Comprises unit type and info header.

@@ -5,14 +5,7 @@
     <artifactId>aoe2m</artifactId>
     <version>1.0</version>
   </parent>
-  <artifactId>aoe2m-assetdba</artifactId>
-  <name>Aoe2m Asset Abstraction</name>
-  <description>Abstraction for Age of Empire II asset database.</description>
-
-  <dependencies>
-  	<dependency>
-		<groupId>net.aegistudio.aoe2m</groupId>
-   		<artifactId>aoe2m-unittype</artifactId>
-	</dependency>
-  </dependencies>
+  <artifactId>aoe2m-unittype</artifactId>
+  <name>Aoe2m Unit Type</name>
+  <description>Extract data structure of unit in game data.</description>
 </project>

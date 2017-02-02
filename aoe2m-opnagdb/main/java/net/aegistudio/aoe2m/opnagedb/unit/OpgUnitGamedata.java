@@ -1,17 +1,14 @@
 package net.aegistudio.aoe2m.opnagedb.unit;
 
-import net.aegistudio.aoe2m.assetdba.unit.BuildingData;
-import net.aegistudio.aoe2m.assetdba.unit.CombatData;
 import net.aegistudio.aoe2m.assetdba.unit.DamageGraphics;
 import net.aegistudio.aoe2m.assetdba.unit.DiscoverData;
-import net.aegistudio.aoe2m.assetdba.unit.EnumUnitType;
-import net.aegistudio.aoe2m.assetdba.unit.ProductionData;
 import net.aegistudio.aoe2m.assetdba.unit.ProjectileData;
 import net.aegistudio.aoe2m.assetdba.unit.ResourceStorage;
-import net.aegistudio.aoe2m.assetdba.unit.UnitDataBuilder;
 import net.aegistudio.aoe2m.assetdba.unit.UnitGamedata;
 import net.aegistudio.aoe2m.assetdba.unit.WalkingData;
 import net.aegistudio.aoe2m.media.Storage;
+import net.aegistudo.aoe2m.unittype.EnumUnitType;
+import net.aegistudo.aoe2m.unittype.UnitBuilder;
 
 public class OpgUnitGamedata extends UnitGamedata {
 	public final Storage storage;
@@ -19,40 +16,40 @@ public class OpgUnitGamedata extends UnitGamedata {
 		this.type = unitType;
 		this.storage = storage;
 		
-		type.build(this, new UnitDataBuilder<RuntimeException>() {
+		type.build(new UnitBuilder<RuntimeException>() {
 			@Override
-			public float flagSpeed(float input) throws RuntimeException {
-				return input;
+			public void flagSpeed() throws RuntimeException {
+				
+			}
+			
+			@Override
+			public void walking() throws RuntimeException {
+				walking = new WalkingData();
+			}
+			
+			@Override
+			public void discover() throws RuntimeException {
+				discover = new DiscoverData();
 			}
 
 			@Override
-			public WalkingData walking(WalkingData walking) throws RuntimeException {
-				return walking == null? new WalkingData() : walking;
+			public void combat() throws RuntimeException {
+				combat = new OpgCombatData();
 			}
 
 			@Override
-			public DiscoverData discover(DiscoverData discover) throws RuntimeException {
-				return discover == null? new DiscoverData() : discover;
+			public void projectile() throws RuntimeException {
+				projectile = new ProjectileData();
 			}
 
 			@Override
-			public CombatData combat(CombatData combat) throws RuntimeException {
-				return combat == null? new OpgCombatData() : combat;
+			public void production() throws RuntimeException {
+				production = new OpgProductionData();
 			}
 
 			@Override
-			public ProjectileData projectile(ProjectileData projectile) throws RuntimeException {
-				return projectile == null? new ProjectileData() : projectile;
-			}
-
-			@Override
-			public ProductionData production(ProductionData production) throws RuntimeException {
-				return production == null? new OpgProductionData() : production;
-			}
-
-			@Override
-			public BuildingData building(BuildingData building) throws RuntimeException {
-				return building == null? new OpgBuildingData() : building;
+			public void building() throws RuntimeException {
+				building = new OpgBuildingData();
 			}
 		});
 	}

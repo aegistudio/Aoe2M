@@ -14,11 +14,11 @@ import net.aegistudio.aoe2m.assetdba.unit.EnumCreatable;
 import net.aegistudio.aoe2m.assetdba.unit.EnumGarrisonType;
 import net.aegistudio.aoe2m.assetdba.unit.EnumInteractionMode;
 import net.aegistudio.aoe2m.assetdba.unit.EnumInteractionType;
-import net.aegistudio.aoe2m.assetdba.unit.EnumUnitType;
 import net.aegistudio.aoe2m.media.Storage;
 import net.aegistudio.aoe2m.opnagedb.CsvFilter;
 import net.aegistudio.aoe2m.opnagedb.FieldMapping;
 import net.aegistudio.aoe2m.opnagedb.FunctionWrapper;
+import net.aegistudo.aoe2m.unittype.EnumUnitType;
 
 public class OpgUnitFactory {
 	protected static OpgUnitFactory instance = new OpgUnitFactory();
