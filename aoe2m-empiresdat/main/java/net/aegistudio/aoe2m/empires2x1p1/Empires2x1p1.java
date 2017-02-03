@@ -13,6 +13,12 @@ import net.aegistudio.aoe2m.empires2x1p1.map.MapData;
 import net.aegistudio.aoe2m.empires2x1p1.map.RandomMapData;
 import net.aegistudio.aoe2m.empires2x1p1.restriction.TerrainRestriction;
 import net.aegistudio.aoe2m.empires2x1p1.sound.Sound;
+import net.aegistudio.aoe2m.empires2x1p1.tech.BuildingConnection;
+import net.aegistudio.aoe2m.empires2x1p1.tech.Research;
+import net.aegistudio.aoe2m.empires2x1p1.tech.ResearchConnection;
+import net.aegistudio.aoe2m.empires2x1p1.tech.Technology;
+import net.aegistudio.aoe2m.empires2x1p1.tech.TechnologyTree;
+import net.aegistudio.aoe2m.empires2x1p1.tech.UnitConnection;
 import net.aegistudio.aoe2m.empires2x1p1.terrain.Terrain;
 import net.aegistudio.aoe2m.empires2x1p1.terrain.TerrainBlob;
 import net.aegistudio.aoe2m.empires2x1p1.terrain.TerrainBorder;
@@ -50,6 +56,18 @@ public class Empires2x1p1 {
 	public final List<Civilization> civilization = new ArrayList<>();
 	
 	public final List<Research> research = new ArrayList<>();
+	
+	public final List<Wrapper<Integer>> uk0 = new ArrayList<>();
+	
+	public final List<TechnologyTree> techTree = new ArrayList<>();
+	
+	public final Wrapper<Integer> uk1 = Container.int0();
+	
+	public final List<BuildingConnection> buildingConnection = new ArrayList<>();
+	
+	public final List<UnitConnection> unitConnection = new ArrayList<>();
+	
+	public final List<ResearchConnection> researchConnection = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
 	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
@@ -115,5 +133,40 @@ public class Empires2x1p1 {
 		translator.unsigned16(researchCount);
 		translator.array(researchCount.getValue(), research, 
 				Research::new, wrap(translator, Research::translate));
+		
+		translator.array(7, uk0, Container::int0, translator::signed32);
+		
+		Wrapper<Byte> ageEntryCount = new Container<>((byte)techTree.size());
+		translator.signed8(ageEntryCount);
+		
+		Wrapper<Byte> buildingConnectionCount = new Container<>(
+				(byte)buildingConnection.size());
+		translator.signed8(buildingConnectionCount);
+
+		Wrapper<Byte> unitConnectionCount = new Container<>(
+				(byte)unitConnection.size());
+		translator.signed8(unitConnectionCount);
+		
+		Wrapper<Byte> researchConnectionCount = new Container<>(
+				(byte)researchConnection.size());
+		translator.signed8(researchConnectionCount);
+		
+		translator.array(ageEntryCount.getValue(), techTree, TechnologyTree::new, 
+				wrap(translator, TechnologyTree::translate));
+		translator.signed32(uk1);
+		
+		translator.array(buildingConnectionCount.getValue(), 
+				buildingConnection, BuildingConnection::new, 
+				wrap(translator, BuildingConnection::translate));
+		
+		translator.array(unitConnectionCount.getValue(), 
+				unitConnection, UnitConnection::new, 
+				wrap(translator, UnitConnection::translate));
+		
+		translator.array(researchConnectionCount.getValue(), 
+				researchConnection, ResearchConnection::new, 
+				wrap(translator, ResearchConnection::translate));
+		
+		translator.end();
 	}
 }

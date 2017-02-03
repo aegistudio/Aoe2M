@@ -1,4 +1,4 @@
-package net.aegistudio.aoe2m.empires2x1p1;
+package net.aegistudio.aoe2m.empires2x1p1.tech;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,6 +8,7 @@ import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.FieldTranslator;
 import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.aoe2m.empires2x1p1.Resource;
 
 import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
 

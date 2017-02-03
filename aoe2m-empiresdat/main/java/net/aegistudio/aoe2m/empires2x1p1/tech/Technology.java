@@ -1,4 +1,4 @@
-package net.aegistudio.aoe2m.empires2x1p1;
+package net.aegistudio.aoe2m.empires2x1p1.tech;
 
 import java.io.IOException;
 import java.util.ArrayList;
