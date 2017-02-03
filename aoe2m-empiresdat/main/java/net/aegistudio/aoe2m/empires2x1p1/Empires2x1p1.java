@@ -16,6 +16,7 @@ import net.aegistudio.aoe2m.empires2x1p1.sound.Sound;
 import net.aegistudio.aoe2m.empires2x1p1.terrain.Terrain;
 import net.aegistudio.aoe2m.empires2x1p1.terrain.TerrainBlob;
 import net.aegistudio.aoe2m.empires2x1p1.terrain.TerrainBorder;
+import net.aegistudio.aoe2m.empires2x1p1.unit.Civilization;
 import net.aegistudio.aoe2m.empires2x1p1.unit.UnitHeader;
 
 import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
@@ -45,6 +46,8 @@ public class Empires2x1p1 {
 	public final List<Technology> technology = new ArrayList<>();
 	
 	public final List<UnitHeader> unitHeader = new ArrayList<>();
+	
+	public final List<Civilization> civilization = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
 	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
@@ -100,5 +103,10 @@ public class Empires2x1p1 {
 		translator.signed32(unitHeaderLength);
 		translator.array(unitHeaderLength.getValue(), unitHeader, 
 				UnitHeader::new, wrap(translator, UnitHeader::translate));
+		
+		Wrapper<Integer> civilLength = new Container<>(civilization.size());
+		translator.unsigned16(civilLength);
+		translator.array(civilLength.getValue(), civilization, 
+				Civilization::new, wrap(translator, Civilization::translate));
 	}
 }

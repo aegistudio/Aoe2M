@@ -122,8 +122,12 @@ public class FieldOutputTranslator implements FieldTranslator {
 			throws IOException, CorruptionException {
 		
 		for( ArrayTranslation<T> translation : translations)
-			for(int i = 0; i < list.size(); i ++) {
-				T value = list.get(i);
+			for(int i = 0; i < length; i ++) {
+				T value;
+				if(i < list.size()) 
+					value = list.get(i);
+				else value = factory.get();
+				
 				translation.translate(value);
 			}
 	}

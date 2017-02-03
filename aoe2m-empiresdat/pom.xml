@@ -9,8 +9,14 @@
   <name>Aoe2m Empires2x1p1 Data</name>
   <description>Submodule presents and persists empires2_x1_p1.dat.</description>
   
-  <dependencies><dependency>
-    <groupId>net.aegistudio.aoe2m</groupId>
-    <artifactId>aoe2m-io</artifactId>
-  </dependency></dependencies>
+  <dependencies>
+  	<dependency>
+    	<groupId>net.aegistudio.aoe2m</groupId>
+    	<artifactId>aoe2m-io</artifactId>
+  	</dependency>
+  	<dependency>
+    	<groupId>net.aegistudio.aoe2m</groupId>
+    	<artifactId>aoe2m-unittype</artifactId>
+  	</dependency>
+  </dependencies>
 </project>

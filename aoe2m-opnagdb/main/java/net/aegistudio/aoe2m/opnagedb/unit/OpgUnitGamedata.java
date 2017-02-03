@@ -10,48 +10,13 @@ import net.aegistudio.aoe2m.media.Storage;
 import net.aegistudo.aoe2m.unittype.EnumUnitType;
 import net.aegistudo.aoe2m.unittype.UnitBuilder;
 
-public class OpgUnitGamedata extends UnitGamedata {
+public class OpgUnitGamedata extends UnitGamedata implements UnitBuilder<RuntimeException> {
 	public final Storage storage;
 	public OpgUnitGamedata(EnumUnitType unitType, Storage storage) {
 		this.type = unitType;
 		this.storage = storage;
 		
-		type.build(new UnitBuilder<RuntimeException>() {
-			@Override
-			public void flagSpeed() throws RuntimeException {
-				
-			}
-			
-			@Override
-			public void walking() throws RuntimeException {
-				walking = new WalkingData();
-			}
-			
-			@Override
-			public void discover() throws RuntimeException {
-				discover = new DiscoverData();
-			}
-
-			@Override
-			public void combat() throws RuntimeException {
-				combat = new OpgCombatData();
-			}
-
-			@Override
-			public void projectile() throws RuntimeException {
-				projectile = new ProjectileData();
-			}
-
-			@Override
-			public void production() throws RuntimeException {
-				production = new OpgProductionData();
-			}
-
-			@Override
-			public void building() throws RuntimeException {
-				building = new OpgBuildingData();
-			}
-		});
+		type.build(this);
 	}
 
 	public OpgDamageGraphics damageGraphics;
@@ -70,5 +35,40 @@ public class OpgUnitGamedata extends UnitGamedata {
 	
 	public int storageLength() {
 		return resourceStorage.count();
+	}
+
+	@Override
+	public void flagSpeed() throws RuntimeException {
+		
+	}
+
+	@Override
+	public void walking() throws RuntimeException {
+		walking = new WalkingData();
+	}
+
+	@Override
+	public void discover() throws RuntimeException {
+		discover = new DiscoverData();
+	}
+
+	@Override
+	public void combat() throws RuntimeException {
+		combat = new OpgCombatData();
+	}
+
+	@Override
+	public void projectile() throws RuntimeException {
+		projectile = new ProjectileData();
+	}
+
+	@Override
+	public void production() throws RuntimeException {
+		production = new OpgProductionData();
+	}
+
+	@Override
+	public void building() throws RuntimeException {
+		building = new OpgBuildingData();
 	}
 }
