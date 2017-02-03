@@ -8,7 +8,7 @@ import net.aegistudio.aoe2m.FieldTranslator;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class Resource {
-	public final Wrapper<Short> type = Container.short0();
+	public final Wrapper<Short> type = Container.short1m();
 	
 	public final Wrapper<Float> amount = Container.float0();
 	protected final Wrapper<Short> castShortAmount = new CastDelegate<Float, Short>(
@@ -28,5 +28,11 @@ public class Resource {
 		translator.signed16(type);
 		translator.signed16(castShortAmount);
 		translator.signed16(used);
+	}
+	
+	public void translateResearch(FieldTranslator translator) throws IOException {
+		translator.signed16(type);
+		translator.signed16(castShortAmount);
+		translator.signed8(castByteUsed);
 	}
 }

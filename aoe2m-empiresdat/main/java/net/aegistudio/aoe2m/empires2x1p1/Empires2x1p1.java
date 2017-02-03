@@ -49,6 +49,8 @@ public class Empires2x1p1 {
 	
 	public final List<Civilization> civilization = new ArrayList<>();
 	
+	public final List<Research> research = new ArrayList<>();
+	
 	@SuppressWarnings("unchecked")
 	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
 		translator.constString(8, version);
@@ -108,5 +110,10 @@ public class Empires2x1p1 {
 		translator.unsigned16(civilLength);
 		translator.array(civilLength.getValue(), civilization, 
 				Civilization::new, wrap(translator, Civilization::translate));
+		
+		Wrapper<Integer> researchCount = new Container<>(research.size());
+		translator.unsigned16(researchCount);
+		translator.array(researchCount.getValue(), research, 
+				Research::new, wrap(translator, Research::translate));
 	}
 }

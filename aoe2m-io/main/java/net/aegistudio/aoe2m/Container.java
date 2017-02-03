@@ -41,6 +41,10 @@ public class Container<T> implements Wrapper<T> {
 		return new Container<>((short)0);
 	}
 	
+	public static Container<Short> short1m() {
+		return new Container<>((short)-1);
+	}
+	
 	public static Container<Integer> int0() {
 		return new Container<>(0);
 	}

@@ -595,6 +595,10 @@ public class Unit {
 			translator.float32(misplaced0);
 			translator.float32(misplaced1);
 		}
+		
+		public boolean invalid() {
+			return unit.getValue() < 0;
+		}
 	}
 	
 	public final List<BuildingAnnex> buildingAnnex = new ArrayList<>();
@@ -635,6 +639,7 @@ public class Unit {
 		//translator.signed8(uk14);
 		translator.array(4, buildingAnnex, BuildingAnnex::new, 
 				wrap(translator, BuildingAnnex::translate));
+		buildingAnnex.removeIf(BuildingAnnex::invalid);
 		
 		translator.signed16(headUnit);
 		translator.signed16(transformUnit);
