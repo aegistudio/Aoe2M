@@ -21,11 +21,11 @@ public class Palette {
 	public void read(InputStream inputStream) throws IOException, CorruptionException {
 		try(WindowsLineReader line = new WindowsLineReader(inputStream)) {
 			String magicNumber = line.readLine();
-			if(magicNumber.equals(MAGIC_NUMBER)) 
+			if(!magicNumber.equals(MAGIC_NUMBER)) 
 				throw new CorruptionException(magicNumber, MAGIC_NUMBER);
 			
 			String magicVersion = line.readLine();
-			if(magicVersion.equals(MAGIC_VERSION))
+			if(!magicVersion.equals(MAGIC_VERSION))
 				throw new CorruptionException(magicVersion, MAGIC_VERSION);
 			
 			int countLines = Integer.parseInt(line.readLine());

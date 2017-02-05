@@ -37,7 +37,7 @@ public class WindowsLineReader extends InputStream {
 				break;
 			
 			state = WAIT_FOR_CARRIER;
-			inputBuffer.append(c);
+			inputBuffer.append((char)c);
 		}
 		return new String(inputBuffer);
 	}
