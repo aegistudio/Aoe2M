@@ -63,7 +63,7 @@ public class DefaultCommandSet implements CommandSet {
 			
 			// Extended:
 			case 0x0e:
-				switch(significant) {
+				switch(significant >>> 4) {
 					case 0:	case 1:	case 2:	case 3:
 						return new Once(opcode, p -> {});
 				
