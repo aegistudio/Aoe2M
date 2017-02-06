@@ -12,4 +12,6 @@ public interface ImagePrinter {
 	public void obstruct1();
 	
 	public void obstruct2();
+	
+	public void endl();
 }

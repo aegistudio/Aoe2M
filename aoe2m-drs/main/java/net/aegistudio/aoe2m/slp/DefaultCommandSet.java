@@ -23,8 +23,8 @@ public class DefaultCommandSet implements CommandSet {
 			
 			// Lesser skip:
 			case 0x01:
-				return new Repeat(opcode,
-						EnumPixelCount.NEXT, ImagePrinter::transparent);
+				return new Repeat(opcode, significant == 0?
+						EnumPixelCount.NEXT : EnumPixelCount.SIGNIFICANT2, ImagePrinter::transparent);
 			
 			// Greater block copy:
 			case 0x02:

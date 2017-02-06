@@ -8,13 +8,14 @@ import javax.swing.tree.DefaultTreeModel;
 import net.aegistudio.aoe2m.drs.Archive;
 import net.aegistudio.aoe2m.drs.TableEntry;
 import net.aegistudio.aoe2m.drs.TableHeader;
+import net.aegistudio.aoe2m.pal.Palette;
 
 public class DrsTableModel extends DefaultTreeModel {
 	private static final long serialVersionUID = 1L;
 	
 	protected final DefaultMutableTreeNode archive;
 	
-	public DrsTableModel(File file, Archive archive) {
+	public DrsTableModel(File file, Archive archive, Palette palette) {
 		super(new DefaultMutableTreeNode(
 				new ArchiveViewObject(file, archive)));
 		
@@ -28,7 +29,7 @@ public class DrsTableModel extends DefaultTreeModel {
 			this.archive.add(tableNode);
 			for(TableEntry entry : table.entries.list()) 
 				tableNode.add(new DefaultMutableTreeNode(
-						new EntryViewObject(archive, tableVo, entry)));
+						new EntryViewObject(archive, tableVo, palette, entry)));
 		}
 	}
 }

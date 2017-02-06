@@ -13,7 +13,7 @@ public enum EnumPixelCount {
 			Wrapper<Byte> next = new Container<Byte>((byte) count);
 			translator.signed8(next);
 			count = next.getValue();
-			return count < 0? count + 128 : count;
+			return count < 0? count + 256 : count;
 		}
 	},
 	SIGNIFICANT2 {

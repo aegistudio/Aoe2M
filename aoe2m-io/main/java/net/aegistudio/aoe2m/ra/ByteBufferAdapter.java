@@ -32,7 +32,7 @@ public class ByteBufferAdapter implements RandomAccessible {
 	@Override
 	public int read() throws IOException {
 		if(pointer >= byteBuffer.length) return -1;
-		else return byteBuffer[pointer ++];
+		else return 0x00ff & (byteBuffer[pointer ++]);
 	}
 
 	@Override

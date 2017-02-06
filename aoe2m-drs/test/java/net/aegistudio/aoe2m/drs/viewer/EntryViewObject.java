@@ -2,6 +2,7 @@ package net.aegistudio.aoe2m.drs.viewer;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,19 +12,28 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import net.aegistudio.aoe2m.FieldTranslator;
 import net.aegistudio.aoe2m.drs.Archive;
 import net.aegistudio.aoe2m.drs.TableEntry;
+import net.aegistudio.aoe2m.io.FieldInputTranslator;
 import net.aegistudio.aoe2m.pal.Palette;
+import net.aegistudio.aoe2m.ra.AccessInputStream;
+import net.aegistudio.aoe2m.ra.ByteBufferAdapter;
+import net.aegistudio.aoe2m.ra.RandomAccessible;
+import net.aegistudio.aoe2m.slp.Picture;
 
 public class EntryViewObject implements ViewObject {
 	public final Archive archive;
 	public final TableViewObject parent;
 	public final TableEntry entry;
+	public final Palette palette;
 	
-	public EntryViewObject(Archive archive, TableViewObject parent, TableEntry entry) {
+	public EntryViewObject(Archive archive, TableViewObject parent, 
+			Palette palette, TableEntry entry) {
 		this.archive = archive;
 		this.parent = parent;
 		this.entry = entry;
+		this.palette = palette;
 	}
 	
 	public String toString() {
@@ -68,7 +78,19 @@ public class EntryViewObject implements ViewObject {
 									new JTextArea(new String(content)))));
 				}
 			}
+			
+			if(parent.getFormat().equals("slp")) try {
+				Picture picture = new Picture();
 				
+				RandomAccessible randomAccess = new ByteBufferAdapter(content);
+				InputStream inputStream = new AccessInputStream(randomAccess);
+				FieldTranslator translator = new FieldInputTranslator(inputStream, "gbk");
+				picture.translate(translator);
+				
+				result.add(new ViewObject.Entry("Slp", 
+						new SlpRenderView(palette, picture, translator, randomAccess)));
+			} catch(Exception e) {	e.printStackTrace(); }
+			
 			result.add(new ViewObject.Entry(
 					"Hex", new HexDumpView(content, 16, 2)));
 		}

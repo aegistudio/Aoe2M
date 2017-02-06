@@ -20,6 +20,6 @@ public class EndLine extends Command {
 
 	@Override
 	public void draw(ImagePrinter printer) {
-		
+		printer.endl();
 	}
 }

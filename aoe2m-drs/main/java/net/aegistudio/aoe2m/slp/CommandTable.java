@@ -68,4 +68,10 @@ public class CommandTable {
 				ScanLine::offset,
 				ScanLine::body));
 	}
+	
+	public void render(ImagePrinter printer) {
+		lines.forEach(scanline -> 
+			scanline.commands.forEach(
+					item -> item.command.draw(printer)));
+	}
 }
