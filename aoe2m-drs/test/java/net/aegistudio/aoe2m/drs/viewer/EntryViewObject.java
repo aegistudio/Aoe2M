@@ -26,14 +26,14 @@ public class EntryViewObject implements ViewObject {
 	public final Archive archive;
 	public final TableViewObject parent;
 	public final TableEntry entry;
-	public final Palette palette;
+	public final Archive interfac;
 	
 	public EntryViewObject(Archive archive, TableViewObject parent, 
-			Palette palette, TableEntry entry) {
+			Archive interfac, TableEntry entry) {
 		this.archive = archive;
 		this.parent = parent;
 		this.entry = entry;
-		this.palette = palette;
+		this.interfac = interfac;
 	}
 	
 	public String toString() {
@@ -88,7 +88,7 @@ public class EntryViewObject implements ViewObject {
 				picture.translate(translator);
 				
 				result.add(new ViewObject.Entry("Slp", 
-						new SlpRenderView(palette, picture, translator, randomAccess)));
+						new SlpRenderView(interfac, picture, translator, randomAccess)));
 			} catch(Exception e) {	e.printStackTrace(); }
 			
 			result.add(new ViewObject.Entry(

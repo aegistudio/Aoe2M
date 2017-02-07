@@ -6,13 +6,13 @@ import java.awt.Graphics;
 import net.aegistudio.aoe2m.pal.Palette;
 import net.aegistudio.aoe2m.slp.Outline;
 
-public class GraphicsPainter extends AbstractPrinter {
+public class GraphicsPrinter extends AbstractPrinter {
 	public final Graphics graphics;
 	public final Outline outline;
 	
 	protected int xpos, ypos;
 	
-	public GraphicsPainter(Graphics graphics, Outline outline,
+	public GraphicsPrinter(Graphics graphics, Outline outline,
 			Palette normal, Palette player, 
 			Color transparent, Color shadow, 
 			Color obstruct1,Color obstruct2) {

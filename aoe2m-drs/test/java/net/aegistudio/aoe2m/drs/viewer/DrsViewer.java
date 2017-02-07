@@ -1,7 +1,6 @@
 package net.aegistudio.aoe2m.drs.viewer;
 
 import java.awt.BorderLayout;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -21,7 +20,6 @@ import org.junit.Test;
 
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.drs.Archive;
-import net.aegistudio.aoe2m.pal.Palette;
 import net.aegistudio.aoe2m.ra.RandomFileAdapter;
 
 /**
@@ -67,10 +65,6 @@ public class DrsViewer {
 				new File(file.getParentFile(), "interfac.drs"), "r");
 		Archive interfac = Archive.open(new RandomFileAdapter(interfaceRandom));
 		
-		Palette palette = new Palette(); 
-		byte[] paletteByte = interfac.open(interfac.getEntry(0, 50500));
-		palette.read(new ByteArrayInputStream(paletteByte));
-		
 		// Open viewer.
 		JFrame jframe = new JFrame("DRS Viewer");
 		jframe.setLocationRelativeTo(null);
@@ -80,7 +74,7 @@ public class DrsViewer {
 		jframe.add(BorderLayout.CENTER, tabPane);
 		
 		JTree contentTable = new JTree();
-		contentTable.setModel(new DrsTableModel(file, archive, palette));
+		contentTable.setModel(new DrsTableModel(file, archive, interfac));
 		contentTable.addTreeSelectionListener(new TreeSelectionListener() {
 			@Override
 			public void valueChanged(TreeSelectionEvent arg0) {
