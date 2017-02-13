@@ -5,8 +5,8 @@ import java.util.List;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.EnumContainer;
-import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.aoe2m.scx.TextContainer;
 
 public class PlayerData {
 	// PlayerData1
@@ -25,13 +25,13 @@ public class PlayerData {
 	public EnumContainer<EnumCivilization> civilization = new EnumContainer<>(EnumCivilization.BRITONS);
 	
 	// PlayerData2
-	public Wrapper<Text> vcName = new Container<Text>(new Text(0, ""));
+	public Wrapper<String> vcName = Container.string0();
 	
-	public Wrapper<Text> ctyName = new Container<Text>(new Text(0, ""));
+	public Wrapper<String> ctyName = Container.string0();
 	
 	public static final String randomGame = "RandomGame";
-	public Wrapper<Text> aiName = new Container<Text>(new Text(randomGame.length(), randomGame));
-	public Wrapper<Text> perFile = new Container<Text>(new Text(0, ""));
+	public Wrapper<String> aiName = new Container<>(randomGame);
+	public Wrapper<String> perFile = Container.string0();
 
 	public EnumContainer<EnumAiType> aiType = new EnumContainer<>(EnumAiType.STANDARD);
 	
@@ -60,7 +60,7 @@ public class PlayerData {
 	
 	// PlayerData3
 	// Localized string Player N. Please notice it is localized.
-	public Wrapper<Text> constPlayerName = new Container<Text>(new Text(0, ""));
+	public TextContainer constPlayerName = new TextContainer();
 	
 	public Wrapper<Float> cameraX = new Container<Float>(0.0f);
 	public Wrapper<Float> cameraY = new Container<Float>(0.0f);

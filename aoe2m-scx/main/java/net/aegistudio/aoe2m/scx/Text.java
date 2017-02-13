@@ -1,26 +1,33 @@
-package net.aegistudio.aoe2m;
+package net.aegistudio.aoe2m.scx;
+
+/**
+ * A text is a special kind of string that 
+ * it should either be empty (length 0) or
+ * end with '\0' and '\0' would be counted.
+ * 
+ * @author aegistudio
+ */
 
 public final class Text {
 	public final long length;
 	public final String string;
 	
 	public Text(String string) {
-		if(string.length() == 0) {
-			this.length = 0;
-			this.string = string;
-		}
-		else {
+		if(string.length() > 0 && !string.endsWith("\0")) {
 			this.length = string.length() + 1;
 			this.string = string.concat("\0");
 		}
-	}
-	
-	public Text(long length, String string) {
-		this.length = length;
-		this.string = string;
+		else {
+			this.length = string.length();
+			this.string = string;
+		}
 	}
 	
 	public Text() {		this("");	}
+	
+	public String string() {
+		return this.string;
+	}
 	
 	public String toString() {
 		return string.replace("\0", "\\0");

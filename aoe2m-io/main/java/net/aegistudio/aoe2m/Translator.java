@@ -31,9 +31,9 @@ public interface Translator {
 	
 	public void signed8(Wrapper<Byte> field) throws IOException;
 	
-	public void string32(Wrapper<Text> field) throws IOException;
+	public void string32(Wrapper<String> field) throws IOException;
 	
-	public void string16(Wrapper<Text> field) throws IOException;
+	public void string16(Wrapper<String> field) throws IOException;
 	
 	public void bool32(Wrapper<Boolean> field) throws IOException;
 

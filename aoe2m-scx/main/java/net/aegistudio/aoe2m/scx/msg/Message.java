@@ -1,24 +1,24 @@
 package net.aegistudio.aoe2m.scx.msg;
 
 import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.scx.StringFormater;
+import net.aegistudio.aoe2m.scx.TextContainer;
 
 public class Message {
-	public Wrapper<Text> instructions = new Container<Text>(new Text());
+	public TextContainer instructions = new TextContainer();
 	public Wrapper<Long> instructionsIndex = new Container<Long>(-1l);
-	public Wrapper<Text> hints = new Container<Text>(new Text());
+	public TextContainer hints = new TextContainer();
 	public Wrapper<Long> hintsIndex = new Container<Long>(-1l);
-	public Wrapper<Text> victory = new Container<Text>(new Text());
+	public TextContainer victory = new TextContainer();
 	public Wrapper<Long> victoryIndex = new Container<Long>(-1l);
-	public Wrapper<Text> loss = new Container<Text>(new Text());
+	public TextContainer loss = new TextContainer();
 	public Wrapper<Long> lossIndex = new Container<Long>(-1l);
-	public Wrapper<Text> history = new Container<Text>(new Text());
+	public TextContainer history = new TextContainer();
 	public Wrapper<Long> historyIndex = new Container<Long>(-1l);
 	
 	// version >= 1.22
-	public Wrapper<Text> scouts = new Container<Text>(new Text(0, ""));
+	public TextContainer scouts = new TextContainer();
 	public Wrapper<Long> scoutsIndex = new Container<Long>(-1l);
 	public Wrapper<Integer> shouldParse = new Container<Integer>(1);
 	

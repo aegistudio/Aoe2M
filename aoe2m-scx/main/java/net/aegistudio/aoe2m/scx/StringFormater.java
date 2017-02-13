@@ -2,8 +2,6 @@ package net.aegistudio.aoe2m.scx;
 
 import java.util.List;
 
-import net.aegistudio.aoe2m.Text;
-
 public class StringFormater {
 	final StringBuilder toString;
 	private boolean hasValue = false;

@@ -3,8 +3,6 @@ package net.aegistudio.aoe2m.io;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import net.aegistudio.aoe2m.Text;
-
 public class FieldOutputStream extends OutputStream {
 	private OutputStream outputStream;
 	private byte[] bytes = new byte[8];
@@ -57,13 +55,15 @@ public class FieldOutputStream extends OutputStream {
 		if(written < length) skip(length - written);
 	}
 	
-	public void writeString16(Text text) throws IOException {
-		write16((short) text.length);
-		writeConstString((int) text.length, text.string);
+	public void writeString16(String text) throws IOException {
+		byte[] bytes = text.getBytes();
+		write16((short) bytes.length);
+		write(bytes);
 	}
 	
-	public void writeString32(Text text) throws IOException {
-		write32((int) text.length);
-		writeConstString((int) text.length, text.string);
+	public void writeString32(String text) throws IOException {
+		byte[] bytes = text.getBytes();
+		write32((int) bytes.length);
+		write(bytes);
 	}
 }

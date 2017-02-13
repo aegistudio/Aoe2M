@@ -1,7 +1,5 @@
 package net.aegistudio.aoe2m.scx;
 
-import net.aegistudio.aoe2m.Text;
-
 /**
  * This file assists scenario creation,
  * by reading data from a preset scenario

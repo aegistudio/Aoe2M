@@ -8,8 +8,8 @@ import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.EnumContainer;
 import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.aoe2m.scx.TextContainer;
 import net.aegistudio.aoe2m.scx.player.EnumDiplomacy;
 
 public class EffectPo {
@@ -58,8 +58,8 @@ public class EffectPo {
 	public Wrapper<Integer> unitType2 = new Container<Integer>(-1);
 	
 	public Wrapper<Integer> instructionPanel = new Container<Integer>(-1);
-	public Wrapper<Text> message = new Container<Text>(new Text(0, ""));
-	public Wrapper<Text> sound = new Container<Text>(new Text(1, new String(new byte[]{0})));	// Very special.
+	public TextContainer message = new TextContainer();
+	public Wrapper<String> sound = new Container<String>(new String(new byte[]{0}));	// Very special.
 	
 	@SuppressWarnings("unchecked")
 	public void build(Translator translator) throws IOException, CorruptionException {
@@ -99,7 +99,7 @@ public class EffectPo {
 		translator.signed32(unitType2);
 		
 		translator.signed32(instructionPanel);
-		translator.string32(message);
+		translator.string32(message.stringWrapper());
 		translator.string32(sound);
 		
 		translator.array(unitsBeSelected.getValue(), units, 

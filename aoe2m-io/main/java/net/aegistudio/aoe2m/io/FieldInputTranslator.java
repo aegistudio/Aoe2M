@@ -15,7 +15,6 @@ import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.EnumWrapper;
 import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
-import net.aegistudio.aoe2m.Text;
 
 public class FieldInputTranslator implements Translator {
 	private final String charset;
@@ -41,12 +40,12 @@ public class FieldInputTranslator implements Translator {
 	}
 
 	@Override
-	public void string32(Wrapper<Text> field) throws IOException {
+	public void string32(Wrapper<String> field) throws IOException {
 		field.setValue(fieldInputStream.readString32());
 	}
 
 	@Override
-	public void string16(Wrapper<Text> field) throws IOException {
+	public void string16(Wrapper<String> field) throws IOException {
 		field.setValue(fieldInputStream.readString16());
 	}
 

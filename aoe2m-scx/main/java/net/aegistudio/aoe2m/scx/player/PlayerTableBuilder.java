@@ -124,7 +124,7 @@ public class PlayerTableBuilder {
 		translator.unsigned32(playerTable.playerData3Length);
 		for(int i = 0; i < playerTable.playerData3Length.getValue() - 1; i ++) {
 			PlayerData playerData = this.playerTable.playerData[i];
-			translator.string16(playerData.constPlayerName);
+			translator.string16(playerData.constPlayerName.stringWrapper());
 			
 			translator.float32(playerData.cameraX);
 			translator.float32(playerData.cameraY);

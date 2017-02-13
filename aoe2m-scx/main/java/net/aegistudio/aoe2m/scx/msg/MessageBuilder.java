@@ -27,20 +27,20 @@ public class MessageBuilder {
 				translator.unsigned32(message.scoutsIndex);
 		}
 		
-		translator.string16(message.instructions);
-		translator.string16(message.hints);
-		translator.string16(message.victory);
-		translator.string16(message.loss);
-		translator.string16(message.history);
+		translator.string16(message.instructions.stringWrapper());
+		translator.string16(message.hints.stringWrapper());
+		translator.string16(message.victory.stringWrapper());
+		translator.string16(message.loss.stringWrapper());
+		translator.string16(message.history.stringWrapper());
 		if(metadata.version.getVersionFloat() >= 1.22f)
-			translator.string16(message.scouts);
+			translator.string16(message.scouts.stringWrapper());
 	}
 	
 	public void buildCinematic(MetadataPo metadata, Translator translator) throws IOException, CorruptionException {
-		translator.string16(cinematic.pregame);
-		translator.string16(cinematic.victory);
-		translator.string16(cinematic.loss);
-		translator.string16(cinematic.background);
+		translator.string16(cinematic.pregame.stringWrapper());
+		translator.string16(cinematic.victory.stringWrapper());
+		translator.string16(cinematic.loss.stringWrapper());
+		translator.string16(cinematic.background.stringWrapper());
 
 		Wrapper<Boolean> bitmapIncluded = new Container<>(cinematic.bitmap.getValue() != null);
 		Wrapper<Short> shouldParse = new Container<>((short) (bitmapIncluded.getValue()? -1 : 1));

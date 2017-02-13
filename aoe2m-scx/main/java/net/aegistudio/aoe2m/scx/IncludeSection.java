@@ -7,18 +7,17 @@ import java.util.List;
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.TranslateWrapper;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class IncludeSection {
 	public static class IncludedFile {
-		public final Wrapper<Text> name = new Container<>(new Text());
-		public final Wrapper<Text> content = new Container<>(new Text());
+		public final TextContainer name = new TextContainer();
+		public final TextContainer content = new TextContainer();
 		
 		public void buildIncludedFile(Translator translator) throws IOException {
-			translator.string32(name);
-			translator.string32(content);
+			translator.string32(name.stringWrapper());
+			translator.string32(content.stringWrapper());
 		}
 		
 		public static void build(IncludedFile file, Translator translator) throws IOException {

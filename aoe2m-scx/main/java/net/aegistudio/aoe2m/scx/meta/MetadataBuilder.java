@@ -8,6 +8,7 @@ import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.io.FieldInputStream;
 import net.aegistudio.aoe2m.io.FieldOutputStream;
 import net.aegistudio.aoe2m.scx.ScxConstants;
+import net.aegistudio.aoe2m.scx.Text;
 import net.aegistudio.aoe2m.scx.msg.Message;
 
 public class MetadataBuilder {
@@ -33,7 +34,7 @@ public class MetadataBuilder {
 		metadata.lastSavedTimestamp = fin.readUnsigned32();
 		headerLength -= 4;
 		
-		message.instructions.setValue(fin.readString32());
+		message.instructions.setValue(new Text(fin.readString32()));
 		headerLength -= (message.instructions.getValue().length + 4);
 		
 		CorruptionException.assertLong(0, fin.readUnsigned32());
@@ -55,7 +56,7 @@ public class MetadataBuilder {
 		
 		fieldTemp.write32(2);
 		fieldTemp.write32((int) metadata.lastSavedTimestamp);
-		fieldTemp.writeString32(message.instructions.getValue());
+		fieldTemp.writeString32(message.instructions.getValue().string());
 		fieldTemp.write32(0);
 		fieldTemp.write32(metadata.playerCount);
 		
@@ -75,7 +76,7 @@ public class MetadataBuilder {
 		translator.constInteger((int)2147483648l);
 		translator.constByte(191);
 		
-		translator.string16(metadata.originalFileName);
+		translator.string16(metadata.originalFileName.stringWrapper());
 	}
 	
 	public void buildGlobalVictory(Translator translator) throws IOException, CorruptionException {

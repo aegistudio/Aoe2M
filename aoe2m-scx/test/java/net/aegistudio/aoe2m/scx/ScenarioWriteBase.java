@@ -7,8 +7,6 @@ import java.io.FileOutputStream;
 
 import org.junit.Test;
 
-import net.aegistudio.aoe2m.Text;
-
 /**
  * This file will not be run in maven automated 
  * test unless you run it manually. You could

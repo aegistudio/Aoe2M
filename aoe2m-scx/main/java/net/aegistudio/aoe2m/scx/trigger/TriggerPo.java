@@ -7,7 +7,6 @@ import java.util.List;
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.TranslateWrapper;
 import net.aegistudio.aoe2m.Wrapper;
 
@@ -20,8 +19,8 @@ public class TriggerPo {
 	public Wrapper<Long> objectiveOrder = new Container<Long>(0l);
 	public Wrapper<Short> unknownValue = new Container<Short>((short) 0);
 	
-	public Wrapper<Text> triggerDescription = new Container<Text>(new Text(0, ""));	
-	public Wrapper<Text> triggerName = new Container<Text>(new Text(0, ""));
+	public Wrapper<String> triggerDescription = Container.string0();
+	public Wrapper<String> triggerName = Container.string0();
 	
 	public List<EffectPo> effectList = new ArrayList<>();
 	public List<ConditionPo> conditionList = new ArrayList<>();

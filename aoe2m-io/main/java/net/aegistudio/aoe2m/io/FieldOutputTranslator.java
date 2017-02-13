@@ -13,7 +13,6 @@ import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.EnumWrapper;
 import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
-import net.aegistudio.aoe2m.Text;
 
 public class FieldOutputTranslator implements Translator {
 	private final FieldOutputStream fieldOutputStream;
@@ -67,12 +66,12 @@ public class FieldOutputTranslator implements Translator {
 	}
 
 	@Override
-	public void string32(Wrapper<Text> field) throws IOException {
+	public void string32(Wrapper<String> field) throws IOException {
 		fieldOutputStream.writeString32(field.getValue());
 	}
 
 	@Override
-	public void string16(Wrapper<Text> field) throws IOException {
+	public void string16(Wrapper<String> field) throws IOException {
 		fieldOutputStream.writeString16(field.getValue());
 	}
 

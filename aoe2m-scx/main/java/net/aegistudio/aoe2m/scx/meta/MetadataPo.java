@@ -3,8 +3,8 @@ package net.aegistudio.aoe2m.scx.meta;
 import java.util.Date;
 
 import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.aoe2m.scx.TextContainer;
 
 public class MetadataPo {
 	public EnumVersion version = EnumVersion.AGE_OF_EMPIRE_II_THE_CONQUEROR;
@@ -19,5 +19,5 @@ public class MetadataPo {
 	
 	public Wrapper<Long> nextUnitId = new Container<>(0l);
 	
-	public Wrapper<Text> originalFileName = new Container<>(new Text());
+	public TextContainer originalFileName = new TextContainer();
 }

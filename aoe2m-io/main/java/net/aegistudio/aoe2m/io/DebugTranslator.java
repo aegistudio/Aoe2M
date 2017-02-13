@@ -9,7 +9,6 @@ import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.EnumWrapper;
 import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
-import net.aegistudio.aoe2m.Text;
 
 public class DebugTranslator implements Translator {
 	private Debuggable debug;
@@ -44,12 +43,12 @@ public class DebugTranslator implements Translator {
 	}
 
 	@Override
-	public void string32(Wrapper<Text> field) throws IOException {
+	public void string32(Wrapper<String> field) throws IOException {
 		debug("str32", () -> wrapped.string32(field));
 	}
 
 	@Override
-	public void string16(Wrapper<Text> field) throws IOException {
+	public void string16(Wrapper<String> field) throws IOException {
 		debug("str16", () -> wrapped.string16(field));
 	}
 
