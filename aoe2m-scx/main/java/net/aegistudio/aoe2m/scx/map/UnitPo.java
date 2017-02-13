@@ -20,7 +20,7 @@ public class UnitPo {
 	public Wrapper<Short> animationFrame = new Container<Short>((short) 0);
 	public Wrapper<Integer> garrisonedId = new Container<Integer>(-1);
 	
-	public void buildUnit(Translator translator) throws IOException {
+	public void build(Translator translator) throws IOException {
 		translator.float32(positionX);
 		translator.float32(positionY);
 		translator.float32(positionZ);
@@ -31,10 +31,6 @@ public class UnitPo {
 		
 		EnumIndicator.getBuilder(indicator.getValue())
 			.buildUnit(this, translator);
-	}
-	
-	public static void build(UnitPo unit, Translator translator) throws IOException {
-		unit.buildUnit(translator);
 	}
 	
 	public String toString() {

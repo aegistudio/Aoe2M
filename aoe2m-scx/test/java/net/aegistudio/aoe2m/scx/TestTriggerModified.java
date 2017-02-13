@@ -4,15 +4,16 @@ import net.aegistudio.aoe2m.scx.trigger.ConditionPo;
 import net.aegistudio.aoe2m.scx.trigger.EffectPo;
 import net.aegistudio.aoe2m.scx.trigger.EnumConditionType;
 import net.aegistudio.aoe2m.scx.trigger.EnumEffectType;
-import net.aegistudio.aoe2m.scx.trigger.OrderedList;
 import net.aegistudio.aoe2m.scx.trigger.TriggerPo;
 import static org.junit.Assert.*;
+
+import java.util.List;
 
 public class TestTriggerModified extends ScenarioReadBase {
 	public TestTriggerModified() {super("/triggerModified.scx", "gbk"); }
 	
 	public void todo(Scenario scenario) {
-		OrderedList<TriggerPo> list = scenario.trigger;
+		List<TriggerPo> list = scenario.trigger;
 		assertEquals(list.size(), 1);
 		
 		TriggerPo trigger = list.get(0);

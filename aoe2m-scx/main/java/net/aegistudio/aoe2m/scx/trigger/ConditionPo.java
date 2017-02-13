@@ -65,4 +65,10 @@ public class ConditionPo {
 		
 		translator.signed32(aiSignal);
 	}
+	
+	public Wrapper<Integer> displayOrder = Container.int0();
+	
+	public void order(Translator translator) throws IOException {
+		translator.signed32(displayOrder);
+	}
 }

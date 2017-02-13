@@ -17,7 +17,7 @@ public class TestRandomMapRead extends ScenarioReadBase {
 	@Override
 	protected void todo(Scenario scenario) {
 		assertEquals(scenario.metadata.playerCount, 2);
-		assertEquals(scenario.map.gaia.element.size(), 1920);
+		assertEquals(scenario.map.gaia.size(), 1920);
 		assertEquals(scenario.map.units[0].size(), 5);
 		assertEquals(scenario.map.units[1].size(), 5);
 	}

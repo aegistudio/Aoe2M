@@ -1,6 +1,8 @@
 package net.aegistudio.aoe2m.scx;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import net.aegistudio.aoe2m.scx.map.MapPo;
 import net.aegistudio.aoe2m.scx.meta.GlobalVictoryPo;
@@ -8,7 +10,6 @@ import net.aegistudio.aoe2m.scx.meta.MetadataPo;
 import net.aegistudio.aoe2m.scx.msg.Cinematic;
 import net.aegistudio.aoe2m.scx.msg.Message;
 import net.aegistudio.aoe2m.scx.player.PlayerTable;
-import net.aegistudio.aoe2m.scx.trigger.OrderedList;
 import net.aegistudio.aoe2m.scx.trigger.TriggerPo;
 
 public class Scenario {
@@ -22,8 +23,7 @@ public class Scenario {
 	
 	public final MapPo map = new MapPo();
 
-	public final OrderedList<TriggerPo> trigger = new OrderedList<>(TriggerPo::new,
-			(trigger, translator) -> trigger.buildTrigger(translator));
+	public final List<TriggerPo> trigger = new ArrayList<>();
 	
 	public final IncludeSection include = new IncludeSection();
 	

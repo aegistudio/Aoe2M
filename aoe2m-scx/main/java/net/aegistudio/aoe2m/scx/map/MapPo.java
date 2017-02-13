@@ -1,7 +1,9 @@
 package net.aegistudio.aoe2m.scx.map;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.VariantList;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class MapPo {
@@ -25,9 +27,9 @@ public class MapPo {
 	
 	public Wrapper<Long> playerCount = new Container<Long>(9l);
 	
-	public VariantList<UnitPo> gaia = new VariantList<>(UnitPo::new, UnitPo::build);
+	public List<UnitPo> gaia = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
-	public VariantList<UnitPo>[] units = new VariantList[8];
-	{ for(int i = 0; i < 8; i ++) units[i] = new VariantList<>(UnitPo::new, UnitPo::build); }
+	public List<UnitPo>[] units = new ArrayList[8];
+	{ for(int i = 0; i < 8; i ++) units[i] = new ArrayList<>(); }
 }

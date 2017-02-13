@@ -105,4 +105,10 @@ public class EffectPo {
 		translator.array(unitsBeSelected.getValue(), units, 
 				Container::int0, translator::signed32);
 	}
+	
+	public Wrapper<Integer> displayOrder = Container.int0();
+	
+	public void order(Translator translator) throws IOException {
+		translator.signed32(displayOrder);
+	}
 }
