@@ -6,7 +6,7 @@ import java.util.List;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class Sound {
@@ -19,7 +19,7 @@ public class Sound {
 	public List<SoundItem> items = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptionException {
 		translator.signed32(id);
 		//translator.signed16(playAtUpdate);	// WTF?
 		Wrapper<Integer> itemsLength = new Container<>(items.size());

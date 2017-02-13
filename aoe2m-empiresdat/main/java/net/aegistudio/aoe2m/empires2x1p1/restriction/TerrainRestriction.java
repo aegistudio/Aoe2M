@@ -7,7 +7,7 @@ import java.util.List;
 import net.aegistudio.aoe2m.Container;
 //import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class TerrainRestriction {
@@ -16,7 +16,7 @@ public class TerrainRestriction {
 	public List<Wrapper<Integer>> offset1 = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(int restriction, int terrain, FieldTranslator translator) 
+	public void translate(int restriction, int terrain, Translator translator) 
 			throws IOException, CorruptionException {
 		
 		translator.array(restriction, offset0, 

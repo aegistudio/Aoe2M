@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import net.aegistudio.aoe2m.CastDelegate;
 import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class Resource {
@@ -18,19 +18,19 @@ public class Resource {
 	protected final Wrapper<Byte> castByteUsed = new CastDelegate<Short, Byte>(
 			used, out -> (byte)(short)out, in -> (short)(byte)in);
 	
-	public void translateStorage(FieldTranslator translator) throws IOException {
+	public void translateStorage(Translator translator) throws IOException {
 		translator.signed16(type);
 		translator.float32(amount);
 		translator.signed8(castByteUsed);
 	}
 	
-	public void translateCost(FieldTranslator translator) throws IOException {
+	public void translateCost(Translator translator) throws IOException {
 		translator.signed16(type);
 		translator.signed16(castShortAmount);
 		translator.signed16(used);
 	}
 	
-	public void translateResearch(FieldTranslator translator) throws IOException {
+	public void translateResearch(Translator translator) throws IOException {
 		translator.signed16(type);
 		translator.signed16(castShortAmount);
 		translator.signed8(castByteUsed);

@@ -12,8 +12,8 @@ import java.util.function.Supplier;
  * @author aegistudio
  */
 
-public interface FieldTranslator {
-	public void constString(int length, Wrapper<String> string) throws IOException;
+public interface Translator {
+	public void string(int length, Wrapper<String> string) throws IOException;
 
 	public void unsigned16(Wrapper<Integer> field) throws IOException;
 	
@@ -39,11 +39,9 @@ public interface FieldTranslator {
 
 	public void constString(String field) throws CorruptionException, IOException;
 	
-	public void constUnsigned16(int field) throws CorruptionException, IOException;
+	public void constShort(int field) throws CorruptionException, IOException;
 	
-	public void constSigned32(int field) throws CorruptionException, IOException;
-	
-	public void constUnsigned32(long field) throws CorruptionException, IOException;
+	public void constInteger(int field) throws CorruptionException, IOException;
 	
 	public void constByte(int field) throws CorruptionException, IOException;
 	

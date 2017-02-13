@@ -6,14 +6,14 @@ import java.util.List;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class ContentTable {
 	public final List<Wrapper<Integer>> entries = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(FieldTranslator translator)
+	public void translate(Translator translator)
 			throws IOException, CorruptionException{
 		
 		Wrapper<Byte> entryCount = new Container<>((byte)entries.size());

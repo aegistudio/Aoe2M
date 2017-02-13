@@ -6,7 +6,7 @@ import java.util.List;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.empires2x1p1.graphics.Graphics;
 import net.aegistudio.aoe2m.empires2x1p1.map.MapData;
@@ -70,8 +70,8 @@ public class Empires2x1p1 {
 	public final List<ResearchConnection> researchConnection = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
-		translator.constString(8, version);
+	public void translate(Translator translator) throws IOException, CorruptionException {
+		translator.string(8, version);
 		
 		Wrapper<Integer> restrictionLength 
 			= new Container<>(terrainRestriction.restrictions.size());

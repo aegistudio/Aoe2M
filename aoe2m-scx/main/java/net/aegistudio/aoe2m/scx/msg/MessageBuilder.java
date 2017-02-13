@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.scx.meta.MetadataPo;
 
@@ -16,7 +16,7 @@ public class MessageBuilder {
 		this.cinematic = cinematic;
 	}
 	
-	public void buildMessage(MetadataPo metadata, FieldTranslator translator) throws IOException {
+	public void buildMessage(MetadataPo metadata, Translator translator) throws IOException {
 		if(metadata.version.getVersionFloat() >= 1.18f) {
 			translator.unsigned32(message.instructionsIndex);
 			translator.unsigned32(message.hintsIndex);
@@ -36,7 +36,7 @@ public class MessageBuilder {
 			translator.string16(message.scouts);
 	}
 	
-	public void buildCinematic(MetadataPo metadata, FieldTranslator translator) throws IOException, CorruptionException {
+	public void buildCinematic(MetadataPo metadata, Translator translator) throws IOException, CorruptionException {
 		translator.string16(cinematic.pregame);
 		translator.string16(cinematic.victory);
 		translator.string16(cinematic.loss);

@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
 
-import net.aegistudio.aoe2m.FieldTranslator.ArrayTranslation;
+import net.aegistudio.aoe2m.Translator.ArrayTranslation;
 
 /**
  * All entries in this list must be stored in sequential
@@ -115,7 +115,7 @@ public class SequentialList<E extends IntegerIndexed> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void entranslate(FieldTranslator translator, int length, Supplier<E> supplier, 
+	public void entranslate(Translator translator, int length, Supplier<E> supplier, 
 			ArrayTranslation<E> translation) throws IOException, CorruptionException {
 		translator.array(length, elements, supplier, translation);
 		validate();

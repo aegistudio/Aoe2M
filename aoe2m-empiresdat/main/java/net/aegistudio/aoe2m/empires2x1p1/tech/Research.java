@@ -6,7 +6,7 @@ import java.util.List;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.empires2x1p1.Resource;
 
@@ -48,7 +48,7 @@ public class Research {
 	public final Wrapper<String> name = Container.string0();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptionException {
 		translator.array(6, requiredTech, Container::short1m, 
 				translator::signed16);
 		requiredTech.removeIf(value -> value.getValue() <= 0);
@@ -79,6 +79,6 @@ public class Research {
 		Wrapper<Integer> nameLength = new Container<>(
 				name.getValue().getBytes().length);
 		translator.unsigned16(nameLength);
-		translator.constString(nameLength.getValue(), name);
+		translator.string(nameLength.getValue(), name);
 	}
 }

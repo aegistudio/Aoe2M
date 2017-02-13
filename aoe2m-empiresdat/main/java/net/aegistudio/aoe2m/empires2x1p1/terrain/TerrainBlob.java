@@ -6,7 +6,7 @@ import java.util.List;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class TerrainBlob {
@@ -15,7 +15,7 @@ public class TerrainBlob {
 	public List<Wrapper<Integer>> blob1 = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptionException {
 		translator.array(21, blob0, Container::byte0, translator::signed8);
 		translator.array(157, blob1, Container::int0, translator::signed32);
 	}

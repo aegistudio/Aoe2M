@@ -3,7 +3,7 @@ package net.aegistudio.aoe2m.drs;
 import java.io.IOException;
 
 import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.IntegerIndexed;
 import net.aegistudio.aoe2m.Wrapper;
 
@@ -14,7 +14,7 @@ public class TableEntry implements IntegerIndexed {
 	
 	public final Wrapper<Long> length = new Container<>(0L);
 	
-	public void translate(FieldTranslator translator) throws IOException {
+	public void translate(Translator translator) throws IOException {
 		translator.signed32(id);
 		translator.unsigned32(offset);
 		translator.unsigned32(length);

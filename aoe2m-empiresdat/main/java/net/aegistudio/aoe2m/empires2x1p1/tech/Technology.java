@@ -6,7 +6,7 @@ import java.util.List;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import static net.aegistudio.aoe2m.TranslateWrapper.*;
 import net.aegistudio.aoe2m.Wrapper;
 
@@ -24,7 +24,7 @@ public class Technology {
 		
 		public Wrapper<Float> delta = Container.float0();
 		
-		public void translate(FieldTranslator translator) throws IOException {
+		public void translate(Translator translator) throws IOException {
 			translator.signed8(type);
 			translator.signed16(unit);
 			translator.signed16(unitClass);
@@ -36,8 +36,8 @@ public class Technology {
 	public final List<Effect> effects = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
-		translator.constString(31, name);
+	public void translate(Translator translator) throws IOException, CorruptionException {
+		translator.string(31, name);
 		
 		Wrapper<Integer> effectCount = new Container<>(effects.size());
 		translator.unsigned16(effectCount);

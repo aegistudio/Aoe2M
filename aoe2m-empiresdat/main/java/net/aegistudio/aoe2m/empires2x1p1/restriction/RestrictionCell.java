@@ -3,7 +3,7 @@ package net.aegistudio.aoe2m.empires2x1p1.restriction;
 import java.io.IOException;
 
 import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class RestrictionCell {
@@ -14,11 +14,11 @@ public class RestrictionCell {
 	public final Wrapper<Integer> graphicsWalk = new Container<Integer>(-1);
 	public final Wrapper<Float> spriteRate = new Container<Float>(0f);
 	
-	public void accessible(FieldTranslator translator) throws IOException {
+	public void accessible(Translator translator) throws IOException {
 		translator.float32(accessible);
 	}
 	
-	public void sprite(FieldTranslator translator) throws IOException {
+	public void sprite(Translator translator) throws IOException {
 		translator.signed32(graphicsEnter);
 		translator.signed32(graphicsExit);
 		translator.signed32(graphicsWalk);

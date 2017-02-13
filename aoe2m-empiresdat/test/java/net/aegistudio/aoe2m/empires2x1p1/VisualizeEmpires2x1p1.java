@@ -8,7 +8,7 @@ import java.util.zip.InflaterInputStream;
 import org.junit.Test;
 
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.io.DebugInputStream;
 import net.aegistudio.aoe2m.io.FieldInputTranslator;
 //import net.aegistudio.aoe2m.io.StackDebugTranslator;
@@ -23,7 +23,7 @@ public class VisualizeEmpires2x1p1 {
 			//FieldTranslator inputTranslator = new StackDebugTranslator(
 			//		debugInput, new FieldInputTranslator(debugInput, "gbk"));
 	
-			FieldTranslator inputTranslator 
+			Translator inputTranslator 
 				= new FieldInputTranslator(inflateInput, "gbk");
 			
 			Empires2x1p1 empires2x1p1 = new Empires2x1p1();

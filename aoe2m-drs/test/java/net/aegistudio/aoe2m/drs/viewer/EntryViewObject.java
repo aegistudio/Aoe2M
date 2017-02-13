@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.drs.Archive;
 import net.aegistudio.aoe2m.drs.TableEntry;
 import net.aegistudio.aoe2m.io.FieldInputTranslator;
@@ -84,7 +84,7 @@ public class EntryViewObject implements ViewObject {
 				
 				RandomAccessible randomAccess = new ByteBufferAdapter(content);
 				InputStream inputStream = new AccessInputStream(randomAccess);
-				FieldTranslator translator = new FieldInputTranslator(inputStream, "gbk");
+				Translator translator = new FieldInputTranslator(inputStream, "gbk");
 				picture.translate(translator);
 				
 				result.add(new ViewObject.Entry("Slp", 

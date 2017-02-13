@@ -7,7 +7,7 @@ import java.util.List;
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.EnumContainer;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.scx.player.EnumDiplomacy;
@@ -62,9 +62,9 @@ public class EffectPo {
 	public Wrapper<Text> sound = new Container<Text>(new Text(1, new String(new byte[]{0})));	// Very special.
 	
 	@SuppressWarnings("unchecked")
-	public void build(FieldTranslator translator) throws IOException, CorruptionException {
+	public void build(Translator translator) throws IOException, CorruptionException {
 		translator.enum32(type.enumWrapper());
-		translator.constUnsigned32(0x17);
+		translator.constInteger(0x17);
 		
 		translator.signed32(aiGoal);
 		translator.signed32(amount);

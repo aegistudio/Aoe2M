@@ -7,7 +7,7 @@ import java.util.function.BiConsumer;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.slp.Command;
 import net.aegistudio.aoe2m.slp.ImagePrinter;
@@ -27,7 +27,7 @@ public class BlockCopy extends Command {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void translate(FieldTranslator translator) 
+	public void translate(Translator translator) 
 			throws IOException, CorruptionException {
 		int count = pixelCount.pixelCount(
 				opcode, translator, indices.size());

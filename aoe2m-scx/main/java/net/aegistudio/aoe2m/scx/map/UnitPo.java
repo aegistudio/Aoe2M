@@ -3,7 +3,7 @@ package net.aegistudio.aoe2m.scx.map;
 import java.io.IOException;
 
 import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.scx.StringFormater;
 
@@ -20,7 +20,7 @@ public class UnitPo {
 	public Wrapper<Short> animationFrame = new Container<Short>((short) 0);
 	public Wrapper<Integer> garrisonedId = new Container<Integer>(-1);
 	
-	public void buildUnit(FieldTranslator translator) throws IOException {
+	public void buildUnit(Translator translator) throws IOException {
 		translator.float32(positionX);
 		translator.float32(positionY);
 		translator.float32(positionZ);
@@ -33,7 +33,7 @@ public class UnitPo {
 			.buildUnit(this, translator);
 	}
 	
-	public static void build(UnitPo unit, FieldTranslator translator) throws IOException {
+	public static void build(UnitPo unit, Translator translator) throws IOException {
 		unit.buildUnit(translator);
 	}
 	

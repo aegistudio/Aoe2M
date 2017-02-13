@@ -6,7 +6,7 @@ import java.util.List;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
 import net.aegistudio.aoe2m.Wrapper;
 
@@ -26,7 +26,7 @@ public class MapData {
 	public final List<MapTileSize> tileSizes = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
-	public void translateMapData1(FieldTranslator translator) throws IOException, CorruptionException {
+	public void translateMapData1(Translator translator) throws IOException, CorruptionException {
 		translator.signed32(mapPointer);
 		translator.signed32(uk0);
 		translator.signed32(mapWidth);
@@ -90,7 +90,7 @@ public class MapData {
 	
 	public final Wrapper<Byte> fog = new Container<>((byte)0);
 
-	public void translateMapData2(FieldTranslator translator) throws IOException, CorruptionException {
+	public void translateMapData2(Translator translator) throws IOException, CorruptionException {
 		translator.signed32(uk1);
 		translator.float32(mapMinX);
 		translator.float32(mapMinY);

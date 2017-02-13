@@ -6,7 +6,7 @@ import java.util.List;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 
 import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
@@ -49,9 +49,9 @@ public class GraphicsItem {
 	public final List<GraphicsAttackSound> attackSounds = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
-		translator.constString(21, name0);
-		translator.constString(13, name1);
+	public void translate(Translator translator) throws IOException, CorruptionException {
+		translator.string(21, name0);
+		translator.string(13, name1);
 		
 		translator.signed32(slp);
 		//translator.signed16(uk0);

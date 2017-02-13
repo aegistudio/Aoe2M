@@ -6,7 +6,7 @@ import java.util.List;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.empires2x1p1.Resource;
 import net.aegistudo.aoe2m.unittype.EnumUnitType;
@@ -180,7 +180,7 @@ public class Unit {
 	public final Wrapper<Short> id2 = Container.short0();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptionException {
 		translator.signed8(type);
 		
 		Wrapper<Integer> nameLength = new Container<>(
@@ -284,7 +284,7 @@ public class Unit {
 		translator.signed8(attackMode);
 		translator.signed8(uk7);
 		
-		translator.constString(nameLength.getValue(), name);
+		translator.string(nameLength.getValue(), name);
 		translator.signed16(id1);
 		translator.signed16(id2);
 		
@@ -311,7 +311,7 @@ public class Unit {
 	
 	public final Wrapper<Float> speed = Container.float0();
 	
-	public void translateFlagSpeed(FieldTranslator translator) throws IOException {
+	public void translateFlagSpeed(Translator translator) throws IOException {
 		translator.float32(speed);
 	}
 	
@@ -328,7 +328,7 @@ public class Unit {
 	public final List<Wrapper<Float>> rotations = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
-	public void translateWalking(FieldTranslator translator) throws IOException, CorruptionException {
+	public void translateWalking(Translator translator) throws IOException, CorruptionException {
 		translator.signed16(graphicsWalking0);
 		translator.signed16(graphicsWalking1);
 
@@ -362,7 +362,7 @@ public class Unit {
 	
 	public final Wrapper<Byte> animalMode = Container.byte0();
 	
-	public void translateDiscover(FieldTranslator translator) throws IOException {
+	public void translateDiscover(Translator translator) throws IOException {
 		translator.signed16(discoverAction);
 		translator.float32(searchRadius);
 		translator.float32(workRate);
@@ -382,7 +382,7 @@ public class Unit {
 		
 		public final Wrapper<Short> amount = Container.short0();
 		
-		public void translate(FieldTranslator translator) throws IOException {
+		public void translate(Translator translator) throws IOException {
 			translator.signed16(type);
 			translator.signed16(amount);
 		}
@@ -431,7 +431,7 @@ public class Unit {
 	public final Wrapper<Float> displayedReloadTime = Container.float0();
 	
 	@SuppressWarnings("unchecked")
-	public void translateCombat(FieldTranslator translator) throws IOException, CorruptionException {
+	public void translateCombat(Translator translator) throws IOException, CorruptionException {
 		translator.signed16(defaultArmor);
 		
 		Wrapper<Integer> attackCount = new Container<>(attack.size());
@@ -481,7 +481,7 @@ public class Unit {
 	
 	public final Wrapper<Float> projectileArc = Container.float0();
 	
-	public void translateProjectile(FieldTranslator translator) throws IOException {
+	public void translateProjectile(Translator translator) throws IOException {
 		translator.signed8(stretch);
 		translator.signed8(smart);
 		translator.signed8(dropAnimation);
@@ -522,7 +522,7 @@ public class Unit {
 		
 		public final Wrapper<Integer> secondaryUnit = Container.int0();
 		
-		public void translate(FieldTranslator translator) throws IOException, CorruptionException {
+		public void translate(Translator translator) throws IOException, CorruptionException {
 			translator.float32(count);
 			translator.signed8(max);
 			translator.float32(areaWidth);
@@ -541,7 +541,7 @@ public class Unit {
 	public final Wrapper<Short> displayedPierceArmor = Container.short0();
 	
 	@SuppressWarnings("unchecked")
-	public void translateProduction(FieldTranslator translator) throws IOException, CorruptionException {
+	public void translateProduction(Translator translator) throws IOException, CorruptionException {
 		translator.array(3, cost, Resource::new, 
 				wrap(translator, Resource::translateCost));
 		translator.signed16(creationTime);
@@ -590,7 +590,7 @@ public class Unit {
 		
 		public final Wrapper<Float> misplaced1 = Container.float0();
 		
-		public void translate(FieldTranslator translator) throws IOException {
+		public void translate(Translator translator) throws IOException {
 			translator.signed16(unit);
 			translator.float32(misplaced0);
 			translator.float32(misplaced1);
@@ -626,7 +626,7 @@ public class Unit {
 	public final Wrapper<Integer> uk20 = Container.int0();
 	
 	@SuppressWarnings("unchecked")
-	public void translateBuilding(FieldTranslator translator) throws IOException, CorruptionException {
+	public void translateBuilding(Translator translator) throws IOException, CorruptionException {
 		translator.signed16(graphicsConstruction);
 		translator.signed16(graphicsSnow);
 		translator.signed16(adjacenceMode);

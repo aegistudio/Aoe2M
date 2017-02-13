@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Text;
 import net.aegistudio.aoe2m.Wrapper;
 
@@ -26,7 +26,7 @@ public class TriggerPo {
 	public OrderedList<ConditionPo> conditionList = new OrderedList<>(
 			ConditionPo::new, (condition, translator) -> condition.build(translator));
 	
-	public void buildTrigger(FieldTranslator translator) throws IOException, CorruptionException {
+	public void buildTrigger(Translator translator) throws IOException, CorruptionException {
 		translator.bool32(enabled);
 		translator.bool32(looping);
 		translator.signed8(unknownField);

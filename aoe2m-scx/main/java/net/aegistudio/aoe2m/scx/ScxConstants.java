@@ -3,7 +3,7 @@ package net.aegistudio.aoe2m.scx;
 import java.io.IOException;
 
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 
 /**
  * Defines usually used constants (like division) in a 
@@ -13,13 +13,13 @@ import net.aegistudio.aoe2m.FieldTranslator;
  */
 
 public class ScxConstants {
-	public static void unused(FieldTranslator translator) 
+	public static void unused(Translator translator) 
 			throws IOException, CorruptionException {
-		translator.constUnsigned32(0l);
+		translator.constInteger(0);
 	}
 	
-	public static void division(FieldTranslator translator) 
+	public static void division(Translator translator) 
 			throws IOException, CorruptionException {
-		translator.constUnsigned32(0x0ffffff9dl);
+		translator.constInteger((int)0x0ffffff9dl);
 	}
 }

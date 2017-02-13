@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.ra.RandomAccessible;
 
@@ -25,7 +25,7 @@ public class Frame {
 	
 	public final Wrapper<Integer> originY = Container.int0();
 	
-	public void translate(FieldTranslator translator) throws IOException {
+	public void translate(Translator translator) throws IOException {
 		translator.unsigned32(commandOffset);
 		translator.unsigned32(outlineOffset);
 		translator.unsigned32(paletteOffset);
@@ -38,7 +38,7 @@ public class Frame {
 		translator.signed32(originY);
 	}
 	
-	public void seek(FieldTranslator translator, RandomAccessible access, 
+	public void seek(Translator translator, RandomAccessible access, 
 			Outline outline, CommandTable command) throws IOException, CorruptionException {
 		int height = this.height.getValue();
 		

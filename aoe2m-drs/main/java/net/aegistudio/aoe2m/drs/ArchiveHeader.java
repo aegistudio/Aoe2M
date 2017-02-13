@@ -6,7 +6,7 @@ import java.util.List;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 
 /**
@@ -47,10 +47,10 @@ public class ArchiveHeader {
 	public final Wrapper<Long> fileSectionOffset = new Container<>(1024L);
 	
 	@SuppressWarnings("unchecked")
-	public void translate(FieldTranslator translator) throws CorruptionException, IOException {
-		translator.constString(40, signature);
-		translator.constString(4, version);
-		translator.constString(12, type);
+	public void translate(Translator translator) throws CorruptionException, IOException {
+		translator.string(40, signature);
+		translator.string(4, version);
+		translator.string(12, type);
 		
 		Wrapper<Integer> tableListLength = new Container<>(tableList.size());
 		translator.signed32(tableListLength);

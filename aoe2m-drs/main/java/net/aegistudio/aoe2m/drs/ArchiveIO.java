@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.RandomAccessFile;
 
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.io.FieldInputTranslator;
 import net.aegistudio.aoe2m.io.FieldOutputTranslator;
 import net.aegistudio.aoe2m.ra.AccessInputStream;
@@ -24,7 +24,7 @@ import net.aegistudio.aoe2m.ra.RandomAccessible;
 
 public final class ArchiveIO {
 	public static void translate(RandomAccessible file, ArchiveHeader archive, 
-			FieldTranslator translator) throws CorruptionException, IOException {
+			Translator translator) throws CorruptionException, IOException {
 		file.seek(0l);
 		archive.translate(translator);
 		
@@ -36,7 +36,7 @@ public final class ArchiveIO {
 	
 	public static ArchiveHeader read(RandomAccessible file) throws CorruptionException, IOException {
 		AccessInputStream fileStream = new AccessInputStream(file);
-		FieldTranslator translator = new FieldInputTranslator(fileStream, "utf-8");
+		Translator translator = new FieldInputTranslator(fileStream, "utf-8");
 		
 		ArchiveHeader result = new ArchiveHeader();
 		translate(file, result, translator);
@@ -63,7 +63,7 @@ public final class ArchiveIO {
 	
 	public static void write(ArchiveHeader archive, RandomAccessible file) throws CorruptionException, IOException {
 		AccessOutputStream fileStream = new AccessOutputStream(file);
-		FieldTranslator translator = new FieldOutputTranslator(fileStream);
+		Translator translator = new FieldOutputTranslator(fileStream);
 		
 		translate(file, archive, translator);
 	}

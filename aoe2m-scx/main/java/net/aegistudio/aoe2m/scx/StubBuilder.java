@@ -5,11 +5,11 @@ import java.io.IOException;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class StubBuilder {
-	public void buildStub(FieldTranslator translator) throws IOException, CorruptionException {
+	public void buildStub(Translator translator) throws IOException, CorruptionException {
 		int accum = 0;
 		byte[] buffer = new byte[16];
 		

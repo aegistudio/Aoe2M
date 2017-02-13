@@ -6,7 +6,7 @@ import java.util.List;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.slp.cmd.EndLine;
 
@@ -16,7 +16,7 @@ public class CommandTable {
 	public class Item {
 		public Command command = commandSet.parse((byte)0); 
 				
-		public void translate(FieldTranslator translator) 
+		public void translate(Translator translator) 
 				throws IOException, CorruptionException {
 			
 			Wrapper<Byte> opcode = new Container<>(command.opcode);
@@ -36,11 +36,11 @@ public class CommandTable {
 
 		public final List<Item> commands = new ArrayList<>();
 		
-		public void offset(FieldTranslator translator) throws IOException {
+		public void offset(Translator translator) throws IOException {
 			translator.signed32(offset);
 		}
 		
-		public void body(FieldTranslator translator)
+		public void body(Translator translator)
 				throws IOException, CorruptionException {
 			
 			for(int i = 0; ; i ++) {
@@ -60,7 +60,7 @@ public class CommandTable {
 	public final List<ScanLine> lines = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(int height, FieldTranslator translator) 
+	public void translate(int height, Translator translator) 
 			throws IOException, CorruptionException  {
 		
 		translator.array(height, lines, 

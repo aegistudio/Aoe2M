@@ -47,12 +47,7 @@ public class DebugInputTranslator extends FieldInputTranslator {
 	public void string16(Wrapper<Text> field) throws IOException {
 		debug("str16", () -> super.string16(field));
 	}
-
-	@Override
-	public void constUnsigned32(long field) throws CorruptionException, IOException {
-		constDebug("cu32", () -> super.constUnsigned32(field));
-	}
-
+	
 	@Override
 	public void constByte(int field) throws CorruptionException, IOException {
 		constDebug("cu8", () -> super.constByte(field));
@@ -64,8 +59,8 @@ public class DebugInputTranslator extends FieldInputTranslator {
 	}
 
 	@Override
-	public void constString(int length, Wrapper<String> string) throws IOException {
-		debug("cstr" + length, () -> super.constString(length, string));
+	public void string(int length, Wrapper<String> string) throws IOException {
+		debug("cstr" + length, () -> super.string(length, string));
 	}
 
 	@Override
@@ -104,8 +99,8 @@ public class DebugInputTranslator extends FieldInputTranslator {
 	}
 
 	@Override
-	public void constUnsigned16(int field) throws CorruptionException, IOException {
-		constDebug("cu16", () -> super.constUnsigned16(field));
+	public void constShort(int field) throws CorruptionException, IOException {
+		constDebug("cu16", () -> super.constShort(field));
 	}
 
 }

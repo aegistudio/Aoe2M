@@ -3,11 +3,11 @@ package net.aegistudio.aoe2m.io;
 import java.io.IOException;
 
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 
 public class StackDebugTranslator extends DebugTranslator {
 
-	public StackDebugTranslator(Debuggable debug, FieldTranslator translator) {
+	public StackDebugTranslator(Debuggable debug, Translator translator) {
 		super(debug, translator);
 	}
 	

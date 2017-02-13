@@ -6,7 +6,7 @@ import java.util.List;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class TerrainBorder {
@@ -45,10 +45,10 @@ public class TerrainBorder {
 	public Wrapper<Short> uk7 = new Container<>((short)0);
 	
 	@SuppressWarnings("unchecked")
-	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptionException {
 		translator.signed16(enabled);
-		translator.constString(13, name0);
-		translator.constString(13, name1);
+		translator.string(13, name0);
+		translator.string(13, name1);
 		
 		translator.signed32(resource);
 		translator.signed32(uk0);

@@ -3,7 +3,7 @@ package net.aegistudio.aoe2m.empires2x1p1.graphics;
 import java.io.IOException;
 
 import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class GraphicsDelta {
@@ -23,7 +23,7 @@ public class GraphicsDelta {
 	
 	public Wrapper<Short> uk4 = new Container<>((short)0);
 	
-	public void translate(FieldTranslator translator) throws IOException {
+	public void translate(Translator translator) throws IOException {
 		translator.unsigned16(graphics);
 		translator.signed16(uk0);
 		translator.signed16(uk1);

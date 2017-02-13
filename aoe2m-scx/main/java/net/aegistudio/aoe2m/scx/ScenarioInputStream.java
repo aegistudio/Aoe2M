@@ -5,7 +5,7 @@ import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.io.DebugInputStream;
 import net.aegistudio.aoe2m.io.FieldInputStream;
 import net.aegistudio.aoe2m.io.FieldInputTranslator;
@@ -36,7 +36,7 @@ public class ScenarioInputStream extends InputStream {
 		Inflater inflater = new Inflater(true);
 		InflaterInputStream inflateInput = new InflaterInputStream(fieldInputStream, inflater);
 		
-		FieldTranslator translator;
+		Translator translator;
 		if(debugging) {
 			DebugInputStream input = new DebugInputStream(inflateInput, System.out);
 			translator = new FieldInputTranslator(input, charset);

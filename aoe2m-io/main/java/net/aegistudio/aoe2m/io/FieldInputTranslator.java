@@ -13,11 +13,11 @@ import javax.imageio.ImageIO;
 
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.EnumWrapper;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.Text;
 
-public class FieldInputTranslator implements FieldTranslator {
+public class FieldInputTranslator implements Translator {
 	private final String charset;
 	private final FieldInputStream fieldInputStream;
 	public FieldInputTranslator(InputStream fieldInputStream, String charset) {
@@ -51,11 +51,6 @@ public class FieldInputTranslator implements FieldTranslator {
 	}
 
 	@Override
-	public void constUnsigned32(long field) throws CorruptionException, IOException {
-		CorruptionException.assertLong(field, fieldInputStream.readUnsigned32());
-	}
-
-	@Override
 	public void constByte(int field) throws CorruptionException, IOException {
 		CorruptionException.assertInt(field, fieldInputStream.read());
 	}
@@ -66,7 +61,7 @@ public class FieldInputTranslator implements FieldTranslator {
 	}
 	
 	@Override
-	public void constString(int length, Wrapper<String> string) throws IOException {
+	public void string(int length, Wrapper<String> string) throws IOException {
 		string.setValue(fieldInputStream.readConstLengthString(length));
 	}
 
@@ -106,7 +101,7 @@ public class FieldInputTranslator implements FieldTranslator {
 	}
 
 	@Override
-	public void constUnsigned16(int field) throws CorruptionException, IOException {
+	public void constShort(int field) throws CorruptionException, IOException {
 		CorruptionException.assertInt(field, fieldInputStream.readUnsigned16());
 	}
 
@@ -195,7 +190,7 @@ public class FieldInputTranslator implements FieldTranslator {
 	}
 
 	@Override
-	public void constSigned32(int field) throws CorruptionException, IOException {
+	public void constInteger(int field) throws CorruptionException, IOException {
 		CorruptionException.assertInt(field, fieldInputStream.readSigned32());
 	}
 }

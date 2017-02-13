@@ -3,7 +3,7 @@ package net.aegistudio.aoe2m.empires2x1p1.unit;
 import java.io.IOException;
 
 import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class UnitCommand {
@@ -65,7 +65,7 @@ public class UnitCommand {
 	
 	public final Wrapper<Short> soundResourceDeposit = Container.short0();
 	
-	public void translate(FieldTranslator translator) throws IOException {
+	public void translate(Translator translator) throws IOException {
 		translator.signed16(commandUsed);
 		translator.signed16(id);
 		translator.signed8(uk0);

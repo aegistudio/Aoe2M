@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.function.Consumer;
 
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.slp.Command;
 import net.aegistudio.aoe2m.slp.ImagePrinter;
 
@@ -16,7 +16,7 @@ public class Once extends Command {
 	}
 
 	@Override
-	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptionException {
 		
 	}
 

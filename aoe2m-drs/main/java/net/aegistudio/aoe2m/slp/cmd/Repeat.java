@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.slp.Command;
 import net.aegistudio.aoe2m.slp.ImagePrinter;
@@ -22,7 +22,7 @@ public class Repeat extends Command {
 	public Wrapper<Integer> count = Container.int0();
 	
 	@Override
-	public void translate(FieldTranslator translator) 
+	public void translate(Translator translator) 
 			throws IOException, CorruptionException {
 		count.setValue(pixelCount.pixelCount(
 				opcode, translator, count.getValue()));

@@ -6,7 +6,7 @@ import java.util.List;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
 
@@ -28,9 +28,9 @@ public class Civilization {
 	public final List<Unit> units = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptionException {
 		translator.signed8(enabled);
-		translator.constString(20, name);
+		translator.string(20, name);
 		
 		Wrapper<Integer> resourcesCount = new Container<>(resources.size());
 		translator.unsigned16(resourcesCount);

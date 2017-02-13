@@ -6,7 +6,7 @@ import java.util.zip.Deflater;
 import java.util.zip.DeflaterOutputStream;
 
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.io.DebugOutputStream;
 import net.aegistudio.aoe2m.io.FieldOutputStream;
 import net.aegistudio.aoe2m.io.FieldOutputTranslator;
@@ -38,7 +38,7 @@ public class ScenarioOutputStream extends OutputStream {
 		Deflater deflater = new Deflater(Deflater.BEST_COMPRESSION, true);
 		DeflaterOutputStream deflateOutput = new DeflaterOutputStream(fieldOutputStream, deflater);
 		
-		FieldTranslator translator;
+		Translator translator;
 		if(debugging) {
 			DebugOutputStream input = new DebugOutputStream(deflateOutput, System.out);
 			translator = new FieldOutputTranslator(input);

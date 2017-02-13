@@ -7,7 +7,7 @@ import java.util.function.Supplier;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.VariantList;
 import net.aegistudio.aoe2m.Wrapper;
 
@@ -19,7 +19,7 @@ public class OrderedList<T> extends VariantList<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void build(FieldTranslator translator) throws IOException, CorruptionException {
+	public void build(Translator translator) throws IOException, CorruptionException {
 		super.build(translator);
 		translator.array(element.size(), order, 
 				Container::int0, translator::signed32);

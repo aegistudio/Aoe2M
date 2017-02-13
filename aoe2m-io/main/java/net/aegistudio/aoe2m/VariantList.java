@@ -12,7 +12,7 @@ public class VariantList<T> {
 	public final ListTranslation<T> translation;
 	
 	public static interface ListTranslation<T> {
-		public void translate(T t, FieldTranslator translator) 
+		public void translate(T t, Translator translator) 
 				throws IOException, CorruptionException;
 	}
 	public VariantList(Supplier<T> factory, ListTranslation<T> translation) {
@@ -21,7 +21,7 @@ public class VariantList<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void build(FieldTranslator translator) throws IOException, CorruptionException {
+	public void build(Translator translator) throws IOException, CorruptionException {
 		Wrapper<Integer> count = new Container<Integer>(element.size());
 		translator.signed32(count);
 		

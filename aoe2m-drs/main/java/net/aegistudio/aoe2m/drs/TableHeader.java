@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.SequentialList;
 import net.aegistudio.aoe2m.Wrapper;
 
@@ -28,15 +28,15 @@ public class TableHeader {
 	
 	public final SequentialList<TableEntry> entries = new SequentialList<>();
 	
-	public void translateHeader(FieldTranslator fieldTranslator) throws IOException {
-		fieldTranslator.constString(4, format);
+	public void translateHeader(Translator fieldTranslator) throws IOException {
+		fieldTranslator.string(4, format);
 		fieldTranslator.unsigned32(entryOffset);
 		
 		entryCount.setValue(entries.size());
 		fieldTranslator.signed32(entryCount);
 	}
 	
-	public void translateBody(FieldTranslator fieldTranslator) throws IOException, CorruptionException {
+	public void translateBody(Translator fieldTranslator) throws IOException, CorruptionException {
 		entries.entranslate(fieldTranslator, entryCount.getValue(), 
 				TableEntry::new, entry -> entry.translate(fieldTranslator));
 	}

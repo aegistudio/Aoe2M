@@ -6,7 +6,7 @@ import java.util.List;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 
 import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
@@ -17,7 +17,7 @@ public class Outline {
 		
 		public final Wrapper<Short> right = Container.short0();
 		
-		public void translate(FieldTranslator translator) throws IOException {
+		public void translate(Translator translator) throws IOException {
 			translator.signed16(left);
 			translator.signed16(right);
 		}
@@ -26,7 +26,7 @@ public class Outline {
 	public final List<Padding> padding = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(int height, FieldTranslator translator) 
+	public void translate(int height, Translator translator) 
 			throws IOException, CorruptionException {
 		
 		translator.array(height, padding, Padding::new, 

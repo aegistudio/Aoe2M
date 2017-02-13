@@ -3,7 +3,7 @@ package net.aegistudio.aoe2m.empires2x1p1.tech;
 import java.io.IOException;
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class TechnologyTree {
@@ -23,7 +23,7 @@ public class TechnologyTree {
 	
 	public final Wrapper<Integer> secondAge = Container.int0();
 	
-	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptionException {
 		translator.signed32(uk0);
 		translator.signed32(id);
 		translator.signed8(uk1);

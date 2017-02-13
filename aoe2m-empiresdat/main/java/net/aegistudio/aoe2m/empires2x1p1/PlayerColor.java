@@ -3,7 +3,7 @@ package net.aegistudio.aoe2m.empires2x1p1;
 import java.io.IOException;
 
 import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class PlayerColor {
@@ -17,7 +17,7 @@ public class PlayerColor {
 	public final Wrapper<Integer> uk4 = new Container<Integer>(0);
 	public final Wrapper<Integer> statistics = new Container<Integer>(0);	
 	
-	public void translate(FieldTranslator translator) throws IOException {
+	public void translate(Translator translator) throws IOException {
 		translator.signed32(id);
 		translator.signed32(palette);
 		translator.signed32(color);

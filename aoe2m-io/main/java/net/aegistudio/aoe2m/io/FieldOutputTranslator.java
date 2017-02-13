@@ -11,18 +11,18 @@ import javax.imageio.ImageIO;
 
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.EnumWrapper;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.Text;
 
-public class FieldOutputTranslator implements FieldTranslator {
+public class FieldOutputTranslator implements Translator {
 	private final FieldOutputStream fieldOutputStream;
 	public FieldOutputTranslator(OutputStream fieldOutputStream) {
 		this.fieldOutputStream = new FieldOutputStream(fieldOutputStream);
 	}
 	
 	@Override
-	public void constString(int length, Wrapper<String> string) throws IOException {
+	public void string(int length, Wrapper<String> string) throws IOException {
 		fieldOutputStream.writeConstString(length, string.getValue());
 	}
 
@@ -82,13 +82,8 @@ public class FieldOutputTranslator implements FieldTranslator {
 	}
 
 	@Override
-	public void constUnsigned16(int field) throws CorruptionException, IOException {
+	public void constShort(int field) throws CorruptionException, IOException {
 		fieldOutputStream.write16((short) field);
-	}
-
-	@Override
-	public void constUnsigned32(long field) throws CorruptionException, IOException {
-		fieldOutputStream.write32((int) field);
 	}
 
 	@Override
@@ -143,7 +138,7 @@ public class FieldOutputTranslator implements FieldTranslator {
 	}
 
 	@Override
-	public void constSigned32(int field) throws CorruptionException, IOException {
+	public void constInteger(int field) throws CorruptionException, IOException {
 		fieldOutputStream.write32(field);
 	}
 }

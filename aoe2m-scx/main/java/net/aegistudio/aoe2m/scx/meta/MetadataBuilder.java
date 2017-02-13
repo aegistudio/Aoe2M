@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.io.FieldInputStream;
 import net.aegistudio.aoe2m.io.FieldOutputStream;
 import net.aegistudio.aoe2m.scx.ScxConstants;
@@ -65,20 +65,20 @@ public class MetadataBuilder {
 		fieldTemp.close();
 	}
 	
-	public void buildCompressedHeaderPre(FieldTranslator translator) throws IOException, CorruptionException {
+	public void buildCompressedHeaderPre(Translator translator) throws IOException, CorruptionException {
 		translator.unsigned32(metadata.nextUnitId);
 		translator.constFloat(metadata.version.getVersionFloat());
 	}
 	
-	public void buildCompressedHeaderTail(FieldTranslator translator) throws IOException, CorruptionException {
-		translator.constUnsigned32(1);
-		translator.constUnsigned32(2147483648l);
+	public void buildCompressedHeaderTail(Translator translator) throws IOException, CorruptionException {
+		translator.constInteger(1);
+		translator.constInteger((int)2147483648l);
 		translator.constByte(191);
 		
 		translator.string16(metadata.originalFileName);
 	}
 	
-	public void buildGlobalVictory(FieldTranslator translator) throws IOException, CorruptionException {
+	public void buildGlobalVictory(Translator translator) throws IOException, CorruptionException {
 		ScxConstants.division(translator);
 		translator.bool32(victory.customConquer);
 		ScxConstants.unused(translator);

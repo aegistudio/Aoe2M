@@ -6,7 +6,7 @@ import java.util.List;
 
 import net.aegistudio.aoe2m.Container;
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 
 public class Terrain {
@@ -73,12 +73,12 @@ public class Terrain {
 	public Wrapper<Short> unitsUsed = new Container<>((short)0);
 	
 	@SuppressWarnings("unchecked")
-	public void translate(FieldTranslator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptionException {
 		translator.signed16(uk0);
 		translator.signed16(uk1);
 
-		translator.constString(13, name0);
-		translator.constString(13, name1);
+		translator.string(13, name0);
+		translator.string(13, name1);
 		
 		translator.signed32(slp);
 		translator.signed32(uk2);
@@ -97,7 +97,7 @@ public class Terrain {
 		translator.signed8(uk3);
 		
 		translator.float32(uk4);
-		translator.constString(18, uk5);
+		translator.string(18, uk5);
 		
 		translator.signed16(frameCount);
 		translator.signed16(angleCount);

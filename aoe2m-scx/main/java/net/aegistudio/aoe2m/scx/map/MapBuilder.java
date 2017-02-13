@@ -3,7 +3,7 @@ package net.aegistudio.aoe2m.scx.map;
 import java.io.IOException;
 
 import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.scx.ScxConstants;
 import net.aegistudio.aoe2m.scx.meta.MetadataPo;
 
@@ -13,7 +13,7 @@ public class MapBuilder {
 		this.map = map;
 	}
 	
-	public void buildTerrian(MetadataPo metadata, FieldTranslator translator) 
+	public void buildTerrian(MetadataPo metadata, Translator translator) 
 			throws CorruptionException, IOException {
 		ScxConstants.division(translator);
 		translator.signed32(map.weCameraY);
@@ -36,7 +36,7 @@ public class MapBuilder {
 		translator.unsigned32(map.playerCount);
 	}
 	
-	public void buildUnits(MetadataPo metadata, FieldTranslator translator) 
+	public void buildUnits(MetadataPo metadata, Translator translator) 
 			throws IOException, CorruptionException {
 		map.gaia.build(translator);
 		

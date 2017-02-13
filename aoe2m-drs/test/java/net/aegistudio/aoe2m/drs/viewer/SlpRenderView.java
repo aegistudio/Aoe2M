@@ -17,7 +17,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.drs.Archive;
 import net.aegistudio.aoe2m.drs.TableEntry;
 import net.aegistudio.aoe2m.pal.Palette;
@@ -36,7 +36,7 @@ public class SlpRenderView extends JPanel {
 
 	public final Archive interfac;
 	public final Picture picture;
-	public final FieldTranslator translator;
+	public final Translator translator;
 	public final RandomAccessible access;
 	
 	public final JLabel imageView;
@@ -46,7 +46,7 @@ public class SlpRenderView extends JPanel {
 	public final JCheckBox normal, player, obstruct, origin;
 	
 	public SlpRenderView(Archive interfac, Picture picture, 
-			FieldTranslator translator, RandomAccessible access) {
+			Translator translator, RandomAccessible access) {
 		super.setLayout(new BorderLayout());
 		
 		this.interfac = interfac;

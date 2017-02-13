@@ -7,15 +7,15 @@ import java.util.function.Supplier;
 
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.EnumWrapper;
-import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.Text;
 
-public class DebugTranslator implements FieldTranslator {
+public class DebugTranslator implements Translator {
 	private Debuggable debug;
-	private FieldTranslator wrapped;
+	private Translator wrapped;
 	
-	public DebugTranslator(Debuggable debug, FieldTranslator wrapped) {
+	public DebugTranslator(Debuggable debug, Translator wrapped) {
 		this.debug = debug;
 		this.wrapped = wrapped;
 	}
@@ -54,11 +54,6 @@ public class DebugTranslator implements FieldTranslator {
 	}
 
 	@Override
-	public void constUnsigned32(long field) throws CorruptionException, IOException {
-		constDebug("cu32", () -> wrapped.constUnsigned32(field));
-	}
-
-	@Override
 	public void constByte(int field) throws CorruptionException, IOException {
 		constDebug("cu8", () -> wrapped.constByte(field));
 	}
@@ -69,8 +64,8 @@ public class DebugTranslator implements FieldTranslator {
 	}
 
 	@Override
-	public void constString(int length, Wrapper<String> string) throws IOException {
-		debug("cstr" + length, () -> wrapped.constString(length, string));
+	public void string(int length, Wrapper<String> string) throws IOException {
+		debug("cstr" + length, () -> wrapped.string(length, string));
 	}
 
 	@Override
@@ -109,8 +104,8 @@ public class DebugTranslator implements FieldTranslator {
 	}
 
 	@Override
-	public void constUnsigned16(int field) throws CorruptionException, IOException {
-		constDebug("cu16", () -> wrapped.constUnsigned16(field));
+	public void constShort(int field) throws CorruptionException, IOException {
+		constDebug("cu16", () -> wrapped.constShort(field));
 	}
 	
 	public void end() throws IOException, CorruptionException {
@@ -140,7 +135,7 @@ public class DebugTranslator implements FieldTranslator {
 	}
 
 	@Override
-	public void constSigned32(int field) throws CorruptionException, IOException {
-		constDebug("cs32", () -> wrapped.constSigned32(field));
+	public void constInteger(int field) throws CorruptionException, IOException {
+		constDebug("cs32", () -> wrapped.constInteger(field));
 	}
 }
