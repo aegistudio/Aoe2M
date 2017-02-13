@@ -7,6 +7,7 @@ import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.FieldTranslator;
 import net.aegistudio.aoe2m.io.FieldInputStream;
 import net.aegistudio.aoe2m.io.FieldOutputStream;
+import net.aegistudio.aoe2m.scx.ScxConstants;
 import net.aegistudio.aoe2m.scx.msg.Message;
 
 public class MetadataBuilder {
@@ -78,15 +79,15 @@ public class MetadataBuilder {
 	}
 	
 	public void buildGlobalVictory(FieldTranslator translator) throws IOException, CorruptionException {
-		translator.division();
+		ScxConstants.division(translator);
 		translator.bool32(victory.customConquer);
-		translator.unused();
+		ScxConstants.unused(translator);
 
 		translator.unsigned32(victory.customMinRelic);
-		translator.unused();
+		ScxConstants.unused(translator);
 		
 		translator.unsigned32(victory.customExplorePercent);
-		translator.unused();
+		ScxConstants.unused(translator);
 		
 		translator.bool32(victory.allCustomCondition);
 		translator.enum32(victory.victoryMode.enumWrapper());

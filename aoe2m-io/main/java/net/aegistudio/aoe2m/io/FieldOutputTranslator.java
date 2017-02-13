@@ -82,16 +82,6 @@ public class FieldOutputTranslator implements FieldTranslator {
 	}
 
 	@Override
-	public void division() throws CorruptionException, IOException {
-		fieldOutputStream.write32((int) 0x0ffffff9dl);
-	}
-
-	@Override
-	public void unused() throws CorruptionException, IOException {
-		fieldOutputStream.write32(0);
-	}
-
-	@Override
 	public void constUnsigned16(int field) throws CorruptionException, IOException {
 		fieldOutputStream.write16((short) field);
 	}

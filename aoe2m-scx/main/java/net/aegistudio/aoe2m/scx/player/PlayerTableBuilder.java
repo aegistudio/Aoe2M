@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.scx.ScxConstants;
 import net.aegistudio.aoe2m.scx.meta.MetadataPo;
 
 public class PlayerTableBuilder {
@@ -39,14 +40,15 @@ public class PlayerTableBuilder {
 			translator.string16(playerTable.playerData[i].aiName);
 		
 		for(int i = 0; i < 16; i ++) {
-			translator.unused();	translator.unused();
+			ScxConstants.unused(translator);
+			ScxConstants.unused(translator);
 			translator.string32(playerTable.playerData[i].perFile);
 		}
 		
 		for(int i = 0; i < 16; i ++)
 			translator.enum8(playerTable.playerData[i].aiType.enumWrapper());
 		
-		translator.division();
+		ScxConstants.division(translator);
 		
 		for(int i = 0; i < 16; i ++) {
 			translator.unsigned32(playerTable.playerData[i].initGold);
@@ -54,7 +56,7 @@ public class PlayerTableBuilder {
 			translator.unsigned32(playerTable.playerData[i].initFood);;
 			translator.unsigned32(playerTable.playerData[i].initStone);
 			translator.unsigned32(playerTable.playerData[i].initOreX);
-			translator.unused();
+			ScxConstants.unused(translator);
 		}
 	}
 	
@@ -64,7 +66,7 @@ public class PlayerTableBuilder {
 				translator.enum32(playerTable.playerData[i].diplomacy[j].enumWrapper());
 			
 		translator.skip(11520);	// 16 * 720, WTF
-		translator.division();
+		ScxConstants.division(translator);
 		
 		for(int i = 0; i < 16; i ++)
 			translator.bool32(playerTable.playerData[i].alliedVictory);
@@ -98,8 +100,8 @@ public class PlayerTableBuilder {
 			for(int i = 0; i < 16; i ++) playerTable.playerData[i]
 					.diasabledBuildings.buildExtraDisabledId(translator);
 		
-		translator.unused();
-		translator.unused();
+		ScxConstants.unused(translator);
+		ScxConstants.unused(translator);
 		translator.bool32(playerTable.allTechs);
 		for(int i = 0; i < 16; i ++)
 			translator.signed32(playerTable.playerData[i].startingAge);

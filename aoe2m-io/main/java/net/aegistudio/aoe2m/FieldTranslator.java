@@ -36,10 +36,6 @@ public interface FieldTranslator {
 	public void string16(Wrapper<Text> field) throws IOException;
 	
 	public void bool32(Wrapper<Boolean> field) throws IOException;
-	
-	public void division() throws CorruptionException, IOException;
-	
-	public void unused() throws CorruptionException, IOException;
 
 	public void constString(String field) throws CorruptionException, IOException;
 	

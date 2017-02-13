@@ -49,16 +49,6 @@ public class DebugInputTranslator extends FieldInputTranslator {
 	}
 
 	@Override
-	public void division() throws CorruptionException, IOException {
-		constDebug("division", () -> super.division());
-	}
-
-	@Override
-	public void unused() throws CorruptionException, IOException {
-		constDebug("unused", () -> super.unused());
-	}
-
-	@Override
 	public void constUnsigned32(long field) throws CorruptionException, IOException {
 		constDebug("cu32", () -> super.constUnsigned32(field));
 	}

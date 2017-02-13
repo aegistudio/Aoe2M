@@ -54,16 +54,6 @@ public class DebugTranslator implements FieldTranslator {
 	}
 
 	@Override
-	public void division() throws CorruptionException, IOException {
-		constDebug("division", () -> wrapped.division());
-	}
-
-	@Override
-	public void unused() throws CorruptionException, IOException {
-		constDebug("unused", () -> wrapped.unused());
-	}
-
-	@Override
 	public void constUnsigned32(long field) throws CorruptionException, IOException {
 		constDebug("cu32", () -> wrapped.constUnsigned32(field));
 	}

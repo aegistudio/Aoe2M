@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.FieldTranslator;
+import net.aegistudio.aoe2m.scx.ScxConstants;
 import net.aegistudio.aoe2m.scx.meta.MetadataPo;
 
 public class MapBuilder {
@@ -14,7 +15,7 @@ public class MapBuilder {
 	
 	public void buildTerrian(MetadataPo metadata, FieldTranslator translator) 
 			throws CorruptionException, IOException {
-		translator.division();
+		ScxConstants.division(translator);
 		translator.signed32(map.weCameraY);
 		translator.signed32(map.weCameraX);
 		if(metadata.version.getVersionFloat() >= 1.21)

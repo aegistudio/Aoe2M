@@ -51,16 +51,6 @@ public class FieldInputTranslator implements FieldTranslator {
 	}
 
 	@Override
-	public void division() throws CorruptionException, IOException {
-		CorruptionException.assertDivision(fieldInputStream.readUnsigned32());
-	}
-
-	@Override
-	public void unused() throws CorruptionException, IOException {
-		CorruptionException.assertUnused(fieldInputStream.readUnsigned32());
-	}
-
-	@Override
 	public void constUnsigned32(long field) throws CorruptionException, IOException {
 		CorruptionException.assertLong(field, fieldInputStream.readUnsigned32());
 	}
