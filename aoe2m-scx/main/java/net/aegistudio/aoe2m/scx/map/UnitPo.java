@@ -2,9 +2,9 @@ package net.aegistudio.aoe2m.scx.map;
 
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.wrap.Container;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
 import net.aegistudio.aoe2m.scx.StringFormater;
 
 public class UnitPo {
@@ -29,7 +29,7 @@ public class UnitPo {
 		translator.signed16(unitType);
 		translator.signed8(indicator);
 		
-		EnumIndicator.getBuilder(indicator.getValue())
+		EnumIndicator.getBuilder(indicator.get())
 			.buildUnit(this, translator);
 	}
 	
@@ -38,7 +38,7 @@ public class UnitPo {
 		toString.add("Id", unitId);
 		toString.add("Type", unitType);
 		toString.add("DataType", EnumIndicator.getBuilder(
-				indicator.getValue()));
+				indicator.get()));
 		toString.line();
 		
 		toString.add("X", positionX);

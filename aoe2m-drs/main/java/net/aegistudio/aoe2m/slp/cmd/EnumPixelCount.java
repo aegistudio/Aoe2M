@@ -2,9 +2,9 @@ package net.aegistudio.aoe2m.slp.cmd;
 
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 
 public enum EnumPixelCount {
 	NEXT {
@@ -12,7 +12,7 @@ public enum EnumPixelCount {
 		public int pixelCount(byte opcode, Translator translator, int count) throws IOException {
 			Wrapper<Byte> next = new Container<Byte>((byte) count);
 			translator.signed8(next);
-			count = next.getValue();
+			count = next.get();
 			return count < 0? count + 256 : count;
 		}
 	},

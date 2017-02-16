@@ -9,16 +9,16 @@ import java.util.function.BiConsumer;
 import net.aegistudio.aoe2m.assetdba.AssetListener;
 import net.aegistudio.aoe2m.assetdba.AssetManager;
 import net.aegistudio.aoe2m.assetdba.TileGamedata;
-import net.aegistudio.aoe2m.media.Storage;
+import net.aegistudio.uio.media.Storage;
 
 import static net.aegistudio.aoe2m.assetdba.AssetConnection.*;
 
 public class OpgTileManager implements AssetManager<TileGamedata> {
 	protected final TileGamedata[] tiles;
 	public OpgTileManager(AssetListener perfLog, Storage root) throws IOException {
-		Storage parent = root.chdir("terrain");
-		Storage terrainGamedata = root.chdir("gamedata")
-				.chdir("gamedata-empiresdat").chdir("0000-terrains.docx");
+		Storage parent = root.open("terrain");
+		Storage terrainGamedata = root.open("gamedata")
+				.open("gamedata-empiresdat").open("0000-terrains.docx");
 		
 		try(BufferedReader gamedataReader = new BufferedReader(new InputStreamReader(terrainGamedata.read()))) {
 			String[] lines = gamedataReader.lines().toArray(String[]::new);

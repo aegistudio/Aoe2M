@@ -6,7 +6,7 @@ import net.aegistudio.aoe2m.assetdba.unit.ProjectileData;
 import net.aegistudio.aoe2m.assetdba.unit.ResourceStorage;
 import net.aegistudio.aoe2m.assetdba.unit.UnitGamedata;
 import net.aegistudio.aoe2m.assetdba.unit.WalkingData;
-import net.aegistudio.aoe2m.media.Storage;
+import net.aegistudio.uio.media.Storage;
 import net.aegistudo.aoe2m.unittype.EnumUnitType;
 import net.aegistudo.aoe2m.unittype.UnitBuilder;
 

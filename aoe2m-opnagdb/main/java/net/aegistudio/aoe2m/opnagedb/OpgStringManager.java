@@ -13,12 +13,12 @@ import java.util.function.BiConsumer;
 
 import net.aegistudio.aoe2m.assetdba.AssetListener;
 import net.aegistudio.aoe2m.assetdba.AssetManager;
-import net.aegistudio.aoe2m.media.Storage;
+import net.aegistudio.uio.media.Storage;
 
 public class OpgStringManager {
 	public final Map<String, OpgStringLocaleManager> localeMap = new TreeMap<>();
 	public OpgStringManager(AssetListener perfLog, Storage root) throws IOException {
-		Storage parent = root.chdir("string_resources.docx");
+		Storage parent = root.open("string_resources.docx");
 		
 		try(BufferedReader gamedataReader = new BufferedReader(new InputStreamReader(parent.read()))) {
 			String[] lines = gamedataReader.lines().toArray(String[]::new);

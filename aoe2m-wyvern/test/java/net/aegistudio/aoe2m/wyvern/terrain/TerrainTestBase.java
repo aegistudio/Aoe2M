@@ -8,7 +8,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import net.aegistudio.aoe2m.assetdba.AssetConnection;
-import net.aegistudio.aoe2m.media.Storage;
+import net.aegistudio.uio.media.Storage;
 import net.aegistudio.aoe2m.opnagedb.OpgAssetConnection;
 import net.aegistudio.aoe2m.wyvern.WyvernRider;
 import net.aegistudio.aoe2m.wyvern.asset.Blendomatic;
@@ -28,8 +28,8 @@ public abstract class TerrainTestBase extends WyvernRider {
 	public final TileOutline outline, biasOutline;
 	
 	public TerrainTestBase() throws IOException, LWJGLException {
-		//Storage storage = new net.aegistudio.aoe2m.media.FileStorage(new java.io.File("assets"));
-		Storage storage = new net.aegistudio.aoe2m.media.ZipStorage(
+		//Storage storage = new net.aegistudio.uio.media.FileStorage(new java.io.File("assets"));
+		Storage storage = new net.aegistudio.uio.media.ZipStorage(
 				new java.util.zip.ZipFile("asset.zip"), "converted");
 		
 		connection = new OpgAssetConnection(storage, new ConsoleAssetListener());

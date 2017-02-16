@@ -2,7 +2,7 @@ package net.aegistudio.aoe2m.scx.map;
 
 import java.util.TreeMap;
 
-import net.aegistudio.aoe2m.Container;
+import net.aegistudio.uio.wrap.Container;
 
 public class AiMapWrapper extends Container<Integer>{
 	public static final TreeMap<Integer, EnumAiMap> aiMapLookup;
@@ -18,7 +18,7 @@ public class AiMapWrapper extends Container<Integer>{
 	}
 
 	public void setValue(Integer value) {
-		super.setValue(value);
+		super.set(value);
 		aiMapValue = aiMapLookup.get(value);
 	}
 }

@@ -2,11 +2,9 @@ package net.aegistudio.aoe2m.slp;
 
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
-import net.aegistudio.aoe2m.ra.RandomAccessible;
+import net.aegistudio.uio.*;
+import net.aegistudio.uio.ra.RandomAccessible;
+import net.aegistudio.uio.wrap.*;
 
 public class Frame {
 	public final Wrapper<Long> commandOffset = Container.long0();
@@ -39,13 +37,13 @@ public class Frame {
 	}
 	
 	public void seek(Translator translator, RandomAccessible access, 
-			Outline outline, CommandTable command) throws IOException, CorruptionException {
-		int height = this.height.getValue();
+			Outline outline, CommandTable command) throws IOException, CorruptException {
+		int height = this.height.get();
 		
-		access.seek(outlineOffset.getValue());
+		access.seek(outlineOffset.get());
 		outline.translate(height, translator);
 		
-		access.seek(commandOffset.getValue());
+		access.seek(commandOffset.get());
 		command.translate(height, translator);
 	}
 }

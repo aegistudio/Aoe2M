@@ -7,18 +7,18 @@ import java.io.RandomAccessFile;
 
 import org.junit.Test;
 
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.ra.RandomFileAdapter;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.ra.RandomFileAdapter;
 
 public class TestArchiveInput extends ArchiveTestBase{
 	public TestArchiveInput() {	super("gamedata.drs");	}
 
-	public @Test void test() throws CorruptionException, IOException {
+	public @Test void test() throws CorruptException, IOException {
 		RandomAccessFile file = new RandomAccessFile(url.getFile(), "r");
 		Archive archive = Archive.open(new RandomFileAdapter(file));
 		for(TableEntry entry : archive.list(0)) {
 			byte[] value = archive.open(entry);
-			assertEquals((long)value.length, entry.length.getValue());
+			assertEquals((long)value.length, entry.length.get());
 		}
 	}
 }

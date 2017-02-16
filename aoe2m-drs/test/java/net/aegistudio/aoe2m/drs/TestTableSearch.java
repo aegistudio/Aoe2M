@@ -25,7 +25,7 @@ public class TestTableSearch {
 	
 	public void add(int id) {
 		TableEntry entry = new TableEntry();
-		entry.id.setValue(id);
+		entry.id.set(id);
 		atom.add(entry);
 	}
 	

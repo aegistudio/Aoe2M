@@ -14,10 +14,10 @@ public class TestCinematicImage extends ScenarioReadBase {
 
 	@Override
 	protected void todo(Scenario scenario) {
-		assertNotNull(scenario.cinematic.bitmap.getValue());
+		assertNotNull(scenario.cinematic.bitmap.get());
 		try {
 			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			ImageIO.write(scenario.cinematic.bitmap.getValue(), "bmp", buffer);
+			ImageIO.write(scenario.cinematic.bitmap.get(), "bmp", buffer);
 			byte[] readImage = buffer.toByteArray();
 			
 			BufferedImage compareImageObj = ImageIO

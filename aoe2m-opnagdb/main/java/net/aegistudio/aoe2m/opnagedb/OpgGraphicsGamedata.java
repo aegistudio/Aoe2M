@@ -8,7 +8,7 @@ import net.aegistudio.aoe2m.assetdba.AssetListener;
 import net.aegistudio.aoe2m.assetdba.EnumLayer;
 import net.aegistudio.aoe2m.assetdba.GraphicsDelta;
 import net.aegistudio.aoe2m.assetdba.GraphicsGamedata;
-import net.aegistudio.aoe2m.media.Storage;
+import net.aegistudio.uio.media.Storage;
 
 import static net.aegistudio.aoe2m.assetdba.AssetConnection.*;
 
@@ -47,7 +47,7 @@ public class OpgGraphicsGamedata extends GraphicsGamedata {
 		mirroringMode = Integer.parseInt(parameters[16]);
 		
 		String deltaFilename = parameters[17].substring(parameters[17].indexOf('/') + 1);
-		Storage deltaFile = graphicsDeltaRoot.chdir(deltaFilename);
+		Storage deltaFile = graphicsDeltaRoot.open(deltaFilename);
 		try(BufferedReader reader = new BufferedReader(new InputStreamReader(deltaFile.read()))) {
 			deltas = reader.lines().filter(CsvFilter::filter)
 						.map(CsvFilter::map)

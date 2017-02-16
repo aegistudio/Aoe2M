@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 
 public class BuildingConnection {
 	public final Wrapper<Integer> id = Container.int0();
@@ -41,7 +41,7 @@ public class BuildingConnection {
 	public final Wrapper<Integer> requiredResearch = Container.int0();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(Translator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptException {
 		translator.signed32(id);
 		translator.signed8(status);
 		buildings.translate(translator);
@@ -51,11 +51,14 @@ public class BuildingConnection {
 		translator.signed32(unitOrResearch0);
 		translator.signed32(unitOrResearch1);
 		
-		translator.array(8, uk0, Container::int0, translator::signed32);
+		translator.array(8, uk0, Container::int0, 
+				Translator.reverse(Translator::signed32));
 		translator.signed32(mode0);
 		translator.signed32(mode1);
-		translator.array(8, uk1, Container::int0, translator::signed32);
-		translator.array(11, uk2, Container::byte0, translator::signed8);
+		translator.array(8, uk1, Container::int0, 
+				Translator.reverse(Translator::signed32));
+		translator.array(11, uk2, Container::byte0, 
+				Translator.reverse(Translator::signed8));
 		
 		translator.signed32(lineMode);
 		translator.signed32(requiredResearch);

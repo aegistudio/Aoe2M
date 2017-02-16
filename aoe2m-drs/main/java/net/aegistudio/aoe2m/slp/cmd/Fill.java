@@ -3,10 +3,8 @@ package net.aegistudio.aoe2m.slp.cmd;
 import java.io.IOException;
 import java.util.function.BiConsumer;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.*;
+import net.aegistudio.uio.wrap.*;
 import net.aegistudio.aoe2m.slp.Command;
 import net.aegistudio.aoe2m.slp.ImagePrinter;
 
@@ -26,15 +24,15 @@ public class Fill extends Command {
 	
 	@Override
 	public void translate(Translator translator) 
-			throws IOException, CorruptionException {
-		count.setValue(pixelCount.pixelCount(
-				opcode, translator, count.getValue()));
+			throws IOException, CorruptException {
+		count.set(pixelCount.pixelCount(
+				opcode, translator, count.get()));
 		translator.signed8(pixel);
 	}
 
 	@Override
 	public void draw(ImagePrinter printer) {
-		for(int i = 0; i < count.getValue(); i ++)
-			todo.accept(printer, pixel.getValue());
+		for(int i = 0; i < count.get(); i ++)
+			todo.accept(printer, pixel.get());
 	}
 }

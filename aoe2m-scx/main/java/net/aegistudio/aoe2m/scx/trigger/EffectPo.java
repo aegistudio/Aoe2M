@@ -4,11 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.EnumContainer;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.wrap.*;
+import net.aegistudio.uio.*;
 import net.aegistudio.aoe2m.scx.TextContainer;
 import net.aegistudio.aoe2m.scx.player.EnumDiplomacy;
 
@@ -19,16 +16,16 @@ public class EffectPo {
 	
 	public Wrapper<Integer> resourceType = new Container<Integer>(-1);
 	public EnumResourceType getResourceType() { 
-		return EnumResourceType.getByAuxOrder(resourceType.getValue());
+		return EnumResourceType.getByAuxOrder(resourceType.get());
 	}
 	
 	public void setResourceType(EnumResourceType type) {
-		resourceType.setValue(type.auxilliaryOrder);
+		resourceType.set(type.auxilliaryOrder);
 	}
 	
 	public Wrapper<Integer> diplomacy = new Container<Integer>(-1);
-	public EnumDiplomacy getDiplomacy() { return EnumDiplomacy.getByAuxOrder(diplomacy.getValue()); }
-	public void setDiplomacy(EnumDiplomacy value) { diplomacy.setValue(value.auxiliaryOrder); }
+	public EnumDiplomacy getDiplomacy() { return EnumDiplomacy.getByAuxOrder(diplomacy.get()); }
+	public void setDiplomacy(EnumDiplomacy value) { diplomacy.set(value.auxiliaryOrder); }
 	
 	public List<Wrapper<Integer>> units;
 	
@@ -62,8 +59,8 @@ public class EffectPo {
 	public Wrapper<String> sound = new Container<String>(new String(new byte[]{0}));	// Very special.
 	
 	@SuppressWarnings("unchecked")
-	public void build(Translator translator) throws IOException, CorruptionException {
-		translator.enum32(type.enumWrapper());
+	public void build(Translator translator) throws IOException, CorruptException {
+		translator.signed32(type.enum32());
 		translator.constInteger(0x17);
 		
 		translator.signed32(aiGoal);
@@ -74,7 +71,7 @@ public class EffectPo {
 		Wrapper<Integer> unitsBeSelected = new Container<Integer>(
 				units != null? units.size() : -1);
 		translator.signed32(unitsBeSelected);
-		if(unitsBeSelected.getValue() >= 0 && units == null)
+		if(unitsBeSelected.get() >= 0 && units == null)
 			units = new ArrayList<Wrapper<Integer>>();
 		
 		translator.signed32(unitIdToLocate);
@@ -102,8 +99,8 @@ public class EffectPo {
 		translator.string32(message.stringWrapper());
 		translator.string32(sound);
 		
-		translator.array(unitsBeSelected.getValue(), units, 
-				Container::int0, translator::signed32);
+		translator.array(unitsBeSelected.get(), units, 
+				Container::int0, Translator.squeech(translator::signed32));
 	}
 	
 	public Wrapper<Integer> displayOrder = Container.int0();

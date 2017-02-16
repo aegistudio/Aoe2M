@@ -8,6 +8,7 @@ import net.aegistudio.aoe2m.model.PlayerTableModel;
 import net.aegistudio.aoe2m.model.TerrainModel;
 import net.aegistudio.aoe2m.model.TriggerListModel;
 import net.aegistudio.aoe2m.scx.Scenario;
+import net.aegistudio.uio.Wrapper;
 
 public interface Document extends ModelObject<Document> {
 	public void marshal(Scenario sceario) throws Aoe2mException;

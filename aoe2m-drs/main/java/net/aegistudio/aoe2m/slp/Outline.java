@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
-
-import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 
 public class Outline {
 	public static class Padding {
@@ -27,9 +25,9 @@ public class Outline {
 	
 	@SuppressWarnings("unchecked")
 	public void translate(int height, Translator translator) 
-			throws IOException, CorruptionException {
+			throws IOException, CorruptException {
 		
 		translator.array(height, padding, Padding::new, 
-				wrap(translator, Padding::translate));
+				Padding::translate);
 	}
 }

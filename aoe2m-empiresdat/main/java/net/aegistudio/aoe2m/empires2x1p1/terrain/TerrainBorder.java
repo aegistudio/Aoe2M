@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 
 public class TerrainBorder {
 	public Wrapper<Short> enabled = new Container<>((short)0);
@@ -45,7 +45,7 @@ public class TerrainBorder {
 	public Wrapper<Short> uk7 = new Container<>((short)0);
 	
 	@SuppressWarnings("unchecked")
-	public void translate(Translator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptException {
 		translator.signed16(enabled);
 		translator.string(13, name0);
 		translator.string(13, name1);
@@ -62,7 +62,7 @@ public class TerrainBorder {
 		translator.signed32(uk4);
 		
 		translator.array(230, frames, BorderFrameData::new, 
-				frame -> frame.translate(translator));
+				BorderFrameData::translate);
 		translator.signed16(frameCount);
 		translator.signed16(uk5);
 		translator.signed16(uk6);

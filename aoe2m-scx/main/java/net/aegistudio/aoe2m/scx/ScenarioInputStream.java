@@ -1,16 +1,14 @@
 package net.aegistudio.aoe2m.scx;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.io.DebugInputStream;
-import net.aegistudio.aoe2m.io.FieldInputStream;
-import net.aegistudio.aoe2m.io.FieldInputTranslator;
-import net.aegistudio.aoe2m.io.StackDebugTranslator;
 import net.aegistudio.aoe2m.scx.meta.MetadataBuilder;
+import net.aegistudio.uio.stream.*;
+import net.aegistudio.uio.strmdbg.*;
+import net.aegistudio.uio.*;
 
 public class ScenarioInputStream extends InputStream {
 	private final InputStream inputStream;
@@ -28,8 +26,8 @@ public class ScenarioInputStream extends InputStream {
 	
 	private static final boolean debugging = false;
 	
-	public void readScenario(Scenario scenario) throws IOException, CorruptionException {
-		FieldInputStream fieldInputStream = new FieldInputStream(this, charset);
+	public void readScenario(Scenario scenario) throws IOException, CorruptException {
+		BinaryInputStream fieldInputStream = new BinaryInputStream(this, charset);
 		new MetadataBuilder(scenario.metadata, scenario.globalVictory)
 			.readUncompressedHeader(fieldInputStream, scenario.message);
 		
@@ -39,10 +37,10 @@ public class ScenarioInputStream extends InputStream {
 		Translator translator;
 		if(debugging) {
 			DebugInputStream input = new DebugInputStream(inflateInput, System.out);
-			translator = new FieldInputTranslator(input, charset);
-			translator = new StackDebugTranslator(input, translator);
+			translator = new InputTranslator(input, charset);
+			translator = new StackTranslator(input, translator);
 		}
-		else translator = new FieldInputTranslator(inflateInput, charset);
+		else translator = new InputTranslator(inflateInput, charset);
 		
 		new ScenarioDirector().build(scenario, translator);
 	}

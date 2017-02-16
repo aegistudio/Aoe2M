@@ -2,8 +2,8 @@ package net.aegistudio.aoe2m.scx.meta;
 
 import java.util.Date;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.wrap.Container;
+import net.aegistudio.uio.Wrapper;
 import net.aegistudio.aoe2m.scx.TextContainer;
 
 public class MetadataPo {

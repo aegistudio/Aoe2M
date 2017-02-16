@@ -10,7 +10,7 @@
   <description>Submodule that represents and persists data archive files.</description>
   
   <dependencies><dependency>
-    <groupId>net.aegistudio.aoe2m</groupId>
-    <artifactId>aoe2m-io</artifactId>
+  		<groupId>net.aegistudio.uio</groupId>
+  		<artifactId>unified-io</artifactId>
   </dependency></dependencies>
 </project>

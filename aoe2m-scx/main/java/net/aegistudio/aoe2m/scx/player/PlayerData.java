@@ -3,16 +3,17 @@ package net.aegistudio.aoe2m.scx.player;
 import java.util.Arrays;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.EnumContainer;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.wrap.BooleanContainer;
+import net.aegistudio.uio.wrap.Container;
+import net.aegistudio.uio.wrap.EnumContainer;
+import net.aegistudio.uio.Wrapper;
 import net.aegistudio.aoe2m.scx.TextContainer;
 
 public class PlayerData {
 	// PlayerData1
 	public Wrapper<String> asciiPlayerName = new Container<String>("");
 	public String getAsciiPlayerName() {
-		String effectiveAsciiPlayerName = asciiPlayerName.getValue();
+		String effectiveAsciiPlayerName = asciiPlayerName.get();
 		effectiveAsciiPlayerName = effectiveAsciiPlayerName.substring(
 				0, effectiveAsciiPlayerName.indexOf('\0'));
 		return effectiveAsciiPlayerName;
@@ -20,8 +21,8 @@ public class PlayerData {
 	
 	// version >= 1.18
 	public Wrapper<Long> stringTableIndex = new Container<Long>(-1l);
-	public Wrapper<Boolean> active = new Container<Boolean>(false);
-	public Wrapper<Boolean> human = new Container<Boolean>(false);
+	public BooleanContainer active = new BooleanContainer(false);
+	public BooleanContainer human = new BooleanContainer(false);
 	public EnumContainer<EnumCivilization> civilization = new EnumContainer<>(EnumCivilization.BRITONS);
 	
 	// PlayerData2
@@ -46,7 +47,7 @@ public class PlayerData {
 	public EnumContainer<EnumDiplomacy>[] diplomacy = new EnumContainer[16];
 	{ for(int i = 0; i < 16; i ++) diplomacy[i] = new EnumContainer<EnumDiplomacy>(EnumDiplomacy.ENEMY); }
 	
-	public Wrapper<Boolean> alliedVictory = new Container<Boolean>(false);
+	public BooleanContainer alliedVictory = new BooleanContainer(false);
 	
 	// Disable section
 	public DisableList diasabledTechs = new DisableList(30, 30);
@@ -83,54 +84,54 @@ public class PlayerData {
 		// Basis.
 		toString.append("name=\"").append(getAsciiPlayerName()).append("\", ");
 
-		toString.append("active=").append(active.getValue()).append(", ");
-		toString.append("role=").append(human.getValue()? "human" : "computer").append(", ");
-		toString.append("civilization=").append(civilization.getValue()).append(", ");
-		toString.append("playerColor=").append(playerColor.getValue()).append(",");
+		toString.append("active=").append(active.get()).append(", ");
+		toString.append("role=").append(human.get()? "human" : "computer").append(", ");
+		toString.append("civilization=").append(civilization.get()).append(", ");
+		toString.append("playerColor=").append(playerColor.get()).append(",");
 		toString.append("\n\t");
 		
 		// Ai Config.
 		toString.append("aiConfig={");
-			toString.append("aiName=\"").append(aiName.getValue()).append("\", ");
-			toString.append("perFile=\"").append(perFile.getValue()).append("\", ");
-			toString.append(aiType.getValue());
+			toString.append("aiName=\"").append(aiName.get()).append("\", ");
+			toString.append("perFile=\"").append(perFile.get()).append("\", ");
+			toString.append(aiType.get());
 		toString.append("}, ");
 		toString.append("\n\t");
 		
 		// Resource Config.
 		toString.append("resources={");
-			toString.append("Food=").append(initFood.getValue()).append(", ");
-			toString.append("Wood=").append(initWood.getValue()).append(", ");
-			toString.append("Gold=").append(initGold.getValue()).append(", ");
-			toString.append("Stone=").append(initStone.getValue()).append(", ");
-			toString.append("OreX=").append(initOreX.getValue());
+			toString.append("Food=").append(initFood.get()).append(", ");
+			toString.append("Wood=").append(initWood.get()).append(", ");
+			toString.append("Gold=").append(initGold.get()).append(", ");
+			toString.append("Stone=").append(initStone.get()).append(", ");
+			toString.append("OreX=").append(initOreX.get());
 		toString.append("}, ");
 		toString.append("\n\t");
 		
 		// Game config.
-		toString.append("PopulationLimit=").append(populationLimit.getValue()).append(", ");
-		toString.append("AlliedVictory=").append(alliedVictory.getValue()).append(", ");
-		toString.append("StartingAge=").append(startingAge.getValue()).append(", ");
+		toString.append("PopulationLimit=").append(populationLimit.get()).append(", ");
+		toString.append("AlliedVictory=").append(alliedVictory.get()).append(", ");
+		toString.append("StartingAge=").append(startingAge.get()).append(", ");
 		toString.append("\n\t");
 		
 		// Diplomacy
 		List<Object> dipArray = Arrays.asList(Arrays.asList(diplomacy).stream()
-			.map(diplomacyEntry -> diplomacyEntry.getValue().toString().charAt(0)).toArray());
+			.map(diplomacyEntry -> diplomacyEntry.get().toString().charAt(0)).toArray());
 		toString.append("diplomacy=Diplomacy@").append(diplomacy.length)
 			.append(dipArray).append(", \n\t");
 		
 		// Strings
-		toString.append("constPlayerName=\"").append(constPlayerName.getValue()).append("\", ");
-		toString.append("vcName=\"").append(vcName.getValue()).append("\", ");
-		toString.append("ctyName=\"").append(ctyName.getValue()).append("\", ");
+		toString.append("constPlayerName=\"").append(constPlayerName.get()).append("\", ");
+		toString.append("vcName=\"").append(vcName.get()).append("\", ");
+		toString.append("ctyName=\"").append(ctyName.get()).append("\", ");
 		toString.append("\n\t");
 		
 		// Camera
 		toString.append("camera={");
-			toString.append("x=").append(cameraX.getValue())
-				.append("(").append(unknownedX.getValue()).append("), ");
-			toString.append("y=").append(cameraY.getValue())
-				.append("(").append(unknownedY.getValue()).append(")");
+			toString.append("x=").append(cameraX.get())
+				.append("(").append(unknownedX.get()).append("), ");
+			toString.append("y=").append(cameraY.get())
+				.append("(").append(unknownedY.get()).append(")");
 		toString.append("}, ");
 		toString.append("\n\t");
 		

@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 
 /**
  * A .drs archive is a composite of data number 
@@ -47,7 +47,7 @@ public class ArchiveHeader {
 	public final Wrapper<Long> fileSectionOffset = new Container<>(1024L);
 	
 	@SuppressWarnings("unchecked")
-	public void translate(Translator translator) throws CorruptionException, IOException {
+	public void translate(Translator translator) throws CorruptException, IOException {
 		translator.string(40, signature);
 		translator.string(4, version);
 		translator.string(12, type);
@@ -57,7 +57,7 @@ public class ArchiveHeader {
 		
 		translator.unsigned32(fileSectionOffset);
 		
-		translator.array(tableListLength.getValue(), tableList, 
-				TableHeader::new, table -> table.translateHeader(translator));
+		translator.array(tableListLength.get(), tableList, 
+				TableHeader::new, TableHeader::translateHeader);
 	}
 }

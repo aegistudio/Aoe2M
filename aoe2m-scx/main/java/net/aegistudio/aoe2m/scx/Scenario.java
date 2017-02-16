@@ -47,7 +47,7 @@ public class Scenario {
 		toString.add("Player", Arrays.asList(player.playerData).subList(0, 
 				metadata.playerCount));
 		
-		toString.add("AllTechs", player.allTechs.getValue());
+		toString.add("AllTechs", player.allTechs.get());
 		
 		return toString.toString();
 	}

@@ -3,12 +3,12 @@ package net.aegistudio.aoe2m.slp.cmd;
 import java.io.IOException;
 import java.util.function.Consumer;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.slp.Command;
 import net.aegistudio.aoe2m.slp.ImagePrinter;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 
 public class Repeat extends Command {
 	public final EnumPixelCount pixelCount;
@@ -23,14 +23,14 @@ public class Repeat extends Command {
 	
 	@Override
 	public void translate(Translator translator) 
-			throws IOException, CorruptionException {
-		count.setValue(pixelCount.pixelCount(
-				opcode, translator, count.getValue()));
+			throws IOException, CorruptException {
+		count.set(pixelCount.pixelCount(
+				opcode, translator, count.get()));
 	}
 
 	@Override
 	public void draw(ImagePrinter printer) {
-		for(int i = 0; i < count.getValue(); i ++)
+		for(int i = 0; i < count.get(); i ++)
 			task.accept(printer);
 	}
 }

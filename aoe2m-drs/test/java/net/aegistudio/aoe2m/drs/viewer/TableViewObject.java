@@ -12,7 +12,7 @@ public class TableViewObject {
 	}
 	
 	public String getFormat() {
-		return new StringBuilder(table.format.getValue())
+		return new StringBuilder(table.format.get())
 				.reverse().toString().substring(0, 3);
 	}
 	

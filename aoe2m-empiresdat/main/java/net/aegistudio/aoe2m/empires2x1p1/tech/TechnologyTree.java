@@ -1,10 +1,11 @@
 package net.aegistudio.aoe2m.empires2x1p1.tech;
 
 import java.io.IOException;
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
+
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 
 public class TechnologyTree {
 	public final Wrapper<Integer> uk0 = Container.int0();
@@ -23,7 +24,7 @@ public class TechnologyTree {
 	
 	public final Wrapper<Integer> secondAge = Container.int0();
 	
-	public void translate(Translator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptException {
 		translator.signed32(uk0);
 		translator.signed32(id);
 		translator.signed8(uk1);

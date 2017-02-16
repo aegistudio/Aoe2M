@@ -9,9 +9,9 @@ public class TestPlayerModified extends ScenarioReadBase {
 	
 	public void todo(Scenario scenario) {
 		assertEquals(scenario.metadata.playerCount, 2);
-		assertEquals(scenario.player.playerData[0].initFood.getValue(), 100L);
+		assertEquals(scenario.player.playerData[0].initFood.get(), 100L);
 		assertEquals(scenario.player.playerData[0]
-				.civilization.getValue(), EnumCivilization.PERSIANS);
+				.civilization.get(), EnumCivilization.PERSIANS);
 		assertEquals(scenario.player.playerData[0].getAsciiPlayerName(), "Test");
 	}
 }

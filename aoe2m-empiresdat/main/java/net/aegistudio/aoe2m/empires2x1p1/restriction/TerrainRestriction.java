@@ -4,11 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-//import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 
 public class TerrainRestriction {
 	public List<RestrictionItem> restrictions = new ArrayList<>();
@@ -17,16 +16,15 @@ public class TerrainRestriction {
 	
 	@SuppressWarnings("unchecked")
 	public void translate(int restriction, int terrain, Translator translator) 
-			throws IOException, CorruptionException {
+			throws IOException, CorruptException {
 		
 		translator.array(restriction, offset0, 
-				Container::int0, translator::signed32);
+				Container::int0, Translator.squeech(translator::signed32));
 		
 		translator.array(restriction, offset1, 
-				Container::int0, translator::signed32);
+				Container::int0, Translator.squeech(translator::signed32));
 		
 		translator.array(restriction, restrictions, 
-				RestrictionItem::new, 
-				item -> item.translateItem(terrain, translator));
+				RestrictionItem::new, RestrictionItem.terrain(terrain));
 	}
 }

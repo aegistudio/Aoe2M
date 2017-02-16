@@ -10,9 +10,9 @@ import net.aegistudio.aoe2m.assetdba.NullAssetListener;
 import net.aegistudio.aoe2m.assetdba.PlayerPalette;
 import net.aegistudio.aoe2m.assetdba.unit.Civilization;
 import net.aegistudio.aoe2m.assetdba.unit.UnitGamedata;
-import net.aegistudio.aoe2m.media.Storage;
 import net.aegistudio.aoe2m.opnagedb.unit.OpgCivManager;
 import net.aegistudio.aoe2m.opnagedb.unit.OpgUnitSubsystem;
+import net.aegistudio.uio.media.Storage;
 
 public class OpgAssetConnection implements AssetConnection {
 	public OpgAssetConnection(Storage root, AssetListener perfLog) throws IOException {

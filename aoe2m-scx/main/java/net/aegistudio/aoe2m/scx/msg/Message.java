@@ -1,7 +1,7 @@
 package net.aegistudio.aoe2m.scx.msg;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.wrap.Container;
+import net.aegistudio.uio.Wrapper;
 import net.aegistudio.aoe2m.scx.StringFormater;
 import net.aegistudio.aoe2m.scx.TextContainer;
 
@@ -24,31 +24,31 @@ public class Message {
 	
 	public String toString() {
 		StringFormater toString = new StringFormater(this);
-		toString.add("InstructionsIndex", instructionsIndex.getValue());
-		toString.add("Instructions", instructions.getValue());
+		toString.add("InstructionsIndex", instructionsIndex.get());
+		toString.add("Instructions", instructions.get());
 		toString.line();
 
-		toString.add("HintsIndex", hintsIndex.getValue());
-		toString.add("Hints", hints.getValue());
+		toString.add("HintsIndex", hintsIndex.get());
+		toString.add("Hints", hints.get());
 		toString.line();
 		
-		toString.add("VictoryIndex", victoryIndex.getValue());
-		toString.add("Victory", victory.getValue());
+		toString.add("VictoryIndex", victoryIndex.get());
+		toString.add("Victory", victory.get());
 		toString.line();
 
-		toString.add("LossIndex", lossIndex.getValue());
-		toString.add("Loss", loss.getValue());
+		toString.add("LossIndex", lossIndex.get());
+		toString.add("Loss", loss.get());
 		toString.line();
 		
-		toString.add("HistoryIndex", historyIndex.getValue());
-		toString.add("History", history.getValue());
+		toString.add("HistoryIndex", historyIndex.get());
+		toString.add("History", history.get());
 		toString.line();
 		
-		toString.add("ScoutsIndex", scoutsIndex.getValue());
-		toString.add("Scouts", scouts.getValue());
+		toString.add("ScoutsIndex", scoutsIndex.get());
+		toString.add("Scouts", scouts.get());
 		toString.line();
 		
-		toString.add("shouldParse", shouldParse.getValue());
+		toString.add("shouldParse", shouldParse.get());
 		
 		return toString.toString();
 	}

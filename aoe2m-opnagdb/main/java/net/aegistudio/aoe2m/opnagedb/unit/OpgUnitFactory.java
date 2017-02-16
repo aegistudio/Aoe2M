@@ -14,10 +14,10 @@ import net.aegistudio.aoe2m.assetdba.unit.EnumCreatable;
 import net.aegistudio.aoe2m.assetdba.unit.EnumGarrisonType;
 import net.aegistudio.aoe2m.assetdba.unit.EnumInteractionMode;
 import net.aegistudio.aoe2m.assetdba.unit.EnumInteractionType;
-import net.aegistudio.aoe2m.media.Storage;
 import net.aegistudio.aoe2m.opnagedb.CsvFilter;
 import net.aegistudio.aoe2m.opnagedb.FieldMapping;
 import net.aegistudio.aoe2m.opnagedb.FunctionWrapper;
+import net.aegistudio.uio.media.Storage;
 import net.aegistudo.aoe2m.unittype.EnumUnitType;
 
 public class OpgUnitFactory {
@@ -53,7 +53,7 @@ public class OpgUnitFactory {
 				.floatField("selection_shape_y", "selectionShapeY")
 				.floatField("selection_shape_z", "selectionShapeZ")
 				.map("damage_graphic", (obj, path) -> obj.damageGraphics 
-						= new OpgDamageGraphics(obj.storage.chdir(path)))
+						= new OpgDamageGraphics(obj.storage.open(path)))
 				.integerField("sound_selection", "soundSelection")
 				.integerField("sound_dying", "soundDying")
 				.enumField("attack_mode", EnumAttackMode.class, "attackMode")
@@ -88,7 +88,7 @@ public class OpgUnitFactory {
 				
 				/** living unit. **/
 				.map("resource_cost", (obj, path) -> ((OpgProductionData)obj.production).costs 
-						= new OpgResourceStorage(obj.storage.chdir(path)))
+						= new OpgResourceStorage(obj.storage.open(path)))
 				.integerField("creation_time", "production", "creationTime")
 				.integerField("creation_location_id", "production", "creationLocationId")
 				.enumField("creatable_type", EnumCreatable.class, "production", "creatableType")
@@ -99,7 +99,7 @@ public class OpgUnitFactory {
 				.integerField("stack_unit_id", "building", "stackUnitId")
 				.integerField("terrain_id", "building", "terrainId")
 				.map("building_annex", (obj, path) -> ((OpgBuildingData)obj.building).annex
-						= new OpgBuildingAnnex(obj.storage.chdir(path)))
+						= new OpgBuildingAnnex(obj.storage.open(path)))
 				.enumField("garrison_type", EnumGarrisonType.class, "building", "garrisonType");
 	}
 	

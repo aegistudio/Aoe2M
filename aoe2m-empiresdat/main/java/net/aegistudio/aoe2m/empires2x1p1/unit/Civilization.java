@@ -4,11 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
-import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 
 public class Civilization {
 	public final Wrapper<Byte> enabled = Container.byte0();
@@ -28,7 +27,7 @@ public class Civilization {
 	public final List<Unit> units = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(Translator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptException {
 		translator.signed8(enabled);
 		translator.string(20, name);
 		
@@ -38,19 +37,18 @@ public class Civilization {
 		translator.signed16(techTree);
 		translator.signed16(teamBonus);
 		
-		translator.array(resourcesCount.getValue(), resources, 
-				Container::float0, translator::float32);
+		translator.array(resourcesCount.get(), resources, 
+				Container::float0, Translator.reverse(Translator::float32));
 		
 		translator.signed8(iconSet);
 		
 		Wrapper<Integer> unitOffsetsCount = new Container<>(unitOffsets.size());
 		translator.unsigned16(unitOffsetsCount);
-		translator.array(unitOffsetsCount.getValue(), unitOffsets, 
-				Container::int0, translator::signed32);
+		translator.array(unitOffsetsCount.get(), unitOffsets, 
+				Container::int0, Translator.reverse(Translator::signed32));
 		
 		int actualCount = (int)unitOffsets.stream()
-				.mapToInt(Wrapper::getValue).filter(i -> i != 0).count();
-		translator.array(actualCount, units, Unit::new, 
-				wrap(translator, Unit::translate));
+				.mapToInt(Wrapper::get).filter(i -> i != 0).count();
+		translator.array(actualCount, units, Unit::new, Unit::translate);
 	}
 }

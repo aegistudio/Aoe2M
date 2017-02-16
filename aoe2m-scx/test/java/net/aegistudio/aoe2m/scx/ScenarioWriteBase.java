@@ -26,7 +26,7 @@ public abstract class ScenarioWriteBase {
 		try {
 			Scenario scenario = new EmptyScenario(scenarioFile);
 			
-			scenario.metadata.originalFileName.setValue(new Text(scenarioFile));
+			scenario.metadata.originalFileName.set(new Text(scenarioFile));
 			todo(scenario);
 			
 			File file = new File(scenarioFile);

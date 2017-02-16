@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
-
-import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 
 public class Picture {
 	public final Wrapper<String> version = new Container<>("2.0N");
@@ -19,14 +17,14 @@ public class Picture {
 	public final Wrapper<String> comment = Container.string0();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(Translator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptException {
 		translator.string(4, version);
 		
 		Wrapper<Integer> frameCount = new Container<>(frames.size());
 		translator.signed32(frameCount);
 		
 		translator.string(24, comment);
-		translator.array(frameCount.getValue(), frames, Frame::new, 
-				wrap(translator, Frame::translate));
+		translator.array(frameCount.get(), frames, Frame::new, 
+				Frame::translate);
 	}
 }

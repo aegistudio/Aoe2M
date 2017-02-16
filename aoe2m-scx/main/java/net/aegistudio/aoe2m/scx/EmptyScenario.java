@@ -20,7 +20,7 @@ public class EmptyScenario extends Scenario {
 			throw new Error();
 		}
 		
-		super.metadata.originalFileName.setValue(new Text(name));
+		super.metadata.originalFileName.set(new Text(name));
 		super.metadata.touch();
 	}
 }

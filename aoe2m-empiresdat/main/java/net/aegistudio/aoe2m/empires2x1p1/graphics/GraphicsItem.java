@@ -4,21 +4,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
-
-import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 
 public class GraphicsItem {
-	public final Wrapper<String> name0 = new Container<>("");
-	public final Wrapper<String> name1 = new Container<>("");
+	public final Wrapper<String> name0 = Container.string0();
+	public final Wrapper<String> name1 = Container.string0();
 	
-	public final Wrapper<Integer> slp = new Container<>(-1);
-	public final Wrapper<Short> uk0 = new Container<>((short)0);
+	public final Wrapper<Integer> slp = Container.int1m();
+	public final Wrapper<Short> uk0 = Container.short0();
 	
-	public final Wrapper<Byte> layer = new Container<>((byte)0);
+	public final Wrapper<Byte> layer = Container.byte0();
 	public final Wrapper<Short> playerColor = new Container<>((short)0);
 	public final Wrapper<Byte> adaptColor = new Container<>((byte)0);
 	
@@ -49,7 +47,7 @@ public class GraphicsItem {
 	public final List<GraphicsAttackSound> attackSounds = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(Translator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptException {
 		translator.string(21, name0);
 		translator.string(13, name1);
 		
@@ -83,11 +81,11 @@ public class GraphicsItem {
 		translator.signed16(mirroringMode);
 		//translator.signed8(uk1);
 		
-		translator.array(deltasCount.getValue(), deltas, 
-				GraphicsDelta::new, wrap(translator, GraphicsDelta::translate));
+		translator.array(deltasCount.get(), deltas, 
+				GraphicsDelta::new, GraphicsDelta::translate);
 		
-		if(attackSoundUsed.getValue() != 0) 
-			translator.array(angleCount.getValue(), attackSounds, 
-					GraphicsAttackSound::new, wrap(translator, GraphicsAttackSound::translate));
+		if(attackSoundUsed.get() != 0) 
+			translator.array(angleCount.get(), attackSounds, 
+					GraphicsAttackSound::new, GraphicsAttackSound::translate);
 	}
 }

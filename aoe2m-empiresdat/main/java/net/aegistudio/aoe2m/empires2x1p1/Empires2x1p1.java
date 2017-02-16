@@ -4,10 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.empires2x1p1.graphics.Graphics;
 import net.aegistudio.aoe2m.empires2x1p1.map.MapData;
 import net.aegistudio.aoe2m.empires2x1p1.map.RandomMapData;
@@ -24,11 +20,13 @@ import net.aegistudio.aoe2m.empires2x1p1.terrain.TerrainBlob;
 import net.aegistudio.aoe2m.empires2x1p1.terrain.TerrainBorder;
 import net.aegistudio.aoe2m.empires2x1p1.unit.Civilization;
 import net.aegistudio.aoe2m.empires2x1p1.unit.UnitHeader;
-
-import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 
 public class Empires2x1p1 {
-	public final Wrapper<String> version = new Container<String>("");
+	public final Wrapper<String> version = Container.string0();
 	
 	public final TerrainRestriction terrainRestriction = new TerrainRestriction();
 	
@@ -70,7 +68,7 @@ public class Empires2x1p1 {
 	public final List<ResearchConnection> researchConnection = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(Translator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptException {
 		translator.string(8, version);
 		
 		Wrapper<Integer> restrictionLength 
@@ -82,31 +80,31 @@ public class Empires2x1p1 {
 		translator.unsigned16(terrainLength);
 		
 		terrainRestriction.translate(
-				restrictionLength.getValue(), 
-				terrainLength.getValue(), translator);
+				restrictionLength.get(), 
+				terrainLength.get(), translator);
 		
 		Wrapper<Integer> playerColorLength = new Container<>(playerColor.size());
 		translator.unsigned16(playerColorLength);
-		translator.array(playerColorLength.getValue(), playerColor, 
-				PlayerColor::new, wrap(translator, PlayerColor::translate));
+		translator.array(playerColorLength.get(), playerColor, 
+				PlayerColor::new, PlayerColor::translate);
 		
 		Wrapper<Integer> soundLength = new Container<>(sound.size());
 		translator.unsigned16(soundLength);
-		translator.array(soundLength.getValue(), sound, 
-				Sound::new, wrap(translator, Sound::translate));
+		translator.array(soundLength.get(), sound, 
+				Sound::new, Sound::translate);
 		
 		graphics.translate(translator);
 		
 		map.translateMapData1(translator);
 		
-		translator.array(terrainLength.getValue(), terrain, Terrain::new, 
-				wrap(translator, Terrain::translate));
+		translator.array(terrainLength.get(), terrain, 
+				Terrain::new, Terrain::translate);
 		
 		//emptyTerrain.translate(translator);
 		translator.skip(438);
 		
-		translator.array(16, terrainBorder, TerrainBorder::new, 
-				wrap(translator, TerrainBorder::translate));
+		translator.array(16, terrainBorder, 
+				TerrainBorder::new, TerrainBorder::translate);
 		
 		map.translateMapData2(translator);
 		
@@ -116,25 +114,26 @@ public class Empires2x1p1 {
 		
 		Wrapper<Integer> techLength = new Container<>(sound.size());
 		translator.signed32(techLength);
-		translator.array(techLength.getValue(), technology, 
-				Technology::new, wrap(translator, Technology::translate));
+		translator.array(techLength.get(), technology, 
+				Technology::new, Technology::translate);
 		
 		Wrapper<Integer> unitHeaderLength = new Container<>(unitHeader.size());
 		translator.signed32(unitHeaderLength);
-		translator.array(unitHeaderLength.getValue(), unitHeader, 
-				UnitHeader::new, wrap(translator, UnitHeader::translate));
+		translator.array(unitHeaderLength.get(), unitHeader, 
+				UnitHeader::new, UnitHeader::translate);
 		
 		Wrapper<Integer> civilLength = new Container<>(civilization.size());
 		translator.unsigned16(civilLength);
-		translator.array(civilLength.getValue(), civilization, 
-				Civilization::new, wrap(translator, Civilization::translate));
+		translator.array(civilLength.get(), civilization, 
+				Civilization::new, Civilization::translate);
 		
 		Wrapper<Integer> researchCount = new Container<>(research.size());
 		translator.unsigned16(researchCount);
-		translator.array(researchCount.getValue(), research, 
-				Research::new, wrap(translator, Research::translate));
+		translator.array(researchCount.get(), research, 
+				Research::new, Research::translate);
 		
-		translator.array(7, uk0, Container::int0, translator::signed32);
+		translator.array(7, uk0, Container::int0, 
+				Translator.reverse(Translator::signed32));
 		
 		Wrapper<Byte> ageEntryCount = new Container<>((byte)techTree.size());
 		translator.signed8(ageEntryCount);
@@ -151,21 +150,21 @@ public class Empires2x1p1 {
 				(byte)researchConnection.size());
 		translator.signed8(researchConnectionCount);
 		
-		translator.array(ageEntryCount.getValue(), techTree, TechnologyTree::new, 
-				wrap(translator, TechnologyTree::translate));
+		translator.array(ageEntryCount.get(), techTree, TechnologyTree::new, 
+				TechnologyTree::translate);
 		translator.signed32(uk1);
 		
-		translator.array(buildingConnectionCount.getValue(), 
+		translator.array(buildingConnectionCount.get(), 
 				buildingConnection, BuildingConnection::new, 
-				wrap(translator, BuildingConnection::translate));
+				BuildingConnection::translate);
 		
-		translator.array(unitConnectionCount.getValue(), 
+		translator.array(unitConnectionCount.get(), 
 				unitConnection, UnitConnection::new, 
-				wrap(translator, UnitConnection::translate));
+				UnitConnection::translate);
 		
-		translator.array(researchConnectionCount.getValue(), 
+		translator.array(researchConnectionCount.get(), 
 				researchConnection, ResearchConnection::new, 
-				wrap(translator, ResearchConnection::translate));
+				ResearchConnection::translate);
 		
 		translator.end();
 	}

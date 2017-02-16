@@ -3,8 +3,8 @@ package net.aegistudio.aoe2m.scx.map;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.wrap.Container;
+import net.aegistudio.uio.Wrapper;
 
 public class MapPo {
 	public Wrapper<Integer> weCameraX = new Container<Integer>(0);

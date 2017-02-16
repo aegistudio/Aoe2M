@@ -9,7 +9,7 @@ import java.util.function.BiConsumer;
 import net.aegistudio.aoe2m.assetdba.AssetListener;
 import net.aegistudio.aoe2m.assetdba.AssetManager;
 import net.aegistudio.aoe2m.assetdba.SlpImage;
-import net.aegistudio.aoe2m.media.Storage;
+import net.aegistudio.uio.media.Storage;
 
 import static net.aegistudio.aoe2m.assetdba.AssetConnection.*;
 
@@ -17,7 +17,7 @@ public class OpgBlendomaticManager implements AssetManager<SlpImage> {
 	protected final SlpImage[] blendomatics;
 	
 	public OpgBlendomaticManager(AssetListener perfLog, Storage root) throws IOException {
-		Storage blendomatic = root.chdir("blendomatic");
+		Storage blendomatic = root.open("blendomatic");
 		Storage[] blendomaticFiles = blendomatic.list();
 		perfLog.initSubsystem(BLENDOMATIC_NAME, BLENDOMATIC_CLASS, blendomaticFiles.length);
 		

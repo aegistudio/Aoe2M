@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
-
-import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 
 public class RandomMap {
 	public Wrapper<Integer> script = new Container<>(0);
@@ -70,40 +68,40 @@ public class RandomMap {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void translateBody(Translator translator) throws IOException, CorruptionException {
+	public void translateBody(Translator translator) throws IOException, CorruptException {
 		// Repeating headers.
-		translator.constInteger(borderSw.getValue());
-		translator.constInteger(borderNw.getValue());
-		translator.constInteger(borderNe.getValue());
-		translator.constInteger(borderSe.getValue());
-		translator.constInteger(borderUsage.getValue());
-		translator.constInteger(waterShape.getValue());
-		translator.constInteger(nonBaseTerrain.getValue());
-		translator.constInteger(baseZoneCoverage.getValue());
-		translator.constInteger(uk0.getValue());
+		translator.constInteger(borderSw.get());
+		translator.constInteger(borderNw.get());
+		translator.constInteger(borderNe.get());
+		translator.constInteger(borderSe.get());
+		translator.constInteger(borderUsage.get());
+		translator.constInteger(waterShape.get());
+		translator.constInteger(nonBaseTerrain.get());
+		translator.constInteger(baseZoneCoverage.get());
+		translator.constInteger(uk0.get());
 		
 		// Base zone.
-		translator.constInteger(baseZoneCount.getValue());
-		translator.constInteger(baseZonePointer.getValue());
-		translator.array(baseZoneCount.getValue(), baseZones, BaseZone::new, 
-				wrap(translator, BaseZone::translate));
+		translator.constInteger(baseZoneCount.get());
+		translator.constInteger(baseZonePointer.get());
+		translator.array(baseZoneCount.get(), baseZones, BaseZone::new, 
+				BaseZone::translate);
 		
 		// Map terrain.
-		translator.constInteger(mapTerrainCount.getValue());
-		translator.constInteger(mapTerrainPointer.getValue());
-		translator.array(mapTerrainCount.getValue(), mapTerrains, MapTerrain::new, 
-				wrap(translator, MapTerrain::translate));
+		translator.constInteger(mapTerrainCount.get());
+		translator.constInteger(mapTerrainPointer.get());
+		translator.array(mapTerrainCount.get(), mapTerrains, MapTerrain::new, 
+				MapTerrain::translate);
 		
 		// Map units.
-		translator.constInteger(mapUnitCount.getValue());
-		translator.constInteger(mapUnitPointer.getValue());
-		translator.array(mapUnitCount.getValue(), mapUnits, MapUnit::new, 
-				wrap(translator, MapUnit::translate));
+		translator.constInteger(mapUnitCount.get());
+		translator.constInteger(mapUnitPointer.get());
+		translator.array(mapUnitCount.get(), mapUnits, MapUnit::new, 
+				MapUnit::translate);
 		
 		// Map unknowns.
-		translator.constInteger(mapUnknownCount.getValue());
-		translator.constInteger(mapUnknownPointer.getValue());
-		translator.array(mapUnknownCount.getValue(), mapUnknowns, MapUnknown::new, 
-				wrap(translator, MapUnknown::translate));
+		translator.constInteger(mapUnknownCount.get());
+		translator.constInteger(mapUnknownPointer.get());
+		translator.array(mapUnknownCount.get(), mapUnknowns, MapUnknown::new, 
+				MapUnknown::translate);
 	}
 }

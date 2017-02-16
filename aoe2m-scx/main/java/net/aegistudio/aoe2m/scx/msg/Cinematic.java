@@ -2,8 +2,8 @@ package net.aegistudio.aoe2m.scx.msg;
 
 import java.awt.image.BufferedImage;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.wrap.Container;
+import net.aegistudio.uio.Wrapper;
 import net.aegistudio.aoe2m.scx.TextContainer;
 
 public class Cinematic {

@@ -3,7 +3,7 @@ package net.aegistudio.aoe2m.opnagedb.unit;
 import java.io.IOException;
 
 import net.aegistudio.aoe2m.assetdba.unit.ResourceStorage;
-import net.aegistudio.aoe2m.media.Storage;
+import net.aegistudio.uio.media.Storage;
 
 public class OpgResourceStorage {
 	public static final ResourceStorage NULL = new ResourceStorage(); static {

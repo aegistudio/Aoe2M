@@ -13,14 +13,14 @@ import java.util.function.BiConsumer;
 import net.aegistudio.aoe2m.assetdba.AssetListener;
 import net.aegistudio.aoe2m.assetdba.AssetManager;
 import net.aegistudio.aoe2m.assetdba.unit.Civilization;
-import net.aegistudio.aoe2m.media.Storage;
 import net.aegistudio.aoe2m.opnagedb.CsvFilter;
+import net.aegistudio.uio.media.Storage;
 
 public class OpgCivManager implements AssetManager<Civilization> {
 	protected final OpgCivilization[] civilizations;
 	public OpgCivManager(AssetListener perfLog, Storage root) throws IOException {
-		Storage gamedata = root.chdir("gamedata").chdir("gamedata-empiresdat");
-		Storage civs = gamedata.chdir("0000-civs.docx");
+		Storage gamedata = root.open("gamedata").open("gamedata-empiresdat");
+		Storage civs = gamedata.open("0000-civs.docx");
 		
 		try(BufferedReader gamedataReader = new BufferedReader(new InputStreamReader(civs.read()))) {
 			String[] lines = gamedataReader.lines().toArray(String[]::new);

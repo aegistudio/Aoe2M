@@ -2,7 +2,7 @@ package net.aegistudio.aoe2m.scx.map;
 
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.Translator;
+import net.aegistudio.uio.Translator;
 
 public enum EnumIndicator {
 	ERASURE {

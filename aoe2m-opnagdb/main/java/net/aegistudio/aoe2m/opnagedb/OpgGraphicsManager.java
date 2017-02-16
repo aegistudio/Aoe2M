@@ -9,17 +9,17 @@ import java.util.function.BiConsumer;
 import net.aegistudio.aoe2m.assetdba.AssetListener;
 import net.aegistudio.aoe2m.assetdba.AssetManager;
 import net.aegistudio.aoe2m.assetdba.GraphicsGamedata;
-import net.aegistudio.aoe2m.media.Storage;
+import net.aegistudio.uio.media.Storage;
 
 import static net.aegistudio.aoe2m.assetdba.AssetConnection.*;
 
 public class OpgGraphicsManager implements AssetManager<GraphicsGamedata>{
 	protected final OpgGraphicsGamedata[] graphics;
 	public OpgGraphicsManager(AssetListener perfLog, OpgPlayerPalette playerPalette, Storage root) throws IOException {
-		Storage parent = root.chdir("graphics");
-		Storage gamedata = root.chdir("gamedata").chdir("gamedata-empiresdat");
-		Storage graphicsDelta = gamedata.chdir("0000-graphics");
-		Storage graphicsGamedata = gamedata.chdir("0000-graphics.docx");
+		Storage parent = root.open("graphics");
+		Storage gamedata = root.open("gamedata").open("gamedata-empiresdat");
+		Storage graphicsDelta = gamedata.open("0000-graphics");
+		Storage graphicsGamedata = gamedata.open("0000-graphics.docx");
 		
 		try(BufferedReader gamedataReader = new BufferedReader(new InputStreamReader(graphicsGamedata.read()))) {
 			String[] lines = gamedataReader.lines().toArray(String[]::new);

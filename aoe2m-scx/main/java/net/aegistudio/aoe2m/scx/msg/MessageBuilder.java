@@ -2,10 +2,11 @@ package net.aegistudio.aoe2m.scx.msg;
 
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.wrap.BooleanContainer;
+import net.aegistudio.uio.wrap.Container;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
 import net.aegistudio.aoe2m.scx.meta.MetadataPo;
 
 public class MessageBuilder {
@@ -36,26 +37,26 @@ public class MessageBuilder {
 			translator.string16(message.scouts.stringWrapper());
 	}
 	
-	public void buildCinematic(MetadataPo metadata, Translator translator) throws IOException, CorruptionException {
+	public void buildCinematic(MetadataPo metadata, Translator translator) throws IOException, CorruptException {
 		translator.string16(cinematic.pregame.stringWrapper());
 		translator.string16(cinematic.victory.stringWrapper());
 		translator.string16(cinematic.loss.stringWrapper());
 		translator.string16(cinematic.background.stringWrapper());
 
-		Wrapper<Boolean> bitmapIncluded = new Container<>(cinematic.bitmap.getValue() != null);
-		Wrapper<Short> shouldParse = new Container<>((short) (bitmapIncluded.getValue()? -1 : 1));
+		BooleanContainer bitmapIncluded = new BooleanContainer(cinematic.bitmap.get() != null);
+		Wrapper<Short> shouldParse = new Container<>((short) (bitmapIncluded.get()? -1 : 1));
 		
-		Wrapper<Long> width = new Container<>(cinematic.bitmap.getValue() == null? 
-				0l : cinematic.bitmap.getValue().getWidth());
-		Wrapper<Long> height = new Container<>(cinematic.bitmap.getValue() == null? 
-				0l : cinematic.bitmap.getValue().getHeight());
+		Wrapper<Long> width = new Container<>(cinematic.bitmap.get() == null? 
+				0l : cinematic.bitmap.get().getWidth());
+		Wrapper<Long> height = new Container<>(cinematic.bitmap.get() == null? 
+				0l : cinematic.bitmap.get().getHeight());
 		
-		translator.bool32(bitmapIncluded);
+		translator.signed32(bitmapIncluded.bool32());
 		translator.unsigned32(width);
 		translator.unsigned32(height);
 		
 		translator.signed16(shouldParse);
-		if(shouldParse.getValue() != 1) 
-			translator.bitmap(cinematic.bitmap);
+		if(shouldParse.get() != 1) 
+			translator.fallback(new ImageFallback(cinematic.bitmap));
 	}
 }

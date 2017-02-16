@@ -2,13 +2,12 @@ package net.aegistudio.aoe2m.scx.player;
 
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.*;
+import net.aegistudio.uio.wrap.*;
 
 @SuppressWarnings("unchecked")
 public class DisableList {
-	public Wrapper<Long> disabledCount = new Container<Long>(0l);
+	public Wrapper<Long> disabledCount = Container.long0();
 	public Wrapper<Long> disabledId[];
 	public Wrapper<Long> extraDisabledId[];
 	
@@ -35,10 +34,10 @@ public class DisableList {
 	
 	public String toString() {
 		StringBuilder toString = new StringBuilder("DisableList");
-		toString.append("@").append(disabledCount.getValue()).append("[");
-		for(int i = 0; i < disabledCount.getValue(); i ++) {
+		toString.append("@").append(disabledCount.get()).append("[");
+		for(int i = 0; i < disabledCount.get(); i ++) {
 			if(i > 0) toString.append(", ");
-			toString.append(disabledId[i].getValue());
+			toString.append(disabledId[i].get());
 		}
 		toString.append("]");
 		return new String(toString);

@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 
 import net.aegistudio.aoe2m.assetdba.SlpImage;
 import net.aegistudio.aoe2m.assetdba.SlpSubImage;
-import net.aegistudio.aoe2m.media.Storage;
+import net.aegistudio.uio.media.Storage;
 
 public class OpgSlpImage implements SlpImage {
 	protected final Storage image;
@@ -29,8 +29,8 @@ public class OpgSlpImage implements SlpImage {
 	public OpgSlpImage(Runnable initArchive, Runnable readyArchive, Storage root, String name) throws IOException {
 		this.initArchive = initArchive;
 		this.readyArchive = readyArchive;
-		this.image = root.chdir(name + ".png");
-		Storage descriptor = root.chdir(name + ".docx");
+		this.image = root.open(name + ".png");
+		Storage descriptor = root.open(name + ".docx");
 
 		try(BufferedReader reader = new BufferedReader(new InputStreamReader(descriptor.read()))) {
 			this.subImages = reader.lines()

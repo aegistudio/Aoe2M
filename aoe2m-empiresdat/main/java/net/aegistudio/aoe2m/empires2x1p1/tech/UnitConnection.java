@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 
 public class UnitConnection {
 	public final Wrapper<Integer> id = Container.int0();
@@ -45,7 +45,7 @@ public class UnitConnection {
 	public final Wrapper<Integer> enablingResearch = Container.int0();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(Translator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptException {
 		translator.signed32(id);
 		translator.signed8(status);
 		translator.signed32(upperBuilding);
@@ -54,10 +54,12 @@ public class UnitConnection {
 		translator.signed32(unitOrResearch0);
 		translator.signed32(unitOrResearch1);
 		
-		translator.array(8, uk0, Container::int0, translator::signed32);
+		translator.array(8, uk0, Container::int0, 
+				Translator.reverse(Translator::signed32));
 		translator.signed32(mode0);
 		translator.signed32(mode1);
-		translator.array(7, uk0, Container::int0, translator::signed32);
+		translator.array(7, uk0, Container::int0, 
+				Translator.reverse(Translator::signed32));
 		
 		translator.signed32(verticalLines);
 		units.translate(translator);

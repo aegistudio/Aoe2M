@@ -7,12 +7,12 @@ import java.io.InputStreamReader;
 
 import net.aegistudio.aoe2m.assetdba.AssetListener;
 import net.aegistudio.aoe2m.assetdba.PlayerPalette;
-import net.aegistudio.aoe2m.media.Storage;
+import net.aegistudio.uio.media.Storage;
 
 public class OpgPlayerPalette extends PlayerPalette {
 	public OpgPlayerPalette(AssetListener perfLog, Storage root) throws IOException {
 		perfLog.initPlayerPalette();
-		Storage descriptor = root.chdir("player_palette.docx");
+		Storage descriptor = root.open("player_palette.docx");
 
 		try(BufferedReader reader = new BufferedReader(new InputStreamReader(descriptor.read()))) {
 			this.items = reader.lines()

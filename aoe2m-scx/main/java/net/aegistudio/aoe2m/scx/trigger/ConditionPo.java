@@ -2,11 +2,8 @@ package net.aegistudio.aoe2m.scx.trigger;
 
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.EnumContainer;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.wrap.*;
+import net.aegistudio.uio.*;
 
 public class ConditionPo {
 	public EnumContainer<EnumConditionType> type = new EnumContainer<>(EnumConditionType.NONE);
@@ -14,11 +11,11 @@ public class ConditionPo {
 	
 	public Wrapper<Integer> resourceType = new Container<Integer>(-1);
 	public EnumResourceType getResourceType() { 
-		return EnumResourceType.getByAuxOrder(resourceType.getValue());
+		return EnumResourceType.getByAuxOrder(resourceType.get());
 	}
 	
 	public void setResourceType(EnumResourceType type) {
-		resourceType.setValue(type.auxilliaryOrder);
+		resourceType.set(type.auxilliaryOrder);
 	}
 	
 	public Wrapper<Integer> object = new Container<Integer>(-1);
@@ -41,8 +38,8 @@ public class ConditionPo {
 	
 	public Wrapper<Integer> aiSignal = new Container<Integer>(-1);
 	
-	public void build(Translator translator) throws IOException, CorruptionException {
-		translator.enum32(type.enumWrapper());
+	public void build(Translator translator) throws IOException, CorruptException {
+		translator.signed32(type.enum32());
 		translator.constInteger(0x10);
 		
 		translator.signed32(amount);

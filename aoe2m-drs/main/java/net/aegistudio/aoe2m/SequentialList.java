@@ -7,7 +7,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
 
-import net.aegistudio.aoe2m.Translator.ArrayTranslation;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Translator.ArrayTranslation;
 
 /**
  * All entries in this list must be stored in sequential
@@ -103,20 +105,20 @@ public class SequentialList<E extends IntegerIndexed> {
 		return Collections.unmodifiableList(elements);
 	}
 	
-	protected void validate() throws CorruptionException {
+	protected void validate() throws CorruptException {
 		if(elements.isEmpty()) return;
 		int previous = elements.get(0).keyword();
 		for(int i = 1; i < elements.size(); i ++) {
 			int current = elements.get(i).keyword();
 			if(current <= previous)
-				throw new CorruptionException(current, previous);
+				throw new CorruptException(current, previous);
 			previous = current;
 		}
 	}
 	
 	@SuppressWarnings("unchecked")
 	public void entranslate(Translator translator, int length, Supplier<E> supplier, 
-			ArrayTranslation<E> translation) throws IOException, CorruptionException {
+			ArrayTranslation<E> translation) throws IOException, CorruptException {
 		translator.array(length, elements, supplier, translation);
 		validate();
 	}

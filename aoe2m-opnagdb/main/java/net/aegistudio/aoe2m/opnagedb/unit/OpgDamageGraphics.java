@@ -6,10 +6,10 @@ import java.io.InputStreamReader;
 
 import net.aegistudio.aoe2m.assetdba.unit.DamageGraphics;
 import net.aegistudio.aoe2m.assetdba.unit.EnumDamageApply;
-import net.aegistudio.aoe2m.media.Storage;
 import net.aegistudio.aoe2m.opnagedb.CsvFilter;
 import net.aegistudio.aoe2m.opnagedb.FieldMapping;
 import net.aegistudio.aoe2m.opnagedb.FunctionWrapper;
+import net.aegistudio.uio.media.Storage;
 
 public class OpgDamageGraphics {
 	public static final FieldMapping<DamageGraphics> mapping 

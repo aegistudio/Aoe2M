@@ -18,9 +18,9 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.junit.Test;
 
-import net.aegistudio.aoe2m.CorruptionException;
 import net.aegistudio.aoe2m.drs.Archive;
-import net.aegistudio.aoe2m.ra.RandomFileAdapter;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.ra.RandomFileAdapter;
 
 /**
  * A stand-alone viewer that is designed to open
@@ -34,7 +34,7 @@ public class DrsViewer {
 	public static final String LOOK_AND_FEEL = 
 				"com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
 	
-	public @Test void test() throws CorruptionException, IOException, InterruptedException {
+	public @Test void test() throws CorruptException, IOException, InterruptedException {
 		try { UIManager.setLookAndFeel(LOOK_AND_FEEL); } catch(Exception e) {}
 		
 		// Initialize file chooser.

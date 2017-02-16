@@ -15,7 +15,7 @@ import static net.aegistudio.aoe2m.assetdba.AssetConnection.*;
 import net.aegistudio.aoe2m.assetdba.AssetListener;
 import net.aegistudio.aoe2m.assetdba.AssetManager;
 import net.aegistudio.aoe2m.assetdba.unit.UnitGamedata;
-import net.aegistudio.aoe2m.media.Storage;
+import net.aegistudio.uio.media.Storage;
 import net.aegistudo.aoe2m.unittype.EnumUnitType;
 
 public class OpgUnitManager implements AssetManager<UnitGamedata> {
@@ -44,7 +44,7 @@ public class OpgUnitManager implements AssetManager<UnitGamedata> {
 				OpgUnitFactory.get().build(type, /*civ.chdir(uniform)*/ civ, 
 						p -> perfLog.initAsset(UNIT_NAME, UNIT_CLASS, Integer.parseInt(p[0])),
 						p -> perfLog.readyAsset(UNIT_NAME, UNIT_CLASS, Integer.parseInt(p[0])),
-						civ.chdir(uniform + ".docx").read(), 
+						civ.open(uniform + ".docx").read(), 
 						scribe(uniform))));
 	}
 	

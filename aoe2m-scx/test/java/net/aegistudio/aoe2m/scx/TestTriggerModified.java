@@ -17,16 +17,16 @@ public class TestTriggerModified extends ScenarioReadBase {
 		assertEquals(list.size(), 1);
 		
 		TriggerPo trigger = list.get(0);
-		assertEquals(trigger.triggerName, "TestTrigger\0");
+		assertEquals(trigger.triggerName.get().string, "TestTrigger\0");
 		assertEquals(trigger.conditionList.size(), 1);
 		assertEquals(trigger.effectList.size(), 1);
 		
 		ConditionPo condition = trigger.conditionList.get(0);
-		assertEquals(condition.type.getValue(), EnumConditionType.AI_SIGNAL);
-		assertEquals(condition.aiSignal.getValue(), 0);
+		assertEquals(condition.type.get(), EnumConditionType.AI_SIGNAL);
+		assertEquals(condition.aiSignal.get(), 0);
 		
 		EffectPo effect = trigger.effectList.get(0);
-		assertEquals(effect.type.getValue(), EnumEffectType.SEND_CHAT);
-		assertEquals(effect.message, "Test\0");
+		assertEquals(effect.type.get(), EnumEffectType.SEND_CHAT);
+		assertEquals(effect.message.get().string, "Test\0");
 	}
 }

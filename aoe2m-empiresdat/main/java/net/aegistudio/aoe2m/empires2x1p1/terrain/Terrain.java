@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 
 public class Terrain {
 	public Wrapper<Short> uk0 = new Container<>((short)0);
@@ -73,7 +73,7 @@ public class Terrain {
 	public Wrapper<Short> unitsUsed = new Container<>((short)0);
 	
 	@SuppressWarnings("unchecked")
-	public void translate(Translator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptException {
 		translator.signed16(uk0);
 		translator.signed16(uk1);
 
@@ -104,22 +104,27 @@ public class Terrain {
 		
 		translator.signed16(id);
 		translator.array(54, elevationGraphics, 
-				Container::short0, translator::signed16);
+				Container::short0, 
+				Translator.reverse(Translator::signed16));
 		translator.signed16(replacement);	
 		translator.signed16(dimension0);
 		translator.signed16(dimension1);
 		
 		translator.array(84, borders, 
-				Container::byte0, translator::signed8);	
+				Container::byte0, 
+				Translator.reverse(Translator::signed8));
 		
 		translator.array(30, units, 
-				Container::short0, translator::signed16);
+				Container::short0, 
+				Translator.reverse(Translator::signed16));
 
 		translator.array(30, densities, 
-				Container::short0, translator::signed16);
+				Container::short0, 
+				Translator.reverse(Translator::signed16));
 		
 		translator.array(30, placementFlags, 
-				Container::byte0, translator::signed8);
+				Container::byte0, 
+				Translator.reverse(Translator::signed8));
 		
 		translator.signed16(unitsUsed);
 	}

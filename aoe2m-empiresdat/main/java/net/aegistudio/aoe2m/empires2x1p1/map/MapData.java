@@ -4,11 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 
 public class MapData {
 	public final Wrapper<Integer> mapPointer = new Container<>(0);
@@ -26,7 +25,7 @@ public class MapData {
 	public final List<MapTileSize> tileSizes = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
-	public void translateMapData1(Translator translator) throws IOException, CorruptionException {
+	public void translateMapData1(Translator translator) throws IOException, CorruptException {
 		translator.signed32(mapPointer);
 		translator.signed32(uk0);
 		translator.signed32(mapWidth);
@@ -35,7 +34,7 @@ public class MapData {
 		translator.signed32(worldHeight);
 		
 		translator.array(19, tileSizes, MapTileSize::new, 
-				wrap(translator, MapTileSize::translate));
+				MapTileSize::translate);
 	}
 	
 	public final Wrapper<Integer> uk1 = new Container<>(0);
@@ -90,7 +89,7 @@ public class MapData {
 	
 	public final Wrapper<Byte> fog = new Container<>((byte)0);
 
-	public void translateMapData2(Translator translator) throws IOException, CorruptionException {
+	public void translateMapData2(Translator translator) throws IOException, CorruptException {
 		translator.signed32(uk1);
 		translator.float32(mapMinX);
 		translator.float32(mapMinY);

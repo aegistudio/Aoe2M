@@ -7,8 +7,8 @@ public class TestAiModified extends ScenarioReadBase {
 
 	@Override
 	protected void todo(Scenario scenario) {
-		assertEquals(scenario.player.playerData[1].aiName, "test");
-		assertEquals(scenario.player.playerData[1].perFile, 
+		assertEquals(scenario.player.playerData[1].aiName.get(), "test");
+		assertEquals(scenario.player.playerData[1].perFile.get(), 
 				"(defrule\n    (true)\n    =>\n    (resign)\n)\n");
 	}
 }

@@ -9,7 +9,7 @@ import java.util.function.BiFunction;
 import javax.imageio.ImageIO;
 
 import net.aegistudio.aoe2m.assetdba.SlpImage;
-import net.aegistudio.aoe2m.media.Storage;
+import net.aegistudio.uio.media.Storage;
 
 public class OpgSlpPaletteImage extends OpgSlpImage {
 	protected final OpgPlayerPalette palette;

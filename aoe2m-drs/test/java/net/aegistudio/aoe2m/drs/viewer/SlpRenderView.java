@@ -17,11 +17,9 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 
-import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.drs.Archive;
 import net.aegistudio.aoe2m.drs.TableEntry;
 import net.aegistudio.aoe2m.pal.Palette;
-import net.aegistudio.aoe2m.ra.RandomAccessible;
 import net.aegistudio.aoe2m.slp.CommandTable;
 import net.aegistudio.aoe2m.slp.Frame;
 import net.aegistudio.aoe2m.slp.ImagePrinter;
@@ -30,6 +28,8 @@ import net.aegistudio.aoe2m.slp.Picture;
 import net.aegistudio.aoe2m.slp.printer.GraphicsPrinter;
 import net.aegistudio.aoe2m.slp.printer.NullPrinter;
 import net.aegistudio.aoe2m.slp.printer.SubscribePrinter;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.ra.RandomAccessible;
 
 public class SlpRenderView extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -141,8 +141,8 @@ public class SlpRenderView extends JPanel {
 	public void renderFrame(int whichFrame) {
 		try {
 			Frame frame = picture.frames.get(whichFrame);
-			BufferedImage image = new BufferedImage(frame.width.getValue(), 
-					frame.height.getValue(), BufferedImage.TYPE_4BYTE_ABGR);
+			BufferedImage image = new BufferedImage(frame.width.get(), 
+					frame.height.get(), BufferedImage.TYPE_4BYTE_ABGR);
 			
 			Outline outline = new Outline();
 			CommandTable command = new CommandTable();
@@ -163,10 +163,10 @@ public class SlpRenderView extends JPanel {
 			command.render(painter);
 			
 			if(origin.isSelected()) {
-				int ox = frame.originX.getValue();
-				int oy = frame.originY.getValue();
-				int w = frame.width.getValue();
-				int h = frame.height.getValue();
+				int ox = frame.originX.get();
+				int oy = frame.originY.get();
+				int w = frame.width.get();
+				int h = frame.height.get();
 				
 				graphics.setColor(Color.RED);
 				graphics.drawLine(0, oy, w, oy);

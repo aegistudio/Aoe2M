@@ -4,11 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.TranslateWrapper;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.wrap.*;
+import net.aegistudio.uio.*;
 
 public class IncludeSection {
 	public static class IncludedFile {
@@ -28,16 +25,16 @@ public class IncludeSection {
 	public final List<IncludedFile> includedFiles = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
-	public void build(Translator translator) throws IOException, CorruptionException {
-		Wrapper<Boolean> fileIncluded = new Container<>(includedFiles.size() > 0);
-		translator.bool32(fileIncluded);
+	public void build(Translator translator) throws IOException, CorruptException {
+		BooleanContainer fileIncluded = new BooleanContainer(includedFiles.size() > 0);
+		translator.signed32(fileIncluded.bool32());
 		translator.constInteger(0);
 		
-		if(fileIncluded.getValue()) {
+		if(fileIncluded.get()) {
 			Wrapper<Integer> size = new Container<>(includedFiles.size());
 			translator.signed32(size);
-			translator.array(size.getValue(), includedFiles, IncludedFile::new, 
-					TranslateWrapper.wrap(translator, IncludedFile::build));
+			translator.array(size.get(), includedFiles, 
+					IncludedFile::new, IncludedFile::build);
 		}
 	}
 }

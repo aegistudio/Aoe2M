@@ -6,10 +6,10 @@ public class TestMessageModified extends ScenarioReadBase {
 	public TestMessageModified() {super("/messageModified.scx", "gbk"); }
 	
 	public void todo(Scenario scenario) {
-		assertEquals(scenario.message.instructions, "Instruction\0");
-		assertEquals(scenario.message.hints, "Tips\0");
-		assertEquals(scenario.message.victory, "Victory\0");
-		assertEquals(scenario.message.loss, "Defeat\0");
-		assertEquals(scenario.message.scouts, "Scout\0");
+		assertEquals(scenario.message.instructions.get().string, "Instruction\0");
+		assertEquals(scenario.message.hints.get().string, "Tips\0");
+		assertEquals(scenario.message.victory.get().string, "Victory\0");
+		assertEquals(scenario.message.loss.get().string, "Defeat\0");
+		assertEquals(scenario.message.scouts.get().string, "Scout\0");
 	}
 }

@@ -4,21 +4,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 
 public class ContentTable {
 	public final List<Wrapper<Integer>> entries = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
 	public void translate(Translator translator)
-			throws IOException, CorruptionException{
+			throws IOException, CorruptException{
 		
 		Wrapper<Byte> entryCount = new Container<>((byte)entries.size());
 		translator.signed8(entryCount);
-		translator.array(entryCount.getValue(), 
-				entries, Container::int0, translator::signed32);
+		translator.array(entryCount.get(), 
+				entries, Container::int0, 
+				Translator.squeech(translator::signed32));
 	}
 }

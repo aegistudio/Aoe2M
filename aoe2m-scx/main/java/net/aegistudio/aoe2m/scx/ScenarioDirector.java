@@ -2,8 +2,9 @@ package net.aegistudio.aoe2m.scx;
 
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+
 import net.aegistudio.aoe2m.scx.map.MapBuilder;
 import net.aegistudio.aoe2m.scx.meta.MetadataBuilder;
 import net.aegistudio.aoe2m.scx.msg.MessageBuilder;
@@ -11,7 +12,7 @@ import net.aegistudio.aoe2m.scx.player.PlayerTableBuilder;
 import net.aegistudio.aoe2m.scx.trigger.TriggerBuilder;
 
 public class ScenarioDirector {
-	public void build(Scenario scenario, Translator fieldTranslator) throws IOException, CorruptionException {
+	public void build(Scenario scenario, Translator fieldTranslator) throws IOException, CorruptException {
 		MetadataBuilder metadata = new MetadataBuilder(scenario.metadata, scenario.globalVictory);
 		PlayerTableBuilder playerTable = new PlayerTableBuilder(scenario.player);
 		MessageBuilder message = new MessageBuilder(scenario.message, scenario.cinematic);

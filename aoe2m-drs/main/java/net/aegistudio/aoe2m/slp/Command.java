@@ -2,8 +2,8 @@ package net.aegistudio.aoe2m.slp;
 
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
 
 public abstract class Command {
 	public byte opcode;
@@ -13,7 +13,7 @@ public abstract class Command {
 	}
 	
 	public abstract void translate(Translator translator)
-			throws IOException, CorruptionException;
+			throws IOException, CorruptException;
 	
 	public abstract void draw(ImagePrinter printer);
 }

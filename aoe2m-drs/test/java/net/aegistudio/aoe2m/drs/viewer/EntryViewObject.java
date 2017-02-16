@@ -12,15 +12,15 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.drs.Archive;
 import net.aegistudio.aoe2m.drs.TableEntry;
-import net.aegistudio.aoe2m.io.FieldInputTranslator;
 import net.aegistudio.aoe2m.pal.Palette;
-import net.aegistudio.aoe2m.ra.AccessInputStream;
-import net.aegistudio.aoe2m.ra.ByteBufferAdapter;
-import net.aegistudio.aoe2m.ra.RandomAccessible;
 import net.aegistudio.aoe2m.slp.Picture;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.ra.AccessInputStream;
+import net.aegistudio.uio.ra.ByteBufferAdapter;
+import net.aegistudio.uio.ra.RandomAccessible;
+import net.aegistudio.uio.stream.InputTranslator;
 
 public class EntryViewObject implements ViewObject {
 	public final Archive archive;
@@ -37,7 +37,7 @@ public class EntryViewObject implements ViewObject {
 	}
 	
 	public String toString() {
-		return entry.id.getValue() + "." + parent.getFormat();
+		return entry.id.get() + "." + parent.getFormat();
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class EntryViewObject implements ViewObject {
 				
 				RandomAccessible randomAccess = new ByteBufferAdapter(content);
 				InputStream inputStream = new AccessInputStream(randomAccess);
-				Translator translator = new FieldInputTranslator(inputStream, "gbk");
+				Translator translator = new InputTranslator(inputStream, "gbk");
 				picture.translate(translator);
 				
 				result.add(new ViewObject.Entry("Slp", 

@@ -4,13 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.empires2x1p1.Resource;
-
-import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 
 public class Research {
 	public final List<Wrapper<Short>> requiredTech = new ArrayList<Wrapper<Short>>();
@@ -48,13 +46,13 @@ public class Research {
 	public final Wrapper<String> name = Container.string0();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(Translator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptException {
 		translator.array(6, requiredTech, Container::short1m, 
-				translator::signed16);
-		requiredTech.removeIf(value -> value.getValue() <= 0);
+				Translator.reverse(Translator::signed16));
+		requiredTech.removeIf(value -> value.get() <= 0);
 		
 		translator.array(3, researchCost, Resource::new, 
-				wrap(translator, Resource::translateResearch));
+				Resource::translateResearch);
 		
 		translator.signed16(minRequired);
 		translator.signed16(civilSpecific);
@@ -77,8 +75,8 @@ public class Research {
 		translator.signed32(uk0);
 		
 		Wrapper<Integer> nameLength = new Container<>(
-				name.getValue().getBytes().length);
+				name.get().getBytes().length);
 		translator.unsigned16(nameLength);
-		translator.string(nameLength.getValue(), name);
+		translator.string(nameLength.get(), name);
 	}
 }

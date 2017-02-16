@@ -15,7 +15,7 @@ public class CinematicImageWrite extends ScenarioWriteBase {
 			BufferedImage image = ImageIO.read(
 				getClass().getResourceAsStream("/cinematicImage.bmp"));
 			assertNotNull(image);
-			scenario.cinematic.bitmap.setValue(image);
+			scenario.cinematic.bitmap.set(image);
 		}
 		catch(IOException e) {
 			assertTrue(false);

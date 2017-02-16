@@ -4,17 +4,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
 import net.aegistudio.aoe2m.empires2x1p1.Resource;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 import net.aegistudo.aoe2m.unittype.EnumUnitType;
 import static net.aegistudo.aoe2m.unittype.EnumUnitType.*;
 
 import net.aegistudo.aoe2m.unittype.SlotUnitBuilder;
-
-import static net.aegistudio.aoe2m.TranslateWrapper.wrap;
 
 public class Unit {
 	private static final EnumUnitType[] TYPING = new EnumUnitType[] {
@@ -25,10 +23,10 @@ public class Unit {
 	// Header data set.
 	public final Wrapper<Byte> type = Container.byte0();
 	public EnumUnitType getActualType() {
-		assert type.getValue() >= 10;
-		assert type.getValue() <= 90;
+		assert type.get() >= 10;
+		assert type.get() <= 90;
 		
-		return TYPING[(type.getValue() / 10)];
+		return TYPING[(type.get() / 10)];
 	}
 	
 	public final Wrapper<Short> id0 = Container.short0();
@@ -180,11 +178,11 @@ public class Unit {
 	public final Wrapper<Short> id2 = Container.short0();
 	
 	@SuppressWarnings("unchecked")
-	public void translate(Translator translator) throws IOException, CorruptionException {
+	public void translate(Translator translator) throws IOException, CorruptException {
 		translator.signed8(type);
 		
 		Wrapper<Integer> nameLength = new Container<>(
-				name.getValue().getBytes().length);
+				name.get().getBytes().length);
 		translator.unsigned16(nameLength);
 		
 		translator.signed16(id0);
@@ -271,20 +269,20 @@ public class Unit {
 		translator.float32(selectionShapeZ);
 		
 		translator.array(3, resourceStorage, Resource::new, 
-				wrap(translator, Resource::translateStorage));
+				Resource::translateStorage);
 		
 		Wrapper<Byte> damageGraphicsCount = new Container<>(
 				(byte)damageGraphics.size());
 		translator.signed8(damageGraphicsCount);
-		translator.array(damageGraphicsCount.getValue(), damageGraphics, 
-				DamageGraphics::new, wrap(translator, DamageGraphics::translate));
+		translator.array(damageGraphicsCount.get(), damageGraphics, 
+				DamageGraphics::new, DamageGraphics::translate);
 		
 		translator.signed16(soundSelection);
 		translator.signed16(soundDying);
 		translator.signed8(attackMode);
 		translator.signed8(uk7);
 		
-		translator.string(nameLength.getValue(), name);
+		translator.string(nameLength.get(), name);
 		translator.signed16(id1);
 		translator.signed16(id2);
 		
@@ -303,8 +301,8 @@ public class Unit {
 		catch(Exception e) {
 			if(e instanceof IOException) 
 				throw (IOException)e;
-			if(e instanceof CorruptionException)
-				throw (CorruptionException)e;
+			if(e instanceof CorruptException)
+				throw (CorruptException)e;
 			throw new AssertionError();
 		}
 	}
@@ -328,7 +326,7 @@ public class Unit {
 	public final List<Wrapper<Float>> rotations = new ArrayList<>();
 	
 	@SuppressWarnings("unchecked")
-	public void translateWalking(Translator translator) throws IOException, CorruptionException {
+	public void translateWalking(Translator translator) throws IOException, CorruptException {
 		translator.signed16(graphicsWalking0);
 		translator.signed16(graphicsWalking1);
 
@@ -339,8 +337,8 @@ public class Unit {
 		translator.float32(trackingUnitDensity);
 		//translator.float32(uk9);
 		translator.signed16(uk10);
-		translator.array(5, rotations, 
-				Container::float0, translator::float32);
+		translator.array(5, rotations, Container::float0, 
+				Translator.reverse(Translator::float32));
 	}
 	
 	// Discover data set.
@@ -431,18 +429,18 @@ public class Unit {
 	public final Wrapper<Float> displayedReloadTime = Container.float0();
 	
 	@SuppressWarnings("unchecked")
-	public void translateCombat(Translator translator) throws IOException, CorruptionException {
+	public void translateCombat(Translator translator) throws IOException, CorruptException {
 		translator.signed16(defaultArmor);
 		
 		Wrapper<Integer> attackCount = new Container<>(attack.size());
 		translator.unsigned16(attackCount);
-		translator.array(attackCount.getValue(), attack, 
-				Damage::new, wrap(translator, Damage::translate));
+		translator.array(attackCount.get(), attack, 
+				Damage::new, Damage::translate);
 		
 		Wrapper<Integer> armorCount = new Container<>(armor.size());
 		translator.unsigned16(armorCount);
-		translator.array(armorCount.getValue(), armor, 
-				Damage::new, wrap(translator, Damage::translate));
+		translator.array(armorCount.get(), armor, 
+				Damage::new, Damage::translate);
 		
 		translator.signed16(interactionType);
 		translator.float32(maxRange);
@@ -522,7 +520,7 @@ public class Unit {
 		
 		public final Wrapper<Integer> secondaryUnit = Container.int0();
 		
-		public void translate(Translator translator) throws IOException, CorruptionException {
+		public void translate(Translator translator) throws IOException, CorruptException {
 			translator.float32(count);
 			translator.signed8(max);
 			translator.float32(areaWidth);
@@ -541,9 +539,8 @@ public class Unit {
 	public final Wrapper<Short> displayedPierceArmor = Container.short0();
 	
 	@SuppressWarnings("unchecked")
-	public void translateProduction(Translator translator) throws IOException, CorruptionException {
-		translator.array(3, cost, Resource::new, 
-				wrap(translator, Resource::translateCost));
+	public void translateProduction(Translator translator) throws IOException, CorruptException {
+		translator.array(3, cost, Resource::new, Resource::translateCost);
 		translator.signed16(creationTime);
 		translator.signed16(creationLocation);
 		translator.signed8(creationButton);
@@ -597,7 +594,7 @@ public class Unit {
 		}
 		
 		public boolean invalid() {
-			return unit.getValue() < 0;
+			return unit.get() < 0;
 		}
 	}
 	
@@ -626,7 +623,7 @@ public class Unit {
 	public final Wrapper<Integer> uk20 = Container.int0();
 	
 	@SuppressWarnings("unchecked")
-	public void translateBuilding(Translator translator) throws IOException, CorruptionException {
+	public void translateBuilding(Translator translator) throws IOException, CorruptException {
 		translator.signed16(graphicsConstruction);
 		translator.signed16(graphicsSnow);
 		translator.signed16(adjacenceMode);
@@ -637,8 +634,7 @@ public class Unit {
 		translator.signed16(research);
 		translator.signed8(disappersWhenBuilt);
 		//translator.signed8(uk14);
-		translator.array(4, buildingAnnex, BuildingAnnex::new, 
-				wrap(translator, BuildingAnnex::translate));
+		translator.array(4, buildingAnnex, BuildingAnnex::new, BuildingAnnex::translate);
 		buildingAnnex.removeIf(BuildingAnnex::invalid);
 		
 		translator.signed16(headUnit);

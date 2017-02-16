@@ -1,14 +1,15 @@
 package net.aegistudio.aoe2m.scx.meta;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.EnumContainer;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.wrap.BooleanContainer;
+import net.aegistudio.uio.wrap.Container;
+import net.aegistudio.uio.wrap.EnumContainer;
+import net.aegistudio.uio.Wrapper;
 
 public class GlobalVictoryPo {
-	public Wrapper<Boolean> customConquer = new Container<>(false);
+	public BooleanContainer customConquer = new BooleanContainer(false);
 	public Wrapper<Long> customMinRelic = new Container<>(0l);
 	public Wrapper<Long> customExplorePercent = new Container<>(0l);
-	public Wrapper<Boolean> allCustomCondition = new Container<>(false);
+	public BooleanContainer allCustomCondition = new BooleanContainer(false);
 	
 	public EnumContainer<EnumVictoryMode> victoryMode
 		= new EnumContainer<>(EnumVictoryMode.STANDARD);

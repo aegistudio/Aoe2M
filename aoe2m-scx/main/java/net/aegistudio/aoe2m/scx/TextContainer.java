@@ -1,8 +1,8 @@
 package net.aegistudio.aoe2m.scx;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.Transform;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.wrap.Container;
+import net.aegistudio.uio.wrap.Transform;
+import net.aegistudio.uio.Wrapper;
 
 public class TextContainer extends Container<Text> {
 	protected Wrapper<String> stringWrapper;

@@ -2,8 +2,8 @@ package net.aegistudio.aoe2m.scx.player;
 
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
 import net.aegistudio.aoe2m.scx.ScxConstants;
 import net.aegistudio.aoe2m.scx.meta.MetadataPo;
 
@@ -13,7 +13,7 @@ public class PlayerTableBuilder {
 		this.playerTable = playerTable;
 	}
 	
-	public void buildPlayerData1(MetadataPo metadata, Translator translator) throws IOException, CorruptionException {
+	public void buildPlayerData1(MetadataPo metadata, Translator translator) throws IOException, CorruptException {
 		for(int i = 0; i < 16; i ++) 
 			translator.string(256, playerTable.playerData[i].asciiPlayerName);
 		
@@ -22,14 +22,14 @@ public class PlayerTableBuilder {
 				translator.unsigned32(playerTable.playerData[i].stringTableIndex);
 		
 		for(int i = 0; i < 16; i ++) {
-			translator.bool32(playerTable.playerData[i].active);
-			translator.bool32(playerTable.playerData[i].human);
-			translator.enum32(playerTable.playerData[i].civilization.enumWrapper());
+			translator.signed32(playerTable.playerData[i].active.bool32());
+			translator.signed32(playerTable.playerData[i].human.bool32());
+			translator.signed32(playerTable.playerData[i].civilization.enum32());
 			translator.constInteger(4);
 		}
 	}
 	
-	public void buildPlayerData2(MetadataPo metadata, Translator translator) throws IOException, CorruptionException {
+	public void buildPlayerData2(MetadataPo metadata, Translator translator) throws IOException, CorruptException {
 		for(int i = 0; i < 16; i ++) 
 			translator.string16(playerTable.playerData[i].vcName);
 		
@@ -46,7 +46,7 @@ public class PlayerTableBuilder {
 		}
 		
 		for(int i = 0; i < 16; i ++)
-			translator.enum8(playerTable.playerData[i].aiType.enumWrapper());
+			translator.signed8(playerTable.playerData[i].aiType.enum8());
 		
 		ScxConstants.division(translator);
 		
@@ -60,19 +60,19 @@ public class PlayerTableBuilder {
 		}
 	}
 	
-	public void buildDiplomacy(MetadataPo metadata, Translator translator) throws IOException, CorruptionException {
+	public void buildDiplomacy(MetadataPo metadata, Translator translator) throws IOException, CorruptException {
 		for(int i = 0; i < 16; i ++) 
 			for(int j = 0; j < 16; j ++) 
-				translator.enum32(playerTable.playerData[i].diplomacy[j].enumWrapper());
+				translator.signed32(playerTable.playerData[i].diplomacy[j].enum32());
 			
 		translator.skip(11520);	// 16 * 720, WTF
 		ScxConstants.division(translator);
 		
 		for(int i = 0; i < 16; i ++)
-			translator.bool32(playerTable.playerData[i].alliedVictory);
+			translator.signed32(playerTable.playerData[i].alliedVictory.bool32());
 	}
 	
-	public void buildDisable(MetadataPo metadata, Translator translator) throws IOException, CorruptionException {
+	public void buildDisable(MetadataPo metadata, Translator translator) throws IOException, CorruptException {
 		// Disabled techs
 		for(int i = 0; i < 16; i ++) playerTable.playerData[i]
 				.diasabledTechs.buildCount(translator);
@@ -102,27 +102,27 @@ public class PlayerTableBuilder {
 		
 		ScxConstants.unused(translator);
 		ScxConstants.unused(translator);
-		translator.bool32(playerTable.allTechs);
+		translator.signed32(playerTable.allTechs.bool32());
 		for(int i = 0; i < 16; i ++)
 			translator.signed32(playerTable.playerData[i].startingAge);
 	}
 	
 
-	public void buildPlayerData4(MetadataPo metadata, Translator translator) throws IOException, CorruptionException {
+	public void buildPlayerData4(MetadataPo metadata, Translator translator) throws IOException, CorruptException {
 		for(int i = 0; i < 8; i ++) {
-			translator.constFloat(playerTable.playerData[i].initFood.getValue());
-			translator.constFloat(playerTable.playerData[i].initWood.getValue());
-			translator.constFloat(playerTable.playerData[i].initGold.getValue());
-			translator.constFloat(playerTable.playerData[i].initStone.getValue());
-			translator.constFloat(playerTable.playerData[i].initOreX.getValue());
+			translator.constFloat(playerTable.playerData[i].initFood.get());
+			translator.constFloat(playerTable.playerData[i].initWood.get());
+			translator.constFloat(playerTable.playerData[i].initGold.get());
+			translator.constFloat(playerTable.playerData[i].initStone.get());
+			translator.constFloat(playerTable.playerData[i].initOreX.get());
 			translator.constFloat(0.0f);
 			translator.float32(playerTable.playerData[i].populationLimit);
 		}
 	}
 	
-	public void buildPlayerData3(MetadataPo metadata, Translator translator) throws IOException, CorruptionException {
+	public void buildPlayerData3(MetadataPo metadata, Translator translator) throws IOException, CorruptException {
 		translator.unsigned32(playerTable.playerData3Length);
-		for(int i = 0; i < playerTable.playerData3Length.getValue() - 1; i ++) {
+		for(int i = 0; i < playerTable.playerData3Length.get() - 1; i ++) {
 			PlayerData playerData = this.playerTable.playerData[i];
 			translator.string16(playerData.constPlayerName.stringWrapper());
 			
@@ -131,36 +131,36 @@ public class PlayerTableBuilder {
 			translator.signed16(playerData.unknownedX);
 			translator.signed16(playerData.unknownedY);
 			
-			translator.constByte(playerData.alliedVictory.getValue()? 1: 0);
-			translator.constShort((int)(long)playerTable.playerData3Length.getValue());
+			translator.constByte((byte)(playerData.alliedVictory.get()? 1: 0));
+			translator.constShort((short)(long)playerTable.playerData3Length.get());
 
-			translator.constByte(EnumDiplomacy.ENEMY.ordinal());
-			for(int d = 0; d < playerTable.playerData3Length.getValue() - 1; d ++) {
-				translator.enum8(this.playerTable.playerData[i].diplomacy[d].enumWrapper());
+			translator.constByte((byte)EnumDiplomacy.ENEMY.ordinal());
+			for(int d = 0; d < playerTable.playerData3Length.get() - 1; d ++) {
+				translator.signed8(this.playerTable.playerData[i].diplomacy[d].enum8());
 			}
 			
 			translator.constInteger(0);
-			for(int d = 0; d < playerTable.playerData3Length.getValue() - 1; d ++) {
+			for(int d = 0; d < playerTable.playerData3Length.get() - 1; d ++) {
 				if(d == i) translator.constInteger(1);
-				else translator.constInteger(this.playerTable.playerData[i].diplomacy[d]
-						.getValue().auxiliaryOrder);
+				else translator.constInteger(this.playerTable.playerData[i]
+						.diplomacy[d].get().auxiliaryOrder);
 			}
 			
 			// The .scx format doesn't handle the entry correctly.
 			translator.constInteger(i); // WTF?
 			
 			translator.float32(playerData.unknownedArrayIncluded);
-			translator.enum32(playerData.playerColor.enumWrapper());
+			translator.signed32(playerData.playerColor.enum32());
 			translator.signed16(playerData.grandTheftEmpirePlayers);
-			translator.constShort(0);
+			translator.constShort((short)0);
 			
-			if(playerData.unknownedArrayIncluded.getValue() == 2.0f) translator.skip(8);
-			translator.skip(44 * playerData.grandTheftEmpirePlayers.getValue());
+			if(playerData.unknownedArrayIncluded.get() == 2.0f) translator.skip(8);
+			translator.skip(44 * playerData.grandTheftEmpirePlayers.get());
 
 			translator.skip(1);
 			
 			translator.constInteger((int)(playerData.unknownedArrayIncluded
-					.getValue() == 2.0f? 0x0ffffffffl: 0x00000000l));
+					.get() == 2.0f? 0x0ffffffffl: 0x00000000l));
 		}
 		translator.constInteger((int)0x09999999al);
 		translator.constInteger((int)0x03ff99999l);

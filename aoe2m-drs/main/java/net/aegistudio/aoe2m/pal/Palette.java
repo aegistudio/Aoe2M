@@ -7,7 +7,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.aegistudio.aoe2m.CorruptionException;
+import net.aegistudio.uio.CorruptException;
 
 public class Palette {	
 	public static final String MAGIC_NUMBER = "JASC-PAL";
@@ -18,15 +18,15 @@ public class Palette {
 		return palette.toArray(new Color[0]);
 	}
 	
-	public void read(InputStream inputStream) throws IOException, CorruptionException {
+	public void read(InputStream inputStream) throws IOException, CorruptException {
 		try(WindowsLineReader line = new WindowsLineReader(inputStream)) {
 			String magicNumber = line.readLine();
 			if(!magicNumber.equals(MAGIC_NUMBER)) 
-				throw new CorruptionException(magicNumber, MAGIC_NUMBER);
+				throw new CorruptException(magicNumber, MAGIC_NUMBER);
 			
 			String magicVersion = line.readLine();
 			if(!magicVersion.equals(MAGIC_VERSION))
-				throw new CorruptionException(magicVersion, MAGIC_VERSION);
+				throw new CorruptException(magicVersion, MAGIC_VERSION);
 			
 			int countLines = Integer.parseInt(line.readLine());
 			for(int i = 0; i < countLines; i ++) {
@@ -40,7 +40,7 @@ public class Palette {
 		}
 	}
 	
-	public void write(OutputStream outputStream) throws IOException, CorruptionException {
+	public void write(OutputStream outputStream) throws IOException, CorruptException {
 		try(WindowsLineWriter line = new WindowsLineWriter(outputStream)) {
 			line.writeLine(MAGIC_NUMBER);
 			line.writeLine(MAGIC_VERSION);

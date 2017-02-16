@@ -28,7 +28,7 @@ public class GraphicsPrinter extends AbstractPrinter {
 	public void endl() {
 		ypos ++;
 		if(ypos < outline.padding.size())
-			xpos = outline.padding.get(ypos).left.getValue();
+			xpos = outline.padding.get(ypos).left.get();
 		else xpos = 0;
 	}
 

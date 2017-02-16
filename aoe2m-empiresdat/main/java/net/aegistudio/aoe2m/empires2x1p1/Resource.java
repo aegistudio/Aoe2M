@@ -2,10 +2,10 @@ package net.aegistudio.aoe2m.empires2x1p1;
 
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.Transform;
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.Translator;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
+import net.aegistudio.uio.wrap.Transform;
 
 public class Resource {
 	public final Wrapper<Short> type = Container.short1m();

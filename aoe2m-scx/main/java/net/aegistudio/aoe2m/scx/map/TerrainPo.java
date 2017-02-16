@@ -1,6 +1,6 @@
 package net.aegistudio.aoe2m.scx.map;
 
-import net.aegistudio.aoe2m.Container;
+import net.aegistudio.uio.wrap.Container;
 
 public class TerrainPo extends Container<Byte> {
 	public byte[][] terrianValue;

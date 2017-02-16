@@ -4,10 +4,10 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.util.List;
 
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.ra.AccessInputStream;
-import net.aegistudio.aoe2m.ra.AccessOutputStream;
-import net.aegistudio.aoe2m.ra.RandomAccessible;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.ra.AccessInputStream;
+import net.aegistudio.uio.ra.AccessOutputStream;
+import net.aegistudio.uio.ra.RandomAccessible;
 
 /**
  * Represents a .DRS archive file.
@@ -29,7 +29,7 @@ public class Archive {
 	}
 	
 	public static Archive open(RandomAccessible randomAccessible) 
-			throws CorruptionException, IOException {
+			throws CorruptException, IOException {
 		ArchiveHeader header = ArchiveIO.read(randomAccessible);
 		return new Archive(randomAccessible, header);
 	}
@@ -51,11 +51,11 @@ public class Archive {
 	}
 	
 	public synchronized byte[] open(TableEntry entry) throws IOException {
-		long length = (long)(Long)(entry.length.getValue());
+		long length = (long)(entry.length.get());
 		byte[] buffer = new byte[(int)length];
 		
 		synchronized(access) {
-			access.seek(entry.offset.getValue());
+			access.seek(entry.offset.get());
 			if(inputStream.read(buffer) != length)
 				throw new EOFException();
 		}

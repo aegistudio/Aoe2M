@@ -2,11 +2,11 @@ package net.aegistudio.aoe2m.drs;
 
 import java.io.IOException;
 
-import net.aegistudio.aoe2m.Container;
-import net.aegistudio.aoe2m.CorruptionException;
-import net.aegistudio.aoe2m.Translator;
 import net.aegistudio.aoe2m.SequentialList;
-import net.aegistudio.aoe2m.Wrapper;
+import net.aegistudio.uio.CorruptException;
+import net.aegistudio.uio.Translator;
+import net.aegistudio.uio.Wrapper;
+import net.aegistudio.uio.wrap.Container;
 
 /**
  * The content table that holds different file.
@@ -22,9 +22,9 @@ import net.aegistudio.aoe2m.Wrapper;
 public class TableHeader {
 	public final Wrapper<String> format = new Container<>("anib");
 	
-	public final Wrapper<Long> entryOffset = new Container<>(0L);
+	public final Wrapper<Long> entryOffset = Container.long0();
 	
-	private final Wrapper<Integer> entryCount = new Container<Integer>(0);
+	private final Wrapper<Integer> entryCount = Container.int0();
 	
 	public final SequentialList<TableEntry> entries = new SequentialList<>();
 	
@@ -32,12 +32,12 @@ public class TableHeader {
 		fieldTranslator.string(4, format);
 		fieldTranslator.unsigned32(entryOffset);
 		
-		entryCount.setValue(entries.size());
+		entryCount.set(entries.size());
 		fieldTranslator.signed32(entryCount);
 	}
 	
-	public void translateBody(Translator fieldTranslator) throws IOException, CorruptionException {
-		entries.entranslate(fieldTranslator, entryCount.getValue(), 
-				TableEntry::new, entry -> entry.translate(fieldTranslator));
+	public void translateBody(Translator fieldTranslator) throws IOException, CorruptException {
+		entries.entranslate(fieldTranslator, entryCount.get(), 
+				TableEntry::new, TableEntry::translate);
 	}
 }
