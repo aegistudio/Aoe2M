@@ -30,9 +30,9 @@ public class TestDrsHdrRead extends ArchiveTestBase {
 		
 		// Uniform header.
 		ArchiveHeader archiveConst = new ArchiveHeader();
-		assertEquals(archive.signature, archiveConst.signature);
-		assertEquals(archive.version, archiveConst.version);
-		assertEquals(archive.type, archiveConst.type);
+		assertEquals(archive.signature.get(), archiveConst.signature.get());
+		assertEquals(archive.version.get(), archiveConst.version.get());
+		assertEquals(archive.type.get(), archiveConst.type.get());
 		assertEquals(archive.tableList.size(), 1);
 		assertEquals(archive.fileSectionOffset.get(), 0x028cl);
 		
