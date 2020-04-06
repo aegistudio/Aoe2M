@@ -1,0 +1,17 @@
+howto build
+
+requirements:
+* java: https://adoptopenjdk.net/
+* maven: https://maven.apache.org/ (Download ZIP extract it, add bin to PATH env var)
+
+steps:
+
+1. git clone https://github.com/aegistudio/Aoe2M.git
+2. cd Aoe2M
+3. mvn compile
+
+Unfortunatelly... Error.
+Something like unified-io is missing.
+
+???  git clone --recursive https://github.com/aegistudio/UnifiedIO.git
+
